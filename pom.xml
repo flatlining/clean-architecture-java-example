@@ -11,12 +11,14 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>core</module>
 		<module>delivery</module>
 	</modules>
 
 	<properties>
 		<java.version>11</java.version>
 		<spring.version>2.2.6.RELEASE</spring.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 </project>
