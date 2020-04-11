@@ -9,7 +9,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>delivery</artifactId>
+	<artifactId>entrypoints</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencyManagement>

@@ -9,7 +9,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>core</artifactId>
+	<artifactId>entities</artifactId>
 	<packaging>jar</packaging>
 
 </project>

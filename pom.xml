@@ -11,8 +11,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>core</module>
-		<module>delivery</module>
+		<module>entities</module>
+		<module>entrypoints</module>
 	</modules>
 
 	<properties>
