@@ -12,6 +12,7 @@
 
 	<modules>
 		<module>entities</module>
+		<module>usecases</module>
 		<module>entrypoints</module>
 	</modules>
 
