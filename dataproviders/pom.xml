@@ -6,7 +6,8 @@
 	<parent>
 		<groupId>dev.schertel</groupId>
 		<artifactId>cq</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>${revision}</version>
+		<relativePath>..</relativePath>
 	</parent>
 
 	<artifactId>dataproviders</artifactId>
