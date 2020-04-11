@@ -10,3 +10,4 @@
 
 - http://maven.apache.org/maven-ci-friendly.html
   - https://jeanchristophegay.com/en/posts/maven-unique-version-multi-modules-build/
+- https://www.baeldung.com/maven-java-version
