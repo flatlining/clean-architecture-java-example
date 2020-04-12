@@ -7,7 +7,6 @@
 		<groupId>dev.schertel</groupId>
 		<artifactId>cq</artifactId>
 		<version>${revision}</version>
-		<relativePath>..</relativePath>
 	</parent>
 
 	<artifactId>usecases</artifactId>
@@ -17,7 +16,7 @@
 		<dependency>
 			<groupId>dev.schertel</groupId>
 			<artifactId>entities</artifactId>
-			<version>${project.parent.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -7,23 +7,9 @@
 		<groupId>dev.schertel</groupId>
 		<artifactId>cq</artifactId>
 		<version>${revision}</version>
-		<relativePath>..</relativePath>
 	</parent>
 
 	<artifactId>entities</artifactId>
 	<packaging>jar</packaging>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compiler.version}</version>
-				<configuration>
-					<release>${java.version}</release>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
