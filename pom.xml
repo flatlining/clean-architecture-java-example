@@ -38,7 +38,7 @@
 				<version>1.2.2</version>
 				<configuration>
 					<updatePomFile>true</updatePomFile>
-					<flattenMode>minimum</flattenMode>
+					<flattenMode>resolveCiFriendliesOnly</flattenMode>
 				</configuration>
 				<executions>
 					<execution>
