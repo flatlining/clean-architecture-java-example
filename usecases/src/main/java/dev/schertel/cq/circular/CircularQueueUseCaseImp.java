@@ -1,6 +1,5 @@
 package dev.schertel.cq.circular;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -14,5 +13,10 @@ public class CircularQueueUseCaseImp implements CircularQueueUseCase {
     @Override
     public Stream<CircularQueue> getAll() {
         return provider.getAll();
+    }
+
+    @Override
+    public CircularQueue getById(UUID id) {
+        return provider.getById(id);
     }
 }

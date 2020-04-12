@@ -1,8 +1,8 @@
 package dev.schertel.cq.circular;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class CircularQueueHandler {
@@ -14,5 +14,9 @@ public class CircularQueueHandler {
 
     public Flux<CircularQueueDto> getAll() {
         return Flux.fromStream(useCase.getAll().map(c -> CircularQueueDto.from(c)));
+    }
+
+    public Mono<CircularQueueDto> getById(String id) {
+        return Mono.justOrEmpty(CircularQueueDto.from(useCase.getById(UUID.fromString(id))));
     }
 }
