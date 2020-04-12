@@ -5,14 +5,18 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class CircularQueueConfig {
-
     @Bean
-    public CircularQueueHandler handler() {
-        return new CircularQueueHandler(useCase());
+    public CircularQueueDataProvider dataProvider() {
+        return new CircularQueueDataProviderImp();
     }
 
     @Bean
     public CircularQueueUseCase useCase() {
-        return new CircularQueueUseCaseImp();
+        return new CircularQueueUseCaseImp(dataProvider());
+    }
+
+    @Bean
+    public CircularQueueHandler handler() {
+        return new CircularQueueHandler(useCase());
     }
 }
