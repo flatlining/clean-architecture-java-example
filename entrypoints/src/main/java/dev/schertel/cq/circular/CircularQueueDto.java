@@ -1,6 +1,7 @@
 package dev.schertel.cq.circular;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 public class CircularQueueDto {
@@ -11,7 +12,11 @@ public class CircularQueueDto {
     LocalDateTime updatedAt;
 
     public static CircularQueueDto from(CircularQueue cq) {
-        return new CircularQueueDto(cq.getId(), cq.getName(), cq.getDescription(), cq.getCreatedAt(), cq.getUpdatedAt());
+        return Optional.of(cq).map(circularQueue -> new CircularQueueDto(circularQueue.getId(), circularQueue.getName(), circularQueue.getDescription(), circularQueue.getCreatedAt(), circularQueue.getUpdatedAt())).orElse(null);
+    }
+
+    public static CircularQueueDto from(Optional<CircularQueue> cq) {
+        return cq.map(circularQueue -> new CircularQueueDto(circularQueue.getId(), circularQueue.getName(), circularQueue.getDescription(), circularQueue.getCreatedAt(), circularQueue.getUpdatedAt())).orElse(null);
     }
 
     public CircularQueueDto() {

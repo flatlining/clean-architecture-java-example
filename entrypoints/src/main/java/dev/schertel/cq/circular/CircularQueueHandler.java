@@ -17,6 +17,6 @@ public class CircularQueueHandler {
     }
 
     public Mono<CircularQueueDto> getById(String id) {
-        return useCase.getById(UUID.fromString(id)).findFirst().map(circularQueue -> Mono.just(CircularQueueDto.from(circularQueue))).orElseGet(Mono::empty);
+        return Mono.just(CircularQueueDto.from(useCase.getById(UUID.fromString(id)).findFirst()));
     }
 }
