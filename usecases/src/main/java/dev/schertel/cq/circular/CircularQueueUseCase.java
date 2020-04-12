@@ -6,5 +6,5 @@ import java.util.stream.Stream;
 public interface CircularQueueUseCase {
     public Stream<CircularQueue> getAll();
 
-    public CircularQueue getById(UUID id);
+    public Stream<CircularQueue> getById(UUID id);
 }

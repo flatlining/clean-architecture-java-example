@@ -16,7 +16,7 @@ public class CircularQueueUseCaseImp implements CircularQueueUseCase {
     }
 
     @Override
-    public CircularQueue getById(UUID id) {
+    public Stream<CircularQueue> getById(UUID id) {
         return provider.getById(id);
     }
 }

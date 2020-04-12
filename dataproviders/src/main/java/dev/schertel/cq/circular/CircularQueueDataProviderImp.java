@@ -20,7 +20,7 @@ public class CircularQueueDataProviderImp implements CircularQueueDataProvider {
     }
 
     @Override
-    public CircularQueue getById(UUID id) {
-        return data.stream().filter(c -> id.equals(c.getId())).findAny().orElse(null);
+    public Stream<CircularQueue> getById(UUID id) {
+        return Stream.ofNullable(data.stream().filter(c -> id.equals(c.getId())).findAny().orElse(null));
     }
 }
