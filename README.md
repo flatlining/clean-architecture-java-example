@@ -1,5 +1,19 @@
 # Central Queue
 
+## Usage
+
+Build:
+
+```console
+$ ./mvnw clean install
+```
+
+Execute:
+
+```console
+$ ./mvnw spring-boot:run -pl entrypoints
+```
+
 ## References
 
 ### Clean Architecture

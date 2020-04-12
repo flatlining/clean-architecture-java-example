@@ -1,4 +1,28 @@
-HELP.md
+HELP.md		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>flatten-maven-plugin</artifactId>
+			<version>1.2.2</version>
+			<configuration>
+				<updatePomFile>true</updatePomFile>
+				<flattenMode>minimum</flattenMode>
+			</configuration>
+			<executions>
+				<execution>
+					<id>flatten</id>
+					<phase>process-resources</phase>
+					<goals>
+						<goal>flatten</goal>
+					</goals>
+				</execution>
+				<execution>
+					<id>flatten.clean</id>
+					<phase>clean</phase>
+					<goals>
+						<goal>clean</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
@@ -29,3 +53,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### flatten-maven-plugin
+.flattened-pom.xml
