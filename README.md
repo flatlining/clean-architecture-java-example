@@ -11,3 +11,4 @@
 - http://maven.apache.org/maven-ci-friendly.html
   - https://jeanchristophegay.com/en/posts/maven-unique-version-multi-modules-build/
 - https://www.baeldung.com/maven-java-version
+  - https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9
