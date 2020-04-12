@@ -10,6 +10,10 @@ public class CircularQueueDto {
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 
+    public static CircularQueueDto from(CircularQueue cq) {
+        return new CircularQueueDto(cq.getId(), cq.getName(), cq.getDescription(), cq.getCreatedAt(), cq.getUpdatedAt());
+    }
+
     public CircularQueueDto() {
     }
 

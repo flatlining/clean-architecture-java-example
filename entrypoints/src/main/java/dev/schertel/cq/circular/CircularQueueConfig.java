@@ -8,6 +8,11 @@ public class CircularQueueConfig {
 
     @Bean
     public CircularQueueHandler handler() {
-        return new CircularQueueHandler();
+        return new CircularQueueHandler(useCase());
+    }
+
+    @Bean
+    public CircularQueueUseCase useCase() {
+        return new CircularQueueUseCaseImp();
     }
 }

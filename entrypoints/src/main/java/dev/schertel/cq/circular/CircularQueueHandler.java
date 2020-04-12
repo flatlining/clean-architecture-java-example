@@ -6,9 +6,13 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class CircularQueueHandler {
+    CircularQueueUseCase useCase;
+
+    public CircularQueueHandler(CircularQueueUseCase useCase) {
+        this.useCase = useCase;
+    }
+
     public Flux<CircularQueueDto> getAll() {
-        CircularQueueDto cq1 = new CircularQueueDto(UUID.randomUUID(), "Queue 1", "Circular queue 1", LocalDateTime.now(), LocalDateTime.now());
-        CircularQueueDto cq2 = new CircularQueueDto(UUID.randomUUID(), "Queue 2", "Circular queue 2", LocalDateTime.now(), LocalDateTime.now());
-        return Flux.just(cq1, cq2);
+        return Flux.fromStream(useCase.getAll().map(c -> CircularQueueDto.from(c)));
     }
 }
