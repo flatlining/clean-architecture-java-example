@@ -13,6 +13,8 @@ import java.util.List;
 public class CircularQueueController {
     @GetMapping
     private Flux<CircularQueueDto> getAllCircularQueues() {
-        return (Flux<CircularQueueDto>) Flux.just(new CircularQueueDto());
+        CircularQueueDto cq1 = new CircularQueueDto();
+        CircularQueueDto cq2 = new CircularQueueDto();
+        return (Flux<CircularQueueDto>) Flux.just(cq1, cq2);
     }
 }
