@@ -19,6 +19,15 @@ $ ./mvnw spring-boot:run -pl config
 ### Clean Architecture
 
 - https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830
+  - https://github.com/mattia-battiston/clean-architecture-example
+
+#### Spring-Boot
+
+- https://medium.com/slalom-build/clean-architecture-with-java-11-f78bba431041
+  - https://github.com/carlphilipp/clean-architecture-example
+- https://reflectoring.io/java-components-clean-boundaries/
+- https://imasters.com.br/back-end/introducao-clean-architecture
+- https://medium.com/@icarovictor/the-clean-architecture-54df8a46dba1
 
 ### Maven
 
@@ -27,11 +36,13 @@ $ ./mvnw spring-boot:run -pl config
 - https://www.baeldung.com/maven-java-version
   - https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9
 
-### Beans
+### Java
+
+#### Beans
 
 - https://docs.spring.io/spring-javaconfig/docs/1.0.0.m3/reference/html/creating-bean-definitions.html
 
-### @Inject
+#### @Inject
 
 - https://javarevisited.blogspot.com/2017/04/difference-between-autowired-and-inject-annotation-in-spring-framework.html
 - https://www.baeldung.com/spring-annotations-resource-inject-autowire
