@@ -1,14 +1,14 @@
 package dev.schertel.cq.circular;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
 import java.util.UUID;
 
+@Named
 public class CircularQueueUseCaseImp implements ICircularQueueUseCase {
+    @Inject
     ICircularQueueDataProvider provider;
-
-    public CircularQueueUseCaseImp(ICircularQueueDataProvider provider) {
-        this.provider = provider;
-    }
 
     @Override
     public CircularQueue create(CircularQueue entity) {
