@@ -12,14 +12,15 @@ import java.util.stream.Collectors;
 public class CircularQueueHandler {
     @Autowired
     ICircularQueueUseCase useCase;
-    @Autowired ModelMapper modelMapper;
+    @Autowired
+    ModelMapper modelMapper;
 
     public List<CircularQueueDto> getAll() {
         return useCase.getAll().stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
-    public CircularQueueDto getById(String id) {
-        return convertToDto(useCase.getById(UUID.fromString(id)));
+    public CircularQueueDto getById(UUID id) {
+        return convertToDto(useCase.getById(id));
     }
 
     private CircularQueueDto convertToDto(CircularQueue entity) {

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/circular")
@@ -20,7 +21,7 @@ public class CircularQueueController {
     }
 
     @GetMapping("/{id}")
-    private CircularQueueDto getById(@PathVariable("id") String id) {
+    private CircularQueueDto getById(@PathVariable("id") UUID id) {
         return handler.getById(id);
     }
 }
