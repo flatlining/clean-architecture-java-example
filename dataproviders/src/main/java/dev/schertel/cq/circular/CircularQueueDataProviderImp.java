@@ -17,11 +17,6 @@ public class CircularQueueDataProviderImp implements ICircularQueueDataProvider 
     }
 
     @Override
-    public List<CircularQueue> getAll() {
-        return data;
-    }
-
-    @Override
     public CircularQueue create(CircularQueue entity) {
         LocalDateTime now = LocalDateTime.now();
         entity.setId(UUID.randomUUID());
@@ -32,7 +27,12 @@ public class CircularQueueDataProviderImp implements ICircularQueueDataProvider 
     }
 
     @Override
-    public CircularQueue getById(UUID id) {
+    public List<CircularQueue> readAll() {
+        return data;
+    }
+
+    @Override
+    public CircularQueue read(UUID id) {
         return data.stream().filter(c -> id.equals(c.getId())).findAny().orElse(null);
     }
 }

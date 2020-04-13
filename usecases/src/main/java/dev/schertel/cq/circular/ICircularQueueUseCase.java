@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ICircularQueueUseCase {
-    public List<CircularQueue> getAll();
-
-    public CircularQueue getById(UUID id);
-
     public CircularQueue create(CircularQueue entity);
+
+    public List<CircularQueue> readAll();
+
+    public CircularQueue read(UUID id);
 }

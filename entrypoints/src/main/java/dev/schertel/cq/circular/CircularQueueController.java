@@ -13,11 +13,6 @@ public class CircularQueueController {
     @Autowired
     CircularQueueHandler handler;
 
-    @GetMapping
-    private List<CircularQueueDto> getAllCircularQueues() {
-        return handler.getAll();
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
@@ -25,8 +20,13 @@ public class CircularQueueController {
         return handler.create(circularQueueDto);
     }
 
+    @GetMapping
+    private List<CircularQueueDto> readAll() {
+        return handler.readAll();
+    }
+
     @GetMapping("/{id}")
-    private CircularQueueDto getById(@PathVariable("id") UUID id) {
-        return handler.getById(id);
+    private CircularQueueDto read(@PathVariable("id") UUID id) {
+        return handler.read(id);
     }
 }

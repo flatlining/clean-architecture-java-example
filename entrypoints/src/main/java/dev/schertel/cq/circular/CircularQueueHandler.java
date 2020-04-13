@@ -15,17 +15,17 @@ public class CircularQueueHandler {
     @Autowired
     ModelMapper modelMapper;
 
-    public List<CircularQueueDto> getAll() {
-        return useCase.getAll().stream().map(this::convertToDto).collect(Collectors.toList());
-    }
-
     public CircularQueueDto create(CircularQueueDto dto) {
         CircularQueue entity = convertToEntity(dto);
         return convertToDto(useCase.create(entity));
     }
 
-    public CircularQueueDto getById(UUID id) {
-        return convertToDto(useCase.getById(id));
+    public List<CircularQueueDto> readAll() {
+        return useCase.readAll().stream().map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    public CircularQueueDto read(UUID id) {
+        return convertToDto(useCase.read(id));
     }
 
     private CircularQueueDto convertToDto(CircularQueue entity) {
