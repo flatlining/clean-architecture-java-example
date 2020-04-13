@@ -1,5 +1,7 @@
 package dev.schertel.cq.circular;
 
+import dev.schertel.cq.circular.entity.CircularQueue;
+import dev.schertel.cq.circular.usecase.ICircularQueueDataProvider;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;

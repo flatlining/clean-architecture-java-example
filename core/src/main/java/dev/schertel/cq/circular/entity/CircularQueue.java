@@ -1,4 +1,4 @@
-package dev.schertel.cq.circular;
+package dev.schertel.cq.circular.entity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

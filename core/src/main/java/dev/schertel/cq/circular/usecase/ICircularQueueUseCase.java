@@ -1,4 +1,6 @@
-package dev.schertel.cq.circular;
+package dev.schertel.cq.circular.usecase;
+
+import dev.schertel.cq.circular.entity.CircularQueue;
 
 import java.util.List;
 import java.util.UUID;
