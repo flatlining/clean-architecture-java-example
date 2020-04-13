@@ -21,11 +21,13 @@ public class CircularQueueController {
     }
 
     @GetMapping
+    @ResponseBody
     public List<CircularQueueDto> readAll() {
         return handler.readAll();
     }
 
     @GetMapping("/{id}")
+    @ResponseBody
     public CircularQueueDto read(@PathVariable("id") UUID id) {
         return handler.read(id);
     }
