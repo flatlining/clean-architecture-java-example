@@ -9,4 +9,6 @@ public interface ICircularQueueDataProvider {
     List<CircularQueue> readAll();
 
     CircularQueue read(UUID id);
+
+    void update(CircularQueue entity);
 }

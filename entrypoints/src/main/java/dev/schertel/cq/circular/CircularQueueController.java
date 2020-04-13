@@ -16,8 +16,8 @@ public class CircularQueueController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public CircularQueueDto create(@RequestBody CircularQueueDto circularQueueDto) {
-        return handler.create(circularQueueDto);
+    public CircularQueueDto create(@RequestBody CircularQueueDto body) {
+        return handler.create(body);
     }
 
     @GetMapping
@@ -30,5 +30,11 @@ public class CircularQueueController {
     @ResponseBody
     public CircularQueueDto read(@PathVariable("id") UUID id) {
         return handler.read(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@PathVariable("id") UUID id, @RequestBody CircularQueueDto body) {
+        handler.update(id, body);
     }
 }

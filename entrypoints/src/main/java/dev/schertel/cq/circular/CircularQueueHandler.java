@@ -28,6 +28,13 @@ public class CircularQueueHandler {
         return convertToDto(useCase.read(id));
     }
 
+    public void update(UUID id, CircularQueueDto dto) {
+        CircularQueue entity = convertToEntity(dto);
+        entity.setId(id);
+        useCase.update(entity);
+
+    }
+
     private CircularQueueDto convertToDto(CircularQueue entity) {
         CircularQueueDto dto = modelMapper.map(entity, CircularQueueDto.class);
         return dto;

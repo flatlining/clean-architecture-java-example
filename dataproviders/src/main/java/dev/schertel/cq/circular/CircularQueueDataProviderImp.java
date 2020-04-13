@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -12,8 +13,10 @@ public class CircularQueueDataProviderImp implements ICircularQueueDataProvider 
     List<CircularQueue> data = new ArrayList<CircularQueue>();
 
     public CircularQueueDataProviderImp() {
-        data.add(new CircularQueue(UUID.randomUUID(), "Queue 1", "Circular queue 1", LocalDateTime.now(), LocalDateTime.now()));
-        data.add(new CircularQueue(UUID.randomUUID(), "Queue 2", "Circular queue 2", LocalDateTime.now(), LocalDateTime.now()));
+        LocalDateTime now = LocalDateTime.now();
+        data.add(new CircularQueue(UUID.randomUUID(), "Queue 1", "Circular queue 1", now, now));
+        now = LocalDateTime.now();
+        data.add(new CircularQueue(UUID.randomUUID(), "Queue 2", "Circular queue 2", now, now));
     }
 
     @Override
@@ -34,5 +37,16 @@ public class CircularQueueDataProviderImp implements ICircularQueueDataProvider 
     @Override
     public CircularQueue read(UUID id) {
         return data.stream().filter(c -> id.equals(c.getId())).findAny().orElse(null);
+    }
+
+    @Override
+    public void update(CircularQueue entity) {
+        LocalDateTime now = LocalDateTime.now();
+        Optional<CircularQueue> current = data.stream().filter(c -> c.getId().equals(entity.getId())).findFirst();
+        if (current.isPresent()) {
+            current.get().setName(entity.getName());
+            current.get().setDescription(entity.getDescription());
+            current.get().setUpdatedAt(now);
+        }
     }
 }

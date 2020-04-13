@@ -24,4 +24,9 @@ public class CircularQueueUseCaseImp implements ICircularQueueUseCase {
     public CircularQueue read(UUID id) {
         return provider.read(id);
     }
+
+    @Override
+    public void update(CircularQueue entity) {
+        provider.update(entity);
+    }
 }

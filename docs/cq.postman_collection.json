@@ -83,8 +83,9 @@
 							"script": {
 								"id": "69208fba-777b-48f0-91fd-f1fd145399ae",
 								"exec": [
-									"pm.test(\"Body matches string\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"string_you_want_to_search\");",
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"    pm.environment.unset(\"circularId\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -94,6 +95,68 @@
 					"request": {
 						"method": "GET",
 						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/circular/{{circularId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"circular",
+								"{{circularId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{{id}}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "54709105-89df-477d-8b0f-b73eda12d6e9",
+								"exec": [
+									"pm.sendRequest(\"http://localhost:8080/circular/\", function (err, response) {",
+									"    pm.expect(err).to.be.null",
+									"    pm.expect(response).to.not.be.empty",
+									"    pm.expect(response.code).to.be.equal(200)",
+									"    pm.expect(response.status).to.be.equal(\"OK\")",
+									"    let pos = _.random(0, response.json().length-1)",
+									"    let id = response.json()[pos].id;",
+									"    pm.environment.set(\"circularId\", id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a25a4c43-497a-4181-8fc8-776bf2cc0a33",
+								"exec": [
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"    pm.environment.unset(\"circularId\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Update Queue\",\n    \"description\": \"Update Queue\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/circular/{{circularId}}",
 							"protocol": "http",
