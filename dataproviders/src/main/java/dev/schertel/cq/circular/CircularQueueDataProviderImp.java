@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class CircularQueueDataProviderImp implements CircularQueueDataProvider {
+public class CircularQueueDataProviderImp implements ICircularQueueDataProvider {
     private List<CircularQueue> data = new ArrayList<CircularQueue>();
 
     public CircularQueueDataProviderImp() {

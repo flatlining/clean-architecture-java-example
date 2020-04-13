@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class CircularQueueHandler {
-    @Autowired CircularQueueUseCase useCase;
+    @Autowired
+    ICircularQueueUseCase useCase;
     @Autowired ModelMapper modelMapper;
 
     public List<CircularQueueDto> getAll() {

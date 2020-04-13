@@ -10,7 +10,7 @@ public class CircularQueueConfig {
     CircularQueueDataProviderImp circularQueueDataProvider;
 
     @Bean
-    public CircularQueueUseCase useCase() {
+    public ICircularQueueUseCase useCase() {
         return new CircularQueueUseCaseImp(circularQueueDataProvider);
     }
 }

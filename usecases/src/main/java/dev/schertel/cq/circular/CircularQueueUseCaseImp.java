@@ -3,10 +3,10 @@ package dev.schertel.cq.circular;
 import java.util.List;
 import java.util.UUID;
 
-public class CircularQueueUseCaseImp implements CircularQueueUseCase {
-    CircularQueueDataProvider provider;
+public class CircularQueueUseCaseImp implements ICircularQueueUseCase {
+    ICircularQueueDataProvider provider;
 
-    public CircularQueueUseCaseImp(CircularQueueDataProvider provider) {
+    public CircularQueueUseCaseImp(ICircularQueueDataProvider provider) {
         this.provider = provider;
     }
 
