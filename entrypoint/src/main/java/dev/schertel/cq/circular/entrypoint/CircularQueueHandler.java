@@ -2,7 +2,7 @@ package dev.schertel.cq.circular.entrypoint;
 
 import dev.schertel.cq.circular.dto.CircularQueueDto;
 import dev.schertel.cq.circular.entity.CircularQueue;
-import dev.schertel.cq.circular.usecase.ICircularQueueUseCase;
+import dev.schertel.cq.circular.usecase.output.ICircularQueueUseCase;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

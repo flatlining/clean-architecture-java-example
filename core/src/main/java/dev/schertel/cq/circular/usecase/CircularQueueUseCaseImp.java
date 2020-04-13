@@ -1,6 +1,8 @@
 package dev.schertel.cq.circular.usecase;
 
 import dev.schertel.cq.circular.entity.CircularQueue;
+import dev.schertel.cq.circular.usecase.input.ICircularQueueDataProvider;
+import dev.schertel.cq.circular.usecase.output.ICircularQueueUseCase;
 
 import javax.inject.Inject;
 import javax.inject.Named;
