@@ -1,10 +1,10 @@
 package dev.schertel.cq.circular;
 
+import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 public interface CircularQueueDataProvider {
-    public Stream<CircularQueue> getAll();
+    public List<CircularQueue> getAll();
 
-    public Stream<CircularQueue> getById(UUID id);
+    public CircularQueue getById(UUID id);
 }

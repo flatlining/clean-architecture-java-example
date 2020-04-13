@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 public class CircularQueueDataProviderImp implements CircularQueueDataProvider {
     private List<CircularQueue> data = new ArrayList<CircularQueue>();
@@ -15,12 +14,12 @@ public class CircularQueueDataProviderImp implements CircularQueueDataProvider {
     }
 
     @Override
-    public Stream<CircularQueue> getAll() {
-        return data.stream();
+    public List<CircularQueue> getAll() {
+        return data;
     }
 
     @Override
-    public Stream<CircularQueue> getById(UUID id) {
-        return Stream.ofNullable(data.stream().filter(c -> id.equals(c.getId())).findAny().orElse(null));
+    public CircularQueue getById(UUID id) {
+        return data.stream().filter(c -> id.equals(c.getId())).findAny().orElse(null);
     }
 }

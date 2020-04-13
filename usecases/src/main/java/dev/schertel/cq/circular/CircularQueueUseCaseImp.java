@@ -1,7 +1,7 @@
 package dev.schertel.cq.circular;
 
+import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 public class CircularQueueUseCaseImp implements CircularQueueUseCase {
     CircularQueueDataProvider provider;
@@ -11,12 +11,12 @@ public class CircularQueueUseCaseImp implements CircularQueueUseCase {
     }
 
     @Override
-    public Stream<CircularQueue> getAll() {
+    public List<CircularQueue> getAll() {
         return provider.getAll();
     }
 
     @Override
-    public Stream<CircularQueue> getById(UUID id) {
+    public CircularQueue getById(UUID id) {
         return provider.getById(id);
     }
 }
