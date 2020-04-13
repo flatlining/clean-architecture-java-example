@@ -14,9 +14,4 @@ public class CircularQueueConfig {
     public CircularQueueUseCase useCase() {
         return new CircularQueueUseCaseImp(dataProvider());
     }
-
-    @Bean
-    public CircularQueueHandler handler() {
-        return new CircularQueueHandler();
-    }
 }
