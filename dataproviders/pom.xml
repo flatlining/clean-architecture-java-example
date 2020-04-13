@@ -28,7 +28,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>dev.schertel</groupId>
-			<artifactId>usecases</artifactId>
+			<artifactId>core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
