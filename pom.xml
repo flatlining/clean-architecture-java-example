@@ -11,7 +11,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>entities</module>
 		<module>usecases</module>
 		<module>dataproviders</module>
 		<module>entrypoints</module>

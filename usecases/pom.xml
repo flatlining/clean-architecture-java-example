@@ -13,12 +13,6 @@
 	<packaging>jar</packaging>
 
 	<dependencies>
-		<dependency>
-			<groupId>dev.schertel</groupId>
-			<artifactId>entities</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>
