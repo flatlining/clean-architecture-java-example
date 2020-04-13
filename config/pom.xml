@@ -73,6 +73,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.parent.groupId}-${project.parent.artifactId}-${revision}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
