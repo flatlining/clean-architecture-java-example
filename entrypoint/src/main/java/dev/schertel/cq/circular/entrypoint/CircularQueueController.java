@@ -1,5 +1,6 @@
-package dev.schertel.cq.circular;
+package dev.schertel.cq.circular.entrypoint;
 
+import dev.schertel.cq.circular.dto.CircularQueueDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

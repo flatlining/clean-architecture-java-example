@@ -1,5 +1,6 @@
-package dev.schertel.cq.circular;
+package dev.schertel.cq.circular.entrypoint;
 
+import dev.schertel.cq.circular.dto.CircularQueueDto;
 import dev.schertel.cq.circular.entity.CircularQueue;
 import dev.schertel.cq.circular.usecase.ICircularQueueUseCase;
 import org.modelmapper.ModelMapper;

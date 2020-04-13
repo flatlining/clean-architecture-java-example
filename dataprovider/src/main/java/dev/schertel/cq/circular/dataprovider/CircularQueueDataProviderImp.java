@@ -1,4 +1,4 @@
-package dev.schertel.cq.circular;
+package dev.schertel.cq.circular.dataprovider;
 
 import dev.schertel.cq.circular.entity.CircularQueue;
 import dev.schertel.cq.circular.usecase.ICircularQueueDataProvider;
