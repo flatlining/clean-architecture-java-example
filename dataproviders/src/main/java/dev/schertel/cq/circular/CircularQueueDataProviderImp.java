@@ -1,10 +1,13 @@
 package dev.schertel.cq.circular;
 
+import org.springframework.stereotype.Repository;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Repository
 public class CircularQueueDataProviderImp implements CircularQueueDataProvider {
     private List<CircularQueue> data = new ArrayList<CircularQueue>();
 
