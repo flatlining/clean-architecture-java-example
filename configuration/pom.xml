@@ -9,7 +9,7 @@
 		<version>${revision}</version>
 	</parent>
 
-	<artifactId>entrypoints</artifactId>
+	<artifactId>configuration</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencyManagement>
@@ -28,7 +28,17 @@
 	<dependencies>
 		<dependency>
 			<groupId>dev.schertel</groupId>
+			<artifactId>dataproviders</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>dev.schertel</groupId>
 			<artifactId>core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>dev.schertel</groupId>
+			<artifactId>entrypoints</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -61,5 +71,26 @@
 			<version>2.3.7</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<mainClass>dev.schertel.cq.CentralQueueApplication</mainClass>
+							<excludeDevtools>true</excludeDevtools>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
