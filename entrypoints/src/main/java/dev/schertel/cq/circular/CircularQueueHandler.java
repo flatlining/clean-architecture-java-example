@@ -1,9 +1,8 @@
 package dev.schertel.cq.circular;
 
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class CircularQueueHandler {
     CircularQueueUseCase useCase;
@@ -12,11 +11,11 @@ public class CircularQueueHandler {
         this.useCase = useCase;
     }
 
-    public Flux<CircularQueueDto> getAll() {
-        return Flux.fromStream(useCase.getAll().map(c -> CircularQueueDto.from(c)));
+    public List<CircularQueueDto> getAll() {
+        return useCase.getAll().stream().map(c -> CircularQueueDto.from(c)).collect(Collectors.toList());
     }
 
-    public Mono<CircularQueueDto> getById(String id) {
-        return Mono.just(CircularQueueDto.from(useCase.getById(UUID.fromString(id)).findFirst()));
+    public CircularQueueDto getById(String id) {
+        return CircularQueueDto.from(useCase.getById(UUID.fromString(id)));
     }
 }

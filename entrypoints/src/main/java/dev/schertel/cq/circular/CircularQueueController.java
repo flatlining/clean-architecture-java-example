@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/circular")
@@ -18,12 +18,12 @@ public class CircularQueueController {
     }
 
     @GetMapping
-    private Flux<CircularQueueDto> getAllCircularQueues() {
+    private List<CircularQueueDto> getAllCircularQueues() {
         return handler.getAll();
     }
 
     @GetMapping("/{id}")
-    private Mono<CircularQueueDto> getById(@PathVariable("id") String id) {
+    private CircularQueueDto getById(@PathVariable("id") String id) {
         return handler.getById(id);
     }
 }
