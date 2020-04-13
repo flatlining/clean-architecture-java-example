@@ -21,12 +21,12 @@ public class CircularQueueController {
     }
 
     @GetMapping
-    private List<CircularQueueDto> readAll() {
+    public List<CircularQueueDto> readAll() {
         return handler.readAll();
     }
 
     @GetMapping("/{id}")
-    private CircularQueueDto read(@PathVariable("id") UUID id) {
+    public CircularQueueDto read(@PathVariable("id") UUID id) {
         return handler.read(id);
     }
 }

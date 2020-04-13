@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Repository
 public class CircularQueueDataProviderImp implements ICircularQueueDataProvider {
-    private List<CircularQueue> data = new ArrayList<CircularQueue>();
+    List<CircularQueue> data = new ArrayList<CircularQueue>();
 
     public CircularQueueDataProviderImp() {
         data.add(new CircularQueue(UUID.randomUUID(), "Queue 1", "Circular queue 1", LocalDateTime.now(), LocalDateTime.now()));
