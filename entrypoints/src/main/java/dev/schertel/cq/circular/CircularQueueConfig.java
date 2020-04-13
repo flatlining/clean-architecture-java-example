@@ -17,6 +17,6 @@ public class CircularQueueConfig {
 
     @Bean
     public CircularQueueHandler handler() {
-        return new CircularQueueHandler(useCase());
+        return new CircularQueueHandler();
     }
 }

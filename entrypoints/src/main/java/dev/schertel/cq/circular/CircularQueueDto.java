@@ -1,7 +1,6 @@
 package dev.schertel.cq.circular;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.UUID;
 
 public class CircularQueueDto {
@@ -10,14 +9,6 @@ public class CircularQueueDto {
     String description;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
-
-    public static CircularQueueDto from(CircularQueue cq) {
-        return Optional.of(cq).map(circularQueue -> new CircularQueueDto(circularQueue.getId(), circularQueue.getName(), circularQueue.getDescription(), circularQueue.getCreatedAt(), circularQueue.getUpdatedAt())).orElse(null);
-    }
-
-    public static CircularQueueDto from(Optional<CircularQueue> cq) {
-        return cq.map(circularQueue -> new CircularQueueDto(circularQueue.getId(), circularQueue.getName(), circularQueue.getDescription(), circularQueue.getCreatedAt(), circularQueue.getUpdatedAt())).orElse(null);
-    }
 
     public CircularQueueDto() {
     }
@@ -34,19 +25,39 @@ public class CircularQueueDto {
         return id;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

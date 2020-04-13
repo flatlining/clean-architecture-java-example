@@ -11,11 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/circular")
 public class CircularQueueController {
+    @Autowired
     CircularQueueHandler handler;
-
-    public CircularQueueController(@Autowired CircularQueueHandler handler) {
-        this.handler = handler;
-    }
 
     @GetMapping
     private List<CircularQueueDto> getAllCircularQueues() {
