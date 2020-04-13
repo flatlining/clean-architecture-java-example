@@ -7,4 +7,6 @@ public interface ICircularQueueUseCase {
     public List<CircularQueue> getAll();
 
     public CircularQueue getById(UUID id);
+
+    public CircularQueue create(CircularQueue entity);
 }

@@ -19,6 +19,11 @@ public class CircularQueueHandler {
         return useCase.getAll().stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
+    public CircularQueueDto create(CircularQueueDto dto) {
+        CircularQueue entity = convertToEntity(dto);
+        return convertToDto(useCase.create(entity));
+    }
+
     public CircularQueueDto getById(UUID id) {
         return convertToDto(useCase.getById(id));
     }

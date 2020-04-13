@@ -16,6 +16,11 @@ public class CircularQueueUseCaseImp implements ICircularQueueUseCase {
     }
 
     @Override
+    public CircularQueue create(CircularQueue entity) {
+        return provider.create(entity);
+    }
+
+    @Override
     public CircularQueue getById(UUID id) {
         return provider.getById(id);
     }
