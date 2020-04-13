@@ -9,7 +9,7 @@
 		<version>${revision}</version>
 	</parent>
 
-	<artifactId>configuration</artifactId>
+	<artifactId>config</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencyManagement>

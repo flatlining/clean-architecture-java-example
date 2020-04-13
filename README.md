@@ -11,7 +11,7 @@ $ ./mvnw clean install
 Execute:
 
 ```console
-$ ./mvnw spring-boot:run -pl configuration
+$ ./mvnw spring-boot:run -pl config
 ```
 
 ## References
