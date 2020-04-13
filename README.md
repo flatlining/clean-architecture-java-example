@@ -42,7 +42,7 @@ $ ./mvnw spring-boot:run -pl config
 
 - https://docs.spring.io/spring-javaconfig/docs/1.0.0.m3/reference/html/creating-bean-definitions.html
 
-#### @Inject
+#### Inject
 
 - https://javarevisited.blogspot.com/2017/04/difference-between-autowired-and-inject-annotation-in-spring-framework.html
 - https://www.baeldung.com/spring-annotations-resource-inject-autowire
