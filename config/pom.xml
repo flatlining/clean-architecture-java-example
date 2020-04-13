@@ -28,7 +28,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>dev.schertel</groupId>
-			<artifactId>dataproviders</artifactId>
+			<artifactId>dataprovider</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -38,7 +38,7 @@
 		</dependency>
 		<dependency>
 			<groupId>dev.schertel</groupId>
-			<artifactId>entrypoints</artifactId>
+			<artifactId>entrypoint</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

@@ -11,9 +11,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>dataproviders</module>
+		<module>dataprovider</module>
 		<module>core</module>
-		<module>entrypoints</module>
+		<module>entrypoint</module>
 		<module>config</module>
 	</modules>
 
