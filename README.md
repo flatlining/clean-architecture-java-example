@@ -42,6 +42,7 @@ $ ./mvnw spring-boot:run -pl entrypoints
 - https://start.spring.io/
 - https://spring.io/guides/gs/spring-boot/
 - https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html
+- https://github.com/eugenp/tutorials/blob/master/spring-boot-rest/src/main/java/com/baeldung/springpagination/controller/PostRestController.java
 
 #### Rest
 
