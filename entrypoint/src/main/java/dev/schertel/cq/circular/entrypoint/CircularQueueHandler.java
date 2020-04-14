@@ -32,8 +32,8 @@ public class CircularQueueHandler {
         return entities.stream().map(mapper::convertEntityToResponseDto).collect(Collectors.toList());
     }
 
-    public Optional<CircularQueueResponseDto> read(String id) {
-        Optional<CircularQueue> entity = readCircleQueue.read(id);
-        return entity.map(mapper::convertEntityToResponseDto);
+    public CircularQueueResponseDto read(String id) {
+        CircularQueue entity = readCircleQueue.read(id);
+        return mapper.convertEntityToResponseDto(entity);
     }
 }

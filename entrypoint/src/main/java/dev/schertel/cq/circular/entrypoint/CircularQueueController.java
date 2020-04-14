@@ -30,7 +30,7 @@ public class CircularQueueController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public Optional<CircularQueueResponseDto> read(@PathVariable("id") String id) {
+    public CircularQueueResponseDto read(@PathVariable("id") String id) {
         return handler.read(id);
     }
 }
