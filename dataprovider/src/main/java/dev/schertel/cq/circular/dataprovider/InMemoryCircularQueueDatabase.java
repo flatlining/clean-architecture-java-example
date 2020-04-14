@@ -1,16 +1,16 @@
 package dev.schertel.cq.circular.dataprovider;
 
 import dev.schertel.cq.circular.entity.CircularQueue;
-import dev.schertel.cq.circular.usecase.input.ICircularQueueDataProvider;
+import dev.schertel.cq.circular.usecase.input.CircularQueueDataProvider;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
 @Repository
-public class CircularQueueDataProviderImp implements ICircularQueueDataProvider {
+public class InMemoryCircularQueueDatabase implements CircularQueueDataProvider {
     Map<String, CircularQueue> inMemoryDatabase = new HashMap<String, CircularQueue>();
 
-    public CircularQueueDataProviderImp() {
+    public InMemoryCircularQueueDatabase() {
         CircularQueue cq1 = new CircularQueue(UUID.randomUUID().toString(), "Name 1", "Description 1");
         CircularQueue cq2 = new CircularQueue(UUID.randomUUID().toString(), "Name 2", "Description 2");
         inMemoryDatabase.put(cq1.getId(), cq1);

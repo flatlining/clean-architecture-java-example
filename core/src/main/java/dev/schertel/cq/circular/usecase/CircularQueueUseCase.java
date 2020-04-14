@@ -1,9 +1,10 @@
 package dev.schertel.cq.circular.usecase;
 
 import dev.schertel.cq.circular.entity.CircularQueue;
-import dev.schertel.cq.circular.usecase.input.ICircularQueueDataProvider;
+import dev.schertel.cq.circular.usecase.input.CircularQueueDataProvider;
 import dev.schertel.cq.circular.usecase.input.IdGenerator;
-import dev.schertel.cq.circular.usecase.output.ICircularQueueUseCase;
+import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
+import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,9 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Named
-public class CircularQueueUseCaseImp implements ICircularQueueUseCase {
+public class CircularQueueUseCase implements CreateCircleQueue, ReadCircleQueue {
     @Inject
-    ICircularQueueDataProvider provider;
+    CircularQueueDataProvider provider;
     @Inject
     IdGenerator idGenerator;
 
