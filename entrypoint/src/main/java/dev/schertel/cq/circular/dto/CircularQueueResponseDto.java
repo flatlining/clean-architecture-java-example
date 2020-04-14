@@ -1,14 +1,14 @@
 package dev.schertel.cq.circular.dto;
 
-public class CircularQueueDto {
+public class CircularQueueResponseDto {
     String id;
     String name;
     String description;
 
-    public CircularQueueDto() {
+    public CircularQueueResponseDto() {
     }
 
-    public CircularQueueDto(String id, String name, String description) {
+    public CircularQueueResponseDto(String id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;

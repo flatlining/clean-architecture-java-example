@@ -1,6 +1,7 @@
 package dev.schertel.cq.circular.entrypoint;
 
-import dev.schertel.cq.circular.dto.CircularQueueDto;
+import dev.schertel.cq.circular.dto.CircularQueueRequestDto;
+import dev.schertel.cq.circular.dto.CircularQueueResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,19 +18,19 @@ public class CircularQueueController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public CircularQueueDto create(@RequestBody CircularQueueDto body) {
+    public CircularQueueResponseDto create(@RequestBody CircularQueueRequestDto body) {
         return handler.create(body);
     }
 
     @GetMapping
     @ResponseBody
-    public List<CircularQueueDto> readAll() {
+    public List<CircularQueueResponseDto> readAll() {
         return handler.readAll();
     }
 
     @GetMapping("/{id}")
     @ResponseBody
-    public Optional<CircularQueueDto> read(@PathVariable("id") String id) {
+    public Optional<CircularQueueResponseDto> read(@PathVariable("id") String id) {
         return handler.read(id);
     }
 }
