@@ -4,6 +4,7 @@ import dev.schertel.cq.circular.dto.CircularQueueRequestDto;
 import dev.schertel.cq.circular.dto.CircularQueueResponseDto;
 import dev.schertel.cq.circular.entity.CircularQueue;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
+import dev.schertel.cq.circular.usecase.output.DeleteCircleQueue;
 import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,13 @@ import java.util.stream.Collectors;
 public class CircularQueueHandler {
     private CreateCircleQueue createCircleQueue;
     private ReadCircleQueue readCircleQueue;
+    private DeleteCircleQueue deleteCircleQueue;
     private CircularQueueMapper mapper;
 
-    public CircularQueueHandler(CreateCircleQueue createCircleQueue, ReadCircleQueue readCircleQueue, CircularQueueMapper mapper) {
+    public CircularQueueHandler(CreateCircleQueue createCircleQueue, ReadCircleQueue readCircleQueue, DeleteCircleQueue deleteCircleQueue, CircularQueueMapper mapper) {
         this.createCircleQueue = createCircleQueue;
         this.readCircleQueue = readCircleQueue;
+        this.deleteCircleQueue = deleteCircleQueue;
         this.mapper = mapper;
     }
 
@@ -35,5 +38,9 @@ public class CircularQueueHandler {
     public CircularQueueResponseDto read(String id) {
         CircularQueue entity = readCircleQueue.read(id);
         return mapper.convertEntityToResponseDto(entity);
+    }
+
+    public void delete(String id) {
+        deleteCircleQueue.delete(id);
     }
 }

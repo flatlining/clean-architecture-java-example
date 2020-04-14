@@ -30,4 +30,9 @@ public class InMemoryCircularQueueDatabase implements CircularQueueDataProvider 
     public Optional<CircularQueue> read(String id) {
         return Optional.ofNullable(inMemoryDatabase.get(id));
     }
+
+    @Override
+    public Optional<CircularQueue> delete(String id) {
+        return Optional.ofNullable(inMemoryDatabase.remove(id));
+    }
 }

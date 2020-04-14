@@ -36,4 +36,11 @@ public class CircularQueueController {
     public CircularQueueResponseDto read(@PathVariable("id") String id) {
         return handler.read(id);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
+    public void delete(@PathVariable("id") String id) {
+        handler.delete(id);
+    }
 }

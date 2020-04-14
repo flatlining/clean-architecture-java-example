@@ -11,4 +11,6 @@ public interface CircularQueueDataProvider {
     List<CircularQueue> readAll();
 
     Optional<CircularQueue> read(String id);
+
+    Optional<CircularQueue> delete(String id);
 }
