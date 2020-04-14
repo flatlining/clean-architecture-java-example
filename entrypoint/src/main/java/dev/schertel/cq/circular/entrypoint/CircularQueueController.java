@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/circular")
@@ -29,13 +29,7 @@ public class CircularQueueController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public CircularQueueDto read(@PathVariable("id") UUID id) {
+    public Optional<CircularQueueDto> read(@PathVariable("id") String id) {
         return handler.read(id);
-    }
-
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("id") UUID id, @RequestBody CircularQueueDto body) {
-        handler.update(id, body);
     }
 }

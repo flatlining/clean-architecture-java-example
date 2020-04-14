@@ -1,31 +1,26 @@
 package dev.schertel.cq.circular.entity;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class CircularQueue {
-    UUID id;
+    String id;
     String name;
     String description;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
 
     public CircularQueue() {
     }
 
-    public CircularQueue(UUID id, String name, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public CircularQueue(String id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -43,21 +38,5 @@ public class CircularQueue {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,24 +27,19 @@ public class CircularQueueHandler {
         return useCase.readAll().stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
-    public CircularQueueDto read(UUID id) {
+    public Optional<CircularQueueDto> read(String id) {
         return convertToDto(useCase.read(id));
     }
 
-    public void update(UUID id, CircularQueueDto dto) {
-        CircularQueue entity = convertToEntity(dto);
-        entity.setId(id);
-        useCase.update(entity);
-
+    private CircularQueueDto convertToDto(CircularQueue entity) {
+        return modelMapper.map(entity, CircularQueueDto.class);
     }
 
-    private CircularQueueDto convertToDto(CircularQueue entity) {
-        CircularQueueDto dto = modelMapper.map(entity, CircularQueueDto.class);
-        return dto;
+    private Optional<CircularQueueDto> convertToDto(Optional<CircularQueue> entity) {
+        return entity.map(circularQueue -> modelMapper.map(circularQueue, CircularQueueDto.class));
     }
 
     private CircularQueue convertToEntity(CircularQueueDto dto) {
-        CircularQueue entity = modelMapper.map(dto, CircularQueue.class);
-        return entity;
+        return modelMapper.map(dto, CircularQueue.class);
     }
 }
