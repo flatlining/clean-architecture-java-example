@@ -5,7 +5,6 @@ import dev.schertel.cq.circular.dto.CircularQueueResponseDto;
 import dev.schertel.cq.circular.entity.CircularQueue;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
 import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,29 +18,22 @@ public class CircularQueueHandler {
     CreateCircleQueue createCircleQueue;
     @Autowired
     ReadCircleQueue readCircleQueue;
+
     @Autowired
-    ModelMapper modelMapper;
+    CircularQueueMapper mapper;
 
     public CircularQueueResponseDto create(CircularQueueRequestDto dto) {
-        CircularQueue entity = createCircleQueue.create(convertRequestDtoToEntity(dto));
-        return convertEntityToResponseDto(entity);
+        CircularQueue entity = createCircleQueue.create(mapper.convertRequestDtoToEntity(dto));
+        return mapper.convertEntityToResponseDto(entity);
     }
 
     public List<CircularQueueResponseDto> readAll() {
         List<CircularQueue> entities = readCircleQueue.readAll();
-        return entities.stream().map(this::convertEntityToResponseDto).collect(Collectors.toList());
+        return entities.stream().map(mapper::convertEntityToResponseDto).collect(Collectors.toList());
     }
 
     public Optional<CircularQueueResponseDto> read(String id) {
         Optional<CircularQueue> entity = readCircleQueue.read(id);
-        return entity.map(this::convertEntityToResponseDto);
-    }
-
-    private CircularQueue convertRequestDtoToEntity(CircularQueueRequestDto dto) {
-        return modelMapper.map(dto, CircularQueue.class);
-    }
-
-    private CircularQueueResponseDto convertEntityToResponseDto(CircularQueue entity) {
-        return modelMapper.map(entity, CircularQueueResponseDto.class);
+        return entity.map(mapper::convertEntityToResponseDto);
     }
 }
