@@ -5,22 +5,22 @@ import dev.schertel.cq.circular.dto.CircularQueueResponseDto;
 import dev.schertel.cq.circular.entity.CircularQueue;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
 import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class CircularQueueHandler {
-    @Autowired
-    CreateCircleQueue createCircleQueue;
-    @Autowired
-    ReadCircleQueue readCircleQueue;
+    private CreateCircleQueue createCircleQueue;
+    private ReadCircleQueue readCircleQueue;
+    private CircularQueueMapper mapper;
 
-    @Autowired
-    CircularQueueMapper mapper;
+    public CircularQueueHandler(CreateCircleQueue createCircleQueue, ReadCircleQueue readCircleQueue, CircularQueueMapper mapper) {
+        this.createCircleQueue = createCircleQueue;
+        this.readCircleQueue = readCircleQueue;
+        this.mapper = mapper;
+    }
 
     public CircularQueueResponseDto create(CircularQueueRequestDto dto) {
         CircularQueue entity = createCircleQueue.create(mapper.convertRequestDtoToEntity(dto));

@@ -6,7 +6,7 @@ import dev.schertel.cq.circular.usecase.input.CircularQueueDataProvider;
 import java.util.*;
 
 public class InMemoryCircularQueueDatabase implements CircularQueueDataProvider {
-    Map<String, CircularQueue> inMemoryDatabase = new HashMap<String, CircularQueue>();
+    private Map<String, CircularQueue> inMemoryDatabase = new HashMap<String, CircularQueue>();
 
     public InMemoryCircularQueueDatabase() {
         CircularQueue cq1 = new CircularQueue(UUID.randomUUID().toString(), "Name 1", "Description 1");

@@ -12,8 +12,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/circular")
 public class CircularQueueController {
-    @Autowired
-    CircularQueueHandler handler;
+    private CircularQueueHandler handler;
+
+    public CircularQueueController(CircularQueueHandler handler) {
+        this.handler = handler;
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

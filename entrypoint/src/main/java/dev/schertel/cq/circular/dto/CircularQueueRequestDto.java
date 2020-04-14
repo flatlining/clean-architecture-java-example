@@ -1,8 +1,8 @@
 package dev.schertel.cq.circular.dto;
 
 public class CircularQueueRequestDto {
-    String name;
-    String description;
+    private String name;
+    private String description;
 
     public CircularQueueRequestDto() {
     }

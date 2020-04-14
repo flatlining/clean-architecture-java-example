@@ -3,9 +3,9 @@ package dev.schertel.cq.circular.entity;
 import java.util.UUID;
 
 public class CircularQueue {
-    String id;
-    String name;
-    String description;
+    private String id;
+    private String name;
+    private String description;
 
     public CircularQueue() {
     }
