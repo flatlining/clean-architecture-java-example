@@ -6,17 +6,17 @@ import dev.schertel.cq.circular.usecase.input.IdGenerator;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
 import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.List;
 import java.util.Optional;
 
-@Named
 public class CircularQueueUseCase implements CreateCircleQueue, ReadCircleQueue {
-    @Inject
-    CircularQueueDataProvider provider;
-    @Inject
-    IdGenerator idGenerator;
+    private CircularQueueDataProvider provider;
+    private IdGenerator idGenerator;
+
+    public CircularQueueUseCase(CircularQueueDataProvider provider, IdGenerator idGenerator) {
+        this.provider = provider;
+        this.idGenerator = idGenerator;
+    }
 
     @Override
     public CircularQueue create(CircularQueue entity) {

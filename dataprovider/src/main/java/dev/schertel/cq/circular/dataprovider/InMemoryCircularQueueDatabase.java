@@ -2,11 +2,9 @@ package dev.schertel.cq.circular.dataprovider;
 
 import dev.schertel.cq.circular.entity.CircularQueue;
 import dev.schertel.cq.circular.usecase.input.CircularQueueDataProvider;
-import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
 public class InMemoryCircularQueueDatabase implements CircularQueueDataProvider {
     Map<String, CircularQueue> inMemoryDatabase = new HashMap<String, CircularQueue>();
 
