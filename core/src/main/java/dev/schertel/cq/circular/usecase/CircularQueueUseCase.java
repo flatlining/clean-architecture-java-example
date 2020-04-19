@@ -7,10 +7,12 @@ import dev.schertel.cq.circular.usecase.input.IdGenerator;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
 import dev.schertel.cq.circular.usecase.output.DeleteCircleQueue;
 import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
+import dev.schertel.cq.circular.usecase.output.UpdateCircleQueue;
 
 import java.util.List;
+import java.util.Optional;
 
-public class CircularQueueUseCase implements CreateCircleQueue, ReadCircleQueue, DeleteCircleQueue {
+public class CircularQueueUseCase implements CreateCircleQueue, ReadCircleQueue, UpdateCircleQueue, DeleteCircleQueue {
     private CircularQueueDataProvider provider;
     private IdGenerator idGenerator;
 
@@ -33,6 +35,19 @@ public class CircularQueueUseCase implements CreateCircleQueue, ReadCircleQueue,
     @Override
     public CircularQueue read(String id) {
         return provider.read(id).orElseThrow(() -> new CircularQueueNotFoundException(id));
+    }
+
+    @Override
+    public void update(String id, CircularQueue entity) {
+        Optional<CircularQueue> toUpdate = provider.read(id);
+        toUpdate.ifPresentOrElse(u -> {
+            u.setId(id);
+            Optional.ofNullable(entity.getName()).ifPresent(u::setName);
+            Optional.ofNullable(entity.getDescription()).ifPresent(u::setDescription);
+            provider.update(u);
+        }, () -> {
+            throw new CircularQueueNotFoundException(id);
+        });
     }
 
     @Override

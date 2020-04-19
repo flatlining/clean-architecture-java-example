@@ -146,11 +146,11 @@
 						}
 					],
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Update Queue\",\n    \"description\": \"Update Queue\"\n}",
+							"raw": "{\n    \"name\": \"Update Queue\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

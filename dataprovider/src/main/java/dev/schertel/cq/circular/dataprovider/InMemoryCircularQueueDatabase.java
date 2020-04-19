@@ -6,7 +6,7 @@ import dev.schertel.cq.circular.usecase.input.CircularQueueDataProvider;
 import java.util.*;
 
 public class InMemoryCircularQueueDatabase implements CircularQueueDataProvider {
-    private Map<String, CircularQueue> inMemoryDatabase = new HashMap<String, CircularQueue>();
+    private final Map<String, CircularQueue> inMemoryDatabase = new HashMap<String, CircularQueue>();
 
     public InMemoryCircularQueueDatabase() {
         CircularQueue cq1 = new CircularQueue(UUID.randomUUID().toString(), "Name 1", "Description 1");
@@ -29,6 +29,16 @@ public class InMemoryCircularQueueDatabase implements CircularQueueDataProvider 
     @Override
     public Optional<CircularQueue> read(String id) {
         return Optional.ofNullable(inMemoryDatabase.get(id));
+    }
+
+    @Override
+    public Optional<CircularQueue> update(CircularQueue entity) {
+        Optional<CircularQueue> updated = Optional.ofNullable(inMemoryDatabase.replace(entity.getId(), entity));
+        if (updated.isPresent()) {
+            return Optional.of(entity);
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override

@@ -12,5 +12,7 @@ public interface CircularQueueDataProvider {
 
     Optional<CircularQueue> read(String id);
 
+    Optional<CircularQueue> update(CircularQueue entity);
+
     Optional<CircularQueue> delete(String id);
 }
