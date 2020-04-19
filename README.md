@@ -33,6 +33,8 @@ $ ./mvnw spring-boot:run -pl config
   - https://jeanchristophegay.com/en/posts/maven-unique-version-multi-modules-build/
 - https://www.baeldung.com/maven-java-version
   - https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9
+- https://mkyong.com/maven/how-to-create-a-java-project-with-maven/
+  - https://github.com/mkyong/maven-examples
 
 ### Test
 
