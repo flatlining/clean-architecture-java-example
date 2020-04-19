@@ -42,6 +42,12 @@ $ ./mvnw spring-boot:run -pl config
 - https://www.baeldung.com/spring-annotations-resource-inject-autowire
 - https://mvnrepository.com/artifact/javax.inject/javax.inject/1
 
+#### Modules
+
+- https://dzone.com/articles/java-9-module-services
+- https://www.baeldung.com/project-jigsaw-java-modularity
+- https://www.oracle.com/corporate/features/understanding-java-9-modules.html
+
 ### Spring-Boot
 
 - https://start.spring.io/
