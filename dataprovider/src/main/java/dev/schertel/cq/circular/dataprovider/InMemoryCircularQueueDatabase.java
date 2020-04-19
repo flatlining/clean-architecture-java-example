@@ -8,13 +8,6 @@ import java.util.*;
 public class InMemoryCircularQueueDatabase implements CircularQueueDataProvider {
     private final Map<String, CircularQueue> inMemoryDatabase = new HashMap<String, CircularQueue>();
 
-    public InMemoryCircularQueueDatabase() {
-        CircularQueue cq1 = new CircularQueue(UUID.randomUUID().toString(), "Name 1", "Description 1");
-        CircularQueue cq2 = new CircularQueue(UUID.randomUUID().toString(), "Name 2", "Description 2");
-        inMemoryDatabase.put(cq1.getId(), cq1);
-        inMemoryDatabase.put(cq2.getId(), cq2);
-    }
-
     @Override
     public CircularQueue create(CircularQueue entity) {
         inMemoryDatabase.put(entity.getId(), entity);
