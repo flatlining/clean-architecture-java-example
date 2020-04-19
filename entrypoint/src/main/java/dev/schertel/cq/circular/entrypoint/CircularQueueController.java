@@ -2,6 +2,7 @@ package dev.schertel.cq.circular.entrypoint;
 
 import dev.schertel.cq.circular.dto.CircularQueueRequestDto;
 import dev.schertel.cq.circular.dto.CircularQueueResponseDto;
+import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +14,22 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/circular")
 public class CircularQueueController {
+    private Logger logger;
     private CircularQueueHandler handler;
 
-    public CircularQueueController(CircularQueueHandler handler) {
+    public CircularQueueController(Logger logger, CircularQueueHandler handler) {
+        this.logger = logger;
         this.handler = handler;
     }
 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public CircularQueueResponseDto create(@RequestBody CircularQueueRequestDto body) {
-        return handler.create(body);
+    public CircularQueueResponseDto create(@RequestBody CircularQueueRequestDto requestBody) {
+        logger.info(requestBody.toString());
+        CircularQueueResponseDto responseBody = handler.create(requestBody);
+        logger.info(responseBody.toString());
+        return responseBody;
     }
 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET

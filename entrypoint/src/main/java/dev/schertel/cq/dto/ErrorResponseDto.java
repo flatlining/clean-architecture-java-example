@@ -8,6 +8,9 @@ public class ErrorResponseDto {
     private String error;
     private String message;
 
+    private ErrorResponseDto() {
+    }
+
     private ErrorResponseDto(Builder builder) {
         this.timestamp = builder.timestamp;
         this.status = builder.status;
@@ -33,6 +36,17 @@ public class ErrorResponseDto {
 
     public String getMessage() {
         return message;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ErrorResponseDto{");
+        sb.append("timestamp=").append(timestamp);
+        sb.append(", status=").append(status);
+        sb.append(", error='").append(error).append('\'');
+        sb.append(", message='").append(message).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
     public static class Builder {

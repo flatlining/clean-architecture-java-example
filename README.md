@@ -4,7 +4,7 @@
 
 ```console
 $ ./mvnw clean install
-$ ./mvnw spring-boot:run -pl config
+$ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 ```
 
 ## References
@@ -14,6 +14,11 @@ $ ./mvnw spring-boot:run -pl config
 - https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830
   - https://github.com/mattia-battiston/clean-architecture-example
 - https://jmgarridopaz.github.io/content/hexagonalarchitecture.html
+
+#### Builder Pattern
+
+- https://www.geeksforgeeks.org/builder-pattern-in-java/
+- https://www.journaldev.com/1425/builder-design-pattern-in-java
 
 #### Spring-Boot
 
@@ -43,7 +48,6 @@ $ ./mvnw spring-boot:run -pl config
 - https://www.baeldung.com/junit-5
 - https://mkyong.com/spring-boot/spring-boot-junit-5-mockito/
 
-
 ### Java
 
 #### Dependency Injection
@@ -60,12 +64,20 @@ $ ./mvnw spring-boot:run -pl config
 - https://medium.com/slalom-build/clean-architecture-with-java-11-f78bba431041
 - https://www.oracle.com/corporate/features/understanding-java-9-modules.html
 
+#### ModelMapper
+
+- https://github.com/modelmapper/modelmapper/issues/265
+
 ### Spring-Boot
 
 - https://start.spring.io/
 - https://spring.io/guides/gs/spring-boot/
 - https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html
 - https://github.com/eugenp/tutorials/blob/master/spring-boot-rest/src/main/java/com/baeldung/springpagination/controller/PostRestController.java
+
+#### Maven
+
+- https://docs.spring.io/spring-boot/docs/current/maven-plugin/examples/run-profiles.html
 
 #### Beans
 
@@ -80,3 +92,8 @@ $ ./mvnw spring-boot:run -pl config
 #### Controller
 
 - https://www.baeldung.com/spring-controller-vs-restcontroller
+
+#### Logging
+
+- https://stackoverflow.com/a/55338237
+  - https://dzone.com/articles/logger-injection-with-springs-injectionpoint
