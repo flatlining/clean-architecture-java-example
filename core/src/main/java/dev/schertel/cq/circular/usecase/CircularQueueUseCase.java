@@ -3,28 +3,27 @@ package dev.schertel.cq.circular.usecase;
 import dev.schertel.cq.circular.entity.CircularQueue;
 import dev.schertel.cq.circular.exception.CircularQueueNotFoundException;
 import dev.schertel.cq.circular.usecase.input.CircularQueueDataProvider;
+import dev.schertel.cq.circular.usecase.input.IdGeneratorDataProvider;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
 import dev.schertel.cq.circular.usecase.output.DeleteCircleQueue;
 import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
 import dev.schertel.cq.circular.usecase.output.UpdateCircleQueue;
-import usecase.UUIDGenerator;
-import usecase.output.GenerateId;
 
 import java.util.List;
 import java.util.Optional;
 
 public class CircularQueueUseCase implements CreateCircleQueue, ReadCircleQueue, UpdateCircleQueue, DeleteCircleQueue {
     private CircularQueueDataProvider provider;
-    private GenerateId generateId;
+    private IdGeneratorDataProvider idGenerator;
 
-    public CircularQueueUseCase(CircularQueueDataProvider provider) {
+    public CircularQueueUseCase(CircularQueueDataProvider provider, IdGeneratorDataProvider idGenerator) {
         this.provider = provider;
-        this.generateId = new UUIDGenerator();
+        this.idGenerator = idGenerator;
     }
 
     @Override
     public CircularQueue create(CircularQueue entity) {
-        CircularQueue toSave = new CircularQueue(generateId.generate(), entity.getName(), entity.getDescription());
+        CircularQueue toSave = new CircularQueue(idGenerator.generate(), entity.getName(), entity.getDescription());
         return provider.create(toSave);
     }
 
