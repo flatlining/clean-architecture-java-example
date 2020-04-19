@@ -1,0 +1,683 @@
+{
+	"info": {
+		"_postman_id": "9428d3d1-56e8-421c-9a04-5b5b9ea3616a",
+		"name": "cq",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/circular",
+			"item": [
+				{
+					"name": "/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "76cf6843-cf70-4e8d-b2d4-6e428ac1953e",
+								"exec": [
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"",
+									"",
+									"var Ajv = require('ajv')",
+									"var ajv = new Ajv({logger: console})",
+									"var schema = {",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",",
+									"    \"type\": \"array\",",
+									"    \"title\": \"Circle Queues\",",
+									"    \"description\": \"List of existing Circular Queues.\",",
+									"    \"default\": [],",
+									"    \"additionalItems\": true,",
+									"    \"items\": {",
+									"        \"type\": \"object\",",
+									"        \"title\": \"Circular Queue\",",
+									"        \"description\": \"A Circular Queue.\",",
+									"        \"default\": {},",
+									"        \"examples\": [",
+									"            {",
+									"                \"description\": \"Queue Description\",",
+									"                \"name\": \"Queue Name\",",
+									"                \"id\": \"1ed48d5f-ecef-4774-8ab8-8e531abd2987\"",
+									"            }",
+									"        ],",
+									"        \"additionalProperties\": true,",
+									"        \"required\": [",
+									"            \"id\"",
+									"        ],",
+									"        \"properties\": {",
+									"            \"id\": {",
+									"                \"type\": \"string\",",
+									"                \"title\": \"Id\",",
+									"                \"description\": \"A unique alphanumeric identified of a Circular Queue.\",",
+									"                \"default\": \"\",",
+									"                \"examples\": [",
+									"                    \"1ed48d5f-ecef-4774-8ab8-8e531abd2987\"",
+									"                ]",
+									"            },",
+									"            \"name\": {",
+									"                \"type\": \"string\",",
+									"                \"title\": \"Name\",",
+									"                \"description\": \"The name of the Circular Queue.\",",
+									"                \"default\": \"\",",
+									"                \"examples\": [",
+									"                    \"Queue Name\"",
+									"                ]",
+									"            },",
+									"            \"description\": {",
+									"                \"type\": \"string\",",
+									"                \"title\": \"Description\",",
+									"                \"description\": \"The description of the Circular Queue.\",",
+									"                \"default\": \"\",",
+									"                \"examples\": [",
+									"                    \"Queue Description\"",
+									"                ]",
+									"            }",
+									"        }",
+									"    }",
+									"}",
+									" ",
+									"pm.test('Schema is valid', function() {",
+									"    var data = pm.response.json();",
+									"    pm.expect(ajv.validate(schema, data)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/circular/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"circular",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "70d329de-147b-4ce2-bfd8-8a576a0bf80f",
+								"exec": [
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"});",
+									"",
+									"var Ajv = require('ajv')",
+									"var ajv = new Ajv({logger: console})",
+									"var schema = {",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",",
+									"    \"type\": \"object\",",
+									"    \"title\": \"Circular Queue\",",
+									"    \"description\": \"A Circular Queue.\",",
+									"    \"default\": {},",
+									"    \"examples\": [",
+									"        {",
+									"            \"description\": \"Queue Description\",",
+									"            \"name\": \"Queue Name\",",
+									"            \"id\": \"1ed48d5f-ecef-4774-8ab8-8e531abd2987\"",
+									"        }",
+									"    ],",
+									"    \"additionalProperties\": true,",
+									"    \"required\": [",
+									"        \"id\"",
+									"    ],",
+									"    \"properties\": {",
+									"        \"id\": {",
+									"            \"type\": \"string\",",
+									"            \"title\": \"Id\",",
+									"            \"description\": \"A unique alphanumeric identified of a Circular Queue.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"1ed48d5f-ecef-4774-8ab8-8e531abd2987\"",
+									"            ]",
+									"        },",
+									"        \"name\": {",
+									"            \"type\": \"string\",",
+									"            \"title\": \"Name\",",
+									"            \"description\": \"The name of the Circular Queue.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"Queue Name\"",
+									"            ]",
+									"        },",
+									"        \"description\": {",
+									"            \"type\": \"string\",",
+									"            \"title\": \"Description\",",
+									"            \"description\": \"The description of the Circular Queue.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"Queue Description\"",
+									"            ]",
+									"        }",
+									"    }",
+									"}",
+									" ",
+									"pm.test('Schema is valid', function() {",
+									"    var data = pm.response.json();",
+									"    pm.expect(ajv.validate(schema, data)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Post Queue\",\n    \"description\": \"Post Queue\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/circular/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"circular",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{{id}}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "654584a5-bc16-4070-960d-4b2056d03318",
+								"exec": [
+									"pm.sendRequest(\"http://localhost:8080/circular/\", function (err, response) {",
+									"    pm.expect(err).to.be.null",
+									"    pm.expect(response).to.not.be.empty",
+									"    pm.expect(response.code).to.be.equal(200)",
+									"    pm.expect(response.status).to.be.equal(\"OK\")",
+									"    let pos = _.random(0, response.json().length-1)",
+									"    let id = response.json()[pos].id;",
+									"    pm.environment.set(\"circularId\", id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "69208fba-777b-48f0-91fd-f1fd145399ae",
+								"exec": [
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"    pm.environment.unset(\"circularId\");",
+									"});",
+									"",
+									"var Ajv = require('ajv')",
+									"var ajv = new Ajv({logger: console})",
+									"var schema = {",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",",
+									"    \"type\": \"object\",",
+									"    \"title\": \"Circular Queue\",",
+									"    \"description\": \"A Circular Queue.\",",
+									"    \"default\": {},",
+									"    \"examples\": [",
+									"        {",
+									"            \"description\": \"Queue Description\",",
+									"            \"name\": \"Queue Name\",",
+									"            \"id\": \"1ed48d5f-ecef-4774-8ab8-8e531abd2987\"",
+									"        }",
+									"    ],",
+									"    \"additionalProperties\": true,",
+									"    \"required\": [",
+									"        \"id\"",
+									"    ],",
+									"    \"properties\": {",
+									"        \"id\": {",
+									"            \"type\": \"string\",",
+									"            \"title\": \"Id\",",
+									"            \"description\": \"A unique alphanumeric identified of a Circular Queue.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"1ed48d5f-ecef-4774-8ab8-8e531abd2987\"",
+									"            ]",
+									"        },",
+									"        \"name\": {",
+									"            \"type\": \"string\",",
+									"            \"title\": \"Name\",",
+									"            \"description\": \"The name of the Circular Queue.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"Queue Name\"",
+									"            ]",
+									"        },",
+									"        \"description\": {",
+									"            \"type\": \"string\",",
+									"            \"title\": \"Description\",",
+									"            \"description\": \"The description of the Circular Queue.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"Queue Description\"",
+									"            ]",
+									"        }",
+									"    }",
+									"}",
+									" ",
+									"pm.test('Schema is valid', function() {",
+									"    var data = pm.response.json();",
+									"    pm.expect(ajv.validate(schema, data)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/circular/{{circularId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"circular",
+								"{{circularId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{{id}}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "54709105-89df-477d-8b0f-b73eda12d6e9",
+								"exec": [
+									"pm.sendRequest(\"http://localhost:8080/circular/\", function (err, response) {",
+									"    pm.expect(err).to.be.null",
+									"    pm.expect(response).to.not.be.empty",
+									"    pm.expect(response.code).to.be.equal(200)",
+									"    pm.expect(response.status).to.be.equal(\"OK\")",
+									"    let pos = _.random(0, response.json().length-1)",
+									"    let id = response.json()[pos].id;",
+									"    pm.environment.set(\"circularId\", id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a25a4c43-497a-4181-8fc8-776bf2cc0a33",
+								"exec": [
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([204]);",
+									"    pm.environment.unset(\"circularId\");",
+									"});",
+									"",
+									"pm.test(\"Response body is empty\", function () {",
+									"    pm.response.to.not.have.body();",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Patch Queue\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/circular/{{circularId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"circular",
+								"{{circularId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{{id}}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "54709105-89df-477d-8b0f-b73eda12d6e9",
+								"exec": [
+									"pm.sendRequest(\"http://localhost:8080/circular/\", function (err, response) {",
+									"    pm.expect(err).to.be.null",
+									"    pm.expect(response).to.not.be.empty",
+									"    pm.expect(response.code).to.be.equal(200)",
+									"    pm.expect(response.status).to.be.equal(\"OK\")",
+									"    let pos = _.random(0, response.json().length-1)",
+									"    let id = response.json()[pos].id;",
+									"    pm.environment.set(\"circularId\", id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a25a4c43-497a-4181-8fc8-776bf2cc0a33",
+								"exec": [
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([204]);",
+									"    pm.environment.unset(\"circularId\");",
+									"});",
+									"",
+									"pm.test(\"Response body is empty\", function () {",
+									"    pm.response.to.not.have.body();",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Put Queue\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/circular/{{circularId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"circular",
+								"{{circularId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{{$randomUUID}}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "54709105-89df-477d-8b0f-b73eda12d6e9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a25a4c43-497a-4181-8fc8-776bf2cc0a33",
+								"exec": [
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"    pm.environment.unset(\"circularId\");",
+									"});",
+									"",
+									"var Ajv = require('ajv')",
+									"var ajv = new Ajv({logger: console})",
+									"var schema = {",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",",
+									"    \"type\": \"object\",",
+									"    \"title\": \"Circular Queue\",",
+									"    \"description\": \"A Circular Queue.\",",
+									"    \"default\": {},",
+									"    \"examples\": [",
+									"        {",
+									"            \"description\": \"Queue Description\",",
+									"            \"name\": \"Queue Name\",",
+									"            \"id\": \"1ed48d5f-ecef-4774-8ab8-8e531abd2987\"",
+									"        }",
+									"    ],",
+									"    \"additionalProperties\": true,",
+									"    \"required\": [",
+									"        \"id\"",
+									"    ],",
+									"    \"properties\": {",
+									"        \"id\": {",
+									"            \"type\": \"string\",",
+									"            \"title\": \"Id\",",
+									"            \"description\": \"A unique alphanumeric identified of a Circular Queue.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"1ed48d5f-ecef-4774-8ab8-8e531abd2987\"",
+									"            ]",
+									"        },",
+									"        \"name\": {",
+									"            \"type\": \"string\",",
+									"            \"title\": \"Name\",",
+									"            \"description\": \"The name of the Circular Queue.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"Queue Name\"",
+									"            ]",
+									"        },",
+									"        \"description\": {",
+									"            \"type\": \"string\",",
+									"            \"title\": \"Description\",",
+									"            \"description\": \"The description of the Circular Queue.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"Queue Description\"",
+									"            ]",
+									"        }",
+									"    }",
+									"}",
+									" ",
+									"pm.test('Schema is valid', function() {",
+									"    var data = pm.response.json();",
+									"    pm.expect(ajv.validate(schema, data)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Put New Queue\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/circular/{{$randomUUID}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"circular",
+								"{{$randomUUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{{id}}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "54709105-89df-477d-8b0f-b73eda12d6e9",
+								"exec": [
+									"pm.sendRequest(\"http://localhost:8080/circular/\", function (err, response) {",
+									"    pm.expect(err).to.be.null",
+									"    pm.expect(response).to.not.be.empty",
+									"    pm.expect(response.code).to.be.equal(200)",
+									"    pm.expect(response.status).to.be.equal(\"OK\")",
+									"    let pos = _.random(0, response.json().length-1)",
+									"    let id = response.json()[pos].id;",
+									"    pm.environment.set(\"circularId\", id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a25a4c43-497a-4181-8fc8-776bf2cc0a33",
+								"exec": [
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([204]);",
+									"    pm.environment.unset(\"circularId\");",
+									"});",
+									"",
+									"pm.test(\"Response body is empty\", function () {",
+									"    pm.response.to.not.have.body();",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/circular/{{circularId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"circular",
+								"{{circularId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "54709105-89df-477d-8b0f-b73eda12d6e9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a25a4c43-497a-4181-8fc8-776bf2cc0a33",
+								"exec": [
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([204]);",
+									"});",
+									"",
+									"pm.test(\"Response body is empty\", function () {",
+									"    pm.response.to.not.have.body();",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/circular/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"circular",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
