@@ -18,6 +18,7 @@ public class CircularQueueController {
         this.handler = handler;
     }
 
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
@@ -25,6 +26,7 @@ public class CircularQueueController {
         return handler.create(body);
     }
 
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET
     @GetMapping
     @ResponseBody
     public List<CircularQueueResponseDto> readAll() {
@@ -37,6 +39,17 @@ public class CircularQueueController {
         return handler.read(id);
     }
 
+    /**
+     * https://pt.stackoverflow.com/questions/92870/qual-%C3%A9-a-diferen%C3%A7a-entre-o-m%C3%A9todo-put-e-o-post
+     * https://stackoverflow.com/questions/107390/whats-the-difference-between-a-post-and-a-put-http-request
+     * https://restfulapi.net/rest-put-vs-post/
+     */
+
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT
+
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH
+
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody
