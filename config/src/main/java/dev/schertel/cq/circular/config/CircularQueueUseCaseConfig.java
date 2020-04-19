@@ -1,5 +1,6 @@
-package dev.schertel.cq.circular.usecase;
+package dev.schertel.cq.circular.config;
 
+import dev.schertel.cq.circular.usecase.CircularQueueUseCase;
 import dev.schertel.cq.circular.usecase.input.CircularQueueDataProvider;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
 import dev.schertel.cq.circular.usecase.output.DeleteCircleQueue;

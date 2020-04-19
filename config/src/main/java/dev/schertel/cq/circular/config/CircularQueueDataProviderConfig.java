@@ -1,5 +1,6 @@
-package dev.schertel.cq.circular.dataprovider;
+package dev.schertel.cq.circular.config;
 
+import dev.schertel.cq.circular.dataprovider.InMemoryCircularQueueDatabase;
 import dev.schertel.cq.circular.usecase.input.CircularQueueDataProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
