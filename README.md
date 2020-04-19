@@ -31,12 +31,9 @@ $ ./mvnw spring-boot:run -pl config
 
 ### Java
 
-#### Beans
+#### Dependency Injection
 
-- https://docs.spring.io/spring-javaconfig/docs/1.0.0.m3/reference/html/creating-bean-definitions.html
-
-#### Inject
-
+- https://www.vogella.com/tutorials/DependencyInjection/article.html
 - https://javarevisited.blogspot.com/2017/04/difference-between-autowired-and-inject-annotation-in-spring-framework.html
 - https://www.baeldung.com/spring-annotations-resource-inject-autowire
 - https://mvnrepository.com/artifact/javax.inject/javax.inject/1
@@ -47,6 +44,10 @@ $ ./mvnw spring-boot:run -pl config
 - https://spring.io/guides/gs/spring-boot/
 - https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html
 - https://github.com/eugenp/tutorials/blob/master/spring-boot-rest/src/main/java/com/baeldung/springpagination/controller/PostRestController.java
+
+#### Beans
+
+- https://docs.spring.io/spring-javaconfig/docs/1.0.0.m3/reference/html/creating-bean-definitions.html
 
 #### Rest
 
