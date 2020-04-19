@@ -13,6 +13,7 @@ $ ./mvnw spring-boot:run -pl config
 
 - https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830
   - https://github.com/mattia-battiston/clean-architecture-example
+- https://jmgarridopaz.github.io/content/hexagonalarchitecture.html
 
 #### Spring-Boot
 
@@ -41,6 +42,13 @@ $ ./mvnw spring-boot:run -pl config
 - https://javarevisited.blogspot.com/2017/04/difference-between-autowired-and-inject-annotation-in-spring-framework.html
 - https://www.baeldung.com/spring-annotations-resource-inject-autowire
 - https://mvnrepository.com/artifact/javax.inject/javax.inject/1
+
+#### Modules
+
+- https://dzone.com/articles/java-9-module-services
+- https://www.baeldung.com/project-jigsaw-java-modularity
+- https://medium.com/slalom-build/clean-architecture-with-java-11-f78bba431041
+- https://www.oracle.com/corporate/features/understanding-java-9-modules.html
 
 ### Spring-Boot
 
