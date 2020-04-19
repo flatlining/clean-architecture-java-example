@@ -42,6 +42,11 @@ public class InMemoryCircularQueueDatabase implements CircularQueueDataProvider 
     }
 
     @Override
+    public void deleteAll() {
+        inMemoryDatabase.clear();
+    }
+
+    @Override
     public Optional<CircularQueue> delete(String id) {
         return Optional.ofNullable(inMemoryDatabase.remove(id));
     }

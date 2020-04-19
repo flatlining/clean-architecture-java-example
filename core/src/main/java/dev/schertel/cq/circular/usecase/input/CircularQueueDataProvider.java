@@ -15,7 +15,7 @@ public interface CircularQueueDataProvider {
     CircularQueue create(CircularQueue entity);
 
     /**
-     * List the {@link CircularQueue} stored.
+     * List all {@link CircularQueue} stored.
      *
      * @return A list of {@link CircularQueue} stored
      */
@@ -36,6 +36,11 @@ public interface CircularQueueDataProvider {
      * @return The {@link CircularQueue} updated
      */
     Optional<CircularQueue> update(CircularQueue entity);
+
+    /**
+     * Delete all {@link CircularQueue} stored.
+     */
+    void deleteAll();
 
     /**
      * Delete a {@link CircularQueue} stored.

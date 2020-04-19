@@ -356,7 +356,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Update Queue\",\n    \"description\": \"Update Queue\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -373,6 +373,59 @@
 							"path": [
 								"circular",
 								"{{circularId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "54709105-89df-477d-8b0f-b73eda12d6e9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a25a4c43-497a-4181-8fc8-776bf2cc0a33",
+								"exec": [
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([204]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/circular/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"circular",
+								""
 							]
 						}
 					},

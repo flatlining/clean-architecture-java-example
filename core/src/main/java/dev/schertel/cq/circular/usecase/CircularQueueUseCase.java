@@ -65,6 +65,11 @@ public class CircularQueueUseCase implements CreateCircleQueue, ReadCircleQueue,
     }
 
     @Override
+    public void deleteAll() {
+        provider.deleteAll();
+    }
+
+    @Override
     public void delete(String id) {
         provider.delete(id).orElseThrow(() -> new CircularQueueNotFoundException(id));
     }

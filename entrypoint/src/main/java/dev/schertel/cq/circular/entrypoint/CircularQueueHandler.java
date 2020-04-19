@@ -53,6 +53,10 @@ public class CircularQueueHandler {
         return entity.map(mapper::convertEntityToResponseDto);
     }
 
+    public void deleteAll() {
+        deleteCircleQueue.deleteAll();
+    }
+
     public void delete(String id) {
         deleteCircleQueue.delete(id);
     }

@@ -5,6 +5,11 @@ import dev.schertel.cq.circular.exception.CircularQueueNotFoundException;
 
 public interface DeleteCircleQueue {
     /**
+     * Real all existing {@link CircularQueue}
+     */
+    void deleteAll();
+
+    /**
      * Delete the {@link CircularQueue} of matching {@code id}.
      *
      * @param id The {@code id} of the {@link CircularQueue} to delete
