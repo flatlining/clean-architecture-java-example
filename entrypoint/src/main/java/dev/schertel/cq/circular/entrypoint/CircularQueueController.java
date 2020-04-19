@@ -3,6 +3,7 @@ package dev.schertel.cq.circular.entrypoint;
 import dev.schertel.cq.circular.dto.CircularQueueRequestDto;
 import dev.schertel.cq.circular.dto.CircularQueueResponseDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,20 +20,20 @@ public class CircularQueueController {
     }
 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public CircularQueueResponseDto create(@RequestBody CircularQueueRequestDto body) {
         return handler.create(body);
     }
 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public List<CircularQueueResponseDto> readAll() {
         return handler.readAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public CircularQueueResponseDto read(@PathVariable("id") String id) {
         return handler.read(id);
@@ -46,14 +47,14 @@ public class CircularQueueController {
      */
 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH
-    @PatchMapping("/{id}")
+    @PatchMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable("id") String id, @RequestBody CircularQueueRequestDto body) {
         handler.update(id, body);
     }
 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Optional<CircularQueueResponseDto>> replaceOrCreate(@PathVariable("id") String id, @RequestBody CircularQueueRequestDto body) {
         Optional<CircularQueueResponseDto> response = handler.replaceOrCreate(id, body);
