@@ -13,6 +13,7 @@ $ ./mvnw spring-boot:run -pl config
 
 - https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830
   - https://github.com/mattia-battiston/clean-architecture-example
+- https://jmgarridopaz.github.io/content/hexagonalarchitecture.html
 
 #### Spring-Boot
 
@@ -46,6 +47,7 @@ $ ./mvnw spring-boot:run -pl config
 
 - https://dzone.com/articles/java-9-module-services
 - https://www.baeldung.com/project-jigsaw-java-modularity
+- https://medium.com/slalom-build/clean-architecture-with-java-11-f78bba431041
 - https://www.oracle.com/corporate/features/understanding-java-9-modules.html
 
 ### Spring-Boot
