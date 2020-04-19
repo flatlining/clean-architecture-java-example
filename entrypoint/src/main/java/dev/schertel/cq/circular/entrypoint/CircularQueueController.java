@@ -20,7 +20,6 @@ public class CircularQueueController {
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
     public CircularQueueResponseDto create(@RequestBody CircularQueueRequestDto body) {
         return handler.create(body);
     }
@@ -28,14 +27,12 @@ public class CircularQueueController {
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
     public List<CircularQueueResponseDto> readAll() {
         return handler.readAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
     public CircularQueueResponseDto read(@PathVariable("id") String id) {
         return handler.read(id);
     }
@@ -57,7 +54,6 @@ public class CircularQueueController {
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @ResponseBody
     public Optional<CircularQueueResponseDto> replaceOrCreate(@PathVariable("id") String id, @RequestBody CircularQueueRequestDto body) {
         return handler.replaceOrCreate(id, body);
     }
