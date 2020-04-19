@@ -22,6 +22,10 @@ $ ./mvnw spring-boot:run -pl config
 - https://imasters.com.br/back-end/introducao-clean-architecture
 - https://medium.com/@icarovictor/the-clean-architecture-54df8a46dba1
 
+### JSON
+
+- https://jsonschema.net/
+
 ### Maven
 
 - http://maven.apache.org/maven-ci-friendly.html
