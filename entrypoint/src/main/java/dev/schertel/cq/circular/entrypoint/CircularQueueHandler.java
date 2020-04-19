@@ -10,6 +10,7 @@ import dev.schertel.cq.circular.usecase.output.UpdateCircleQueue;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,6 +46,11 @@ public class CircularQueueHandler {
 
     public void update(String id, CircularQueueRequestDto dto) {
         updateCircleQueue.update(id, mapper.convertRequestDtoToEntity(dto));
+    }
+
+    public Optional<CircularQueueResponseDto> replaceOrCreate(String id, CircularQueueRequestDto dto) {
+        Optional<CircularQueue> entity = updateCircleQueue.replaceOrCreate(id, mapper.convertRequestDtoToEntity(dto));
+        return entity.map(mapper::convertEntityToResponseDto);
     }
 
     public void delete(String id) {

@@ -51,6 +51,20 @@ public class CircularQueueUseCase implements CreateCircleQueue, ReadCircleQueue,
     }
 
     @Override
+    public Optional<CircularQueue> replaceOrCreate(String id, CircularQueue entity) {
+        Optional<CircularQueue> previous = provider.read(id);
+        if (previous.isPresent()) {
+            CircularQueue toReplace = new CircularQueue(previous.get().getId(), entity.getName(), entity.getDescription());
+            provider.delete(id);
+            provider.create(toReplace);
+            return Optional.empty();
+        } else {
+            CircularQueue toCreate = new CircularQueue(previous.get().getId(), entity.getName(), entity.getDescription());
+            return Optional.of(provider.create(toCreate));
+        }
+    }
+
+    @Override
     public void delete(String id) {
         provider.delete(id).orElseThrow(() -> new CircularQueueNotFoundException(id));
     }

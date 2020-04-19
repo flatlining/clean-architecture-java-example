@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/circular")
@@ -54,6 +55,12 @@ public class CircularQueueController {
     }
 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
+    public Optional<CircularQueueResponseDto> replaceOrCreate(@PathVariable("id") String id, @RequestBody CircularQueueRequestDto body) {
+        return handler.replaceOrCreate(id, body);
+    }
 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE
     @DeleteMapping("/{id}")

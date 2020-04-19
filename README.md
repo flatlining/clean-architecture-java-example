@@ -2,16 +2,8 @@
 
 ## Usage
 
-Build:
-
 ```console
-$ ./mvnw clean install
-```
-
-Execute:
-
-```console
-$ ./mvnw spring-boot:run -pl config
+$ ./mvnw clean install spring-boot:run -pl config
 ```
 
 ## References
