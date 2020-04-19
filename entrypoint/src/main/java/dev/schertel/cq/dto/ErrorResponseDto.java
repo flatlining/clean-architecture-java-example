@@ -8,11 +8,15 @@ public class ErrorResponseDto {
     private String error;
     private String message;
 
-    public ErrorResponseDto(LocalDateTime timestamp, Integer status, String error, String message) {
-        this.timestamp = timestamp;
-        this.status = status;
-        this.error = error;
-        this.message = message;
+    private ErrorResponseDto(Builder builder) {
+        this.timestamp = builder.timestamp;
+        this.status = builder.status;
+        this.error = builder.error;
+        this.message = builder.message;
+    }
+
+    public static Builder builder() {
+        return Builder.newInstance();
     }
 
     public LocalDateTime getTimestamp() {
@@ -29,5 +33,43 @@ public class ErrorResponseDto {
 
     public String getMessage() {
         return message;
+    }
+
+    public static class Builder {
+        private LocalDateTime timestamp;
+        private Integer status;
+        private String error;
+        private String message;
+
+        private Builder() {
+        }
+
+        public static Builder newInstance() {
+            return new Builder();
+        }
+
+        public Builder withTimestamp(LocalDateTime timestamp) {
+            this.timestamp = timestamp;
+            return this;
+        }
+
+        public Builder withStatus(Integer status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder withError(String error) {
+            this.error = error;
+            return this;
+        }
+
+        public Builder withMessage(String message) {
+            this.message = message;
+            return this;
+        }
+
+        public ErrorResponseDto build() {
+            return new ErrorResponseDto(this);
+        }
     }
 }
