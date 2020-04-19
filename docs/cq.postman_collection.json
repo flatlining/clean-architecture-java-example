@@ -263,6 +263,60 @@
 					"response": []
 				},
 				{
+					"name": "/{{$randomUUID}}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "54709105-89df-477d-8b0f-b73eda12d6e9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a25a4c43-497a-4181-8fc8-776bf2cc0a33",
+								"exec": [
+									"pm.test(\"Successful request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"    pm.environment.unset(\"circularId\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Put New Queue\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/circular/{{$randomUUID}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"circular",
+								"{{$randomUUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/{{id}}",
 					"event": [
 						{

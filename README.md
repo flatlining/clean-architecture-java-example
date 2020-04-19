@@ -3,7 +3,8 @@
 ## Usage
 
 ```console
-$ ./mvnw clean install spring-boot:run -pl config
+$ ./mvnw clean install
+$ ./mvnw spring-boot:run -pl config
 ```
 
 ## References

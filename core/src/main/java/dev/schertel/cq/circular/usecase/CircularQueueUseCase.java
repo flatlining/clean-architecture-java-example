@@ -59,7 +59,7 @@ public class CircularQueueUseCase implements CreateCircleQueue, ReadCircleQueue,
             provider.create(toReplace);
             return Optional.empty();
         } else {
-            CircularQueue toCreate = new CircularQueue(previous.get().getId(), entity.getName(), entity.getDescription());
+            CircularQueue toCreate = new CircularQueue(id, entity.getName(), entity.getDescription());
             return Optional.of(provider.create(toCreate));
         }
     }

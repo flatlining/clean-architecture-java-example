@@ -3,6 +3,7 @@ package dev.schertel.cq.circular.entrypoint;
 import dev.schertel.cq.circular.dto.CircularQueueRequestDto;
 import dev.schertel.cq.circular.dto.CircularQueueResponseDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,8 +55,13 @@ public class CircularQueueController {
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public Optional<CircularQueueResponseDto> replaceOrCreate(@PathVariable("id") String id, @RequestBody CircularQueueRequestDto body) {
-        return handler.replaceOrCreate(id, body);
+    public ResponseEntity<Optional<CircularQueueResponseDto>> replaceOrCreate(@PathVariable("id") String id, @RequestBody CircularQueueRequestDto body) {
+        Optional<CircularQueueResponseDto> response = handler.replaceOrCreate(id, body);
+        if (response.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE
