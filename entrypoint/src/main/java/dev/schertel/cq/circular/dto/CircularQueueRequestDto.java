@@ -1,15 +1,20 @@
 package dev.schertel.cq.circular.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
+@JsonDeserialize(builder = CircularQueueRequestDto.Builder.class)
 public class CircularQueueRequestDto {
     private String name;
     private String description;
 
-    public CircularQueueRequestDto() {
+    private CircularQueueRequestDto(Builder builder) {
+        this.name = builder.name;
+        this.description = builder.description;
     }
 
-    public CircularQueueRequestDto(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public static Builder builder() {
+        return Builder.newInstance();
     }
 
     public String getName() {
@@ -27,5 +32,32 @@ public class CircularQueueRequestDto {
         sb.append(", description='").append(description).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @JsonPOJOBuilder
+    public static class Builder {
+        private String name;
+        private String description;
+
+        private Builder() {
+        }
+
+        public static Builder newInstance() {
+            return new Builder();
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public CircularQueueRequestDto build() {
+            return new CircularQueueRequestDto(this);
+        }
     }
 }

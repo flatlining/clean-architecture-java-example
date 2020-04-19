@@ -97,3 +97,7 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 
 - https://stackoverflow.com/a/55338237
   - https://dzone.com/articles/logger-injection-with-springs-injectionpoint
+
+#### JSON
+
+- https://www.baeldung.com/jackson-deserialize-immutable-objects
