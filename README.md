@@ -34,6 +34,14 @@ $ ./mvnw spring-boot:run -pl config
 - https://www.baeldung.com/maven-java-version
   - https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9
 
+### Test
+
+#### jUnit5
+
+- https://www.baeldung.com/junit-5
+- https://mkyong.com/spring-boot/spring-boot-junit-5-mockito/
+
+
 ### Java
 
 #### Dependency Injection
