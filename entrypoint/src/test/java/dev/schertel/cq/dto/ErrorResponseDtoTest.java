@@ -1,5 +1,7 @@
 package dev.schertel.cq.dto;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jparams.verifier.tostring.NameStyle;
 import com.jparams.verifier.tostring.ToStringVerifier;
 import com.jparams.verifier.tostring.preset.Presets;
@@ -8,6 +10,7 @@ import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +23,28 @@ class ErrorResponseDtoTest {
     @BeforeEach
     void setUp() {
         builder = ErrorResponseDto.builder();
+    }
+
+    @Test
+    void json(@Random LocalDateTime timestamp, @Random Integer status, @Random String error, @Random String message) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        String json = String.format("{\n" +
+                "  \"timestamp\":\"%s\",\n" +
+                "  \"status\":%d,\n" +
+                "  \"error\":\"%s\",\n" +
+                "  \"message\":\"%s\"\n" +
+                "}", timestamp, status, error, message);
+        ErrorResponseDto entityFromJson = mapper.readValue(json, ErrorResponseDto.class);
+        String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
+
+        ErrorResponseDto entityFromBuilder = builder.withTimestamp(timestamp).withStatus(status).withError(error).withMessage(message).build();
+        String jsonFromEntitygit  = mapper.writeValueAsString(entityFromBuilder);
+
+        assertAll(
+                () -> assertEquals(jsonFromJSon, jsonFromEntity),
+                () -> assertEquals(entityFromJson.toString(), entityFromBuilder.toString())
+        );
     }
 
     @Test

@@ -1,7 +1,12 @@
 package dev.schertel.cq.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import org.apache.tomcat.jni.Local;
+
 import java.time.LocalDateTime;
 
+@JsonDeserialize(builder = ErrorResponseDto.Builder.class)
 public class ErrorResponseDto {
     private LocalDateTime timestamp;
     private Integer status;
@@ -49,6 +54,7 @@ public class ErrorResponseDto {
         return sb.toString();
     }
 
+    @JsonPOJOBuilder
     public static class Builder {
         private LocalDateTime timestamp;
         private Integer status;
@@ -64,6 +70,11 @@ public class ErrorResponseDto {
 
         public Builder withTimestamp(LocalDateTime timestamp) {
             this.timestamp = timestamp;
+            return this;
+        }
+
+        public Builder withTimestamp(String timestamp) {
+            this.timestamp = LocalDateTime.parse(timestamp);
             return this;
         }
 
