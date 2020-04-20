@@ -60,6 +60,13 @@
 			<artifactId>modelmapper</artifactId>
 			<version>2.3.7</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.jparams</groupId>
+			<artifactId>to-string-verifier</artifactId>
+			<version>${toStringVerifier.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
