@@ -101,3 +101,4 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 #### JSON
 
 - https://www.baeldung.com/jackson-deserialize-immutable-objects
+- https://www.baeldung.com/jackson-map

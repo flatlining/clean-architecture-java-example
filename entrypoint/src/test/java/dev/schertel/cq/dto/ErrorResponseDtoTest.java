@@ -39,10 +39,10 @@ class ErrorResponseDtoTest {
         String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
 
         ErrorResponseDto entityFromBuilder = builder.withTimestamp(timestamp).withStatus(status).withError(error).withMessage(message).build();
-        String jsonFromEntitygit  = mapper.writeValueAsString(entityFromBuilder);
+        String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
 
         assertAll(
-                () -> assertEquals(jsonFromJSon, jsonFromEntity),
+                () -> assertEquals(jsonFromJSon, jsonFromBuilder),
                 () -> assertEquals(entityFromJson.toString(), entityFromBuilder.toString())
         );
     }
