@@ -67,6 +67,13 @@
 			<version>${toStringVerifier.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>io.github.glytching</groupId>
+			<artifactId>junit-extensions</artifactId>
+			<version>${junitExtensions.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

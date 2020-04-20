@@ -27,6 +27,7 @@
 		<spring.version>2.2.6.RELEASE</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<toStringVerifier.version>1.4.1</toStringVerifier.version>
+		<junitExtensions.version>2.4.0</junitExtensions.version>
 	</properties>
 
 	<build>

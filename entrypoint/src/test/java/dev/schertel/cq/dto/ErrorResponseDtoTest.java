@@ -1,16 +1,31 @@
 package dev.schertel.cq.dto;
 
+import com.jparams.verifier.tostring.NameStyle;
+import com.jparams.verifier.tostring.ToStringVerifier;
+import com.jparams.verifier.tostring.preset.Presets;
+import io.github.glytching.junit.extension.random.Random;
+import io.github.glytching.junit.extension.random.RandomBeansExtension;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(RandomBeansExtension.class)
 class ErrorResponseDtoTest {
+    private ErrorResponseDto.Builder builder;
+
+    @BeforeEach
+    void setUp() {
+        builder = ErrorResponseDto.builder();
+    }
 
     @Test
     void nullObject() {
-        ErrorResponseDto dto = ErrorResponseDto.builder().build();
+        ErrorResponseDto dto = builder
+                .build();
 
         assertAll(
                 () -> assertNull(dto.getTimestamp()),
@@ -21,10 +36,10 @@ class ErrorResponseDtoTest {
     }
 
     @Test
-    void getTimestamp() {
-        LocalDateTime expected = LocalDateTime.now();
-
-        ErrorResponseDto dto = ErrorResponseDto.builder().withTimestamp(expected).build();
+    void getTimestamp(@Random LocalDateTime expected) {
+        ErrorResponseDto dto = builder
+                .withTimestamp(expected)
+                .build();
 
         assertAll(
                 () -> assertEquals(expected, dto.getTimestamp()),
@@ -35,10 +50,10 @@ class ErrorResponseDtoTest {
     }
 
     @Test
-    void getStatus() {
-        Integer expected = 1;
-
-        ErrorResponseDto dto = ErrorResponseDto.builder().withStatus(expected).build();
+    void getStatus(@Random Integer expected) {
+        ErrorResponseDto dto = builder
+                .withStatus(expected)
+                .build();
 
         assertAll(
                 () -> assertNull(dto.getTimestamp()),
@@ -49,10 +64,10 @@ class ErrorResponseDtoTest {
     }
 
     @Test
-    void getError() {
-        String expected = "error";
-
-        ErrorResponseDto dto = ErrorResponseDto.builder().withError(expected).build();
+    void getError(@Random String expected) {
+        ErrorResponseDto dto = builder
+                .withError(expected)
+                .build();
 
         assertAll(
                 () -> assertNull(dto.getTimestamp()),
@@ -63,10 +78,10 @@ class ErrorResponseDtoTest {
     }
 
     @Test
-    void getMessage() {
-        String expected = "message";
-
-        ErrorResponseDto dto = ErrorResponseDto.builder().withMessage(expected).build();
+    void getMessage(@Random String expected) {
+        ErrorResponseDto dto = builder
+                .withMessage(expected)
+                .build();
 
         assertAll(
                 () -> assertNull(dto.getTimestamp()),
@@ -77,13 +92,8 @@ class ErrorResponseDtoTest {
     }
 
     @Test
-    void fullObject() {
-        LocalDateTime timestamp = LocalDateTime.now();
-        Integer status = 1;
-        String error = "error";
-        String message = "message";
-
-        ErrorResponseDto dto = ErrorResponseDto.builder()
+    void fullObject(@Random LocalDateTime timestamp, @Random Integer status, @Random String error, @Random String message) {
+        ErrorResponseDto dto = builder
                 .withTimestamp(timestamp)
                 .withStatus(status)
                 .withError(error)
@@ -96,5 +106,13 @@ class ErrorResponseDtoTest {
                 () -> assertEquals(error, dto.getError()),
                 () -> assertEquals(message, dto.getMessage())
         );
+    }
+
+    @Test
+    void testToString() {
+        ToStringVerifier.forClass(ErrorResponseDto.class)
+                .withClassName(NameStyle.SIMPLE_NAME)
+                .withPreset(Presets.INTELLI_J)
+                .verify();
     }
 }

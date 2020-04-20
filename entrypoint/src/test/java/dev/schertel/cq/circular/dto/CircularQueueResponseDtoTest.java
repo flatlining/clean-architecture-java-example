@@ -3,11 +3,15 @@ package dev.schertel.cq.circular.dto;
 import com.jparams.verifier.tostring.NameStyle;
 import com.jparams.verifier.tostring.ToStringVerifier;
 import com.jparams.verifier.tostring.preset.Presets;
+import io.github.glytching.junit.extension.random.Random;
+import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(RandomBeansExtension.class)
 class CircularQueueResponseDtoTest {
     private CircularQueueResponseDto.Builder builder;
 
@@ -29,9 +33,7 @@ class CircularQueueResponseDtoTest {
     }
 
     @Test
-    void getId() {
-        String expected = "id";
-
+    void getId(@Random String expected) {
         CircularQueueResponseDto dto = builder
                 .withId(expected)
                 .build();
@@ -44,9 +46,7 @@ class CircularQueueResponseDtoTest {
     }
 
     @Test
-    void getName() {
-        String expected = "name";
-
+    void getName(@Random String expected) {
         CircularQueueResponseDto dto = builder
                 .withName(expected)
                 .build();
@@ -59,9 +59,7 @@ class CircularQueueResponseDtoTest {
     }
 
     @Test
-    void getDescription() {
-        String expected = "description";
-
+    void getDescription(@Random String expected) {
         CircularQueueResponseDto dto = builder
                 .withDescription(expected)
                 .build();
@@ -74,11 +72,7 @@ class CircularQueueResponseDtoTest {
     }
 
     @Test
-    void fullObject() {
-        String id = "id";
-        String name = "name";
-        String description = "description";
-
+    void fullObject(@Random String id, @Random String name, @Random String description) {
         CircularQueueResponseDto dto = builder
                 .withId(id)
                 .withName(name)
