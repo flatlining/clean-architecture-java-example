@@ -3,7 +3,7 @@ package dev.schertel.cq.circular.usecase;
 import dev.schertel.cq.circular.entity.CircularQueue;
 import dev.schertel.cq.circular.exception.CircularQueueNotFoundException;
 import dev.schertel.cq.circular.usecase.input.CircularQueueDataProvider;
-import dev.schertel.cq.circular.usecase.input.IdGeneratorDataProvider;
+import dev.schertel.cq.usecase.output.GenerateId;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
 import dev.schertel.cq.circular.usecase.output.DeleteCircleQueue;
 import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
@@ -14,9 +14,9 @@ import java.util.Optional;
 
 public class CircularQueueUseCase implements CreateCircleQueue, ReadCircleQueue, UpdateCircleQueue, DeleteCircleQueue {
     private CircularQueueDataProvider provider;
-    private IdGeneratorDataProvider idGenerator;
+    private GenerateId idGenerator;
 
-    public CircularQueueUseCase(CircularQueueDataProvider provider, IdGeneratorDataProvider idGenerator) {
+    public CircularQueueUseCase(CircularQueueDataProvider provider, GenerateId idGenerator) {
         this.provider = provider;
         this.idGenerator = idGenerator;
     }
