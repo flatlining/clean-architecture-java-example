@@ -18,6 +18,8 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://github.com/eliostvs/clean-architecture-delivery-example
   - https://softwareengineering.stackexchange.com/a/373524
 - [Robert C. Martin - Clean Architecture](https://vimeo.com/43612849)
+- [Why you need Use Cases/Interactors](https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576)
+- https://hackernoon.com/clean-architecture-example-in-kotlin-9f23169219be
 
 #### Builder Pattern
 
