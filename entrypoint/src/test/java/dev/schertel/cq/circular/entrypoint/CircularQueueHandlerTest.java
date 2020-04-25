@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
@@ -47,7 +46,7 @@ class CircularQueueHandlerTest {
 
         @Test
         void createNewEntity(@Random String id, @Random String name, @Random String description) {
-            when(mock.create(any(CircularQueue.class))).thenReturn(new CircularQueue(id, name, description));
+            when(mock.create(new CircularQueue(null, name, description))).thenReturn(new CircularQueue(id, name, description));
 
             CircularQueueRequestDto request = CircularQueueRequestDto.builder().withName(name).withDescription(description).build();
             cut = new CircularQueueHandler(mock, null, null, null, mapper);

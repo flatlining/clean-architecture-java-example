@@ -1,5 +1,7 @@
 package dev.schertel.cq.circular.entity;
 
+import java.util.Objects;
+
 public class CircularQueue {
     private String id;
     private String name;
@@ -46,5 +48,20 @@ public class CircularQueue {
         sb.append(", description='").append(description).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CircularQueue)) return false;
+        CircularQueue that = (CircularQueue) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description);
     }
 }
