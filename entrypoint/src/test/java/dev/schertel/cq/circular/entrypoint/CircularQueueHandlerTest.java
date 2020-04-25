@@ -46,7 +46,7 @@ class CircularQueueHandlerTest {
         }
 
         @Test
-        void createNewEntity(@Random String id, @Random String name, @Random String description) {
+        void createNewEntityNameAndDescription(@Random String id, @Random String name, @Random String description) {
             when(mock.create(CircularQueue.builder().withName(name).withDescription(description).build()))
                     .thenReturn(CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
 
@@ -55,6 +55,45 @@ class CircularQueueHandlerTest {
             CircularQueueResponseDto response = cut.create(request);
 
             CircularQueueResponseDto expected = CircularQueueResponseDto.builder().withId(id).withName(name).withDescription(description).build();
+            assertEquals(expected, response);
+        }
+
+        @Test
+        void createNewEntityName(@Random String id, @Random String name) {
+            when(mock.create(CircularQueue.builder().withName(name).build()))
+                    .thenReturn(CircularQueue.builder().withId(id).withName(name).build());
+
+            CircularQueueRequestDto request = CircularQueueRequestDto.builder().withName(name).build();
+            cut = new CircularQueueHandler(mock, null, null, null, mapper);
+            CircularQueueResponseDto response = cut.create(request);
+
+            CircularQueueResponseDto expected = CircularQueueResponseDto.builder().withId(id).withName(name).build();
+            assertEquals(expected, response);
+        }
+
+        @Test
+        void createNewEntityDescription(@Random String id, @Random String description) {
+            when(mock.create(CircularQueue.builder().withDescription(description).build()))
+                    .thenReturn(CircularQueue.builder().withId(id).withDescription(description).build());
+
+            CircularQueueRequestDto request = CircularQueueRequestDto.builder().withDescription(description).build();
+            cut = new CircularQueueHandler(mock, null, null, null, mapper);
+            CircularQueueResponseDto response = cut.create(request);
+
+            CircularQueueResponseDto expected = CircularQueueResponseDto.builder().withId(id).withDescription(description).build();
+            assertEquals(expected, response);
+        }
+
+        @Test
+        void createNewEntityWithNothing(@Random String id) {
+            when(mock.create(CircularQueue.builder().build()))
+                    .thenReturn(CircularQueue.builder().withId(id).build());
+
+            CircularQueueRequestDto request = CircularQueueRequestDto.builder().build();
+            cut = new CircularQueueHandler(mock, null, null, null, mapper);
+            CircularQueueResponseDto response = cut.create(request);
+
+            CircularQueueResponseDto expected = CircularQueueResponseDto.builder().withId(id).build();
             assertEquals(expected, response);
         }
     }
