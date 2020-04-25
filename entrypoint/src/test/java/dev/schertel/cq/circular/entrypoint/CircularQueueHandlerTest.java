@@ -136,6 +136,19 @@ class CircularQueueHandlerTest {
 
             verify(mock).update(id, CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
         }
+
+        @Test
+        void updateNonExistingEntity(@Random String id, @Random String name, @Random String description) {
+            doThrow(new CircularQueueNotFoundException(id)).when(mock).update(id, CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
+
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            CircularQueueNotFoundException exception = assertThrows(CircularQueueNotFoundException.class, () -> {
+                cut.update(id, CircularQueueRequestDto.builder().withName(name).withDescription(description).build());
+            });
+
+            assertEquals(id, exception.getId());
+        }
     }
 
     @Nested
