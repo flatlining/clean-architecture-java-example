@@ -4,6 +4,7 @@ import dev.schertel.cq.circular.dto.CircularQueueRequestDto;
 import dev.schertel.cq.circular.dto.CircularQueueResponseDto;
 import dev.schertel.cq.circular.entity.CircularQueue;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
+import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,22 +32,44 @@ class CircularQueueHandlerTest {
     }
 
     @Nested
-    class CreateUseCase {
+    class Create {
         @Mock
-        CreateCircleQueue createCircleQueue;
+        CreateCircleQueue mock;
 
         @BeforeEach
         void setUp() {
-            reset(createCircleQueue);
+            reset(mock);
         }
 
         @Test
         void createNewEntity(@Random String id, @Random String name, @Random String description) {
-            when(createCircleQueue.create(any(CircularQueue.class))).thenReturn(new CircularQueue(id, name, description));
+            when(mock.create(any(CircularQueue.class))).thenReturn(new CircularQueue(id, name, description));
 
             CircularQueueRequestDto request = CircularQueueRequestDto.builder().withName(name).withDescription(description).build();
-            cut = new CircularQueueHandler(createCircleQueue, null, null, null, mapper);
+            cut = new CircularQueueHandler(mock, null, null, null, mapper);
             CircularQueueResponseDto response = cut.create(request);
+
+            CircularQueueResponseDto expected = CircularQueueResponseDto.builder().withId(id).withName(name).withDescription(description).build();
+            assertEquals(expected, response);
+        }
+    }
+
+    @Nested
+    class Read {
+        @Mock
+        ReadCircleQueue mock;
+
+        @BeforeEach
+        void setUp() {
+            reset(mock);
+        }
+
+        @Test
+        void readExistingEntity(@Random String id, @Random String name, @Random String description) {
+            when(mock.read(id)).thenReturn(new CircularQueue(id, name, description));
+
+            cut = new CircularQueueHandler(null, mock, null, null, mapper);
+            CircularQueueResponseDto response = cut.read(id);
 
             CircularQueueResponseDto expected = CircularQueueResponseDto.builder().withId(id).withName(name).withDescription(description).build();
             assertEquals(expected, response);
