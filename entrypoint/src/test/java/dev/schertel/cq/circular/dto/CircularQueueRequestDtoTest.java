@@ -1,5 +1,7 @@
 package dev.schertel.cq.circular.dto;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jparams.verifier.tostring.NameStyle;
 import com.jparams.verifier.tostring.ToStringVerifier;
 import com.jparams.verifier.tostring.preset.Presets;
@@ -20,6 +22,27 @@ class CircularQueueRequestDtoTest {
     @BeforeEach
     void setUp() {
         builder = CircularQueueRequestDto.builder();
+    }
+
+    @Test
+    void json(@Random String name, @Random String description) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        String json = String.format("{\n" +
+                "  \"name\":\"%s\",\n" +
+                "  \"description\":\"%s\"\n" +
+                "}", name, description);
+        CircularQueueRequestDto entityFromJson = mapper.readValue(json, CircularQueueRequestDto.class);
+        String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
+
+        CircularQueueRequestDto entityFromBuilder = builder.withName(name).withDescription(description).build();
+        String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
+
+        assertAll(
+                () -> assertEquals(jsonFromJSon, jsonFromBuilder),
+                () -> assertEquals(entityFromJson, entityFromBuilder),
+                () -> assertEquals(entityFromJson.toString(), entityFromBuilder.toString())
+        );
     }
 
     @Test
