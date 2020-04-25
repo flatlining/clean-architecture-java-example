@@ -9,7 +9,7 @@ import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -19,48 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(RandomBeansExtension.class)
 class ErrorResponseDtoTest {
-    private ErrorResponseDto.Builder builder;
-
-    @BeforeEach
-    void setUp() {
-        builder = ErrorResponseDto.builder();
-    }
-
-    @Test
-    void json(@Random LocalDateTime timestamp, @Random Integer status, @Random String error, @Random String message) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-
-        String json = String.format("{\n" +
-                "  \"timestamp\":\"%s\",\n" +
-                "  \"status\":%d,\n" +
-                "  \"error\":\"%s\",\n" +
-                "  \"message\":\"%s\"\n" +
-                "}", timestamp, status, error, message);
-        ErrorResponseDto entityFromJson = mapper.readValue(json, ErrorResponseDto.class);
-        String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
-
-        ErrorResponseDto entityFromBuilder = builder.withTimestamp(timestamp).withStatus(status).withError(error).withMessage(message).build();
-        String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
-
-        assertAll(
-                () -> assertEquals(jsonFromJSon, jsonFromBuilder),
-                () -> assertEquals(entityFromJson, entityFromBuilder),
-                () -> assertEquals(entityFromJson.toString(), entityFromBuilder.toString())
-        );
-    }
-
-    @Test
-    void nullObject() {
-        ErrorResponseDto dto = builder
-                .build();
-
-        assertAll(
-                () -> assertNull(dto.getTimestamp()),
-                () -> assertNull(dto.getStatus()),
-                () -> assertNull(dto.getError()),
-                () -> assertNull(dto.getMessage())
-        );
-    }
+    private ErrorResponseDto.Builder builder = ErrorResponseDto.builder();
 
     @Test
     void getTimestamp(@Random LocalDateTime expected) {
@@ -118,33 +77,78 @@ class ErrorResponseDtoTest {
         );
     }
 
-    @Test
-    void fullObject(@Random LocalDateTime timestamp, @Random Integer status, @Random String error, @Random String message) {
-        ErrorResponseDto dto = builder
-                .withTimestamp(timestamp)
-                .withStatus(status)
-                .withError(error)
-                .withMessage(message)
-                .build();
+    @Nested
+    class Builder {
+        @Test
+        void nullObject() {
+            ErrorResponseDto dto = builder
+                    .build();
 
-        assertAll(
-                () -> assertEquals(timestamp, dto.getTimestamp()),
-                () -> assertEquals(status, dto.getStatus()),
-                () -> assertEquals(error, dto.getError()),
-                () -> assertEquals(message, dto.getMessage())
-        );
+            assertAll(
+                    () -> assertNull(dto.getTimestamp()),
+                    () -> assertNull(dto.getStatus()),
+                    () -> assertNull(dto.getError()),
+                    () -> assertNull(dto.getMessage())
+            );
+        }
+
+        @Test
+        void fullObject(@Random LocalDateTime timestamp, @Random Integer status, @Random String error, @Random String message) {
+            ErrorResponseDto dto = builder
+                    .withTimestamp(timestamp)
+                    .withStatus(status)
+                    .withError(error)
+                    .withMessage(message)
+                    .build();
+
+            assertAll(
+                    () -> assertEquals(timestamp, dto.getTimestamp()),
+                    () -> assertEquals(status, dto.getStatus()),
+                    () -> assertEquals(error, dto.getError()),
+                    () -> assertEquals(message, dto.getMessage())
+            );
+        }
     }
 
-    @Test
-    void testToString() {
-        ToStringVerifier.forClass(ErrorResponseDto.class)
-                .withClassName(NameStyle.SIMPLE_NAME)
-                .withPreset(Presets.INTELLI_J)
-                .verify();
+    @Nested
+    class JSON {
+        @Test
+        void serializationDeserialization(@Random LocalDateTime timestamp, @Random Integer status, @Random String error, @Random String message) throws JsonProcessingException {
+            ObjectMapper mapper = new ObjectMapper();
+
+            String json = String.format("{\n" +
+                    "  \"timestamp\":\"%s\",\n" +
+                    "  \"status\":%d,\n" +
+                    "  \"error\":\"%s\",\n" +
+                    "  \"message\":\"%s\"\n" +
+                    "}", timestamp, status, error, message);
+            ErrorResponseDto entityFromJson = mapper.readValue(json, ErrorResponseDto.class);
+            String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
+
+            ErrorResponseDto entityFromBuilder = builder.withTimestamp(timestamp).withStatus(status).withError(error).withMessage(message).build();
+            String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
+
+            assertAll(
+                    () -> assertEquals(jsonFromJSon, jsonFromBuilder),
+                    () -> assertEquals(entityFromJson, entityFromBuilder),
+                    () -> assertEquals(entityFromJson.toString(), entityFromBuilder.toString())
+            );
+        }
     }
 
-    @Test
-    void testEquals() {
-        EqualsVerifier.forClass(ErrorResponseDto.class).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
+    @Nested
+    class Override {
+        @Test
+        void testToString() {
+            ToStringVerifier.forClass(ErrorResponseDto.class)
+                    .withClassName(NameStyle.SIMPLE_NAME)
+                    .withPreset(Presets.INTELLI_J)
+                    .verify();
+        }
+
+        @Test
+        void testEquals() {
+            EqualsVerifier.forClass(ErrorResponseDto.class).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
+        }
     }
 }
