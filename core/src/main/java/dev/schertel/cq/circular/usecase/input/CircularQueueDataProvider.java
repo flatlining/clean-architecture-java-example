@@ -30,14 +30,6 @@ public interface CircularQueueDataProvider {
     Optional<CircularQueue> read(String id);
 
     /**
-     * Update a {@link CircularQueue} stored.
-     *
-     * @param entity The {@link CircularQueue} to update
-     * @return The {@link CircularQueue} updated
-     */
-    Optional<CircularQueue> update(CircularQueue entity);
-
-    /**
      * Delete all {@link CircularQueue} stored.
      */
     void deleteAll();

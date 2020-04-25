@@ -6,7 +6,6 @@ import dev.schertel.cq.usecase.output.GenerateId;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
 import dev.schertel.cq.circular.usecase.output.DeleteCircleQueue;
 import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
-import dev.schertel.cq.circular.usecase.output.UpdateCircleQueue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,11 +18,6 @@ public class CircularQueueUseCaseConfig {
 
     @Bean
     public ReadCircleQueue readCircleQueue(CircularQueueDataProvider provider, GenerateId idGenerator) {
-        return new CircularQueueUseCase(provider, idGenerator);
-    }
-
-    @Bean
-    public UpdateCircleQueue updateCircleQueue(CircularQueueDataProvider provider, GenerateId idGenerator) {
         return new CircularQueueUseCase(provider, idGenerator);
     }
 
