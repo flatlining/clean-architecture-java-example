@@ -175,7 +175,7 @@ class CircularQueueHandlerTest {
 
             cut.update(id, CircularQueueRequestDto.builder().withName(name).withDescription(description).build());
 
-            verify(mock).update(id, CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
+            verify(mock, times(1)).update(id, CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
         }
 
         @Test
@@ -184,7 +184,7 @@ class CircularQueueHandlerTest {
 
             cut.update(id, CircularQueueRequestDto.builder().withName(name).build());
 
-            verify(mock).update(id, CircularQueue.builder().withId(id).withName(name).build());
+            verify(mock, times(1)).update(id, CircularQueue.builder().withId(id).withName(name).build());
         }
 
         @Test
@@ -193,7 +193,7 @@ class CircularQueueHandlerTest {
 
             cut.update(id, CircularQueueRequestDto.builder().withDescription(description).build());
 
-            verify(mock).update(id, CircularQueue.builder().withId(id).withDescription(description).build());
+            verify(mock, times(1)).update(id, CircularQueue.builder().withId(id).withDescription(description).build());
         }
 
         @Test
@@ -202,7 +202,7 @@ class CircularQueueHandlerTest {
 
             cut.update(id, CircularQueueRequestDto.builder().build());
 
-            verify(mock).update(id, CircularQueue.builder().withId(id).build());
+            verify(mock, times(1)).update(id, CircularQueue.builder().withId(id).build());
         }
 
         @Test
@@ -226,7 +226,7 @@ class CircularQueueHandlerTest {
 
             cut.replaceOrCreate(id, CircularQueueRequestDto.builder().withName(name).withDescription(description).build());
 
-            verify(mock).replaceOrCreate(id, CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
+            verify(mock, times(1)).replaceOrCreate(id, CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
         }
 
         @Test
@@ -235,7 +235,7 @@ class CircularQueueHandlerTest {
 
             cut.replaceOrCreate(id, CircularQueueRequestDto.builder().withName(name).build());
 
-            verify(mock).replaceOrCreate(id, CircularQueue.builder().withId(id).withName(name).build());
+            verify(mock, times(1)).replaceOrCreate(id, CircularQueue.builder().withId(id).withName(name).build());
         }
 
         @Test
@@ -244,7 +244,7 @@ class CircularQueueHandlerTest {
 
             cut.replaceOrCreate(id, CircularQueueRequestDto.builder().withDescription(description).build());
 
-            verify(mock).replaceOrCreate(id, CircularQueue.builder().withId(id).withDescription(description).build());
+            verify(mock, times(1)).replaceOrCreate(id, CircularQueue.builder().withId(id).withDescription(description).build());
         }
 
         @Test
@@ -253,7 +253,7 @@ class CircularQueueHandlerTest {
 
             cut.replaceOrCreate(id, CircularQueueRequestDto.builder().build());
 
-            verify(mock).replaceOrCreate(id, CircularQueue.builder().withId(id).build());
+            verify(mock, times(1)).replaceOrCreate(id, CircularQueue.builder().withId(id).build());
         }
 
         @Test
