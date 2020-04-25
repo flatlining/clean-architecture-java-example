@@ -16,8 +16,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.Collections;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
@@ -88,6 +90,30 @@ class CircularQueueHandlerTest {
             });
 
             assertEquals(id, exception.getId());
+        }
+
+        @Test
+        void readAllEntities(@Random(size = 5, type = CircularQueue.class) List<CircularQueue> entities) {
+            when(mock.readAll()).thenReturn(entities);
+
+            cut = new CircularQueueHandler(null, mock, null, null, mapper);
+
+            List<CircularQueueResponseDto> actual = cut.readAll();
+
+            assertNotNull(actual);
+            assertEquals(5, actual.size());
+        }
+
+        @Test
+        void readAllNonEntities() {
+            when(mock.readAll()).thenReturn(Collections.<CircularQueue>emptyList());
+
+            cut = new CircularQueueHandler(null, mock, null, null, mapper);
+
+            List<CircularQueueResponseDto> actual = cut.readAll();
+
+            assertNotNull(actual);
+            assertEquals(0, actual.size());
         }
     }
 }
