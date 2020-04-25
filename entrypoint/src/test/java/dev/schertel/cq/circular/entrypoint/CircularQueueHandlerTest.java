@@ -354,5 +354,14 @@ class CircularQueueHandlerTest {
 
             assertEquals(id, exception.getId());
         }
+
+        @Test
+        void deleteAll() {
+            cut = new CircularQueueHandler(null, null, null, mock, mapper);
+
+            cut.deleteAll();
+
+            verify(mock, times(1)).deleteAll();
+        }
     }
 }
