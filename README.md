@@ -46,7 +46,11 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 #### jUnit5
 
 - https://www.baeldung.com/junit-5
+- https://www.baeldung.com/mockito-junit-5-extension
 - https://mkyong.com/spring-boot/spring-boot-junit-5-mockito/
+- https://www.petrikainulainen.net/programming/testing/junit-5-tutorial-writing-nested-tests/
+- http://sangsoonam.github.io/2019/02/04/mockito-doreturn-vs-thenreturn.html
+- https://www.baeldung.com/junit-assert-exception
 
 ### Java
 
