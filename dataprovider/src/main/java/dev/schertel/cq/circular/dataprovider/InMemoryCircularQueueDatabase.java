@@ -25,16 +25,6 @@ public class InMemoryCircularQueueDatabase implements CircularQueueDataProvider 
     }
 
     @Override
-    public Optional<CircularQueue> update(CircularQueue entity) {
-        Optional<CircularQueue> updated = Optional.ofNullable(inMemoryDatabase.replace(entity.getId(), entity));
-        if (updated.isPresent()) {
-            return Optional.of(entity);
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    @Override
     public void deleteAll() {
         inMemoryDatabase.clear();
     }

@@ -1,18 +1,30 @@
 package dev.schertel.cq.dto;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+@JsonDeserialize(builder = ErrorResponseDto.Builder.class)
 public class ErrorResponseDto {
     private LocalDateTime timestamp;
     private Integer status;
     private String error;
     private String message;
 
-    public ErrorResponseDto(LocalDateTime timestamp, Integer status, String error, String message) {
-        this.timestamp = timestamp;
-        this.status = status;
-        this.error = error;
-        this.message = message;
+    private ErrorResponseDto() {
+    }
+
+    private ErrorResponseDto(Builder builder) {
+        this.timestamp = builder.timestamp;
+        this.status = builder.status;
+        this.error = builder.error;
+        this.message = builder.message;
+    }
+
+    public static Builder builder() {
+        return Builder.newInstance();
     }
 
     public LocalDateTime getTimestamp() {
@@ -29,5 +41,76 @@ public class ErrorResponseDto {
 
     public String getMessage() {
         return message;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ErrorResponseDto{");
+        sb.append("timestamp=").append(timestamp);
+        sb.append(", status=").append(status);
+        sb.append(", error='").append(error).append('\'');
+        sb.append(", message='").append(message).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ErrorResponseDto)) return false;
+        ErrorResponseDto that = (ErrorResponseDto) o;
+        return Objects.equals(timestamp, that.timestamp) &&
+                Objects.equals(status, that.status) &&
+                Objects.equals(error, that.error) &&
+                Objects.equals(message, that.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(timestamp, status, error, message);
+    }
+
+    @JsonPOJOBuilder
+    public static class Builder {
+        private LocalDateTime timestamp;
+        private Integer status;
+        private String error;
+        private String message;
+
+        private Builder() {
+        }
+
+        public static Builder newInstance() {
+            return new Builder();
+        }
+
+        public Builder withTimestamp(LocalDateTime timestamp) {
+            this.timestamp = timestamp;
+            return this;
+        }
+
+        public Builder withTimestamp(String timestamp) {
+            this.timestamp = LocalDateTime.parse(timestamp);
+            return this;
+        }
+
+        public Builder withStatus(Integer status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder withError(String error) {
+            this.error = error;
+            return this;
+        }
+
+        public Builder withMessage(String message) {
+            this.message = message;
+            return this;
+        }
+
+        public ErrorResponseDto build() {
+            return new ErrorResponseDto(this);
+        }
     }
 }
