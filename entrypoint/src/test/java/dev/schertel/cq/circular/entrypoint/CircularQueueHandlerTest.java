@@ -3,6 +3,7 @@ package dev.schertel.cq.circular.entrypoint;
 import dev.schertel.cq.circular.dto.CircularQueueRequestDto;
 import dev.schertel.cq.circular.dto.CircularQueueResponseDto;
 import dev.schertel.cq.circular.entity.CircularQueue;
+import dev.schertel.cq.circular.exception.CircularQueueNotFoundException;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
 import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
 import io.github.glytching.junit.extension.random.Random;
@@ -16,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
@@ -73,6 +75,19 @@ class CircularQueueHandlerTest {
 
             CircularQueueResponseDto expected = CircularQueueResponseDto.builder().withId(id).withName(name).withDescription(description).build();
             assertEquals(expected, response);
+        }
+
+        @Test
+        void readNonExistingEntity(@Random String id, @Random String name, @Random String description) {
+            when(mock.read(id)).thenThrow(new CircularQueueNotFoundException(id));
+
+            cut = new CircularQueueHandler(null, mock, null, null, mapper);
+
+            CircularQueueNotFoundException exception = assertThrows(CircularQueueNotFoundException.class, () -> {
+                cut.read(id);
+            });
+
+            assertEquals(id, exception.getId());
         }
     }
 }
