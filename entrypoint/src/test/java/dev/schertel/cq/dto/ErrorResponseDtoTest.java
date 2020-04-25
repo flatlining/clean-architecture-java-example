@@ -44,6 +44,7 @@ class ErrorResponseDtoTest {
 
         assertAll(
                 () -> assertEquals(jsonFromJSon, jsonFromBuilder),
+                () -> assertEquals(entityFromJson, entityFromBuilder),
                 () -> assertEquals(entityFromJson.toString(), entityFromBuilder.toString())
         );
     }
