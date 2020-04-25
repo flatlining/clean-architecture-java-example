@@ -17,6 +17,7 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://pusher.com/tutorials/clean-architecture-introduction
 - https://github.com/eliostvs/clean-architecture-delivery-example
   - https://softwareengineering.stackexchange.com/a/373524
+- [Robert C. Martin - Clean Architecture](https://vimeo.com/43612849)
 
 #### Builder Pattern
 
