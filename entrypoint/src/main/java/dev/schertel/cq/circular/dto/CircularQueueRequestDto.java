@@ -6,9 +6,9 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import java.util.Objects;
 
 @JsonDeserialize(builder = CircularQueueRequestDto.Builder.class)
-public final class CircularQueueRequestDto {
-    private final String name;
-    private final String description;
+public class CircularQueueRequestDto {
+    private String name;
+    private String description;
 
     private CircularQueueRequestDto(Builder builder) {
         this.name = builder.name;
@@ -39,7 +39,7 @@ public final class CircularQueueRequestDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof CircularQueueRequestDto)) return false;
         CircularQueueRequestDto that = (CircularQueueRequestDto) o;
         return Objects.equals(name, that.name) &&
                 Objects.equals(description, that.description);

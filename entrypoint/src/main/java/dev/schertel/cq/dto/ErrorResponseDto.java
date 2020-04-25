@@ -2,9 +2,9 @@ package dev.schertel.cq.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @JsonDeserialize(builder = ErrorResponseDto.Builder.class)
 public class ErrorResponseDto {
@@ -52,6 +52,22 @@ public class ErrorResponseDto {
         sb.append(", message='").append(message).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ErrorResponseDto)) return false;
+        ErrorResponseDto that = (ErrorResponseDto) o;
+        return Objects.equals(timestamp, that.timestamp) &&
+                Objects.equals(status, that.status) &&
+                Objects.equals(error, that.error) &&
+                Objects.equals(message, that.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(timestamp, status, error, message);
     }
 
     @JsonPOJOBuilder

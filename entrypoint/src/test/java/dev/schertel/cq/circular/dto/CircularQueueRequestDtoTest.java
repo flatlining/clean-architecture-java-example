@@ -6,6 +6,7 @@ import com.jparams.verifier.tostring.preset.Presets;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -79,6 +80,6 @@ class CircularQueueRequestDtoTest {
 
     @Test
     void testEquals() {
-        EqualsVerifier.forClass(CircularQueueRequestDto.class).verify();
+        EqualsVerifier.forClass(CircularQueueRequestDto.class).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
     }
 }
