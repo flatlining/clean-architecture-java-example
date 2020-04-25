@@ -1,7 +1,11 @@
 package dev.schertel.cq.circular.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import java.util.Objects;
 
+@JsonDeserialize(builder = CircularQueueResponseDto.Builder.class)
 public class CircularQueueResponseDto {
     private String id;
     private String name;
@@ -54,6 +58,7 @@ public class CircularQueueResponseDto {
         return sb.toString();
     }
 
+    @JsonPOJOBuilder
     public static class Builder {
         private String id;
         private String name;
