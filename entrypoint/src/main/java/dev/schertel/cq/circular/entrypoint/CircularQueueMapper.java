@@ -18,11 +18,12 @@ public class CircularQueueMapper {
                 .setDestinationNameTransformer(NameTransformers.builder("with"))
                 .setDestinationNamingConvention(NamingConventions.builder("with"));
         modelMapper.createTypeMap(CircularQueue.class, CircularQueueResponseDto.Builder.class, builderConfiguration);
+        modelMapper.createTypeMap(CircularQueueRequestDto.class, CircularQueue.Builder.class, builderConfiguration);
         this.modelMapper = modelMapper;
     }
 
     public CircularQueue convertRequestDtoToEntity(CircularQueueRequestDto dto) {
-        return modelMapper.map(dto, CircularQueue.class);
+        return modelMapper.map(dto, CircularQueue.Builder.class).build();
     }
 
     public CircularQueueResponseDto convertEntityToResponseDto(CircularQueue entity) {
