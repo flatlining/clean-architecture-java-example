@@ -149,6 +149,42 @@ class CircularQueueHandlerTest {
 
             assertEquals(id, exception.getId());
         }
+
+        @Test
+        void replaceExistingEntityNameAndDescription(@Random String id, @Random String name, @Random String description) {
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            cut.replaceOrCreate(id, CircularQueueRequestDto.builder().withName(name).withDescription(description).build());
+
+            verify(mock).replaceOrCreate(id, CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
+        }
+
+        @Test
+        void replaceExistingEntityName(@Random String id, @Random String name) {
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            cut.replaceOrCreate(id, CircularQueueRequestDto.builder().withName(name).build());
+
+            verify(mock).replaceOrCreate(id, CircularQueue.builder().withId(id).withName(name).build());
+        }
+
+        @Test
+        void replaceExistingEntityDescription(@Random String id, @Random String description) {
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            cut.replaceOrCreate(id, CircularQueueRequestDto.builder().withDescription(description).build());
+
+            verify(mock).replaceOrCreate(id, CircularQueue.builder().withId(id).withDescription(description).build());
+        }
+
+        @Test
+        void replaceExistingEntityWithNothing(@Random String id) {
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            cut.replaceOrCreate(id, CircularQueueRequestDto.builder().build());
+
+            verify(mock).replaceOrCreate(id, CircularQueue.builder().withId(id).build());
+        }
     }
 
     @Nested

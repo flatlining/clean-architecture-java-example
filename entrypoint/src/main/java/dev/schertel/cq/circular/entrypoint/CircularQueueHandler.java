@@ -49,7 +49,7 @@ public class CircularQueueHandler {
     }
 
     public Optional<CircularQueueResponseDto> replaceOrCreate(String id, CircularQueueRequestDto dto) {
-        Optional<CircularQueue> entity = updateCircleQueue.replaceOrCreate(id, mapper.convertRequestDtoToEntity(dto));
+        Optional<CircularQueue> entity = updateCircleQueue.replaceOrCreate(id, CircularQueue.builder().from(mapper.convertRequestDtoToEntity(dto)).withId(id).build());
         return entity.map(mapper::convertEntityToResponseDto);
     }
 
