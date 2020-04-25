@@ -7,7 +7,6 @@ import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -15,12 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularQueueTest {
-    private CircularQueue.Builder builder;
-
-    @BeforeEach
-    void setUp() {
-        builder = CircularQueue.builder();
-    }
+    private CircularQueue.Builder builder = CircularQueue.builder();
 
     @Test
     void nullObject() {
@@ -31,6 +25,36 @@ class CircularQueueTest {
                 () -> assertNull(dto.getId()),
                 () -> assertNull(dto.getName()),
                 () -> assertNull(dto.getDescription())
+        );
+    }
+
+    @Test
+    void from(@Random String id, @Random String name, @Random String description) {
+        CircularQueue expected = builder
+                .withId(id)
+                .withName(name)
+                .withDescription(description)
+                .build();
+
+        CircularQueue actual = builder
+                .from(expected)
+                .build();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void fullObject(@Random String id, @Random String name, @Random String description) {
+        CircularQueue dto = builder
+                .withId(id)
+                .withName(name)
+                .withDescription(description)
+                .build();
+
+        assertAll(
+                () -> assertEquals(id, dto.getId()),
+                () -> assertEquals(name, dto.getName()),
+                () -> assertEquals(description, dto.getDescription())
         );
     }
 
@@ -70,21 +94,6 @@ class CircularQueueTest {
                 () -> assertNull(dto.getId()),
                 () -> assertNull(dto.getName()),
                 () -> assertEquals(expected, dto.getDescription())
-        );
-    }
-
-    @Test
-    void fullObject(@Random String id, @Random String name, @Random String description) {
-        CircularQueue dto = builder
-                .withId(id)
-                .withName(name)
-                .withDescription(description)
-                .build();
-
-        assertAll(
-                () -> assertEquals(id, dto.getId()),
-                () -> assertEquals(name, dto.getName()),
-                () -> assertEquals(description, dto.getDescription())
         );
     }
 
