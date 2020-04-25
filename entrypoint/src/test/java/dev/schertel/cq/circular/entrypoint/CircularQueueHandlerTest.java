@@ -5,6 +5,7 @@ import dev.schertel.cq.circular.dto.CircularQueueResponseDto;
 import dev.schertel.cq.circular.entity.CircularQueue;
 import dev.schertel.cq.circular.exception.CircularQueueNotFoundException;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
+import dev.schertel.cq.circular.usecase.output.DeleteCircleQueue;
 import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
 import dev.schertel.cq.circular.usecase.output.UpdateCircleQueue;
 import io.github.glytching.junit.extension.random.Random;
@@ -322,6 +323,36 @@ class CircularQueueHandlerTest {
 
     @Nested
     class Delete {
+        @Mock
+        DeleteCircleQueue mock;
 
+        @BeforeEach
+        void setUp() {
+            reset(mock);
+        }
+
+        @Test
+        void deleteExistingEntity(@Random String id) {
+            cut = new CircularQueueHandler(null, null, null, mock, mapper);
+
+            cut.delete(id);
+
+            verify(mock, times(1)).delete(id);
+        }
+
+        @Test
+        void deleteNonExistingEntity(@Random String id) {
+            doThrow(new CircularQueueNotFoundException(id))
+                    .when(mock)
+                    .delete(id);
+
+            cut = new CircularQueueHandler(null, null, null, mock, mapper);
+
+            CircularQueueNotFoundException exception = assertThrows(CircularQueueNotFoundException.class, () -> {
+                cut.delete(id);
+            });
+
+            assertEquals(id, exception.getId());
+        }
     }
 }
