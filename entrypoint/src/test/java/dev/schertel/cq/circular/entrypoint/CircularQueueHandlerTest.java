@@ -115,4 +115,14 @@ class CircularQueueHandlerTest {
             assertEquals(0, actual.size());
         }
     }
+    
+    @Nested
+    class Update {
+
+    }
+
+    @Nested
+    class Delete {
+
+    }
 }
