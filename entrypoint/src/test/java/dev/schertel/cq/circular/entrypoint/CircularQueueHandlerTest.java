@@ -46,7 +46,8 @@ class CircularQueueHandlerTest {
 
         @Test
         void createNewEntity(@Random String id, @Random String name, @Random String description) {
-            when(mock.create(new CircularQueue(null, name, description))).thenReturn(new CircularQueue(id, name, description));
+            when(mock.create(CircularQueue.builder().withName(name).withDescription(description).build()))
+                    .thenReturn(CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
 
             CircularQueueRequestDto request = CircularQueueRequestDto.builder().withName(name).withDescription(description).build();
             cut = new CircularQueueHandler(mock, null, null, null, mapper);
@@ -69,7 +70,8 @@ class CircularQueueHandlerTest {
 
         @Test
         void readExistingEntity(@Random String id, @Random String name, @Random String description) {
-            when(mock.read(id)).thenReturn(new CircularQueue(id, name, description));
+            when(mock.read(id))
+                    .thenReturn(CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
 
             cut = new CircularQueueHandler(null, mock, null, null, mapper);
             CircularQueueResponseDto response = cut.read(id);

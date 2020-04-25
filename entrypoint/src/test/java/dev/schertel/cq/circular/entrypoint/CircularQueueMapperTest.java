@@ -34,7 +34,11 @@ class CircularQueueMapperTest {
 
     @Test
     void convertEntityToResponseDto() {
-        CircularQueue entity = new CircularQueue("id", "name", "description");
+        CircularQueue entity = CircularQueue.builder()
+                .withId("id")
+                .withName("name")
+                .withDescription("description")
+                .build();
         CircularQueueResponseDto dto = cut.convertEntityToResponseDto(entity);
 
         assertAll(
