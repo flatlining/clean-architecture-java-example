@@ -45,7 +45,7 @@ public class CircularQueueHandler {
     }
 
     public void update(String id, CircularQueueRequestDto dto) {
-        updateCircleQueue.update(id, mapper.convertRequestDtoToEntity(dto));
+        updateCircleQueue.update(id, CircularQueue.builder().from(mapper.convertRequestDtoToEntity(dto)).withId(id).build());
     }
 
     public Optional<CircularQueueResponseDto> replaceOrCreate(String id, CircularQueueRequestDto dto) {

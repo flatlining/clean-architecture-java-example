@@ -6,6 +6,7 @@ import dev.schertel.cq.circular.entity.CircularQueue;
 import dev.schertel.cq.circular.exception.CircularQueueNotFoundException;
 import dev.schertel.cq.circular.usecase.output.CreateCircleQueue;
 import dev.schertel.cq.circular.usecase.output.ReadCircleQueue;
+import dev.schertel.cq.circular.usecase.output.UpdateCircleQueue;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,8 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith({MockitoExtension.class, RandomBeansExtension.class})
 class CircularQueueHandlerTest {
@@ -120,7 +120,22 @@ class CircularQueueHandlerTest {
 
     @Nested
     class Update {
+        @Mock
+        UpdateCircleQueue mock;
 
+        @BeforeEach
+        void setUp() {
+            reset(mock);
+        }
+
+        @Test
+        void updateExistingEntity(@Random String id, @Random String name, @Random String description) {
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            cut.update(id, CircularQueueRequestDto.builder().withName(name).withDescription(description).build());
+
+            verify(mock).update(id, CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
+        }
     }
 
     @Nested
