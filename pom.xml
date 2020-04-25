@@ -28,6 +28,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<toStringVerifier.version>1.4.1</toStringVerifier.version>
 		<junitExtensions.version>2.4.0</junitExtensions.version>
+		<equalsverifier.version>3.1.13</equalsverifier.version>
 	</properties>
 
 	<build>

@@ -1,9 +1,11 @@
 package dev.schertel.cq.circular.dto;
 
-public class CircularQueueResponseDto {
-    private String id;
-    private String name;
-    private String description;
+import java.util.Objects;
+
+public final class CircularQueueResponseDto {
+    private final String id;
+    private final String name;
+    private final String description;
 
     private CircularQueueResponseDto(Builder builder) {
         this.id = builder.id;
@@ -35,6 +37,21 @@ public class CircularQueueResponseDto {
         sb.append(", description='").append(description).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CircularQueueResponseDto that = (CircularQueueResponseDto) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description);
     }
 
     public static class Builder {
