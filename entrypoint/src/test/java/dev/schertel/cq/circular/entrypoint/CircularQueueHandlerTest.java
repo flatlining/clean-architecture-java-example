@@ -16,6 +16,7 @@ import org.modelmapper.ModelMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 @ExtendWith({MockitoExtension.class, RandomBeansExtension.class})
@@ -30,9 +31,17 @@ class CircularQueueHandlerTest {
     }
 
     @Nested
-    class Create {
+    class CreateUseCase {
+        @Mock
+        CreateCircleQueue createCircleQueue;
+
+        @BeforeEach
+        void setUp() {
+            reset(createCircleQueue);
+        }
+
         @Test
-        void createNewEntity(@Random String id, @Random String name, @Random String description, @Mock CreateCircleQueue createCircleQueue) {
+        void createNewEntity(@Random String id, @Random String name, @Random String description) {
             when(createCircleQueue.create(any(CircularQueue.class))).thenReturn(new CircularQueue(id, name, description));
 
             CircularQueueRequestDto request = CircularQueueRequestDto.builder().withName(name).withDescription(description).build();
