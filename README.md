@@ -14,6 +14,8 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830
   - https://github.com/mattia-battiston/clean-architecture-example
 - https://jmgarridopaz.github.io/content/hexagonalarchitecture.html
+- https://pusher.com/tutorials/clean-architecture-introduction
+- https://github.com/eliostvs/clean-architecture-delivery-example
 
 #### Builder Pattern
 
