@@ -139,6 +139,33 @@ class CircularQueueHandlerTest {
         }
 
         @Test
+        void updateExistingEntityName(@Random String id, @Random String name) {
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            cut.update(id, CircularQueueRequestDto.builder().withName(name).build());
+
+            verify(mock).update(id, CircularQueue.builder().withId(id).withName(name).build());
+        }
+
+        @Test
+        void updateExistingEntityDescription(@Random String id, @Random String description) {
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            cut.update(id, CircularQueueRequestDto.builder().withDescription(description).build());
+
+            verify(mock).update(id, CircularQueue.builder().withId(id).withDescription(description).build());
+        }
+
+        @Test
+        void updateExistingEntityWithNothing(@Random String id) {
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            cut.update(id, CircularQueueRequestDto.builder().build());
+
+            verify(mock).update(id, CircularQueue.builder().withId(id).build());
+        }
+
+        @Test
         void updateNonExistingEntity(@Random String id, @Random String name, @Random String description) {
             doThrow(new CircularQueueNotFoundException(id))
                     .when(mock)
