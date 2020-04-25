@@ -19,6 +19,7 @@ import org.modelmapper.ModelMapper;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -129,7 +130,7 @@ class CircularQueueHandlerTest {
         }
 
         @Test
-        void updateExistingEntity(@Random String id, @Random String name, @Random String description) {
+        void updateExistingEntityNameAndDescription(@Random String id, @Random String name, @Random String description) {
             cut = new CircularQueueHandler(null, null, mock, null, mapper);
 
             cut.update(id, CircularQueueRequestDto.builder().withName(name).withDescription(description).build());
@@ -139,7 +140,9 @@ class CircularQueueHandlerTest {
 
         @Test
         void updateNonExistingEntity(@Random String id, @Random String name, @Random String description) {
-            doThrow(new CircularQueueNotFoundException(id)).when(mock).update(id, CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
+            doThrow(new CircularQueueNotFoundException(id))
+                    .when(mock)
+                    .update(id, CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
 
             cut = new CircularQueueHandler(null, null, mock, null, mapper);
 
@@ -184,6 +187,70 @@ class CircularQueueHandlerTest {
             cut.replaceOrCreate(id, CircularQueueRequestDto.builder().build());
 
             verify(mock).replaceOrCreate(id, CircularQueue.builder().withId(id).build());
+        }
+
+        @Test
+        void replaceNonExistingEntityNameAndDescription(@Random String id, @Random String name, @Random String description) {
+            doReturn(Optional.of(CircularQueue.builder().withId(id).withName(name).withDescription(description).build()))
+                    .when(mock)
+                    .replaceOrCreate(id, CircularQueue.builder().withId(id).withName(name).withDescription(description).build());
+
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            Optional<CircularQueueResponseDto> actual = cut.replaceOrCreate(id, CircularQueueRequestDto.builder().withName(name).withDescription(description).build());
+
+            CircularQueueResponseDto expected = CircularQueueResponseDto.builder().withId(id).withName(name).withDescription(description).build();
+
+            assertTrue(actual.isPresent());
+            assertEquals(expected, actual.get());
+        }
+
+        @Test
+        void replaceNonExistingEntityName(@Random String id, @Random String name) {
+            doReturn(Optional.of(CircularQueue.builder().withId(id).withName(name).build()))
+                    .when(mock)
+                    .replaceOrCreate(id, CircularQueue.builder().withId(id).withName(name).build());
+
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            Optional<CircularQueueResponseDto> actual = cut.replaceOrCreate(id, CircularQueueRequestDto.builder().withName(name).build());
+
+            CircularQueueResponseDto expected = CircularQueueResponseDto.builder().withId(id).withName(name).build();
+
+            assertTrue(actual.isPresent());
+            assertEquals(expected, actual.get());
+        }
+
+        @Test
+        void replaceNonExistingEntityDescription(@Random String id, @Random String description) {
+            doReturn(Optional.of(CircularQueue.builder().withId(id).withDescription(description).build()))
+                    .when(mock)
+                    .replaceOrCreate(id, CircularQueue.builder().withId(id).withDescription(description).build());
+
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            Optional<CircularQueueResponseDto> actual = cut.replaceOrCreate(id, CircularQueueRequestDto.builder().withDescription(description).build());
+
+            CircularQueueResponseDto expected = CircularQueueResponseDto.builder().withId(id).withDescription(description).build();
+
+            assertTrue(actual.isPresent());
+            assertEquals(expected, actual.get());
+        }
+
+        @Test
+        void replaceNonExistingEntityWithNothing(@Random String id) {
+            doReturn(Optional.of(CircularQueue.builder().withId(id).build()))
+                    .when(mock)
+                    .replaceOrCreate(id, CircularQueue.builder().withId(id).build());
+
+            cut = new CircularQueueHandler(null, null, mock, null, mapper);
+
+            Optional<CircularQueueResponseDto> actual = cut.replaceOrCreate(id, CircularQueueRequestDto.builder().build());
+
+            CircularQueueResponseDto expected = CircularQueueResponseDto.builder().withId(id).build();
+
+            assertTrue(actual.isPresent());
+            assertEquals(expected, actual.get());
         }
     }
 
