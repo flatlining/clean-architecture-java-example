@@ -6,7 +6,7 @@ import lombok.ToString;
 import lombok.Value;
 
 @Value
-@Builder(setterPrefix = "with")
+@Builder(builderClassName = "Builder", setterPrefix = "with")
 @EqualsAndHashCode
 @ToString
 public class Circular {
