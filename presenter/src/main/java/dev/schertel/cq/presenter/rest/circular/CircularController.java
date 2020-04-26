@@ -3,8 +3,8 @@ package dev.schertel.cq.presenter.rest.circular;
 import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.core.usecase.UseCaseExecutor;
 import dev.schertel.cq.core.usecase.circular.*;
-import dev.schertel.cq.presenter.rest.dto.CircularRequest;
-import dev.schertel.cq.presenter.rest.dto.CircularResponse;
+import dev.schertel.cq.presenter.rest.entity.CircularRequest;
+import dev.schertel.cq.presenter.rest.entity.CircularResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

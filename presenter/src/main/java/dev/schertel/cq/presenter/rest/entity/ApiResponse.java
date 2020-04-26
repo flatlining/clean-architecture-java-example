@@ -1,4 +1,4 @@
-package dev.schertel.cq.presenter.rest.dto;
+package dev.schertel.cq.presenter.rest.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.Value;
 
-import java.time.Instant;
 import java.time.ZonedDateTime;
 
 @Value

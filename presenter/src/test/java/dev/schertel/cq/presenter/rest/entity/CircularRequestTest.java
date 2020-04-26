@@ -1,4 +1,4 @@
-package dev.schertel.cq.presenter.rest.dto;
+package dev.schertel.cq.presenter.rest.entity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,29 +16,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(RandomBeansExtension.class)
-class CircularResponseTest {
-    private final Class<CircularResponse> CLAZZ = CircularResponse.class;
+class CircularRequestTest {
+    private final Class<CircularRequest> CLAZZ = CircularRequest.class;
 
-    private CircularResponse.Builder builder;
-    private CircularResponse cut;
+    private CircularRequest.Builder builder;
+    private CircularRequest cut;
 
     @BeforeEach
     void setUp() {
-        this.builder = CircularResponse.builder();
+        this.builder = CircularRequest.builder();
         this.cut = null;
-    }
-
-    @Test
-    void getId(@Random String id) {
-        cut = builder
-                .withId(id)
-                .build();
-
-        assertAll(
-                () -> assertEquals(id, cut.getId()),
-                () -> assertNull(cut.getName()),
-                () -> assertNull(cut.getDescription())
-        );
     }
 
     @Test
@@ -48,7 +35,6 @@ class CircularResponseTest {
                 .build();
 
         assertAll(
-                () -> assertNull(cut.getId()),
                 () -> assertEquals(name, cut.getName()),
                 () -> assertNull(cut.getDescription())
         );
@@ -61,7 +47,6 @@ class CircularResponseTest {
                 .build();
 
         assertAll(
-                () -> assertNull(cut.getId()),
                 () -> assertNull(cut.getName()),
                 () -> assertEquals(description, cut.getDescription())
         );
@@ -74,22 +59,19 @@ class CircularResponseTest {
             cut = builder.build();
 
             assertAll(
-                    () -> assertNull(cut.getId()),
                     () -> assertNull(cut.getName()),
                     () -> assertNull(cut.getDescription())
             );
         }
 
         @Test
-        void fullObject(@Random String id, @Random String name, @Random String description) {
+        void fullObject(@Random String name, @Random String description) {
             cut = builder
-                    .withId(id)
                     .withName(name)
                     .withDescription(description)
                     .build();
 
             assertAll(
-                    () -> assertEquals(id, cut.getId()),
                     () -> assertEquals(name, cut.getName()),
                     () -> assertEquals(description, cut.getDescription())
             );
@@ -99,18 +81,17 @@ class CircularResponseTest {
     @Nested
     class JSON {
         @Test
-        void serializationDeserialization(@Random String id, @Random String name, @Random String description) throws JsonProcessingException {
+        void serializationDeserialization(@Random String name, @Random String description) throws JsonProcessingException {
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
             String json = String.format("{\n" +
-                    "  \"id\":\"%s\",\n" +
                     "  \"name\":\"%s\",\n" +
                     "  \"description\":\"%s\"\n" +
-                    "}", id, name, description);
-            CircularResponse entityFromJson = mapper.readValue(json, CLAZZ);
+                    "}", name, description);
+            CircularRequest entityFromJson = mapper.readValue(json, CLAZZ);
             String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
 
-            CircularResponse entityFromBuilder = builder.withId(id).withName(name).withDescription(description).build();
+            CircularRequest entityFromBuilder = builder.withName(name).withDescription(description).build();
             String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
 
             assertEquals(jsonFromJSon, jsonFromBuilder);

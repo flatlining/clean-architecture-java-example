@@ -1,7 +1,7 @@
 package dev.schertel.cq.presenter.rest.circular;
 
-import dev.schertel.cq.presenter.rest.dto.CircularRequest;
-import dev.schertel.cq.presenter.rest.dto.CircularResponse;
+import dev.schertel.cq.presenter.rest.entity.CircularRequest;
+import dev.schertel.cq.presenter.rest.entity.CircularResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

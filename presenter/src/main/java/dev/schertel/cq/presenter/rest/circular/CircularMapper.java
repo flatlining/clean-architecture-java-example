@@ -1,7 +1,7 @@
 package dev.schertel.cq.presenter.rest.circular;
 
 import dev.schertel.cq.core.domain.Circular;
-import dev.schertel.cq.presenter.rest.dto.CircularResponse;
+import dev.schertel.cq.presenter.rest.entity.CircularResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
 import org.modelmapper.convention.NameTransformers;
