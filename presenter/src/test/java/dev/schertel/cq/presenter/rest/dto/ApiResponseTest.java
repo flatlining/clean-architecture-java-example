@@ -14,8 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.http.HttpStatus;
 
-import java.time.Instant;
-import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,7 +31,7 @@ class ApiResponseTest {
     }
 
     @Test
-    void getTimestamp(@Random Instant timestamp) {
+    void getTimestamp(@Random ZonedDateTime timestamp) {
         cut = builder
                 .withTimestamp(timestamp)
                 .build();
@@ -106,7 +105,7 @@ class ApiResponseTest {
         }
 
         @Test
-        void fullObject(@Random Instant timestamp, @Random HttpStatus httpStatus, @Random String message) {
+        void fullObject(@Random ZonedDateTime timestamp, @Random HttpStatus httpStatus, @Random String message) {
             cut = builder
                     .withTimestamp(timestamp)
                     .withStatus(httpStatus.value())
@@ -126,11 +125,11 @@ class ApiResponseTest {
     @Nested
     class JSON {
         @Test
-        void serializationDeserialization(@Random Instant instant, @Random HttpStatus httpStatus, @Random String message) throws JsonProcessingException {
+        void serializationDeserialization(@Random ZonedDateTime now, @Random HttpStatus httpStatus, @Random String message) throws JsonProcessingException {
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
-            DateTimeFormatter FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ").withZone(ZoneOffset.UTC);
-            String timestamp = FMT.format(instant);
+            DateTimeFormatter FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            String timestamp = FMT.format(now);
 
             Integer status = httpStatus.value();
             String reason = httpStatus.getReasonPhrase();
@@ -144,7 +143,7 @@ class ApiResponseTest {
             ApiResponse entityFromJson = mapper.readValue(json, ApiResponse.class);
             String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
 
-            ApiResponse entityFromBuilder = builder.withTimestamp(instant).withStatus(status).withReason(reason).withMessage(message).build();
+            ApiResponse entityFromBuilder = builder.withTimestamp(now).withStatus(status).withReason(reason).withMessage(message).build();
             String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
 
             assertEquals(jsonFromJSon, jsonFromBuilder);

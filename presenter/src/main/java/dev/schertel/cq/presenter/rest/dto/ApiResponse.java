@@ -9,6 +9,7 @@ import lombok.ToString;
 import lombok.Value;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 
 @Value
 @Builder(builderClassName = "Builder", setterPrefix = "with")
@@ -16,15 +17,15 @@ import java.time.Instant;
 @ToString
 @JsonDeserialize(builder = ApiResponse.Builder.class)
 public class ApiResponse {
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "UTC")
-    private final Instant timestamp;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", timezone = "UTC")
+    private final ZonedDateTime timestamp;
     private final Integer status;
     private final String reason;
     private final String message;
 
     @JsonPOJOBuilder
     public static class Builder {
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "UTC")
-        private Instant timestamp;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", timezone = "UTC")
+        private ZonedDateTime timestamp;
     }
 }
