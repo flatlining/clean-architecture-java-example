@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Component
 public class CircularController implements CircularResource {
     private final UseCaseExecutor useCaseExecutor;
+    private final CircularMapper circularMapper;
     private final CreateCircularUseCase createCircularUseCase;
     private final ReadAllCircularUseCase readAllCircularUseCase;
     private final ReadCircularUseCase readCircularUseCase;
@@ -21,12 +22,14 @@ public class CircularController implements CircularResource {
     private final DeleteCircularUseCase deleteCircularUseCase;
 
     public CircularController(UseCaseExecutor useCaseExecutor,
+                              CircularMapper circularMapper,
                               CreateCircularUseCase createCircularUseCase,
                               ReadAllCircularUseCase readAllCircularUseCase,
                               ReadCircularUseCase readCircularUseCase,
                               DeleteAllCircularUseCase deleteAllCircularUseCase,
                               DeleteCircularUseCase deleteCircularUseCase) {
         this.useCaseExecutor = useCaseExecutor;
+        this.circularMapper = circularMapper;
         this.createCircularUseCase = createCircularUseCase;
         this.readAllCircularUseCase = readAllCircularUseCase;
         this.readCircularUseCase = readCircularUseCase;
@@ -56,10 +59,7 @@ public class CircularController implements CircularResource {
                 readAllCircularUseCase,
                 ReadAllCircularUseCase.InputValues.builder().build(),
                 (output) -> output.getCircular().stream()
-                        .map(e -> CircularResponse.builder()
-                                .withId(e.getId().getId())
-                                .withName(e.getName())
-                                .withDescription(e.getDescription()).build())
+                        .map(circularMapper::convertEntityToResponse)
                         .collect(Collectors.toList())
         );
     }
@@ -71,11 +71,7 @@ public class CircularController implements CircularResource {
                 ReadCircularUseCase.InputValues.builder()
                         .withIdentity(Identity.of(id))
                         .build(),
-                (output) -> CircularResponse.builder()
-                        .withId(output.getCircular().getId().getId())
-                        .withName(output.getCircular().getName())
-                        .withDescription(output.getCircular().getDescription())
-                        .build()
+                (output) -> circularMapper.convertEntityToResponse(output.getCircular())
         );
     }
 
