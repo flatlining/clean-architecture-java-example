@@ -9,7 +9,7 @@
 		<version>${revision}</version>
 	</parent>
 
-	<artifactId>config</artifactId>
+	<artifactId>presenter</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencyManagement>
@@ -28,17 +28,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>dev.schertel</groupId>
-			<artifactId>data</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>dev.schertel</groupId>
 			<artifactId>core</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>dev.schertel</groupId>
-			<artifactId>presenter</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -66,30 +56,38 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>2.3.7</version>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
 	<build>
-		<finalName>${project.parent.groupId}-${project.parent.artifactId}-${revision}</finalName>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-						<configuration>
-							<mainClass>dev.schertel.cq.CentralQueueApplication</mainClass>
-							<excludeDevtools>true</excludeDevtools>
-						</configuration>
-					</execution>
-				</executions>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${mavenCompilerPlugin.version}</version>
+				<configuration>
+					<release>${maven.compiler.release}</release>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm</artifactId>
+						<version>${asm.version}</version> <!-- Use newer version of ASM -->
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
