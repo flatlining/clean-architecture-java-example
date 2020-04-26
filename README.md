@@ -68,6 +68,12 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://www.baeldung.com/spring-annotations-resource-inject-autowire
 - https://mvnrepository.com/artifact/javax.inject/javax.inject/1
 
+#### Lombok
+
+- https://projectlombok.org/setup/maven
+  - https://github.com/MCMicS/simple-lombok
+  - https://medium.com/@Leejjon_net/youll-have-this-problems-when-you-add-lombok-to-a-modular-java-11-micro-service-832f55911bc5
+
 #### Modules
 
 - https://dzone.com/articles/java-9-module-services

@@ -26,7 +26,10 @@
 		<maven.compiler.release>${java.version}</maven.compiler.release>
 		<spring.version>2.2.6.RELEASE</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
+		<asm.version>6.2</asm.version>
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
+		<lombok.version>1.18.12</lombok.version>
 		<junit.jupiter.version>5.6.2</junit.jupiter.version>
 		<toStringVerifier.version>1.4.1</toStringVerifier.version>
 		<junitExtensions.version>2.4.0</junitExtensions.version>
