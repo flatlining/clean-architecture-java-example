@@ -10,6 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.Instant;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
 @ControllerAdvice
@@ -18,7 +19,7 @@ public class CircularControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<ApiResponse> customHandleNotFound(NotFoundException ex, WebRequest request) {
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
         ApiResponse apiResponse = ApiResponse.builder()
-                .withTimestamp(ZonedDateTime.now())
+                .withTimestamp(ZonedDateTime.now(ZoneOffset.UTC))
                 .withStatus(httpStatus.value())
                 .withReason(httpStatus.getReasonPhrase())
                 .withMessage(ex.getMessage())

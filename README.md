@@ -95,6 +95,7 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://www.codebyamir.com/blog/add-a-timezone-to-localdatetime-with-zoneddatetime-in-java-8
 - https://stackoverflow.com/a/32443004
 - https://www.moesif.com/blog/technical/timestamp/manage-datetime-timestamp-timezones-in-api/
+- https://mincong.io/2017/02/16/convert-date-to-string-in-java/
 
 ### Spring-Boot
 
