@@ -1,4 +1,4 @@
-package dev.schertel.cq.presenter.rest.entity;
+package dev.schertel.cq.presenter.rest.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Builder;
@@ -10,9 +10,8 @@ import lombok.Value;
 @Builder(setterPrefix = "with")
 @EqualsAndHashCode
 @ToString
-@JsonDeserialize(builder = CircularResponse.CircularResponseBuilder.class)
-public class CircularResponse {
-    private final String id;
+@JsonDeserialize(builder = CircularRequest.CircularRequestBuilder.class)
+public class CircularRequest {
     private final String name;
     private final String description;
 }

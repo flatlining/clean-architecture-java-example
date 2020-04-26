@@ -1,7 +1,7 @@
 package dev.schertel.cq.presenter.rest.circular;
 
 import dev.schertel.cq.core.domain.NotFoundException;
-import dev.schertel.cq.presenter.rest.entity.ApiResponse;
+import dev.schertel.cq.presenter.rest.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

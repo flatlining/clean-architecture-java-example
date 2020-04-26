@@ -3,13 +3,13 @@ package dev.schertel.cq.presenter.rest.circular;
 import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.core.usecase.UseCaseExecutor;
 import dev.schertel.cq.core.usecase.circular.*;
-import dev.schertel.cq.presenter.rest.entity.CircularRequest;
-import dev.schertel.cq.presenter.rest.entity.CircularResponse;
+import dev.schertel.cq.presenter.rest.dto.CircularRequest;
+import dev.schertel.cq.presenter.rest.dto.CircularResponse;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 @Component
 public class CircularController implements CircularResource {
@@ -55,7 +55,12 @@ public class CircularController implements CircularResource {
         return useCaseExecutor.execute(
                 readAllCircularUseCase,
                 ReadAllCircularUseCase.InputValues.builder().build(),
-                (output) -> Collections.emptyList()
+                (output) -> output.getCircular().stream()
+                        .map(e -> CircularResponse.builder()
+                                .withId(e.getId().getId())
+                                .withName(e.getName())
+                                .withDescription(e.getDescription()).build())
+                        .collect(Collectors.toList())
         );
     }
 
@@ -79,7 +84,12 @@ public class CircularController implements CircularResource {
         useCaseExecutor.execute(
                 deleteAllCircularUseCase,
                 DeleteAllCircularUseCase.InputValues.builder().build(),
-                (output) -> Collections.emptyList()
+                (output) -> output.getCircular().stream()
+                        .map(e -> CircularResponse.builder()
+                                .withId(e.getId().getId())
+                                .withName(e.getName())
+                                .withDescription(e.getDescription()).build())
+                        .collect(Collectors.toList())
         );
     }
 

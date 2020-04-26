@@ -1,4 +1,4 @@
-package dev.schertel.cq.presenter.rest.entity;
+package dev.schertel.cq.presenter.rest.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Builder;
