@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(RandomBeansExtension.class)
 class IdentityTest {
+    private final Class<Identity> CLAZZ = Identity.class;
+
     private Identity.Builder builder;
     private Identity cut;
 
@@ -68,8 +70,6 @@ class IdentityTest {
 
     @Nested
     class Override {
-        private final Class<?> CLAZZ = Identity.class;
-
         @Test
         void testToString() {
             ToStringVerifier.forClass(CLAZZ)

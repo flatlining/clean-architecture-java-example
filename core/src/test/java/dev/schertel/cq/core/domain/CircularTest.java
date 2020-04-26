@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularTest {
+    private final Class<Circular> CLAZZ = Circular.class;
+
     private Circular.Builder builder;
     private Circular cut;
 
@@ -93,8 +95,6 @@ class CircularTest {
 
     @Nested
     class Override {
-        private final Class<?> CLAZZ = Circular.class;
-
         @Test
         void testToString() {
             ToStringVerifier.forClass(CLAZZ)

@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(RandomBeansExtension.class)
 class NotFoundExceptionTest {
-    private final Class<?> CLAZZ = NotFoundException.class;
     private NotFoundException cut;
 
     @BeforeEach
