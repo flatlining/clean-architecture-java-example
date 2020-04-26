@@ -76,22 +76,22 @@ public class CircularController implements CircularResource {
     }
 
     @Override
-    public void deleteAll() {
-        useCaseExecutor.execute(
+    public CompletableFuture<Void> deleteAll() {
+        return useCaseExecutor.execute(
                 deleteAllCircularUseCase,
                 DeleteAllCircularUseCase.InputValues.builder().build(),
-                (output) -> output
+                (output) -> null
         );
     }
 
     @Override
-    public void deleteByIdentity(String id) {
-        useCaseExecutor.execute(
+    public CompletableFuture<Void> deleteByIdentity(String id) {
+        return useCaseExecutor.execute(
                 deleteCircularUseCase,
                 DeleteCircularUseCase.InputValues.builder()
                         .withIdentity(Identity.of(id))
                         .build(),
-                (output) -> output
+                (output) -> null
         );
     }
 }

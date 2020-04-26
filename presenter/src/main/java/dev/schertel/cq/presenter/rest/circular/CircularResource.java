@@ -25,9 +25,9 @@ public interface CircularResource {
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteAll();
+    CompletableFuture<Void> deleteAll();
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteByIdentity(@PathVariable("id") String id);
+    CompletableFuture<Void> deleteByIdentity(@PathVariable("id") String id);
 }
