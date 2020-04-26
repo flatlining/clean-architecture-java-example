@@ -2,6 +2,7 @@ package dev.schertel.cq.presenter.rest.dto;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jparams.verifier.tostring.NameStyle;
 import com.jparams.verifier.tostring.ToStringVerifier;
 import io.github.glytching.junit.extension.random.Random;
@@ -13,7 +14,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.http.HttpStatus;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,7 +32,7 @@ class ApiResponseTest {
     }
 
     @Test
-    void getTimestamp(@Random LocalDateTime timestamp) {
+    void getTimestamp(@Random Instant timestamp) {
         cut = builder
                 .withTimestamp(timestamp)
                 .build();
@@ -103,7 +106,7 @@ class ApiResponseTest {
         }
 
         @Test
-        void fullObject(@Random LocalDateTime timestamp, @Random HttpStatus httpStatus, @Random String message) {
+        void fullObject(@Random Instant timestamp, @Random HttpStatus httpStatus, @Random String message) {
             cut = builder
                     .withTimestamp(timestamp)
                     .withStatus(httpStatus.value())
@@ -123,8 +126,12 @@ class ApiResponseTest {
     @Nested
     class JSON {
         @Test
-        void serializationDeserialization(@Random LocalDateTime timestamp, @Random HttpStatus httpStatus, @Random String message) throws JsonProcessingException {
-            ObjectMapper mapper = new ObjectMapper();
+        void serializationDeserialization(@Random HttpStatus httpStatus, @Random String message) throws JsonProcessingException {
+            ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+
+            Instant i = Instant.now();
+            DateTimeFormatter FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ").withZone(ZoneOffset.UTC);
+            String timestamp = FMT.format(i);
 
             Integer status = httpStatus.value();
             String reason = httpStatus.getReasonPhrase();
@@ -138,13 +145,13 @@ class ApiResponseTest {
             ApiResponse entityFromJson = mapper.readValue(json, ApiResponse.class);
             String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
 
-            ApiResponse entityFromBuilder = builder.withTimestamp(timestamp).withStatus(status).withReason(reason).withMessage(message).build();
+            ApiResponse entityFromBuilder = builder.withTimestamp(i).withStatus(status).withReason(reason).withMessage(message).build();
             String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
 
             assertAll(
-                    () -> assertEquals(jsonFromJSon, jsonFromBuilder),
-                    () -> assertEquals(entityFromJson, entityFromBuilder),
-                    () -> assertEquals(entityFromJson.toString(), entityFromBuilder.toString())
+                    () -> assertEquals(jsonFromJSon, jsonFromBuilder, "jsons"),
+                    () -> assertEquals(entityFromJson, entityFromBuilder, "entities"),
+                    () -> assertEquals(entityFromJson.toString(), entityFromBuilder.toString(), "toString")
             );
         }
     }

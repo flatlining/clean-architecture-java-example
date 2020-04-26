@@ -3,15 +3,12 @@ package dev.schertel.cq.presenter.rest.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.Value;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Value
 @Builder(builderClassName = "Builder", setterPrefix = "with")
@@ -19,16 +16,15 @@ import java.time.LocalDateTime;
 @ToString
 @JsonDeserialize(builder = ApiResponse.Builder.class)
 public class ApiResponse {
-    private final LocalDateTime timestamp;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "UTC")
+    private final Instant timestamp;
     private final Integer status;
     private final String reason;
     private final String message;
 
     @JsonPOJOBuilder
     public static class Builder {
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-        @JsonSerialize(using = LocalDateTimeSerializer.class)
-        @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-        private LocalDateTime timestamp;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "UTC")
+        private Instant timestamp;
     }
 }

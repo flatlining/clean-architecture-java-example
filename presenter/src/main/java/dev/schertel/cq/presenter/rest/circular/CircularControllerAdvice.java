@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @ControllerAdvice
 public class CircularControllerAdvice extends ResponseEntityExceptionHandler {
@@ -17,7 +17,7 @@ public class CircularControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<ApiResponse> customHandleNotFound(NotFoundException ex, WebRequest request) {
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
         ApiResponse apiResponse = ApiResponse.builder()
-                .withTimestamp(LocalDateTime.now())
+                .withTimestamp(Instant.now())
                 .withStatus(httpStatus.value())
                 .withReason(httpStatus.getReasonPhrase())
                 .withMessage(ex.getMessage())
