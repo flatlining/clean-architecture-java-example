@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularRequestTest {
+    private final Class<CircularRequest> CLAZZ = CircularRequest.class;
+
     private CircularRequest.Builder builder;
     private CircularRequest cut;
 
@@ -86,22 +88,20 @@ class CircularRequestTest {
                     "  \"name\":\"%s\",\n" +
                     "  \"description\":\"%s\"\n" +
                     "}", name, description);
-            CircularRequest entityFromJson = mapper.readValue(json, CircularRequest.class);
+            CircularRequest entityFromJson = mapper.readValue(json, CLAZZ);
             String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
 
             CircularRequest entityFromBuilder = builder.withName(name).withDescription(description).build();
             String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
 
             assertEquals(jsonFromJSon, jsonFromBuilder);
-            assertEquals(mapper.readValue(jsonFromJSon, CircularRequest.class), mapper.readValue(jsonFromBuilder, CircularRequest.class));
-            assertEquals(mapper.readValue(jsonFromJSon, CircularRequest.class).toString(), mapper.readValue(jsonFromBuilder, CircularRequest.class).toString());
+            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ), mapper.readValue(jsonFromBuilder, CLAZZ));
+            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ).toString(), mapper.readValue(jsonFromBuilder, CLAZZ).toString());
         }
     }
 
     @Nested
     class Override {
-        private final Class<?> CLAZZ = CircularRequest.class;
-
         @Test
         void testToString() {
             ToStringVerifier.forClass(CLAZZ)

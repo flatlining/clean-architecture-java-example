@@ -21,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(RandomBeansExtension.class)
 class ApiResponseTest {
+    private final Class<ApiResponse> CLAZZ = ApiResponse.class;
+
     private ApiResponse.Builder builder;
     private ApiResponse cut;
 
@@ -140,22 +142,20 @@ class ApiResponseTest {
                     "  \"reason\":\"%s\",\n" +
                     "  \"message\":\"%s\"\n" +
                     "}", timestamp, status, reason, message);
-            ApiResponse entityFromJson = mapper.readValue(json, ApiResponse.class);
+            ApiResponse entityFromJson = mapper.readValue(json, CLAZZ);
             String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
 
             ApiResponse entityFromBuilder = builder.withTimestamp(now).withStatus(status).withReason(reason).withMessage(message).build();
             String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
 
             assertEquals(jsonFromJSon, jsonFromBuilder);
-            assertEquals(mapper.readValue(jsonFromJSon, ApiResponse.class), mapper.readValue(jsonFromBuilder, ApiResponse.class));
-            assertEquals(mapper.readValue(jsonFromJSon, ApiResponse.class).toString(), mapper.readValue(jsonFromBuilder, ApiResponse.class).toString());
+            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ), mapper.readValue(jsonFromBuilder, CLAZZ));
+            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ).toString(), mapper.readValue(jsonFromBuilder, CLAZZ).toString());
         }
     }
 
     @Nested
     class Override {
-        private final Class<?> CLAZZ = ApiResponse.class;
-
         @Test
         void testToString() {
             ToStringVerifier.forClass(CLAZZ)
