@@ -1,6 +1,6 @@
-package dev.schertel.cq.core.usecase.queuecircular;
+package dev.schertel.cq.core.usecase.circular;
 
-import dev.schertel.cq.core.domain.CircularQueue;
+import dev.schertel.cq.core.domain.Circular;
 import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.core.domain.NotFoundException;
 import dev.schertel.cq.core.usecase.UseCase;
@@ -9,20 +9,20 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.Value;
 
-public class DeleteCircularQueuesUseCase extends UseCase<DeleteCircularQueuesUseCase.InputValues, DeleteCircularQueuesUseCase.OutputValues> {
-    private CircularQueueRepository repository;
+public class DeleteCircularUseCase extends UseCase<DeleteCircularUseCase.InputValues, DeleteCircularUseCase.OutputValues> {
+    private CircularRepository repository;
 
-    public DeleteCircularQueuesUseCase(CircularQueueRepository repository) {
+    public DeleteCircularUseCase(CircularRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public OutputValues execute(InputValues input) {
-        Identity id = input.getId();
+        Identity identity = input.getIdentity();
 
-        return repository.deleteById(id)
+        return repository.deleteByIdentity(identity)
                 .map(OutputValues::new)
-                .orElseThrow(() -> NotFoundException.of(id.getId()));
+                .orElseThrow(() -> NotFoundException.of(identity.getId()));
     }
 
     @Value
@@ -30,7 +30,7 @@ public class DeleteCircularQueuesUseCase extends UseCase<DeleteCircularQueuesUse
     @EqualsAndHashCode
     @ToString
     public static class InputValues implements UseCase.InputValues {
-        private final Identity id;
+        private final Identity identity;
     }
 
     @Value
@@ -38,6 +38,6 @@ public class DeleteCircularQueuesUseCase extends UseCase<DeleteCircularQueuesUse
     @EqualsAndHashCode
     @ToString
     public static class OutputValues implements UseCase.OutputValues {
-        private final CircularQueue circularQueue;
+        private final Circular circular;
     }
 }

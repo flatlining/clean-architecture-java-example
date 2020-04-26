@@ -1,6 +1,6 @@
-package dev.schertel.cq.core.usecase.queuecircular;
+package dev.schertel.cq.core.usecase.circular;
 
-import dev.schertel.cq.core.domain.CircularQueue;
+import dev.schertel.cq.core.domain.Circular;
 import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.core.usecase.UseCase;
 import lombok.Builder;
@@ -8,22 +8,23 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.Value;
 
-public class CreateCircularQueueUseCase extends UseCase<CreateCircularQueueUseCase.InputValues, CreateCircularQueueUseCase.OutputValues> {
-    private CircularQueueRepository repository;
+public class CreateCircularUseCase extends UseCase<CreateCircularUseCase.InputValues, CreateCircularUseCase.OutputValues> {
+    private CircularRepository repository;
 
-    public CreateCircularQueueUseCase(CircularQueueRepository repository) {
+    public CreateCircularUseCase(CircularRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public OutputValues execute(InputValues input) {
-        CircularQueue circularQueue = CircularQueue.builder()
+        Circular circular = Circular.builder()
                 .withId(Identity.random())
                 .withName(input.getName())
                 .withDescription(input.getDescription())
                 .build();
+
         return OutputValues.builder()
-                .withCircularQueue(repository.persist(circularQueue))
+                .withCircular(repository.create(circular))
                 .build();
     }
 
@@ -41,6 +42,6 @@ public class CreateCircularQueueUseCase extends UseCase<CreateCircularQueueUseCa
     @EqualsAndHashCode
     @ToString
     public static class OutputValues implements UseCase.OutputValues {
-        private final CircularQueue circularQueue;
+        private final Circular circular;
     }
 }

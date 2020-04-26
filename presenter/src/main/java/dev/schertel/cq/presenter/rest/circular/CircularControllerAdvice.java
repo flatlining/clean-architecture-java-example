@@ -1,7 +1,7 @@
-package dev.schertel.cq.presenter.rest.queuecircular;
+package dev.schertel.cq.presenter.rest.circular;
 
 import dev.schertel.cq.core.domain.NotFoundException;
-import dev.schertel.cq.presenter.rest.entity.ErrorResponse;
+import dev.schertel.cq.presenter.rest.entity.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,15 +12,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.LocalDateTime;
 
 @ControllerAdvice
-public class CircularQueueControllerAdvice extends ResponseEntityExceptionHandler {
+public class CircularControllerAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ErrorResponse> customHandleNotFound(NotFoundException ex, WebRequest request) {
-        ErrorResponse errorResponse = ErrorResponse.builder()
+    public ResponseEntity<ApiResponse> customHandleNotFound(NotFoundException ex, WebRequest request) {
+        HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+        ApiResponse apiResponse = ApiResponse.builder()
                 .withTimestamp(LocalDateTime.now())
-                .withStatus(HttpStatus.NOT_FOUND.value())
-                .withError(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .withStatus(httpStatus.value())
+                .withReason(httpStatus.getReasonPhrase())
                 .withMessage(ex.getMessage())
                 .build();
-        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<ApiResponse>(apiResponse, httpStatus);
     }
 }

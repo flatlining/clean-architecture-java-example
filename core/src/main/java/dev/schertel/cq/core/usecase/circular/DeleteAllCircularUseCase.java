@@ -1,6 +1,6 @@
-package dev.schertel.cq.core.usecase.queuecircular;
+package dev.schertel.cq.core.usecase.circular;
 
-import dev.schertel.cq.core.domain.CircularQueue;
+import dev.schertel.cq.core.domain.Circular;
 import dev.schertel.cq.core.usecase.UseCase;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -9,10 +9,10 @@ import lombok.Value;
 
 import java.util.List;
 
-public class DeleteAllCircularQueuesUseCase extends UseCase<DeleteAllCircularQueuesUseCase.InputValues, DeleteAllCircularQueuesUseCase.OutputValues> {
-    private CircularQueueRepository repository;
+public class DeleteAllCircularUseCase extends UseCase<DeleteAllCircularUseCase.InputValues, DeleteAllCircularUseCase.OutputValues> {
+    private CircularRepository repository;
 
-    public DeleteAllCircularQueuesUseCase(CircularQueueRepository repository) {
+    public DeleteAllCircularUseCase(CircularRepository repository) {
         this.repository = repository;
     }
 
@@ -33,6 +33,6 @@ public class DeleteAllCircularQueuesUseCase extends UseCase<DeleteAllCircularQue
     @EqualsAndHashCode
     @ToString
     public static class OutputValues implements UseCase.OutputValues {
-        private final List<CircularQueue> circularQueue;
+        private final List<Circular> circular;
     }
 }

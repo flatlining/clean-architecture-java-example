@@ -1,6 +1,6 @@
-package dev.schertel.cq.core.usecase.queuecircular;
+package dev.schertel.cq.core.usecase.circular;
 
-import dev.schertel.cq.core.domain.CircularQueue;
+import dev.schertel.cq.core.domain.Circular;
 import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.core.domain.NotFoundException;
 import dev.schertel.cq.core.usecase.UseCase;
@@ -9,20 +9,20 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.Value;
 
-public class GetCircularQueuesUseCase extends UseCase<GetCircularQueuesUseCase.InputValues, GetCircularQueuesUseCase.OutputValues> {
-    private CircularQueueRepository repository;
+public class ReadCircularUseCase extends UseCase<ReadCircularUseCase.InputValues, ReadCircularUseCase.OutputValues> {
+    private CircularRepository repository;
 
-    public GetCircularQueuesUseCase(CircularQueueRepository repository) {
+    public ReadCircularUseCase(CircularRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public OutputValues execute(InputValues input) {
-        Identity id = input.getId();
+        Identity identity = input.getIdentity();
 
-        return repository.getById(id)
+        return repository.readByIdentity(identity)
                 .map(OutputValues::new)
-                .orElseThrow(() -> NotFoundException.of(id.getId()));
+                .orElseThrow(() -> NotFoundException.of(identity.getId()));
     }
 
     @Value
@@ -30,7 +30,7 @@ public class GetCircularQueuesUseCase extends UseCase<GetCircularQueuesUseCase.I
     @EqualsAndHashCode
     @ToString
     public static class InputValues implements UseCase.InputValues {
-        private final Identity id;
+        private final Identity identity;
     }
 
     @Value
@@ -38,6 +38,6 @@ public class GetCircularQueuesUseCase extends UseCase<GetCircularQueuesUseCase.I
     @EqualsAndHashCode
     @ToString
     public static class OutputValues implements UseCase.OutputValues {
-        private final CircularQueue circularQueue;
+        private final Circular circular;
     }
 }

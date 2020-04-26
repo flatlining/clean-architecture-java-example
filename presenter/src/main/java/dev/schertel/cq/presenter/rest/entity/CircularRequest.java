@@ -1,4 +1,4 @@
-package dev.schertel.cq.core.domain;
+package dev.schertel.cq.presenter.rest.entity;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -9,8 +9,7 @@ import lombok.Value;
 @Builder(setterPrefix = "with")
 @EqualsAndHashCode
 @ToString
-public class CircularQueue {
-    private final Identity id;
+public class CircularRequest {
     private final String name;
     private final String description;
 }
