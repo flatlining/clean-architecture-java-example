@@ -8,7 +8,7 @@ import lombok.Value;
 import java.util.UUID;
 
 @Value
-@Builder(setterPrefix = "with")
+@Builder(builderClassName = "Builder", setterPrefix = "with")
 @EqualsAndHashCode
 @ToString
 public class Identity {

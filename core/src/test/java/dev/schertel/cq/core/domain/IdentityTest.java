@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(RandomBeansExtension.class)
 class IdentityTest {
-    Identity.IdentityBuilder builder;
+    Identity.Builder builder;
     Identity cut;
 
     @BeforeEach
