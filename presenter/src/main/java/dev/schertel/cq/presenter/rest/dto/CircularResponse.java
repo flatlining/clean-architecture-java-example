@@ -7,10 +7,10 @@ import lombok.ToString;
 import lombok.Value;
 
 @Value
-@Builder(setterPrefix = "with")
+@Builder(builderClassName = "Builder", setterPrefix = "with")
 @EqualsAndHashCode
 @ToString
-@JsonDeserialize(builder = CircularResponse.CircularResponseBuilder.class)
+@JsonDeserialize(builder = CircularResponse.Builder.class)
 public class CircularResponse {
     private final String id;
     private final String name;

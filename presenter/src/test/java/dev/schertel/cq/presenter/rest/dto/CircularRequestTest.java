@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularRequestTest {
-    private CircularRequest.CircularRequestBuilder builder;
+    private CircularRequest.Builder builder;
     private CircularRequest cut;
 
     @BeforeEach

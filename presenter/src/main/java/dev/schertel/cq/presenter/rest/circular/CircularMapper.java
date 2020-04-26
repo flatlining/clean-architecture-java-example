@@ -17,11 +17,11 @@ public class CircularMapper {
         Configuration builderConfiguration = modelMapper.getConfiguration().copy()
                 .setDestinationNameTransformer(NameTransformers.builder("with"))
                 .setDestinationNamingConvention(NamingConventions.builder("with"));
-        modelMapper.createTypeMap(Circular.class, CircularResponse.CircularResponseBuilder.class, builderConfiguration);
+        modelMapper.createTypeMap(Circular.class, CircularResponse.Builder.class, builderConfiguration);
         this.modelMapper = modelMapper;
     }
 
     public CircularResponse convertEntityToResponse(Circular entity) {
-        return modelMapper.map(entity, CircularResponse.CircularResponseBuilder.class).build();
+        return modelMapper.map(entity, CircularResponse.Builder.class).build();
     }
 }
