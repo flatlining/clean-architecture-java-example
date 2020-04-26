@@ -64,6 +64,8 @@ class CircularTest {
 
     @Nested
     class Builder {
+        private final Class<?> CLAZZ = Identity.Builder.class;
+
         @Test
         void nullObject() {
             cut = builder.build();
@@ -89,11 +91,17 @@ class CircularTest {
                     () -> assertEquals(description, cut.getDescription())
             );
         }
+
+        @Test
+        void testToString() {
+            ToStringVerifier.forClass(CLAZZ)
+                    .verify();
+        }
     }
 
     @Nested
     class Override {
-        private final Class<Circular> CLAZZ = Circular.class;
+        private final Class<?> CLAZZ = Circular.class;
 
         @Test
         void testToString() {
