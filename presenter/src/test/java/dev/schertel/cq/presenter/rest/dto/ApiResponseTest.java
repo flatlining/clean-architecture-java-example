@@ -1,5 +1,7 @@
 package dev.schertel.cq.presenter.rest.dto;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jparams.verifier.tostring.NameStyle;
 import com.jparams.verifier.tostring.ToStringVerifier;
 import io.github.glytching.junit.extension.random.Random;
@@ -114,6 +116,35 @@ class ApiResponseTest {
                     () -> assertEquals(httpStatus.value(), cut.getStatus()),
                     () -> assertEquals(httpStatus.getReasonPhrase(), cut.getReason()),
                     () -> assertEquals(message, cut.getMessage())
+            );
+        }
+    }
+
+    @Nested
+    class JSON {
+        @Test
+        void serializationDeserialization(@Random LocalDateTime timestamp, @Random HttpStatus httpStatus, @Random String message) throws JsonProcessingException {
+            ObjectMapper mapper = new ObjectMapper();
+
+            Integer status = httpStatus.value();
+            String reason = httpStatus.getReasonPhrase();
+
+            String json = String.format("{\n" +
+                    "  \"timestamp\":\"%s\",\n" +
+                    "  \"status\":%d,\n" +
+                    "  \"reason\":\"%s\",\n" +
+                    "  \"message\":\"%s\"\n" +
+                    "}", timestamp, status, reason, message);
+            ApiResponse entityFromJson = mapper.readValue(json, ApiResponse.class);
+            String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
+
+            ApiResponse entityFromBuilder = builder.withTimestamp(timestamp).withStatus(status).withReason(reason).withMessage(message).build();
+            String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
+
+            assertAll(
+                    () -> assertEquals(jsonFromJSon, jsonFromBuilder),
+                    () -> assertEquals(entityFromJson, entityFromBuilder),
+                    () -> assertEquals(entityFromJson.toString(), entityFromBuilder.toString())
             );
         }
     }
