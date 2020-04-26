@@ -57,7 +57,7 @@ public class CircularController implements CircularResource {
     public CompletableFuture<List<CircularResponse>> readAll() {
         return useCaseExecutor.execute(
                 readAllCircularUseCase,
-                ReadAllCircularUseCase.InputValues.builder().build(),
+                null,
                 (output) -> output.getCircular().stream()
                         .map(circularMapper::convertEntityToResponse)
                         .collect(Collectors.toList())
@@ -79,7 +79,7 @@ public class CircularController implements CircularResource {
     public CompletableFuture<Void> deleteAll() {
         return useCaseExecutor.execute(
                 deleteAllCircularUseCase,
-                DeleteAllCircularUseCase.InputValues.builder().build(),
+                null,
                 (output) -> null
         );
     }
