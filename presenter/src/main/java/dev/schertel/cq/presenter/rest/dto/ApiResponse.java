@@ -9,10 +9,10 @@ import lombok.Value;
 import java.time.LocalDateTime;
 
 @Value
-@Builder(setterPrefix = "with")
+@Builder(builderClassName = "Builder", setterPrefix = "with")
 @EqualsAndHashCode
 @ToString
-@JsonDeserialize(builder = ApiResponse.ApiResponseBuilder.class)
+@JsonDeserialize(builder = ApiResponse.Builder.class)
 public class ApiResponse {
     private final LocalDateTime timestamp;
     private final Integer status;
