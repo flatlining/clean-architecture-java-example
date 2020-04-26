@@ -16,14 +16,27 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(RandomBeansExtension.class)
-class CircularRequestTest {
-    private CircularRequest.CircularRequestBuilder builder;
-    private CircularRequest cut;
+class CircularResponseTest {
+    private CircularResponse.CircularResponseBuilder builder;
+    private CircularResponse cut;
 
     @BeforeEach
     void setUp() {
-        this.builder = CircularRequest.builder();
+        this.builder = CircularResponse.builder();
         this.cut = null;
+    }
+
+    @Test
+    void getId(@Random String id) {
+        cut = builder
+                .withId(id)
+                .build();
+
+        assertAll(
+                () -> assertEquals(id, cut.getId()),
+                () -> assertNull(cut.getName()),
+                () -> assertNull(cut.getDescription())
+        );
     }
 
     @Test
@@ -33,6 +46,7 @@ class CircularRequestTest {
                 .build();
 
         assertAll(
+                () -> assertNull(cut.getId()),
                 () -> assertEquals(name, cut.getName()),
                 () -> assertNull(cut.getDescription())
         );
@@ -45,6 +59,7 @@ class CircularRequestTest {
                 .build();
 
         assertAll(
+                () -> assertNull(cut.getId()),
                 () -> assertNull(cut.getName()),
                 () -> assertEquals(description, cut.getDescription())
         );
@@ -57,19 +72,22 @@ class CircularRequestTest {
             cut = builder.build();
 
             assertAll(
+                    () -> assertNull(cut.getId()),
                     () -> assertNull(cut.getName()),
                     () -> assertNull(cut.getDescription())
             );
         }
 
         @Test
-        void fullObject(@Random String name, @Random String description) {
+        void fullObject(@Random String id, @Random String name, @Random String description) {
             cut = builder
+                    .withId(id)
                     .withName(name)
                     .withDescription(description)
                     .build();
 
             assertAll(
+                    () -> assertEquals(id, cut.getId()),
                     () -> assertEquals(name, cut.getName()),
                     () -> assertEquals(description, cut.getDescription())
             );
@@ -79,28 +97,29 @@ class CircularRequestTest {
     @Nested
     class JSON {
         @Test
-        void serializationDeserialization(@Random String name, @Random String description) throws JsonProcessingException {
+        void serializationDeserialization(@Random String id, @Random String name, @Random String description) throws JsonProcessingException {
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
             String json = String.format("{\n" +
+                    "  \"id\":\"%s\",\n" +
                     "  \"name\":\"%s\",\n" +
                     "  \"description\":\"%s\"\n" +
-                    "}", name, description);
-            CircularRequest entityFromJson = mapper.readValue(json, CircularRequest.class);
+                    "}", id, name, description);
+            CircularResponse entityFromJson = mapper.readValue(json, CircularResponse.class);
             String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
 
-            CircularRequest entityFromBuilder = builder.withName(name).withDescription(description).build();
+            CircularResponse entityFromBuilder = builder.withId(id).withName(name).withDescription(description).build();
             String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
 
             assertEquals(jsonFromJSon, jsonFromBuilder);
-            assertEquals(mapper.readValue(jsonFromJSon, CircularRequest.class), mapper.readValue(jsonFromBuilder, CircularRequest.class));
-            assertEquals(mapper.readValue(jsonFromJSon, CircularRequest.class).toString(), mapper.readValue(jsonFromBuilder, CircularRequest.class).toString());
+            assertEquals(mapper.readValue(jsonFromJSon, CircularResponse.class), mapper.readValue(jsonFromBuilder, CircularResponse.class));
+            assertEquals(mapper.readValue(jsonFromJSon, CircularResponse.class).toString(), mapper.readValue(jsonFromBuilder, CircularResponse.class).toString());
         }
     }
 
     @Nested
     class Override {
-        private final Class<?> CLAZZ = CircularRequest.class;
+        private final Class<?> CLAZZ = CircularResponse.class;
 
         @Test
         void testToString() {
