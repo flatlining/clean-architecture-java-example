@@ -3,6 +3,7 @@ package dev.schertel.cq.data.repository;
 import dev.schertel.cq.core.domain.Circular;
 import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.core.usecase.circular.CircularRepository;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +11,13 @@ import java.util.List;
 import java.util.Optional;
 
 public class CircularRepositoryImpl implements CircularRepository {
-    HashMap<Identity, Circular> inMemoryDatabase = new HashMap<Identity, Circular>();
+    private final Logger logger;
+    private final HashMap<Identity, Circular> inMemoryDatabase;
+
+    public CircularRepositoryImpl(Logger logger) {
+        this.logger = logger;
+        this.inMemoryDatabase = new HashMap<Identity, Circular>();
+    }
 
     @Override
     public Circular create(Circular circular) {

@@ -13,12 +13,12 @@ import java.util.concurrent.CompletableFuture;
 
 @Component
 public class CircularController implements CircularResource {
-    private UseCaseExecutor useCaseExecutor;
-    private CreateCircularUseCase createCircularUseCase;
-    private ReadAllCircularUseCase readAllCircularUseCase;
-    private ReadCircularUseCase readCircularUseCase;
-    private DeleteAllCircularUseCase deleteAllCircularUseCase;
-    private DeleteCircularUseCase deleteCircularUseCase;
+    private final UseCaseExecutor useCaseExecutor;
+    private final CreateCircularUseCase createCircularUseCase;
+    private final ReadAllCircularUseCase readAllCircularUseCase;
+    private final ReadCircularUseCase readCircularUseCase;
+    private final DeleteAllCircularUseCase deleteAllCircularUseCase;
+    private final DeleteCircularUseCase deleteCircularUseCase;
 
     public CircularController(UseCaseExecutor useCaseExecutor,
                               CreateCircularUseCase createCircularUseCase,
