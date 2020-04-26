@@ -56,30 +56,10 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>2.3.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.jparams</groupId>
-			<artifactId>to-string-verifier</artifactId>
-			<version>${toStringVerifier.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>nl.jqno.equalsverifier</groupId>
-			<artifactId>equalsverifier</artifactId>
-			<version>${equalsverifier.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>io.github.glytching</groupId>
-			<artifactId>junit-extensions</artifactId>
-			<version>${junitExtensions.version}</version>
-			<scope>test</scope>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
@@ -87,8 +67,27 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${mavenSurefirePlugin.version}</version>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${mavenCompilerPlugin.version}</version>
+				<configuration>
+					<release>${maven.compiler.release}</release>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm</artifactId>
+						<version>${asm.version}</version> <!-- Use newer version of ASM -->
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
