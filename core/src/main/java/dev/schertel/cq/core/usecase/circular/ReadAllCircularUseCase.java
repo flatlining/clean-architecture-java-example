@@ -18,7 +18,9 @@ public class ReadAllCircularUseCase extends UseCase<ReadAllCircularUseCase.Input
 
     @Override
     public OutputValues execute(InputValues input) {
-        return new OutputValues(repository.readAll());
+        return OutputValues.builder()
+                .withCircular(repository.readAll())
+                .build();
     }
 
     @Value

@@ -1,6 +1,5 @@
 package dev.schertel.cq.core.usecase.circular;
 
-import dev.schertel.cq.core.domain.Circular;
 import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.core.domain.NotFoundException;
 import dev.schertel.cq.core.usecase.UseCase;
@@ -21,7 +20,7 @@ public class DeleteCircularUseCase extends UseCase<DeleteCircularUseCase.InputVa
         Identity identity = input.getIdentity();
 
         return repository.deleteByIdentity(identity)
-                .map(OutputValues::new)
+                .map(e -> OutputValues.builder().build())
                 .orElseThrow(() -> NotFoundException.of(identity.getId()));
     }
 
@@ -38,6 +37,5 @@ public class DeleteCircularUseCase extends UseCase<DeleteCircularUseCase.InputVa
     @EqualsAndHashCode
     @ToString
     public static class OutputValues implements UseCase.OutputValues {
-        private final Circular circular;
     }
 }

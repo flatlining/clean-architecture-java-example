@@ -21,7 +21,7 @@ public class ReadCircularUseCase extends UseCase<ReadCircularUseCase.InputValues
         Identity identity = input.getIdentity();
 
         return repository.readByIdentity(identity)
-                .map(OutputValues::new)
+                .map(e -> OutputValues.builder().withCircular(e).build())
                 .orElseThrow(() -> NotFoundException.of(identity.getId()));
     }
 

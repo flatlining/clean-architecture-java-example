@@ -84,12 +84,7 @@ public class CircularController implements CircularResource {
         useCaseExecutor.execute(
                 deleteAllCircularUseCase,
                 DeleteAllCircularUseCase.InputValues.builder().build(),
-                (output) -> output.getCircular().stream()
-                        .map(e -> CircularResponse.builder()
-                                .withId(e.getId().getId())
-                                .withName(e.getName())
-                                .withDescription(e.getDescription()).build())
-                        .collect(Collectors.toList())
+                (output) -> output
         );
     }
 
@@ -100,11 +95,7 @@ public class CircularController implements CircularResource {
                 DeleteCircularUseCase.InputValues.builder()
                         .withIdentity(Identity.of(id))
                         .build(),
-                (output) -> CircularResponse.builder()
-                        .withId(output.getCircular().getId().getId())
-                        .withName(output.getCircular().getName())
-                        .withDescription(output.getCircular().getDescription())
-                        .build()
+                (output) -> output
         );
     }
 }
