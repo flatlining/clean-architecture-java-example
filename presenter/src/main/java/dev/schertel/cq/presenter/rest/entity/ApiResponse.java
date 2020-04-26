@@ -1,5 +1,6 @@
 package dev.schertel.cq.presenter.rest.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Builder(setterPrefix = "with")
 @EqualsAndHashCode
 @ToString
+@JsonDeserialize(builder = ApiResponse.ApiResponseBuilder.class)
 public class ApiResponse {
     private final LocalDateTime timestamp;
     private final Integer status;
