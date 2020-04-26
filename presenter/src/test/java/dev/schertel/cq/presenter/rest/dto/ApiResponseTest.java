@@ -126,12 +126,11 @@ class ApiResponseTest {
     @Nested
     class JSON {
         @Test
-        void serializationDeserialization(@Random HttpStatus httpStatus, @Random String message) throws JsonProcessingException {
+        void serializationDeserialization(@Random Instant instant, @Random HttpStatus httpStatus, @Random String message) throws JsonProcessingException {
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
-            Instant i = Instant.now();
             DateTimeFormatter FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ").withZone(ZoneOffset.UTC);
-            String timestamp = FMT.format(i);
+            String timestamp = FMT.format(instant);
 
             Integer status = httpStatus.value();
             String reason = httpStatus.getReasonPhrase();
@@ -145,14 +144,12 @@ class ApiResponseTest {
             ApiResponse entityFromJson = mapper.readValue(json, ApiResponse.class);
             String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
 
-            ApiResponse entityFromBuilder = builder.withTimestamp(i).withStatus(status).withReason(reason).withMessage(message).build();
+            ApiResponse entityFromBuilder = builder.withTimestamp(instant).withStatus(status).withReason(reason).withMessage(message).build();
             String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
 
-            assertAll(
-                    () -> assertEquals(jsonFromJSon, jsonFromBuilder, "jsons"),
-                    () -> assertEquals(entityFromJson, entityFromBuilder, "entities"),
-                    () -> assertEquals(entityFromJson.toString(), entityFromBuilder.toString(), "toString")
-            );
+            assertEquals(jsonFromJSon, jsonFromBuilder);
+            assertEquals(mapper.readValue(jsonFromJSon, ApiResponse.class), mapper.readValue(jsonFromBuilder, ApiResponse.class));
+            assertEquals(mapper.readValue(jsonFromJSon, ApiResponse.class).toString(), mapper.readValue(jsonFromBuilder, ApiResponse.class).toString());
         }
     }
 

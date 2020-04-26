@@ -23,10 +23,6 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started
   - https://github.com/dmilicic/Android-Clean-Boilerplate
 
-#### Time
-
-- http://apiux.com/2013/03/20/5-laws-api-dates-and-times/
-
 #### Builder Pattern
 
 - https://www.geeksforgeeks.org/builder-pattern-in-java/
@@ -93,6 +89,13 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 
 - https://github.com/modelmapper/modelmapper/issues/265
 
+#### Time
+
+- http://apiux.com/2013/03/20/5-laws-api-dates-and-times/
+- https://www.codebyamir.com/blog/add-a-timezone-to-localdatetime-with-zoneddatetime-in-java-8
+- https://stackoverflow.com/a/32443004
+- https://www.moesif.com/blog/technical/timestamp/manage-datetime-timestamp-timezones-in-api/
+
 ### Spring-Boot
 
 - https://start.spring.io/
@@ -127,3 +130,5 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 
 - https://www.baeldung.com/jackson-deserialize-immutable-objects
 - https://www.baeldung.com/jackson-map
+- https://codeboje.de/jackson-java-8-datetime-handling/
+- https://github.com/FasterXML/jackson-modules-java8
