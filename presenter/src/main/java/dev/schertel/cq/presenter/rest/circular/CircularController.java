@@ -46,7 +46,7 @@ public class CircularController implements CircularResource {
                         .withDescription(request.getDescription())
                         .build(),
                 (output) -> CircularResponse.builder()
-                        .withId(output.getCircular().getId().getId())
+                        .withId(output.getCircular().getIdentity().getId())
                         .withName(output.getCircular().getName())
                         .withDescription(output.getCircular().getDescription())
                         .build()

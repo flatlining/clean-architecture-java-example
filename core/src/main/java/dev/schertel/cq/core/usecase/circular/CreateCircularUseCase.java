@@ -18,7 +18,7 @@ public class CreateCircularUseCase extends UseCase<CreateCircularUseCase.InputVa
     @Override
     public OutputValues execute(InputValues input) {
         Circular circular = Circular.builder()
-                .withId(Identity.random())
+                .withIdentity(Identity.random())
                 .withName(input.getName())
                 .withDescription(input.getDescription())
                 .build();
