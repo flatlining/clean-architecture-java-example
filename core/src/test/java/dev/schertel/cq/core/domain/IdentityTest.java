@@ -45,8 +45,6 @@ class IdentityTest {
 
     @Nested
     class Builder {
-        private final Class<?> CLAZZ = Identity.Builder.class;
-
         @Test
         void nullObject() {
             cut = builder.build();
@@ -65,12 +63,6 @@ class IdentityTest {
             assertAll(
                     () -> assertEquals(id, cut.getId())
             );
-        }
-
-        @Test
-        void testToString() {
-            ToStringVerifier.forClass(CLAZZ)
-                    .verify();
         }
     }
 

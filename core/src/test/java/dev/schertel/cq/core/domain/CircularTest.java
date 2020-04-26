@@ -64,8 +64,6 @@ class CircularTest {
 
     @Nested
     class Builder {
-        private final Class<?> CLAZZ = Identity.Builder.class;
-
         @Test
         void nullObject() {
             cut = builder.build();
@@ -90,12 +88,6 @@ class CircularTest {
                     () -> assertEquals(name, cut.getName()),
                     () -> assertEquals(description, cut.getDescription())
             );
-        }
-
-        @Test
-        void testToString() {
-            ToStringVerifier.forClass(CLAZZ)
-                    .verify();
         }
     }
 
