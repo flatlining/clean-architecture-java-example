@@ -23,6 +23,10 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started
   - https://github.com/dmilicic/Android-Clean-Boilerplate
 
+#### Time
+
+- http://apiux.com/2013/03/20/5-laws-api-dates-and-times/
+
 #### Builder Pattern
 
 - https://www.geeksforgeeks.org/builder-pattern-in-java/
@@ -76,6 +80,7 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
   - https://github.com/MCMicS/simple-lombok
   - https://medium.com/@Leejjon_net/youll-have-this-problems-when-you-add-lombok-to-a-modular-java-11-micro-service-832f55911bc5
 - https://www.baeldung.com/lombok-ide
+- http://errataobscura.blogspot.com/2019/03/jsonserialize-and-jsondeserialize-with.html
 
 #### Modules
 
