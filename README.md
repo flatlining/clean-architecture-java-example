@@ -73,6 +73,7 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://projectlombok.org/setup/maven
   - https://github.com/MCMicS/simple-lombok
   - https://medium.com/@Leejjon_net/youll-have-this-problems-when-you-add-lombok-to-a-modular-java-11-micro-service-832f55911bc5
+- https://www.baeldung.com/lombok-ide
 
 #### Modules
 
