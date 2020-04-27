@@ -28,11 +28,11 @@ class CircularTest {
     @Test
     void getIdentity(@Random Identity identity) {
         cut = builder
-                .withIdentity(identity)
+                .withId(identity)
                 .build();
 
         assertAll(
-                () -> assertEquals(identity, cut.getIdentity()),
+                () -> assertEquals(identity, cut.getId()),
                 () -> assertNull(cut.getName()),
                 () -> assertNull(cut.getDescription())
         );
@@ -45,7 +45,7 @@ class CircularTest {
                 .build();
 
         assertAll(
-                () -> assertNull(cut.getIdentity()),
+                () -> assertNull(cut.getId()),
                 () -> assertEquals(name, cut.getName()),
                 () -> assertNull(cut.getDescription())
         );
@@ -58,7 +58,7 @@ class CircularTest {
                 .build();
 
         assertAll(
-                () -> assertNull(cut.getIdentity()),
+                () -> assertNull(cut.getId()),
                 () -> assertNull(cut.getName()),
                 () -> assertEquals(description, cut.getDescription())
         );
@@ -71,7 +71,7 @@ class CircularTest {
             cut = builder.build();
 
             assertAll(
-                    () -> assertNull(cut.getIdentity()),
+                    () -> assertNull(cut.getId()),
                     () -> assertNull(cut.getName()),
                     () -> assertNull(cut.getDescription())
             );
@@ -80,13 +80,13 @@ class CircularTest {
         @Test
         void fullObject(@Random Identity identity, @Random String name, @Random String description) {
             cut = builder
-                    .withIdentity(identity)
+                    .withId(identity)
                     .withName(name)
                     .withDescription(description)
                     .build();
 
             assertAll(
-                    () -> assertEquals(identity, cut.getIdentity()),
+                    () -> assertEquals(identity, cut.getId()),
                     () -> assertEquals(name, cut.getName()),
                     () -> assertEquals(description, cut.getDescription())
             );

@@ -10,7 +10,7 @@ import lombok.Value;
 @EqualsAndHashCode
 @ToString
 public class Circular {
-    private final Identity identity;
+    private final Identity id;
     private final String name;
     private final String description;
 }

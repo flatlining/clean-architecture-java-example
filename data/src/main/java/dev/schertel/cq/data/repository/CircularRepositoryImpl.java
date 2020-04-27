@@ -21,7 +21,7 @@ public class CircularRepositoryImpl implements CircularRepository {
 
     @Override
     public Circular create(Circular circular) {
-        inMemoryDatabase.put(circular.getIdentity(), circular);
+        inMemoryDatabase.put(circular.getId(), circular);
         return circular;
     }
 
