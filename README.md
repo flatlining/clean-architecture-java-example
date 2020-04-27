@@ -133,3 +133,9 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://www.baeldung.com/jackson-map
 - https://codeboje.de/jackson-java-8-datetime-handling/
 - https://github.com/FasterXML/jackson-modules-java8
+
+#### Test
+
+- https://spring.io/guides/gs/testing-web/
+- https://reflectoring.io/unit-testing-spring-boot/
+- https://developer.okta.com/blog/2019/03/28/test-java-spring-boot-junit5
