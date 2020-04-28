@@ -139,3 +139,7 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://spring.io/guides/gs/testing-web/
 - https://reflectoring.io/unit-testing-spring-boot/
 - https://developer.okta.com/blog/2019/03/28/test-java-spring-boot-junit5
+- https://www.baeldung.com/java-spring-mockito-mock-mockbean
+- https://howtodoinjava.com/spring-boot2/testing/spring-mockbean-annotation/
+- https://www.journaldev.com/21876/mockito-argument-matchers-any-eq
+- https://www.baeldung.com/mockito-spy
