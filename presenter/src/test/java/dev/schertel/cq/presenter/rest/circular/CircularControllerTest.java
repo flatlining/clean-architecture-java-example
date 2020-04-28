@@ -21,6 +21,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -90,11 +91,12 @@ class CircularControllerTest {
                 .withName(name)
                 .withDescription(description)
                 .build();
+        RequestBuilder request = post("/circular")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsString(content));
 
         // When
-        MvcResult result = mockMvc.perform(post("/circular")
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(objectMapper.writeValueAsString(content)))
+        MvcResult result = mockMvc.perform(request)
                 .andExpect(request().asyncStarted())
                 .andReturn();
 
@@ -123,18 +125,52 @@ class CircularControllerTest {
         doReturn(output).when(readAllCircularUseCase).execute(eq(null));
 
         // Given
+        RequestBuilder request = get("/circular");
 
         // When
-        MvcResult result =
-                mockMvc.perform(get("/circular"))
-                        .andExpect(request().asyncStarted())
-                        .andReturn();
+        MvcResult result = mockMvc.perform(request)
+                .andExpect(request().asyncStarted())
+                .andReturn();
 
         // Then
         List<CircularResponse> expected = circulars.stream().map(c -> CircularResponse.builder()
                 .withId(c.getId().getId())
                 .withName(c.getName())
                 .withDescription(c.getDescription()).build()).collect(Collectors.toList());
+
+        mockMvc.perform(asyncDispatch(result))
+                .andExpect(status().isOk())
+                .andExpect(actual -> {
+                    assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
+                    assertThat(actual.getResponse().getContentAsString()).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expected));
+                });
+    }
+
+    @Test
+    void getReadSuccessfully(@Random Circular circular) throws Exception {
+        // Background
+        ReadCircularUseCase.InputValues input = ReadCircularUseCase.InputValues.builder()
+                .withIdentity(circular.getId())
+                .build();
+        ReadCircularUseCase.OutputValues output = ReadCircularUseCase.OutputValues.builder()
+                .withCircular(circular)
+                .build();
+        doReturn(output).when(readCircularUseCase).execute(eq(input));
+
+        // Given
+        RequestBuilder request = get("/circular/{id}", circular.getId().getId());
+
+        // When
+        MvcResult result = mockMvc.perform(request)
+                .andExpect(request().asyncStarted())
+                .andReturn();
+
+        // Then
+        CircularResponse expected = CircularResponse.builder()
+                .withId(circular.getId().getId())
+                .withName(circular.getName())
+                .withDescription(circular.getDescription())
+                .build();
 
         mockMvc.perform(asyncDispatch(result))
                 .andExpect(status().isOk())
