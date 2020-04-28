@@ -18,20 +18,19 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.reset;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(RandomBeansExtension.class)
 @WebMvcTest(controllers = CircularController.class)
@@ -70,7 +69,7 @@ class CircularControllerTest {
     }
 
     @Test
-    void create(@Random String name, @Random String description, @Random String id) throws Exception {
+    void postCreateSuccessfully(@Random String name, @Random String description, @Random String id) throws Exception {
         // Background
         CreateCircularUseCase.InputValues input = CreateCircularUseCase.InputValues.builder()
                 .withName(name)
@@ -81,8 +80,8 @@ class CircularControllerTest {
                         .withId(Identity.of(id))
                         .withName(name)
                         .withDescription(description)
-                        .build()
-                ).build();
+                        .build())
+                .build();
         doReturn(output).when(createCircularUseCase).execute(eq(input));
 
         // Given
@@ -92,10 +91,11 @@ class CircularControllerTest {
                 .build();
 
         // When
-        MockHttpServletRequestBuilder request = post("/circular")
+        MvcResult result = mockMvc.perform(post("/circular")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(objectMapper.writeValueAsString(content));
-        RequestBuilder asyncRequest = asyncRequest(request);
+                .content(objectMapper.writeValueAsString(content)))
+                .andExpect(request().asyncStarted())
+                .andReturn();
 
         // Then
         CircularResponse expected = CircularResponse.builder()
@@ -104,21 +104,34 @@ class CircularControllerTest {
                 .withDescription(description)
                 .build();
 
-        asyncResult(asyncRequest).andExpect(actual -> {
-            assertThat(actual.getResponse().getStatus()).isEqualTo(HttpStatus.CREATED.value());
-            assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
-            assertThat(actual.getResponse().getContentAsString()).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expected));
-        });
+        mockMvc.perform(asyncDispatch(result))
+                .andExpect(status().isCreated())
+                .andExpect(actual -> {
+                    assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
+                    assertThat(actual.getResponse().getContentAsString()).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expected));
+                });
     }
 
-    private RequestBuilder asyncRequest(MockHttpServletRequestBuilder request) throws Exception {
-        return asyncDispatch(mockMvc.perform(request)
-                .andExpect(request().asyncStarted())
-                .andReturn());
-    }
+    @Test
+    void getReadAllSuccessfully(@Random(size = 5, type = Circular.class) List<Circular> circulars) throws Exception {
+        // Background
+        ReadAllCircularUseCase.InputValues input = ReadAllCircularUseCase.InputValues.builder().build();
+        ReadAllCircularUseCase.OutputValues output = ReadAllCircularUseCase.OutputValues.builder()
+                .withCircular(circulars)
+                .build();
+        doReturn(output).when(readAllCircularUseCase).execute(eq(null));
 
-    private ResultActions asyncResult(RequestBuilder requestBuilder) throws Exception {
-        return mockMvc.perform(requestBuilder);
+        // Given
+
+        // When
+        MvcResult result =
+                mockMvc.perform(get("/circular"))
+                        .andExpect(request().asyncStarted())
+                        .andReturn();
+
+        // Then
+        mockMvc.perform(asyncDispatch(result))
+                .andExpect(status().isOk());
     }
 
     @TestConfiguration

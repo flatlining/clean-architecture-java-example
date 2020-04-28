@@ -143,3 +143,4 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://howtodoinjava.com/spring-boot2/testing/spring-mockbean-annotation/
 - https://www.journaldev.com/21876/mockito-argument-matchers-any-eq
 - https://www.baeldung.com/mockito-spy
+- https://github.com/spring-projects/spring-framework/blob/master/spring-test/src/test/java/org/springframework/test/web/servlet/samples/standalone/AsyncTests.java
