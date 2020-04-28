@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -373,6 +374,27 @@ class CircularControllerTest {
                     .andExpect(actual -> {
                         assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
                     });
+        }
+
+        @Test
+        void errorUnsupportedMediaType(@Random Circular circular) throws Exception {
+            // Given
+            CircularRequest content = CircularRequest.builder()
+                    .withName(circular.getName())
+                    .withDescription(circular.getDescription())
+                    .build();
+            RequestBuilder request = post("/circular")
+                    .contentType(MediaType.TEXT_PLAIN_VALUE)
+                    .content(objectMapper.writeValueAsString(content));
+
+            // When
+            mockMvc.perform(request)
+                    // Then
+                    .andExpect(status().isUnsupportedMediaType())
+                    .andExpect(actual -> {
+                        assertEquals(0, actual.getResponse().getContentLength());
+                    })
+                    .andReturn();
         }
     }
 }
