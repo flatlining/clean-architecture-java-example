@@ -461,4 +461,28 @@ class CircularControllerTest {
                     .andExpect(status().isNoContent());
         }
     }
+
+    @Nested
+    class Delete {
+        @Test
+        void success(@Random Identity id) throws Exception {
+            // Background
+            DeleteCircularUseCase.InputValues input = DeleteCircularUseCase.InputValues.builder()
+                    .withIdentity(id)
+                    .build();
+            DeleteCircularUseCase.OutputValues output = DeleteCircularUseCase.OutputValues.builder()
+                    .build();
+            doReturn(output).when(deleteCircularUseCase).execute(eq(input));
+
+            // Given
+            RequestBuilder request = delete("/circular/{id}", id.getId());
+
+            // When
+            MvcResult result = makeAsyncRequest(request);
+
+            // Then
+            getAsyncResponse(result)
+                    .andExpect(status().isNoContent());
+        }
+    }
 }
