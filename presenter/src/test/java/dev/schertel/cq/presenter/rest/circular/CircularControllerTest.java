@@ -87,10 +87,7 @@ class CircularControllerTest {
         MockHttpServletRequestBuilder request = post("/circular")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(content));
-        RequestBuilder action = asyncDispatch(mockMvc.perform(request)
-                .andExpect(request().asyncStarted())
-                .andReturn());
-        MvcResult actual = mockMvc.perform(action).andReturn();
+        MvcResult actual = mockMvc.perform(asyncRequest(request)).andReturn();
 
         // Then
         CircularResponse expected = CircularResponse.builder()
@@ -102,6 +99,12 @@ class CircularControllerTest {
         assertThat(actual.getResponse().getStatus()).isEqualTo(HttpStatus.CREATED.value());
         assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
         assertThat(actual.getResponse().getContentAsString()).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expected));
+    }
+
+    private RequestBuilder asyncRequest(MockHttpServletRequestBuilder request) throws Exception {
+        return asyncDispatch(mockMvc.perform(request)
+                .andExpect(request().asyncStarted())
+                .andReturn());
     }
 
     @TestConfiguration
