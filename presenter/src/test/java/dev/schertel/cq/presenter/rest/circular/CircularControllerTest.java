@@ -28,6 +28,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -159,7 +160,7 @@ class CircularControllerTest {
     @Nested
     class ReadAll {
         @Test
-        void successWithAllProperties(@Random(size = 5, type = Circular.class) List<Circular> circulars) throws Exception {
+        void successWithItems(@Random(size = 5, type = Circular.class) List<Circular> circulars) throws Exception {
             // Background
             ReadAllCircularUseCase.InputValues input = ReadAllCircularUseCase.InputValues.builder().build();
             ReadAllCircularUseCase.OutputValues output = ReadAllCircularUseCase.OutputValues.builder()
@@ -178,6 +179,32 @@ class CircularControllerTest {
                     .withId(c.getId().getId())
                     .withName(c.getName())
                     .withDescription(c.getDescription()).build()).collect(Collectors.toList());
+
+            getAsyncResponse(result)
+                    .andExpect(status().isOk())
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                    .andExpect(actual -> {
+                        assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
+                    });
+        }
+
+        @Test
+        void successWithNoItems() throws Exception {
+            // Background
+            ReadAllCircularUseCase.InputValues input = ReadAllCircularUseCase.InputValues.builder().build();
+            ReadAllCircularUseCase.OutputValues output = ReadAllCircularUseCase.OutputValues.builder()
+                    .withCircular(Collections.emptyList())
+                    .build();
+            doReturn(output).when(readAllCircularUseCase).execute(eq(null));
+
+            // Given
+            RequestBuilder request = get("/circular");
+
+            // When
+            MvcResult result = makeAsyncRequest(request);
+
+            // Then
+            List<CircularResponse> expected = Collections.emptyList();
 
             getAsyncResponse(result)
                     .andExpect(status().isOk())
