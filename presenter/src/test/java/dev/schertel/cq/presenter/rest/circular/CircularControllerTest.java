@@ -21,13 +21,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.reset;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
@@ -59,6 +60,13 @@ class CircularControllerTest {
 
     @BeforeEach
     void setUp() {
+        reset(
+                createCircularUseCase,
+                readAllCircularUseCase,
+                readCircularUseCase,
+                deleteAllCircularUseCase,
+                deleteCircularUseCase
+        );
     }
 
     @Test
@@ -87,7 +95,7 @@ class CircularControllerTest {
         MockHttpServletRequestBuilder request = post("/circular")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(content));
-        MvcResult actual = mockMvc.perform(asyncRequest(request)).andReturn();
+        RequestBuilder asyncRequest = asyncRequest(request);
 
         // Then
         CircularResponse expected = CircularResponse.builder()
@@ -96,15 +104,21 @@ class CircularControllerTest {
                 .withDescription(description)
                 .build();
 
-        assertThat(actual.getResponse().getStatus()).isEqualTo(HttpStatus.CREATED.value());
-        assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
-        assertThat(actual.getResponse().getContentAsString()).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expected));
+        asyncResult(asyncRequest).andExpect(actual -> {
+            assertThat(actual.getResponse().getStatus()).isEqualTo(HttpStatus.CREATED.value());
+            assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
+            assertThat(actual.getResponse().getContentAsString()).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expected));
+        });
     }
 
     private RequestBuilder asyncRequest(MockHttpServletRequestBuilder request) throws Exception {
         return asyncDispatch(mockMvc.perform(request)
                 .andExpect(request().asyncStarted())
                 .andReturn());
+    }
+
+    private ResultActions asyncResult(RequestBuilder requestBuilder) throws Exception {
+        return mockMvc.perform(requestBuilder);
     }
 
     @TestConfiguration
