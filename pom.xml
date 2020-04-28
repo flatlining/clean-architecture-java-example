@@ -35,6 +35,7 @@
 		<toStringVerifier.version>1.4.8</toStringVerifier.version>
 		<junitExtensions.version>2.4.0</junitExtensions.version>
 		<equalsverifier.version>3.1.13</equalsverifier.version>
+		<jsonUnitSpring.version>2.17.0</jsonUnitSpring.version>
 	</properties>
 
 	<build>

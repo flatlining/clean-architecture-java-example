@@ -2,7 +2,10 @@ package dev.schertel.cq.presenter.rest.circular;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.schertel.cq.core.domain.Circular;
+import dev.schertel.cq.core.domain.Identity;
+import dev.schertel.cq.core.domain.NotFoundException;
 import dev.schertel.cq.core.usecase.circular.*;
+import dev.schertel.cq.presenter.rest.entity.ApiResponse;
 import dev.schertel.cq.presenter.rest.entity.CircularRequest;
 import dev.schertel.cq.presenter.rest.entity.CircularResponse;
 import dev.schertel.cq.presenter.usecase.UseCaseExecutorImpl;
@@ -17,18 +20,20 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -110,7 +115,7 @@ class CircularControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(actual -> {
                     assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
-                    assertThat(actual.getResponse().getContentAsString()).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expected));
+                    assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
                 });
     }
 
@@ -141,7 +146,7 @@ class CircularControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(actual -> {
                     assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
-                    assertThat(actual.getResponse().getContentAsString()).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expected));
+                    assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
                 });
     }
 
@@ -175,7 +180,40 @@ class CircularControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(actual -> {
                     assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
-                    assertThat(actual.getResponse().getContentAsString()).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expected));
+                    assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
+                });
+    }
+
+    @Test
+    void getReadNotFound(@Random String id) throws Exception {
+        // Background
+        ReadCircularUseCase.InputValues input = ReadCircularUseCase.InputValues.builder()
+                .withIdentity(Identity.of(id))
+                .build();
+        doThrow(NotFoundException.of(id)).when(readCircularUseCase).execute(eq(input));
+
+        // Given
+        RequestBuilder request = get("/circular/{id}", id);
+
+        // When
+        MvcResult result = mockMvc.perform(request)
+                .andExpect(request().asyncStarted())
+                .andReturn();
+
+        // Then
+        HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+        ApiResponse expected = ApiResponse.builder()
+                .withTimestamp(null)
+                .withStatus(httpStatus.value())
+                .withReason(httpStatus.getReasonPhrase())
+                .withMessage(id)
+                .build();
+
+        ResultActions resultActions = mockMvc.perform(asyncDispatch(result))
+                .andExpect(status().isNotFound())
+                .andExpect(actual -> {
+                    assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
+                    assertThatJson(actual.getResponse().getContentAsString()).whenIgnoringPaths("timestamp").isEqualTo(objectMapper.writeValueAsString(expected));
                 });
     }
 
