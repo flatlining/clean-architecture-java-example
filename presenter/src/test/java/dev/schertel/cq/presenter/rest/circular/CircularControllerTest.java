@@ -80,6 +80,10 @@ class CircularControllerTest {
                 .andReturn();
     }
 
+    private ResultActions getResponse(MvcResult result) throws Exception {
+        return mockMvc.perform(asyncDispatch(result));
+    }
+
     @TestConfiguration
     @ComponentScan(basePackages = {"dev.schertel.cq.presenter.rest.circular"})
     static class Config {
@@ -111,7 +115,7 @@ class CircularControllerTest {
                     .withDescription(circular.getDescription())
                     .build();
 
-            mockMvc.perform(asyncDispatch(result))
+            getResponse(result)
                     .andExpect(status().isOk())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -142,7 +146,7 @@ class CircularControllerTest {
                     .withMessage(id)
                     .build();
 
-            ResultActions resultActions = mockMvc.perform(asyncDispatch(result))
+            getResponse(result)
                     .andExpect(status().isNotFound())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -174,7 +178,7 @@ class CircularControllerTest {
                     .withName(c.getName())
                     .withDescription(c.getDescription()).build()).collect(Collectors.toList());
 
-            mockMvc.perform(asyncDispatch(result))
+            getResponse(result)
                     .andExpect(status().isOk())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -220,7 +224,7 @@ class CircularControllerTest {
                     .withDescription(circular.getDescription())
                     .build();
 
-            mockMvc.perform(asyncDispatch(result))
+            getResponse(result)
                     .andExpect(status().isCreated())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -267,7 +271,7 @@ class CircularControllerTest {
                     .withDescription(circular.getDescription())
                     .build();
 
-            mockMvc.perform(asyncDispatch(result))
+            getResponse(result)
                     .andExpect(status().isCreated())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -315,7 +319,7 @@ class CircularControllerTest {
                     .withDescription(circular.getDescription())
                     .build();
 
-            mockMvc.perform(asyncDispatch(result))
+            getResponse(result)
                     .andExpect(status().isCreated())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -363,7 +367,7 @@ class CircularControllerTest {
                     .withDescription(circular.getDescription())
                     .build();
 
-            mockMvc.perform(asyncDispatch(result))
+            getResponse(result)
                     .andExpect(status().isCreated())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
