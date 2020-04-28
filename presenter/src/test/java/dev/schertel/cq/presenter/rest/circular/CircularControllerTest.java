@@ -93,7 +93,7 @@ class CircularControllerTest {
     @Nested
     class Read {
         @Test
-        void readFullSuccessfully(@Random Circular circular) throws Exception {
+        void successWithAllProperties(@Random Circular circular) throws Exception {
             // Background
             ReadCircularUseCase.InputValues input = ReadCircularUseCase.InputValues.builder()
                     .withIdentity(circular.getId())
@@ -125,7 +125,7 @@ class CircularControllerTest {
         }
 
         @Test
-        void readNotFound(@Random String id) throws Exception {
+        void errorNotFound(@Random String id) throws Exception {
             // Background
             ReadCircularUseCase.InputValues input = ReadCircularUseCase.InputValues.builder()
                     .withIdentity(Identity.of(id))
@@ -159,7 +159,7 @@ class CircularControllerTest {
     @Nested
     class ReadAll {
         @Test
-        void readAllSuccessfully(@Random(size = 5, type = Circular.class) List<Circular> circulars) throws Exception {
+        void successWithAllProperties(@Random(size = 5, type = Circular.class) List<Circular> circulars) throws Exception {
             // Background
             ReadAllCircularUseCase.InputValues input = ReadAllCircularUseCase.InputValues.builder().build();
             ReadAllCircularUseCase.OutputValues output = ReadAllCircularUseCase.OutputValues.builder()
