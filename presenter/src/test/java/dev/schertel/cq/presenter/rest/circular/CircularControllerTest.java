@@ -338,7 +338,8 @@ class CircularControllerTest {
             List<CircularResponse> expected = circulars.stream().map(c -> CircularResponse.builder()
                     .withId(c.getId().getId())
                     .withName(c.getName())
-                    .withDescription(c.getDescription()).build()).collect(Collectors.toList());
+                    .withDescription(c.getDescription())
+                    .build()).collect(Collectors.toList());
 
             getAsyncResponse(result)
                     .andExpect(status().isOk())
@@ -470,8 +471,7 @@ class CircularControllerTest {
             DeleteCircularUseCase.InputValues input = DeleteCircularUseCase.InputValues.builder()
                     .withIdentity(id)
                     .build();
-            DeleteCircularUseCase.OutputValues output = DeleteCircularUseCase.OutputValues.builder()
-                    .build();
+            DeleteCircularUseCase.OutputValues output = DeleteCircularUseCase.OutputValues.builder().build();
             doReturn(output).when(deleteCircularUseCase).execute(eq(input));
 
             // Given
@@ -491,8 +491,7 @@ class CircularControllerTest {
             DeleteCircularUseCase.InputValues input = DeleteCircularUseCase.InputValues.builder()
                     .withIdentity(Identity.of(id))
                     .build();
-            DeleteCircularUseCase.OutputValues output = DeleteCircularUseCase.OutputValues.builder()
-                    .build();
+            DeleteCircularUseCase.OutputValues output = DeleteCircularUseCase.OutputValues.builder().build();
             doThrow(NotFoundException.of(id)).when(deleteCircularUseCase).execute(eq(input));
 
             // Given
