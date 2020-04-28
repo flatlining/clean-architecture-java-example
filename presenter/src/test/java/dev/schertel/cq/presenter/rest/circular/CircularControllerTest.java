@@ -2,7 +2,6 @@ package dev.schertel.cq.presenter.rest.circular;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.schertel.cq.core.domain.Circular;
-import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.core.usecase.circular.*;
 import dev.schertel.cq.presenter.rest.entity.CircularRequest;
 import dev.schertel.cq.presenter.rest.entity.CircularResponse;
@@ -71,25 +70,25 @@ class CircularControllerTest {
     }
 
     @Test
-    void postCreateSuccessfully(@Random String name, @Random String description, @Random String id) throws Exception {
+    void postCreateSuccessfully(@Random Circular circular) throws Exception {
         // Background
         CreateCircularUseCase.InputValues input = CreateCircularUseCase.InputValues.builder()
-                .withName(name)
-                .withDescription(description)
+                .withName(circular.getName())
+                .withDescription(circular.getDescription())
                 .build();
         CreateCircularUseCase.OutputValues output = CreateCircularUseCase.OutputValues.builder()
                 .withCircular(Circular.builder()
-                        .withId(Identity.of(id))
-                        .withName(name)
-                        .withDescription(description)
+                        .withId(circular.getId())
+                        .withName(circular.getName())
+                        .withDescription(circular.getDescription())
                         .build())
                 .build();
         doReturn(output).when(createCircularUseCase).execute(eq(input));
 
         // Given
         CircularRequest content = CircularRequest.builder()
-                .withName(name)
-                .withDescription(description)
+                .withName(circular.getName())
+                .withDescription(circular.getDescription())
                 .build();
         RequestBuilder request = post("/circular")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -102,9 +101,9 @@ class CircularControllerTest {
 
         // Then
         CircularResponse expected = CircularResponse.builder()
-                .withId(id)
-                .withName(name)
-                .withDescription(description)
+                .withId(circular.getId().getId())
+                .withName(circular.getName())
+                .withDescription(circular.getDescription())
                 .build();
 
         mockMvc.perform(asyncDispatch(result))
