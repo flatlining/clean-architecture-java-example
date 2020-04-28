@@ -484,5 +484,38 @@ class CircularControllerTest {
             getAsyncResponse(result)
                     .andExpect(status().isNoContent());
         }
+
+        @Test
+        void errorNotFound(@Random String id) throws Exception {
+            // Background
+            DeleteCircularUseCase.InputValues input = DeleteCircularUseCase.InputValues.builder()
+                    .withIdentity(Identity.of(id))
+                    .build();
+            DeleteCircularUseCase.OutputValues output = DeleteCircularUseCase.OutputValues.builder()
+                    .build();
+            doThrow(NotFoundException.of(id)).when(deleteCircularUseCase).execute(eq(input));
+
+            // Given
+            RequestBuilder request = delete("/circular/{id}", id);
+
+            // When
+            MvcResult result = makeAsyncRequest(request);
+
+            // Then
+            HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+            ApiResponse expected = ApiResponse.builder()
+                    .withTimestamp(null)
+                    .withStatus(httpStatus.value())
+                    .withReason(httpStatus.getReasonPhrase())
+                    .withMessage(id)
+                    .build();
+
+            getAsyncResponse(result)
+                    .andExpect(status().isNotFound())
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                    .andExpect(actual -> {
+                        assertThatJson(actual.getResponse().getContentAsString()).whenIgnoringPaths("timestamp").isEqualTo(objectMapper.writeValueAsString(expected));
+                    });
+        }
     }
 }
