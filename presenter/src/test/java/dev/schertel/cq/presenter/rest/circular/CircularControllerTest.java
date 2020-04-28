@@ -31,12 +31,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(RandomBeansExtension.class)
 @WebMvcTest(controllers = CircularController.class)
@@ -113,8 +112,8 @@ class CircularControllerTest {
 
         mockMvc.perform(asyncDispatch(result))
                 .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(actual -> {
-                    assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
                     assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
                 });
     }
@@ -144,8 +143,8 @@ class CircularControllerTest {
 
         mockMvc.perform(asyncDispatch(result))
                 .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(actual -> {
-                    assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
                     assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
                 });
     }
@@ -178,8 +177,8 @@ class CircularControllerTest {
 
         mockMvc.perform(asyncDispatch(result))
                 .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(actual -> {
-                    assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
                     assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
                 });
     }
@@ -211,8 +210,8 @@ class CircularControllerTest {
 
         ResultActions resultActions = mockMvc.perform(asyncDispatch(result))
                 .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(actual -> {
-                    assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
                     assertThatJson(actual.getResponse().getContentAsString()).whenIgnoringPaths("timestamp").isEqualTo(objectMapper.writeValueAsString(expected));
                 });
     }
