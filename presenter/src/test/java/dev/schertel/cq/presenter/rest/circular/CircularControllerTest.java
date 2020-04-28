@@ -396,5 +396,21 @@ class CircularControllerTest {
                     })
                     .andReturn();
         }
+
+        @Test
+        void errorBadRequestNoBody() throws Exception {
+            // Given
+            RequestBuilder request = post("/circular")
+                    .contentType(MediaType.APPLICATION_JSON_VALUE);
+
+            // When
+            mockMvc.perform(request)
+                    // Then
+                    .andExpect(status().isBadRequest())
+                    .andExpect(actual -> {
+                        assertEquals(0, actual.getResponse().getContentLength());
+                    })
+                    .andReturn();
+        }
     }
 }
