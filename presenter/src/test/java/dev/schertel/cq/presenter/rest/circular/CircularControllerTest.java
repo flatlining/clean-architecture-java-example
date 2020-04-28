@@ -186,7 +186,156 @@ class CircularControllerTest {
     @Nested
     class Create {
         @Test
-        void createFullSuccessfully(@Random Circular circular) throws Exception {
+        void successWithAllProperties(@Random Circular circular) throws Exception {
+            // Background
+            CreateCircularUseCase.InputValues input = CreateCircularUseCase.InputValues.builder()
+                    .withName(circular.getName())
+                    .withDescription(circular.getDescription())
+                    .build();
+            CreateCircularUseCase.OutputValues output = CreateCircularUseCase.OutputValues.builder()
+                    .withCircular(Circular.builder()
+                            .withId(circular.getId())
+                            .withName(circular.getName())
+                            .withDescription(circular.getDescription())
+                            .build())
+                    .build();
+            doReturn(output).when(createCircularUseCase).execute(eq(input));
+
+            // Given
+            CircularRequest content = CircularRequest.builder()
+                    .withName(circular.getName())
+                    .withDescription(circular.getDescription())
+                    .build();
+            RequestBuilder request = post("/circular")
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .content(objectMapper.writeValueAsString(content));
+
+            // When
+            MvcResult result = mockMvc.perform(request)
+                    .andExpect(request().asyncStarted())
+                    .andReturn();
+
+            // Then
+            CircularResponse expected = CircularResponse.builder()
+                    .withId(circular.getId().getId())
+                    .withName(circular.getName())
+                    .withDescription(circular.getDescription())
+                    .build();
+
+            mockMvc.perform(asyncDispatch(result))
+                    .andExpect(status().isCreated())
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                    .andExpect(actual -> {
+                        assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
+                    });
+        }
+
+        @Test
+        void successWithNoProperties(@Random Circular forFields) throws Exception {
+            Circular circular = Circular.builder()
+                    .withId(forFields.getId())
+                    .build();
+
+            // Background
+            CreateCircularUseCase.InputValues input = CreateCircularUseCase.InputValues.builder()
+                    .withName(circular.getName())
+                    .withDescription(circular.getDescription())
+                    .build();
+            CreateCircularUseCase.OutputValues output = CreateCircularUseCase.OutputValues.builder()
+                    .withCircular(Circular.builder()
+                            .withId(circular.getId())
+                            .withName(circular.getName())
+                            .withDescription(circular.getDescription())
+                            .build())
+                    .build();
+            doReturn(output).when(createCircularUseCase).execute(eq(input));
+
+            // Given
+            CircularRequest content = CircularRequest.builder()
+                    .withName(circular.getName())
+                    .withDescription(circular.getDescription())
+                    .build();
+            RequestBuilder request = post("/circular")
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .content(objectMapper.writeValueAsString(content));
+
+            // When
+            MvcResult result = mockMvc.perform(request)
+                    .andExpect(request().asyncStarted())
+                    .andReturn();
+
+            // Then
+            CircularResponse expected = CircularResponse.builder()
+                    .withId(circular.getId().getId())
+                    .withName(circular.getName())
+                    .withDescription(circular.getDescription())
+                    .build();
+
+            mockMvc.perform(asyncDispatch(result))
+                    .andExpect(status().isCreated())
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                    .andExpect(actual -> {
+                        assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
+                    });
+        }
+
+        @Test
+        void successWithOnlyName(@Random Circular forFields) throws Exception {
+            Circular circular = Circular.builder()
+                    .withId(forFields.getId())
+                    .withName(forFields.getName())
+                    .build();
+
+            // Background
+            CreateCircularUseCase.InputValues input = CreateCircularUseCase.InputValues.builder()
+                    .withName(circular.getName())
+                    .withDescription(circular.getDescription())
+                    .build();
+            CreateCircularUseCase.OutputValues output = CreateCircularUseCase.OutputValues.builder()
+                    .withCircular(Circular.builder()
+                            .withId(circular.getId())
+                            .withName(circular.getName())
+                            .withDescription(circular.getDescription())
+                            .build())
+                    .build();
+            doReturn(output).when(createCircularUseCase).execute(eq(input));
+
+            // Given
+            CircularRequest content = CircularRequest.builder()
+                    .withName(circular.getName())
+                    .withDescription(circular.getDescription())
+                    .build();
+            RequestBuilder request = post("/circular")
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .content(objectMapper.writeValueAsString(content));
+
+            // When
+            MvcResult result = mockMvc.perform(request)
+                    .andExpect(request().asyncStarted())
+                    .andReturn();
+
+            // Then
+            CircularResponse expected = CircularResponse.builder()
+                    .withId(circular.getId().getId())
+                    .withName(circular.getName())
+                    .withDescription(circular.getDescription())
+                    .build();
+
+            mockMvc.perform(asyncDispatch(result))
+                    .andExpect(status().isCreated())
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                    .andExpect(actual -> {
+                        assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
+                    });
+        }
+
+        @Test
+        void successWithOnlyDescription(@Random Circular forFields) throws Exception {
+            Circular circular = Circular.builder()
+                    .withId(forFields.getId())
+                    .withDescription(forFields.getDescription())
+                    .build();
+
             // Background
             CreateCircularUseCase.InputValues input = CreateCircularUseCase.InputValues.builder()
                     .withName(circular.getName())
