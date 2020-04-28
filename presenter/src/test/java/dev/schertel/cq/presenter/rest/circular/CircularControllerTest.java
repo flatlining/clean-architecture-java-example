@@ -440,4 +440,25 @@ class CircularControllerTest {
                     });
         }
     }
+
+    @Nested
+    class DeleteAll {
+        @Test
+        void success() throws Exception {
+            // Background
+            DeleteAllCircularUseCase.InputValues input = DeleteAllCircularUseCase.InputValues.builder().build();
+            DeleteAllCircularUseCase.OutputValues output = DeleteAllCircularUseCase.OutputValues.builder().build();
+            doReturn(output).when(deleteAllCircularUseCase).execute(eq(null));
+
+            // Given
+            RequestBuilder request = delete("/circular");
+
+            // When
+            MvcResult result = makeAsyncRequest(request);
+
+            // Then
+            getAsyncResponse(result)
+                    .andExpect(status().isNoContent());
+        }
+    }
 }
