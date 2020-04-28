@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
@@ -130,8 +131,17 @@ class CircularControllerTest {
                         .andReturn();
 
         // Then
+        List<CircularResponse> expected = circulars.stream().map(c -> CircularResponse.builder()
+                .withId(c.getId().getId())
+                .withName(c.getName())
+                .withDescription(c.getDescription()).build()).collect(Collectors.toList());
+
         mockMvc.perform(asyncDispatch(result))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(actual -> {
+                    assertThat(actual.getResponse().getContentType()).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
+                    assertThat(actual.getResponse().getContentAsString()).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expected));
+                });
     }
 
     @TestConfiguration

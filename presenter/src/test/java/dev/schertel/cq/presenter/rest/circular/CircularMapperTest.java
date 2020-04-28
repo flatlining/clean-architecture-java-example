@@ -24,9 +24,6 @@ class CircularMapperTest {
     void convertEntityToResponse(@Random Circular entity) {
         CircularResponse actual = cut.convertEntityToResponse(entity);
 
-        System.out.println(entity);
-        System.out.println(actual);
-
         assertAll(
                 () -> assertEquals(entity.getId().getId(), actual.getId(), "id"),
                 () -> assertEquals(entity.getName(), actual.getName(), "name"),
