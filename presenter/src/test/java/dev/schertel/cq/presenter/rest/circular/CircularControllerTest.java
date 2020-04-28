@@ -74,13 +74,13 @@ class CircularControllerTest {
         );
     }
 
-    private MvcResult makeRequest(RequestBuilder request) throws Exception {
+    private MvcResult makeAsyncRequest(RequestBuilder request) throws Exception {
         return mockMvc.perform(request)
                 .andExpect(request().asyncStarted())
                 .andReturn();
     }
 
-    private ResultActions getResponse(MvcResult result) throws Exception {
+    private ResultActions getAsyncResponse(MvcResult result) throws Exception {
         return mockMvc.perform(asyncDispatch(result));
     }
 
@@ -106,7 +106,7 @@ class CircularControllerTest {
             RequestBuilder request = get("/circular/{id}", circular.getId().getId());
 
             // When
-            MvcResult result = makeRequest(request);
+            MvcResult result = makeAsyncRequest(request);
 
             // Then
             CircularResponse expected = CircularResponse.builder()
@@ -115,7 +115,7 @@ class CircularControllerTest {
                     .withDescription(circular.getDescription())
                     .build();
 
-            getResponse(result)
+            getAsyncResponse(result)
                     .andExpect(status().isOk())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -135,7 +135,7 @@ class CircularControllerTest {
             RequestBuilder request = get("/circular/{id}", id);
 
             // When
-            MvcResult result = makeRequest(request);
+            MvcResult result = makeAsyncRequest(request);
 
             // Then
             HttpStatus httpStatus = HttpStatus.NOT_FOUND;
@@ -146,7 +146,7 @@ class CircularControllerTest {
                     .withMessage(id)
                     .build();
 
-            getResponse(result)
+            getAsyncResponse(result)
                     .andExpect(status().isNotFound())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -170,7 +170,7 @@ class CircularControllerTest {
             RequestBuilder request = get("/circular");
 
             // When
-            MvcResult result = makeRequest(request);
+            MvcResult result = makeAsyncRequest(request);
 
             // Then
             List<CircularResponse> expected = circulars.stream().map(c -> CircularResponse.builder()
@@ -178,7 +178,7 @@ class CircularControllerTest {
                     .withName(c.getName())
                     .withDescription(c.getDescription()).build()).collect(Collectors.toList());
 
-            getResponse(result)
+            getAsyncResponse(result)
                     .andExpect(status().isOk())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -215,7 +215,7 @@ class CircularControllerTest {
                     .content(objectMapper.writeValueAsString(content));
 
             // When
-            MvcResult result = makeRequest(request);
+            MvcResult result = makeAsyncRequest(request);
 
             // Then
             CircularResponse expected = CircularResponse.builder()
@@ -224,7 +224,7 @@ class CircularControllerTest {
                     .withDescription(circular.getDescription())
                     .build();
 
-            getResponse(result)
+            getAsyncResponse(result)
                     .andExpect(status().isCreated())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -262,7 +262,7 @@ class CircularControllerTest {
                     .content(objectMapper.writeValueAsString(content));
 
             // When
-            MvcResult result = makeRequest(request);
+            MvcResult result = makeAsyncRequest(request);
 
             // Then
             CircularResponse expected = CircularResponse.builder()
@@ -271,7 +271,7 @@ class CircularControllerTest {
                     .withDescription(circular.getDescription())
                     .build();
 
-            getResponse(result)
+            getAsyncResponse(result)
                     .andExpect(status().isCreated())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -310,7 +310,7 @@ class CircularControllerTest {
                     .content(objectMapper.writeValueAsString(content));
 
             // When
-            MvcResult result = makeRequest(request);
+            MvcResult result = makeAsyncRequest(request);
 
             // Then
             CircularResponse expected = CircularResponse.builder()
@@ -319,7 +319,7 @@ class CircularControllerTest {
                     .withDescription(circular.getDescription())
                     .build();
 
-            getResponse(result)
+            getAsyncResponse(result)
                     .andExpect(status().isCreated())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
@@ -358,7 +358,7 @@ class CircularControllerTest {
                     .content(objectMapper.writeValueAsString(content));
 
             // When
-            MvcResult result = makeRequest(request);
+            MvcResult result = makeAsyncRequest(request);
 
             // Then
             CircularResponse expected = CircularResponse.builder()
@@ -367,7 +367,7 @@ class CircularControllerTest {
                     .withDescription(circular.getDescription())
                     .build();
 
-            getResponse(result)
+            getAsyncResponse(result)
                     .andExpect(status().isCreated())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(actual -> {
