@@ -92,130 +92,6 @@ class CircularControllerTest {
     }
 
     @Nested
-    class Read {
-        @Test
-        void successWithAllProperties(@Random Circular circular) throws Exception {
-            // Background
-            ReadCircularUseCase.InputValues input = ReadCircularUseCase.InputValues.builder()
-                    .withIdentity(circular.getId())
-                    .build();
-            ReadCircularUseCase.OutputValues output = ReadCircularUseCase.OutputValues.builder()
-                    .withCircular(circular)
-                    .build();
-            doReturn(output).when(readCircularUseCase).execute(eq(input));
-
-            // Given
-            RequestBuilder request = get("/circular/{id}", circular.getId().getId());
-
-            // When
-            MvcResult result = makeAsyncRequest(request);
-
-            // Then
-            CircularResponse expected = CircularResponse.builder()
-                    .withId(circular.getId().getId())
-                    .withName(circular.getName())
-                    .withDescription(circular.getDescription())
-                    .build();
-
-            getAsyncResponse(result)
-                    .andExpect(status().isOk())
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                    .andExpect(actual -> {
-                        assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
-                    });
-        }
-
-        @Test
-        void errorNotFound(@Random String id) throws Exception {
-            // Background
-            ReadCircularUseCase.InputValues input = ReadCircularUseCase.InputValues.builder()
-                    .withIdentity(Identity.of(id))
-                    .build();
-            doThrow(NotFoundException.of(id)).when(readCircularUseCase).execute(eq(input));
-
-            // Given
-            RequestBuilder request = get("/circular/{id}", id);
-
-            // When
-            MvcResult result = makeAsyncRequest(request);
-
-            // Then
-            HttpStatus httpStatus = HttpStatus.NOT_FOUND;
-            ApiResponse expected = ApiResponse.builder()
-                    .withTimestamp(null)
-                    .withStatus(httpStatus.value())
-                    .withReason(httpStatus.getReasonPhrase())
-                    .withMessage(id)
-                    .build();
-
-            getAsyncResponse(result)
-                    .andExpect(status().isNotFound())
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                    .andExpect(actual -> {
-                        assertThatJson(actual.getResponse().getContentAsString()).whenIgnoringPaths("timestamp").isEqualTo(objectMapper.writeValueAsString(expected));
-                    });
-        }
-    }
-
-    @Nested
-    class ReadAll {
-        @Test
-        void successWithItems(@Random(size = 5, type = Circular.class) List<Circular> circulars) throws Exception {
-            // Background
-            ReadAllCircularUseCase.InputValues input = ReadAllCircularUseCase.InputValues.builder().build();
-            ReadAllCircularUseCase.OutputValues output = ReadAllCircularUseCase.OutputValues.builder()
-                    .withCircular(circulars)
-                    .build();
-            doReturn(output).when(readAllCircularUseCase).execute(eq(null));
-
-            // Given
-            RequestBuilder request = get("/circular");
-
-            // When
-            MvcResult result = makeAsyncRequest(request);
-
-            // Then
-            List<CircularResponse> expected = circulars.stream().map(c -> CircularResponse.builder()
-                    .withId(c.getId().getId())
-                    .withName(c.getName())
-                    .withDescription(c.getDescription()).build()).collect(Collectors.toList());
-
-            getAsyncResponse(result)
-                    .andExpect(status().isOk())
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                    .andExpect(actual -> {
-                        assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
-                    });
-        }
-
-        @Test
-        void successWithNoItems() throws Exception {
-            // Background
-            ReadAllCircularUseCase.InputValues input = ReadAllCircularUseCase.InputValues.builder().build();
-            ReadAllCircularUseCase.OutputValues output = ReadAllCircularUseCase.OutputValues.builder()
-                    .withCircular(Collections.emptyList())
-                    .build();
-            doReturn(output).when(readAllCircularUseCase).execute(eq(null));
-
-            // Given
-            RequestBuilder request = get("/circular");
-
-            // When
-            MvcResult result = makeAsyncRequest(request);
-
-            // Then
-            List<CircularResponse> expected = Collections.emptyList();
-
-            getAsyncResponse(result)
-                    .andExpect(status().isOk())
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                    .andExpect(actual -> {
-                        assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
-                    });
-        }
-    }
-
-    @Nested
     class Create {
         @Test
         void successWithAllProperties(@Random Circular circular) throws Exception {
@@ -438,6 +314,130 @@ class CircularControllerTest {
                         assertEquals(0, actual.getResponse().getContentLength());
                     })
                     .andReturn();
+        }
+    }
+
+    @Nested
+    class ReadAll {
+        @Test
+        void successWithItems(@Random(size = 5, type = Circular.class) List<Circular> circulars) throws Exception {
+            // Background
+            ReadAllCircularUseCase.InputValues input = ReadAllCircularUseCase.InputValues.builder().build();
+            ReadAllCircularUseCase.OutputValues output = ReadAllCircularUseCase.OutputValues.builder()
+                    .withCircular(circulars)
+                    .build();
+            doReturn(output).when(readAllCircularUseCase).execute(eq(null));
+
+            // Given
+            RequestBuilder request = get("/circular");
+
+            // When
+            MvcResult result = makeAsyncRequest(request);
+
+            // Then
+            List<CircularResponse> expected = circulars.stream().map(c -> CircularResponse.builder()
+                    .withId(c.getId().getId())
+                    .withName(c.getName())
+                    .withDescription(c.getDescription()).build()).collect(Collectors.toList());
+
+            getAsyncResponse(result)
+                    .andExpect(status().isOk())
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                    .andExpect(actual -> {
+                        assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
+                    });
+        }
+
+        @Test
+        void successWithNoItems() throws Exception {
+            // Background
+            ReadAllCircularUseCase.InputValues input = ReadAllCircularUseCase.InputValues.builder().build();
+            ReadAllCircularUseCase.OutputValues output = ReadAllCircularUseCase.OutputValues.builder()
+                    .withCircular(Collections.emptyList())
+                    .build();
+            doReturn(output).when(readAllCircularUseCase).execute(eq(null));
+
+            // Given
+            RequestBuilder request = get("/circular");
+
+            // When
+            MvcResult result = makeAsyncRequest(request);
+
+            // Then
+            List<CircularResponse> expected = Collections.emptyList();
+
+            getAsyncResponse(result)
+                    .andExpect(status().isOk())
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                    .andExpect(actual -> {
+                        assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
+                    });
+        }
+    }
+
+    @Nested
+    class Read {
+        @Test
+        void successWithAllProperties(@Random Circular circular) throws Exception {
+            // Background
+            ReadCircularUseCase.InputValues input = ReadCircularUseCase.InputValues.builder()
+                    .withIdentity(circular.getId())
+                    .build();
+            ReadCircularUseCase.OutputValues output = ReadCircularUseCase.OutputValues.builder()
+                    .withCircular(circular)
+                    .build();
+            doReturn(output).when(readCircularUseCase).execute(eq(input));
+
+            // Given
+            RequestBuilder request = get("/circular/{id}", circular.getId().getId());
+
+            // When
+            MvcResult result = makeAsyncRequest(request);
+
+            // Then
+            CircularResponse expected = CircularResponse.builder()
+                    .withId(circular.getId().getId())
+                    .withName(circular.getName())
+                    .withDescription(circular.getDescription())
+                    .build();
+
+            getAsyncResponse(result)
+                    .andExpect(status().isOk())
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                    .andExpect(actual -> {
+                        assertThatJson(actual.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expected));
+                    });
+        }
+
+        @Test
+        void errorNotFound(@Random String id) throws Exception {
+            // Background
+            ReadCircularUseCase.InputValues input = ReadCircularUseCase.InputValues.builder()
+                    .withIdentity(Identity.of(id))
+                    .build();
+            doThrow(NotFoundException.of(id)).when(readCircularUseCase).execute(eq(input));
+
+            // Given
+            RequestBuilder request = get("/circular/{id}", id);
+
+            // When
+            MvcResult result = makeAsyncRequest(request);
+
+            // Then
+            HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+            ApiResponse expected = ApiResponse.builder()
+                    .withTimestamp(null)
+                    .withStatus(httpStatus.value())
+                    .withReason(httpStatus.getReasonPhrase())
+                    .withMessage(id)
+                    .build();
+
+            getAsyncResponse(result)
+                    .andExpect(status().isNotFound())
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                    .andExpect(actual -> {
+                        assertThatJson(actual.getResponse().getContentAsString()).whenIgnoringPaths("timestamp").isEqualTo(objectMapper.writeValueAsString(expected));
+                    });
         }
     }
 }
