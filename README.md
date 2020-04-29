@@ -20,6 +20,8 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - [Robert C. Martin - Clean Architecture](https://vimeo.com/43612849)
 - [Why you need Use Cases/Interactors](https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576)
 - https://hackernoon.com/clean-architecture-example-in-kotlin-9f23169219be
+- https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started
+  - https://github.com/dmilicic/Android-Clean-Boilerplate
 
 #### Builder Pattern
 
@@ -58,6 +60,7 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - http://sangsoonam.github.io/2019/02/04/mockito-doreturn-vs-thenreturn.html
 - https://www.baeldung.com/junit-assert-exception
 - https://www.baeldung.com/mockito-verify
+- https://www.baeldung.com/mockito-junit-5-extension
 
 ### Java
 
@@ -67,6 +70,14 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - https://javarevisited.blogspot.com/2017/04/difference-between-autowired-and-inject-annotation-in-spring-framework.html
 - https://www.baeldung.com/spring-annotations-resource-inject-autowire
 - https://mvnrepository.com/artifact/javax.inject/javax.inject/1
+
+#### Lombok
+
+- https://projectlombok.org/setup/maven
+  - https://github.com/MCMicS/simple-lombok
+  - https://medium.com/@Leejjon_net/youll-have-this-problems-when-you-add-lombok-to-a-modular-java-11-micro-service-832f55911bc5
+- https://www.baeldung.com/lombok-ide
+- http://errataobscura.blogspot.com/2019/03/jsonserialize-and-jsondeserialize-with.html
 
 #### Modules
 
@@ -78,6 +89,14 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 #### ModelMapper
 
 - https://github.com/modelmapper/modelmapper/issues/265
+
+#### Time
+
+- http://apiux.com/2013/03/20/5-laws-api-dates-and-times/
+- https://www.codebyamir.com/blog/add-a-timezone-to-localdatetime-with-zoneddatetime-in-java-8
+- https://stackoverflow.com/a/32443004
+- https://www.moesif.com/blog/technical/timestamp/manage-datetime-timestamp-timezones-in-api/
+- https://mincong.io/2017/02/16/convert-date-to-string-in-java/
 
 ### Spring-Boot
 
@@ -113,3 +132,16 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 
 - https://www.baeldung.com/jackson-deserialize-immutable-objects
 - https://www.baeldung.com/jackson-map
+- https://codeboje.de/jackson-java-8-datetime-handling/
+- https://github.com/FasterXML/jackson-modules-java8
+
+#### Test
+
+- https://spring.io/guides/gs/testing-web/
+- https://reflectoring.io/unit-testing-spring-boot/
+- https://developer.okta.com/blog/2019/03/28/test-java-spring-boot-junit5
+- https://www.baeldung.com/java-spring-mockito-mock-mockbean
+- https://howtodoinjava.com/spring-boot2/testing/spring-mockbean-annotation/
+- https://www.journaldev.com/21876/mockito-argument-matchers-any-eq
+- https://www.baeldung.com/mockito-spy
+- https://github.com/spring-projects/spring-framework/blob/master/spring-test/src/test/java/org/springframework/test/web/servlet/samples/standalone/AsyncTests.java

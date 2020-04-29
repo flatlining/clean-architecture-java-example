@@ -11,9 +11,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>dataprovider</module>
+		<module>data</module>
 		<module>core</module>
-		<module>entrypoint</module>
+		<module>presenter</module>
 		<module>config</module>
 	</modules>
 
@@ -26,11 +26,17 @@
 		<maven.compiler.release>${java.version}</maven.compiler.release>
 		<spring.version>2.2.6.RELEASE</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
+		<asm.version>6.2</asm.version>
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
+		<lombok.version>1.18.12</lombok.version>
+		<slf4jApi.version>1.7.30</slf4jApi.version>
 		<junit.jupiter.version>5.6.2</junit.jupiter.version>
-		<toStringVerifier.version>1.4.1</toStringVerifier.version>
+		<toStringVerifier.version>1.4.8</toStringVerifier.version>
 		<junitExtensions.version>2.4.0</junitExtensions.version>
 		<equalsverifier.version>3.1.13</equalsverifier.version>
+		<jsonUnitSpring.version>2.17.0</jsonUnitSpring.version>
+		<mockito.version>3.1.0</mockito.version>
 	</properties>
 
 	<build>
