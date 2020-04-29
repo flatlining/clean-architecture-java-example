@@ -60,6 +60,7 @@ $ ./mvnw spring-boot:run -pl config -Dspring-boot.run.profiles=test
 - http://sangsoonam.github.io/2019/02/04/mockito-doreturn-vs-thenreturn.html
 - https://www.baeldung.com/junit-assert-exception
 - https://www.baeldung.com/mockito-verify
+- https://www.baeldung.com/mockito-junit-5-extension
 
 ### Java
 
