@@ -8,8 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.slf4j.Logger;
 
 import java.util.List;
 
@@ -17,14 +15,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularRepositoryImplTest {
-    @Mock
-    private Logger logger;
 
     private CircularRepositoryImpl cut;
 
     @BeforeEach
     void setUp() {
-        this.cut = new CircularRepositoryImpl(logger);
+        this.cut = new CircularRepositoryImpl();
     }
 
     @Nested
