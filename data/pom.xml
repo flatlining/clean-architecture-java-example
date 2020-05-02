@@ -24,12 +24,6 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4jApi.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>${slf4jApi.version}</version>
-			<scope>test</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
