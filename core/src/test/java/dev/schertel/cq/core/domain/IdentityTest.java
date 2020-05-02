@@ -16,11 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class IdentityTest {
     private final Class<Identity> CLAZZ = Identity.class;
 
-    private Identity.Builder builder;
+    private Identity.Builder cut;
 
     @BeforeEach
     void setUp() {
-        this.builder = Identity.builder();
+        this.cut = Identity.builder();
     }
 
     @Test
@@ -37,11 +37,11 @@ class IdentityTest {
     @Test
     void getId(@Random String id) {
         // Given
-        Identity.Builder toBuild = builder
+        cut
                 .withId(id);
 
         // When
-        Identity actual = toBuild.build();
+        Identity actual = cut.build();
 
         // Then
         assertThat(actual.getId()).isEqualTo(id);
@@ -52,10 +52,9 @@ class IdentityTest {
         @Test
         void nullObject() {
             // Given
-            Identity.Builder toBuild = builder;
 
             // When
-            Identity actual = toBuild.build();
+            Identity actual = cut.build();
 
             // Then
             assertThat(actual.getId()).isNull();
@@ -64,11 +63,11 @@ class IdentityTest {
         @Test
         void fullObject(@Random String id) {
             // Given
-            Identity.Builder toBuild = builder
+            cut
                     .withId(id);
 
             // When
-            Identity actual = toBuild.build();
+            Identity actual = cut.build();
 
             // Then
             assertThat(actual.getId()).isEqualTo(id);

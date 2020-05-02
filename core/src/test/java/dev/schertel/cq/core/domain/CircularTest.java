@@ -16,21 +16,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CircularTest {
     private final Class<Circular> CLAZZ = Circular.class;
 
-    private Circular.Builder builder;
+    private Circular.Builder cut;
 
     @BeforeEach
     void setUp() {
-        this.builder = Circular.builder();
+        this.cut = Circular.builder();
     }
 
     @Test
     void getIdentity(@Random Identity identity) {
         // Given
-        Circular.Builder toBuild = builder
+        cut
                 .withId(identity);
 
         // When
-        Circular actual = toBuild.build();
+        Circular actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(circular -> {
@@ -43,11 +43,11 @@ class CircularTest {
     @Test
     void getName(@Random String name) {
         // Given
-        Circular.Builder toBuild = builder
+        cut
                 .withName(name);
 
         // When
-        Circular actual = toBuild.build();
+        Circular actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(circular -> {
@@ -60,11 +60,11 @@ class CircularTest {
     @Test
     void getDescription(@Random String description) {
         // Given
-        Circular.Builder toBuild = builder
+        cut
                 .withDescription(description);
 
         // When
-        Circular actual = toBuild.build();
+        Circular actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(circular -> {
@@ -79,10 +79,9 @@ class CircularTest {
         @Test
         void nullObject() {
             // Given
-            Circular.Builder toBuild = builder;
 
             // When
-            Circular actual = toBuild.build();
+            Circular actual = cut.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(circular -> {
@@ -95,13 +94,13 @@ class CircularTest {
         @Test
         void fullObject(@Random Identity identity, @Random String name, @Random String description) {
             // Given
-            Circular.Builder toBuild = builder
+            cut
                     .withId(identity)
                     .withName(name)
                     .withDescription(description);
 
             // When
-            Circular actual = toBuild.build();
+            Circular actual = cut.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(circular -> {
