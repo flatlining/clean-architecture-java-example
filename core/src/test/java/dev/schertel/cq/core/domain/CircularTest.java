@@ -17,12 +17,10 @@ class CircularTest {
     private final Class<Circular> CLAZZ = Circular.class;
 
     private Circular.Builder builder;
-    private Circular cut;
 
     @BeforeEach
     void setUp() {
         this.builder = Circular.builder();
-        this.cut = null;
     }
 
     @Test
