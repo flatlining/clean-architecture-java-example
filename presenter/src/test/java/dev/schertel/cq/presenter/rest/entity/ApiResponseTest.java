@@ -17,110 +17,127 @@ import org.springframework.http.HttpStatus;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(RandomBeansExtension.class)
 class ApiResponseTest {
     private final Class<ApiResponse> CLAZZ = ApiResponse.class;
 
     private ApiResponse.Builder builder;
-    private ApiResponse cut;
 
     @BeforeEach
     void setUp() {
         this.builder = ApiResponse.builder();
-        this.cut = null;
     }
 
     @Test
     void getTimestamp(@Random ZonedDateTime timestamp) {
-        cut = builder
-                .withTimestamp(timestamp)
-                .build();
+        // Given
+        builder.withTimestamp(timestamp);
 
-        assertAll(
-                () -> assertEquals(timestamp, cut.getTimestamp()),
-                () -> assertNull(cut.getStatus()),
-                () -> assertNull(cut.getReason()),
-                () -> assertNull(cut.getMessage())
-        );
+        // When
+        ApiResponse actual = builder.build();
+
+        // Then
+        assertThat(actual).isNotNull().satisfies(apiResponse -> {
+            assertThat(apiResponse.getTimestamp()).isEqualTo(timestamp);
+            assertThat(apiResponse.getStatus()).isNull();
+            assertThat(apiResponse.getReason()).isNull();
+            assertThat(apiResponse.getMessage()).isNull();
+        });
     }
 
     @Test
     void getStatus(@Random HttpStatus httpStatus) {
+        // Given
         Integer status = httpStatus.value();
+        builder.withStatus(status);
 
-        cut = builder
-                .withStatus(status)
-                .build();
+        // When
+        ApiResponse actual = builder.build();
 
-        assertAll(
-                () -> assertNull(cut.getTimestamp()),
-                () -> assertEquals(status, cut.getStatus()),
-                () -> assertNull(cut.getReason()),
-                () -> assertNull(cut.getMessage())
-        );
+        // Then
+        assertThat(actual).isNotNull().satisfies(apiResponse -> {
+            assertThat(apiResponse.getTimestamp()).isNull();
+            assertThat(apiResponse.getStatus()).isEqualTo(status);
+            assertThat(apiResponse.getReason()).isNull();
+            assertThat(apiResponse.getMessage()).isNull();
+        });
     }
 
     @Test
     void getReason(@Random HttpStatus httpStatus) {
+        // Given
         String reason = httpStatus.getReasonPhrase();
+        builder.withReason(reason);
 
-        cut = builder
-                .withReason(reason)
-                .build();
+        // When
+        ApiResponse actual = builder.build();
 
-        assertAll(
-                () -> assertNull(cut.getTimestamp()),
-                () -> assertNull(cut.getStatus()),
-                () -> assertEquals(reason, cut.getReason()),
-                () -> assertNull(cut.getMessage())
-        );
+        // Then
+        assertThat(actual).isNotNull().satisfies(apiResponse -> {
+            assertThat(apiResponse.getTimestamp()).isNull();
+            assertThat(apiResponse.getStatus()).isNull();
+            assertThat(apiResponse.getReason()).isEqualTo(reason);
+            assertThat(apiResponse.getMessage()).isNull();
+        });
     }
 
     @Test
     void getMessage(@Random String message) {
-        cut = builder
-                .withMessage(message)
-                .build();
+        // Given
+        builder.withMessage(message);
 
-        assertAll(
-                () -> assertNull(cut.getTimestamp()),
-                () -> assertNull(cut.getStatus()),
-                () -> assertNull(cut.getReason()),
-                () -> assertEquals(message, cut.getMessage())
-        );
+        // When
+        ApiResponse actual = builder.build();
+
+        // Then
+        assertThat(actual).isNotNull().satisfies(apiResponse -> {
+            assertThat(apiResponse.getTimestamp()).isNull();
+            assertThat(apiResponse.getStatus()).isNull();
+            assertThat(apiResponse.getReason()).isNull();
+            assertThat(apiResponse.getMessage()).isEqualTo(message);
+        });
     }
 
     @Nested
     class Builder {
         @Test
         void nullObject() {
-            cut = builder.build();
+            // Given
 
-            assertAll(
-                    () -> assertNull(cut.getTimestamp()),
-                    () -> assertNull(cut.getStatus()),
-                    () -> assertNull(cut.getReason()),
-                    () -> assertNull(cut.getMessage())
-            );
+            // When
+            ApiResponse actual = builder.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(apiResponse -> {
+                assertThat(apiResponse.getTimestamp()).isNull();
+                assertThat(apiResponse.getStatus()).isNull();
+                assertThat(apiResponse.getReason()).isNull();
+                assertThat(apiResponse.getMessage()).isNull();
+            });
         }
 
         @Test
         void fullObject(@Random ZonedDateTime timestamp, @Random HttpStatus httpStatus, @Random String message) {
-            cut = builder
+            // Given
+            builder
                     .withTimestamp(timestamp)
                     .withStatus(httpStatus.value())
                     .withReason(httpStatus.getReasonPhrase())
-                    .withMessage(message)
-                    .build();
+                    .withMessage(message);
 
-            assertAll(
-                    () -> assertEquals(timestamp, cut.getTimestamp()),
-                    () -> assertEquals(httpStatus.value(), cut.getStatus()),
-                    () -> assertEquals(httpStatus.getReasonPhrase(), cut.getReason()),
-                    () -> assertEquals(message, cut.getMessage())
-            );
+            // When
+            ApiResponse actual = builder.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(apiResponse -> {
+                assertThat(apiResponse.getTimestamp()).isEqualTo(timestamp);
+                assertThat(apiResponse.getStatus()).isEqualTo(httpStatus.value());
+                assertThat(apiResponse.getReason()).isEqualTo(httpStatus.getReasonPhrase());
+                assertThat(apiResponse.getMessage()).isEqualTo(message);
+            });
         }
     }
 
