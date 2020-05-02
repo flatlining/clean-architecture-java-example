@@ -4,6 +4,7 @@ import dev.schertel.cq.core.domain.Circular;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -65,5 +66,46 @@ class DeleteAllCircularUseCaseTest {
         verify(repository, times(1)).deleteAll();
 
         assertThat(actual).isNotNull();
+    }
+
+    @Nested
+    class Input {
+        DeleteAllCircularUseCase.InputValues.Builder cut;
+
+        @BeforeEach
+        void setUp() {
+            this.cut = DeleteAllCircularUseCase.InputValues.builder();
+        }
+
+        @Test
+        void nullInput() {
+            // Given
+
+            // When
+            DeleteAllCircularUseCase.InputValues actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull();
+        }
+    }
+
+    class Output {
+        DeleteAllCircularUseCase.OutputValues.Builder cut;
+
+        @BeforeEach
+        void setUp() {
+            this.cut = DeleteAllCircularUseCase.OutputValues.builder();
+        }
+
+        @Test
+        void nullInput() {
+            // Given
+
+            // When
+            DeleteAllCircularUseCase.OutputValues actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull();
+        }
     }
 }
