@@ -18,7 +18,6 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(RandomBeansExtension.class)
 class ApiResponseTest {
@@ -145,29 +144,38 @@ class ApiResponseTest {
     class JSON {
         @Test
         void serializationDeserialization(@Random ZonedDateTime now, @Random HttpStatus httpStatus, @Random String message) throws JsonProcessingException {
+            // Background
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-
             DateTimeFormatter FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-            String timestamp = FMT.format(now);
 
+            // Given
+            String timestamp = FMT.format(now);
             Integer status = httpStatus.value();
             String reason = httpStatus.getReasonPhrase();
-
             String json = String.format("{\n" +
                     "  \"timestamp\":\"%s\",\n" +
                     "  \"status\":%d,\n" +
                     "  \"reason\":\"%s\",\n" +
                     "  \"message\":\"%s\"\n" +
                     "}", timestamp, status, reason, message);
-            ApiResponse entityFromJson = mapper.readValue(json, CLAZZ);
-            String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
 
-            ApiResponse entityFromBuilder = builder.withTimestamp(now).withStatus(status).withReason(reason).withMessage(message).build();
+            // When
+            ApiResponse entityFromBuilder = builder
+                    .withTimestamp(now)
+                    .withStatus(status)
+                    .withReason(reason)
+                    .withMessage(message).build();
             String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
 
-            assertEquals(jsonFromJSon, jsonFromBuilder);
-            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ), mapper.readValue(jsonFromBuilder, CLAZZ));
-            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ).toString(), mapper.readValue(jsonFromBuilder, CLAZZ).toString());
+            // Then
+            ApiResponse entityFromJson = mapper.readValue(json, CLAZZ);
+            String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
+            
+            assertThat(jsonFromBuilder).isEqualTo(jsonFromJSon);
+            assertThat(mapper.readValue(jsonFromBuilder, CLAZZ))
+                    .isEqualTo(mapper.readValue(jsonFromJSon, CLAZZ));
+            assertThat(mapper.readValue(jsonFromBuilder, CLAZZ).toString())
+                    .isEqualTo(mapper.readValue(jsonFromJSon, CLAZZ).toString());
         }
     }
 
