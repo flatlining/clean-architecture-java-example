@@ -41,7 +41,7 @@ class GenerateRandomIdentityUseCaseTest {
 
     @Nested
     class Input {
-        GenerateRandomIdentityUseCase.InputValues.InputValuesBuilder cut;
+        GenerateRandomIdentityUseCase.InputValues.Builder cut;
 
         @BeforeEach
         void setUp() {
@@ -62,7 +62,7 @@ class GenerateRandomIdentityUseCaseTest {
 
     @Nested
     class Output {
-        GenerateRandomIdentityUseCase.OutputValues.OutputValuesBuilder cut;
+        GenerateRandomIdentityUseCase.OutputValues.Builder cut;
 
         @BeforeEach
         void setUp() {

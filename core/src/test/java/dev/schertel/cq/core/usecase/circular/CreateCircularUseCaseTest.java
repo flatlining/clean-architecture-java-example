@@ -77,7 +77,7 @@ class CreateCircularUseCaseTest {
 
     @Nested
     class Input {
-        CreateCircularUseCase.InputValues.InputValuesBuilder cut;
+        CreateCircularUseCase.InputValues.Builder cut;
 
         @BeforeEach
         void setUp() {
@@ -118,7 +118,7 @@ class CreateCircularUseCaseTest {
 
     @Nested
     class Output {
-        CreateCircularUseCase.OutputValues.OutputValuesBuilder cut;
+        CreateCircularUseCase.OutputValues.Builder cut;
 
         @BeforeEach
         void setUp() {

@@ -34,7 +34,7 @@ public class CreateCircularUseCase extends UseCase<CreateCircularUseCase.InputVa
     }
 
     @Value
-    @Builder(setterPrefix = "with")
+    @Builder(builderClassName = "Builder", setterPrefix = "with")
     @EqualsAndHashCode
     @ToString
     public static class InputValues implements UseCase.InputValues {
@@ -43,7 +43,7 @@ public class CreateCircularUseCase extends UseCase<CreateCircularUseCase.InputVa
     }
 
     @Value
-    @Builder(setterPrefix = "with")
+    @Builder(builderClassName = "Builder", setterPrefix = "with")
     @EqualsAndHashCode
     @ToString
     public static class OutputValues implements UseCase.OutputValues {
