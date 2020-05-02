@@ -165,17 +165,17 @@ class ApiResponseTest {
                     .withStatus(status)
                     .withReason(reason)
                     .withMessage(message).build();
-            String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
+            String actualJson = mapper.writeValueAsString(entityFromBuilder);
 
             // Then
             ApiResponse entityFromJson = mapper.readValue(json, CLAZZ);
-            String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
-            
-            assertThat(jsonFromBuilder).isEqualTo(jsonFromJSon);
-            assertThat(mapper.readValue(jsonFromBuilder, CLAZZ))
-                    .isEqualTo(mapper.readValue(jsonFromJSon, CLAZZ));
-            assertThat(mapper.readValue(jsonFromBuilder, CLAZZ).toString())
-                    .isEqualTo(mapper.readValue(jsonFromJSon, CLAZZ).toString());
+            String expectedJson = mapper.writeValueAsString(entityFromJson);
+
+            assertThat(actualJson).isEqualTo(expectedJson);
+            assertThat(mapper.readValue(actualJson, CLAZZ))
+                    .isEqualTo(mapper.readValue(expectedJson, CLAZZ));
+            assertThat(mapper.readValue(actualJson, CLAZZ).toString())
+                    .isEqualTo(mapper.readValue(expectedJson, CLAZZ).toString());
         }
     }
 
