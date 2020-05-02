@@ -23,20 +23,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ApiResponseTest {
     private final Class<ApiResponse> CLAZZ = ApiResponse.class;
 
-    private ApiResponse.Builder builder;
+    private ApiResponse.Builder cut;
 
     @BeforeEach
     void setUp() {
-        this.builder = ApiResponse.builder();
+        this.cut = ApiResponse.builder();
     }
 
     @Test
     void getTimestamp(@Random ZonedDateTime timestamp) {
         // Given
-        builder.withTimestamp(timestamp);
+        cut.withTimestamp(timestamp);
 
         // When
-        ApiResponse actual = builder.build();
+        ApiResponse actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(apiResponse -> {
@@ -51,10 +51,10 @@ class ApiResponseTest {
     void getStatus(@Random HttpStatus httpStatus) {
         // Given
         Integer status = httpStatus.value();
-        builder.withStatus(status);
+        cut.withStatus(status);
 
         // When
-        ApiResponse actual = builder.build();
+        ApiResponse actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(apiResponse -> {
@@ -69,10 +69,10 @@ class ApiResponseTest {
     void getReason(@Random HttpStatus httpStatus) {
         // Given
         String reason = httpStatus.getReasonPhrase();
-        builder.withReason(reason);
+        cut.withReason(reason);
 
         // When
-        ApiResponse actual = builder.build();
+        ApiResponse actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(apiResponse -> {
@@ -86,10 +86,10 @@ class ApiResponseTest {
     @Test
     void getMessage(@Random String message) {
         // Given
-        builder.withMessage(message);
+        cut.withMessage(message);
 
         // When
-        ApiResponse actual = builder.build();
+        ApiResponse actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(apiResponse -> {
@@ -107,7 +107,7 @@ class ApiResponseTest {
             // Given
 
             // When
-            ApiResponse actual = builder.build();
+            ApiResponse actual = cut.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(apiResponse -> {
@@ -121,14 +121,14 @@ class ApiResponseTest {
         @Test
         void fullObject(@Random ZonedDateTime timestamp, @Random HttpStatus httpStatus, @Random String message) {
             // Given
-            builder
+            cut
                     .withTimestamp(timestamp)
                     .withStatus(httpStatus.value())
                     .withReason(httpStatus.getReasonPhrase())
                     .withMessage(message);
 
             // When
-            ApiResponse actual = builder.build();
+            ApiResponse actual = cut.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(apiResponse -> {
@@ -160,7 +160,7 @@ class ApiResponseTest {
                     "}", timestamp, status, reason, message);
 
             // When
-            ApiResponse entityFromBuilder = builder
+            ApiResponse entityFromBuilder = cut
                     .withTimestamp(now)
                     .withStatus(status)
                     .withReason(reason)
