@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.slf4j.Logger;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,21 +37,17 @@ class CircularRepositoryImplTest {
     }
 
     @Test
-    void realAllNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> expected) {
-        expected.forEach(circular -> {
+    void realAllNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> repository) {
+        repository.forEach(circular -> {
             cut.create(circular);
         });
 
-        List<Circular> actual = cut.readAll();
-
-        assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
+        assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
     }
 
     @Test
     void readByIdentityEmpty(@Random Identity identity) {
-        Optional<Circular> actual = cut.readByIdentity(identity);
-
-        assertThat(actual).isNotPresent();
+        assertThat(cut.readByIdentity(identity)).isNotPresent();
     }
 
     @Test
@@ -62,11 +57,9 @@ class CircularRepositoryImplTest {
         });
 
         java.util.Random rand = new java.util.Random();
-        Circular expected = repository.get(rand.nextInt(repository.size()));
+        Circular randomItem = repository.get(rand.nextInt(repository.size()));
 
-        Optional<Circular> actual = cut.readByIdentity(expected.getId());
-
-        assertThat(actual).isPresent().hasValue(expected);
+        assertThat(cut.readByIdentity(randomItem.getId())).isPresent().hasValue(randomItem);
     }
 
     @Test
