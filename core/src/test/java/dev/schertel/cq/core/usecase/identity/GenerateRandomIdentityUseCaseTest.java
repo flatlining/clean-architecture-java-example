@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(RandomBeansExtension.class)
@@ -28,11 +28,9 @@ class GenerateRandomIdentityUseCaseTest {
         GenerateRandomIdentityUseCase.OutputValues actual = cut.execute(input);
 
         // Then
-        assertNotNull(actual.getIdentity());
-
-        assertAll(
-                () -> assertNotNull(actual.getIdentity().getId()),
-                () -> assertEquals(UUID.fromString(actual.getIdentity().getId()).toString(), actual.getIdentity().getId())
-        );
+        assertThat(actual.getIdentity()).isNotNull();
+        assertThat(actual.getIdentity().getId())
+                .isNotNull()
+                .isEqualTo(UUID.fromString(actual.getIdentity().getId()).toString());
     }
 }
