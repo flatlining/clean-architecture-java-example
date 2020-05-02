@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,7 +28,13 @@ class CircularRepositoryImplTest {
     class Create {
         @Test
         void create(@Random Circular expected) {
-            assertThat(cut.create(expected)).isEqualTo(expected);
+            // Given
+
+            // When
+            Circular actual = cut.create(expected);
+
+            // Then
+            assertThat(actual).isEqualTo(expected);
         }
     }
 
@@ -35,16 +42,29 @@ class CircularRepositoryImplTest {
     class RealAll {
         @Test
         void realAllEmpty() {
-            assertThat(cut.readAll()).isEmpty();
+            // Given
+
+            // When
+            List<Circular> actual = cut.readAll();
+
+            // Then
+            assertThat(actual).isEmpty();
         }
 
         @Test
         void realAllNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> repository) {
+            // Background
             repository.forEach(circular -> {
                 cut.create(circular);
             });
 
-            assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
+            // Given
+
+            // When
+            List<Circular> actual = cut.readAll();
+
+            // Then
+            assertThat(actual).containsExactlyInAnyOrderElementsOf(repository);
         }
     }
 
@@ -52,30 +72,49 @@ class CircularRepositoryImplTest {
     class ReadByIdentity {
         @Test
         void readByIdentityEmpty(@Random Identity randomIdentity) {
-            assertThat(cut.readByIdentity(randomIdentity)).isNotPresent();
+            // Given
+
+            // When
+            Optional<Circular> actual = cut.readByIdentity(randomIdentity);
+
+            // Then
+            assertThat(actual).isNotPresent();
         }
 
         @Test
         void readByIdentityNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> repository) {
+            // Background
             repository.forEach(circular -> {
                 cut.create(circular);
             });
             assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
 
+            // Given
             java.util.Random rand = new java.util.Random();
             Circular randomItem = repository.get(rand.nextInt(repository.size()));
 
-            assertThat(cut.readByIdentity(randomItem.getId())).isPresent().hasValue(randomItem);
+            // When
+            Optional<Circular> actual = cut.readByIdentity(randomItem.getId());
+
+            // Then
+            assertThat(actual).isPresent().hasValue(randomItem);
         }
 
         @Test
         void readByIdentityNonExistent(@Random(size = 5, type = Circular.class) List<Circular> repository, @Random Identity randomIdentity) {
+            // Background
             repository.forEach(circular -> {
                 cut.create(circular);
             });
             assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
 
-            assertThat(cut.readByIdentity(randomIdentity)).isNotPresent();
+            // Given
+
+            // When
+            Optional<Circular> actual = cut.readByIdentity(randomIdentity);
+
+            // Then
+            assertThat(actual).isNotPresent();
         }
     }
 
