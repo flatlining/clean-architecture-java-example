@@ -115,4 +115,40 @@ class CreateCircularUseCaseTest {
             });
         }
     }
+
+    @Nested
+    class Output {
+        CreateCircularUseCase.OutputValues.OutputValuesBuilder cut;
+
+        @BeforeEach
+        void setUp() {
+            this.cut = CreateCircularUseCase.OutputValues.builder();
+        }
+
+        @Test
+        void nullInput() {
+            // Given
+
+            // When
+            CreateCircularUseCase.OutputValues actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(outputValues -> {
+                assertThat(outputValues.getCircular()).isNull();
+            });
+        }
+
+        @Test
+        void fullInput(@Random Circular circular) {
+            // Given
+            cut
+                    .withCircular(circular);
+
+            // When
+            CreateCircularUseCase.OutputValues actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(outputValues -> assertThat(outputValues.getCircular()).isEqualTo(circular));
+        }
+    }
 }
