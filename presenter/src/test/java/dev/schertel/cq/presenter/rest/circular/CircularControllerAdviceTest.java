@@ -11,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularControllerAdviceTest {
@@ -32,13 +32,14 @@ class CircularControllerAdviceTest {
         ResponseEntity<ApiResponse> actual = cut.customNotFoundException(exception);
 
         // Then
-        assertEquals(HttpStatus.NOT_FOUND, actual.getStatusCode(), "status");
-        assertAll("body",
-                () -> assertNotNull(actual.getBody().getTimestamp()),
-                () -> assertEquals(HttpStatus.NOT_FOUND.value(), actual.getBody().getStatus()),
-                () -> assertEquals(HttpStatus.NOT_FOUND.getReasonPhrase(), actual.getBody().getReason()),
-                () -> assertTrue(actual.getBody().getMessage().contains(value))
-        );
+        HttpStatus expectedHttpStatus = HttpStatus.NOT_FOUND;
+        assertThat(actual.getStatusCode()).isEqualTo(expectedHttpStatus);
+        assertThat(actual.getBody()).isNotNull().satisfies(apiResponse -> {
+            assertThat(apiResponse.getTimestamp()).isNotNull();
+            assertThat(apiResponse.getStatus()).isEqualTo(expectedHttpStatus.value());
+            assertThat(apiResponse.getReason()).isEqualTo(expectedHttpStatus.getReasonPhrase());
+            assertThat(apiResponse.getMessage()).contains(value);
+        });
     }
 
     @Test
@@ -50,12 +51,13 @@ class CircularControllerAdviceTest {
         ResponseEntity<ApiResponse> actual = cut.customDomainException(exception);
 
         // Then
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, actual.getStatusCode(), "status");
-        assertAll("body",
-                () -> assertNotNull(actual.getBody().getTimestamp()),
-                () -> assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), actual.getBody().getStatus()),
-                () -> assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), actual.getBody().getReason()),
-                () -> assertTrue(actual.getBody().getMessage().contains(value))
-        );
+        HttpStatus expectedHttpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        assertThat(actual.getStatusCode()).isEqualTo(expectedHttpStatus);
+        assertThat(actual.getBody()).isNotNull().satisfies(apiResponse -> {
+            assertThat(apiResponse.getTimestamp()).isNotNull();
+            assertThat(apiResponse.getStatus()).isEqualTo(expectedHttpStatus.value());
+            assertThat(apiResponse.getReason()).isEqualTo(expectedHttpStatus.getReasonPhrase());
+            assertThat(apiResponse.getMessage()).contains(value);
+        });
     }
 }

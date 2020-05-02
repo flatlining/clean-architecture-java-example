@@ -18,14 +18,14 @@ public class GenerateRandomIdentityUseCase extends UseCase<GenerateRandomIdentit
     }
 
     @Value
-    @Builder(setterPrefix = "with")
+    @Builder(builderClassName = "Builder", setterPrefix = "with")
     @EqualsAndHashCode
     @ToString
     public static class InputValues implements UseCase.InputValues {
     }
 
     @Value
-    @Builder(setterPrefix = "with")
+    @Builder(builderClassName = "Builder", setterPrefix = "with")
     @EqualsAndHashCode
     @ToString
     public static class OutputValues implements UseCase.OutputValues {

@@ -13,68 +13,82 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularRequestTest {
     private final Class<CircularRequest> CLAZZ = CircularRequest.class;
 
-    private CircularRequest.Builder builder;
-    private CircularRequest cut;
+    private CircularRequest.Builder cut;
 
     @BeforeEach
     void setUp() {
-        this.builder = CircularRequest.builder();
-        this.cut = null;
+        this.cut = CircularRequest.builder();
     }
 
     @Test
     void getName(@Random String name) {
-        cut = builder
-                .withName(name)
-                .build();
+        // Given
+        cut
+                .withName(name);
 
-        assertAll(
-                () -> assertEquals(name, cut.getName()),
-                () -> assertNull(cut.getDescription())
-        );
+        // When
+        CircularRequest actual = cut.build();
+
+        // Then
+        assertThat(actual).isNotNull().satisfies(circularRequest -> {
+            assertThat(circularRequest.getName()).isEqualTo(name);
+            assertThat(circularRequest.getDescription()).isNull();
+        });
     }
 
     @Test
     void getDescription(@Random String description) {
-        cut = builder
-                .withDescription(description)
-                .build();
+        // Given
+        cut
+                .withDescription(description);
 
-        assertAll(
-                () -> assertNull(cut.getName()),
-                () -> assertEquals(description, cut.getDescription())
-        );
+        // When
+        CircularRequest actual = cut.build();
+
+        // Then
+        assertThat(actual).isNotNull().satisfies(circularRequest -> {
+            assertThat(circularRequest.getName()).isNull();
+            assertThat(circularRequest.getDescription()).isEqualTo(description);
+        });
     }
 
     @Nested
     class Builder {
         @Test
         void nullObject() {
-            cut = builder.build();
+            // Given
 
-            assertAll(
-                    () -> assertNull(cut.getName()),
-                    () -> assertNull(cut.getDescription())
-            );
+            // When
+            CircularRequest actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(circularRequest -> {
+                assertThat(circularRequest.getName()).isNull();
+                assertThat(circularRequest.getDescription()).isNull();
+            });
         }
 
         @Test
         void fullObject(@Random String name, @Random String description) {
-            cut = builder
+            // Given
+            cut
                     .withName(name)
-                    .withDescription(description)
-                    .build();
+                    .withDescription(description);
 
-            assertAll(
-                    () -> assertEquals(name, cut.getName()),
-                    () -> assertEquals(description, cut.getDescription())
-            );
+            // When
+            CircularRequest actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(circularRequest -> {
+                assertThat(circularRequest.getName()).isEqualTo(name);
+                assertThat(circularRequest.getDescription()).isEqualTo(description);
+            });
         }
     }
 
@@ -82,21 +96,28 @@ class CircularRequestTest {
     class JSON {
         @Test
         void serializationDeserialization(@Random String name, @Random String description) throws JsonProcessingException {
+            // Background
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
+            // Given
             String json = String.format("{\n" +
                     "  \"name\":\"%s\",\n" +
                     "  \"description\":\"%s\"\n" +
                     "}", name, description);
+
+            // When
+            CircularRequest entityFromBuilder = cut.withName(name).withDescription(description).build();
+            String actualJson = mapper.writeValueAsString(entityFromBuilder);
+
+            // Then
             CircularRequest entityFromJson = mapper.readValue(json, CLAZZ);
-            String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
+            String expectedJson = mapper.writeValueAsString(entityFromJson);
 
-            CircularRequest entityFromBuilder = builder.withName(name).withDescription(description).build();
-            String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
-
-            assertEquals(jsonFromJSon, jsonFromBuilder);
-            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ), mapper.readValue(jsonFromBuilder, CLAZZ));
-            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ).toString(), mapper.readValue(jsonFromBuilder, CLAZZ).toString());
+            assertThat(actualJson).isEqualTo(expectedJson);
+            assertThat(mapper.readValue(actualJson, CLAZZ))
+                    .isEqualTo(mapper.readValue(expectedJson, CLAZZ));
+            assertThat(mapper.readValue(actualJson, CLAZZ).toString())
+                    .isEqualTo(mapper.readValue(expectedJson, CLAZZ).toString());
         }
     }
 

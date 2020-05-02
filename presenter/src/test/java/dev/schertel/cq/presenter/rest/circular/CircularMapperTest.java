@@ -8,8 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularMapperTest {
@@ -22,12 +21,16 @@ class CircularMapperTest {
 
     @Test
     void convertEntityToResponse(@Random Circular entity) {
+        // Given
+
+        // When
         CircularResponse actual = cut.convertEntityToResponse(entity);
 
-        assertAll(
-                () -> assertEquals(entity.getId().getId(), actual.getId(), "id"),
-                () -> assertEquals(entity.getName(), actual.getName(), "name"),
-                () -> assertEquals(entity.getDescription(), actual.getDescription(), "description")
-        );
+        // Then
+        assertThat(actual).isNotNull().satisfies(circularResponse -> {
+            assertThat(circularResponse.getId()).isEqualTo(entity.getId().getId());
+            assertThat(circularResponse.getName()).isEqualTo(entity.getName());
+            assertThat(circularResponse.getDescription()).isEqualTo(entity.getDescription());
+        });
     }
 }

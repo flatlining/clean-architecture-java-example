@@ -10,61 +10,67 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(RandomBeansExtension.class)
 class IdentityTest {
     private final Class<Identity> CLAZZ = Identity.class;
 
-    private Identity.Builder builder;
-    private Identity cut;
+    private Identity.Builder cut;
 
     @BeforeEach
     void setUp() {
-        this.builder = Identity.builder();
-        this.cut = null;
+        this.cut = Identity.builder();
     }
 
     @Test
     void of(@Random String id) {
-        cut = Identity.of(id);
+        // Given
 
-        assertAll(
-                () -> assertEquals(id, cut.getId())
-        );
+        // When
+        Identity actual = Identity.of(id);
+
+        // Then
+        assertThat(actual.getId()).isEqualTo(id);
     }
 
     @Test
     void getId(@Random String id) {
-        cut = builder
-                .withId(id)
-                .build();
+        // Given
+        cut
+                .withId(id);
 
-        assertAll(
-                () -> assertEquals(id, cut.getId())
-        );
+        // When
+        Identity actual = cut.build();
+
+        // Then
+        assertThat(actual.getId()).isEqualTo(id);
     }
 
     @Nested
     class Builder {
         @Test
         void nullObject() {
-            cut = builder.build();
+            // Given
 
-            assertAll(
-                    () -> assertNull(cut.getId())
-            );
+            // When
+            Identity actual = cut.build();
+
+            // Then
+            assertThat(actual.getId()).isNull();
         }
 
         @Test
         void fullObject(@Random String id) {
-            cut = builder
-                    .withId(id)
-                    .build();
+            // Given
+            cut
+                    .withId(id);
 
-            assertAll(
-                    () -> assertEquals(id, cut.getId())
-            );
+            // When
+            Identity actual = cut.build();
+
+            // Then
+            assertThat(actual.getId()).isEqualTo(id);
         }
     }
 

@@ -17,110 +17,126 @@ import org.springframework.http.HttpStatus;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(RandomBeansExtension.class)
 class ApiResponseTest {
     private final Class<ApiResponse> CLAZZ = ApiResponse.class;
 
-    private ApiResponse.Builder builder;
-    private ApiResponse cut;
+    private ApiResponse.Builder cut;
 
     @BeforeEach
     void setUp() {
-        this.builder = ApiResponse.builder();
-        this.cut = null;
+        this.cut = ApiResponse.builder();
     }
 
     @Test
     void getTimestamp(@Random ZonedDateTime timestamp) {
-        cut = builder
-                .withTimestamp(timestamp)
-                .build();
+        // Given
+        cut.withTimestamp(timestamp);
 
-        assertAll(
-                () -> assertEquals(timestamp, cut.getTimestamp()),
-                () -> assertNull(cut.getStatus()),
-                () -> assertNull(cut.getReason()),
-                () -> assertNull(cut.getMessage())
-        );
+        // When
+        ApiResponse actual = cut.build();
+
+        // Then
+        assertThat(actual).isNotNull().satisfies(apiResponse -> {
+            assertThat(apiResponse.getTimestamp()).isEqualTo(timestamp);
+            assertThat(apiResponse.getStatus()).isNull();
+            assertThat(apiResponse.getReason()).isNull();
+            assertThat(apiResponse.getMessage()).isNull();
+        });
     }
 
     @Test
     void getStatus(@Random HttpStatus httpStatus) {
+        // Given
         Integer status = httpStatus.value();
+        cut.withStatus(status);
 
-        cut = builder
-                .withStatus(status)
-                .build();
+        // When
+        ApiResponse actual = cut.build();
 
-        assertAll(
-                () -> assertNull(cut.getTimestamp()),
-                () -> assertEquals(status, cut.getStatus()),
-                () -> assertNull(cut.getReason()),
-                () -> assertNull(cut.getMessage())
-        );
+        // Then
+        assertThat(actual).isNotNull().satisfies(apiResponse -> {
+            assertThat(apiResponse.getTimestamp()).isNull();
+            assertThat(apiResponse.getStatus()).isEqualTo(status);
+            assertThat(apiResponse.getReason()).isNull();
+            assertThat(apiResponse.getMessage()).isNull();
+        });
     }
 
     @Test
     void getReason(@Random HttpStatus httpStatus) {
+        // Given
         String reason = httpStatus.getReasonPhrase();
+        cut.withReason(reason);
 
-        cut = builder
-                .withReason(reason)
-                .build();
+        // When
+        ApiResponse actual = cut.build();
 
-        assertAll(
-                () -> assertNull(cut.getTimestamp()),
-                () -> assertNull(cut.getStatus()),
-                () -> assertEquals(reason, cut.getReason()),
-                () -> assertNull(cut.getMessage())
-        );
+        // Then
+        assertThat(actual).isNotNull().satisfies(apiResponse -> {
+            assertThat(apiResponse.getTimestamp()).isNull();
+            assertThat(apiResponse.getStatus()).isNull();
+            assertThat(apiResponse.getReason()).isEqualTo(reason);
+            assertThat(apiResponse.getMessage()).isNull();
+        });
     }
 
     @Test
     void getMessage(@Random String message) {
-        cut = builder
-                .withMessage(message)
-                .build();
+        // Given
+        cut.withMessage(message);
 
-        assertAll(
-                () -> assertNull(cut.getTimestamp()),
-                () -> assertNull(cut.getStatus()),
-                () -> assertNull(cut.getReason()),
-                () -> assertEquals(message, cut.getMessage())
-        );
+        // When
+        ApiResponse actual = cut.build();
+
+        // Then
+        assertThat(actual).isNotNull().satisfies(apiResponse -> {
+            assertThat(apiResponse.getTimestamp()).isNull();
+            assertThat(apiResponse.getStatus()).isNull();
+            assertThat(apiResponse.getReason()).isNull();
+            assertThat(apiResponse.getMessage()).isEqualTo(message);
+        });
     }
 
     @Nested
     class Builder {
         @Test
         void nullObject() {
-            cut = builder.build();
+            // Given
 
-            assertAll(
-                    () -> assertNull(cut.getTimestamp()),
-                    () -> assertNull(cut.getStatus()),
-                    () -> assertNull(cut.getReason()),
-                    () -> assertNull(cut.getMessage())
-            );
+            // When
+            ApiResponse actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(apiResponse -> {
+                assertThat(apiResponse.getTimestamp()).isNull();
+                assertThat(apiResponse.getStatus()).isNull();
+                assertThat(apiResponse.getReason()).isNull();
+                assertThat(apiResponse.getMessage()).isNull();
+            });
         }
 
         @Test
         void fullObject(@Random ZonedDateTime timestamp, @Random HttpStatus httpStatus, @Random String message) {
-            cut = builder
+            // Given
+            cut
                     .withTimestamp(timestamp)
                     .withStatus(httpStatus.value())
                     .withReason(httpStatus.getReasonPhrase())
-                    .withMessage(message)
-                    .build();
+                    .withMessage(message);
 
-            assertAll(
-                    () -> assertEquals(timestamp, cut.getTimestamp()),
-                    () -> assertEquals(httpStatus.value(), cut.getStatus()),
-                    () -> assertEquals(httpStatus.getReasonPhrase(), cut.getReason()),
-                    () -> assertEquals(message, cut.getMessage())
-            );
+            // When
+            ApiResponse actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(apiResponse -> {
+                assertThat(apiResponse.getTimestamp()).isEqualTo(timestamp);
+                assertThat(apiResponse.getStatus()).isEqualTo(httpStatus.value());
+                assertThat(apiResponse.getReason()).isEqualTo(httpStatus.getReasonPhrase());
+                assertThat(apiResponse.getMessage()).isEqualTo(message);
+            });
         }
     }
 
@@ -128,29 +144,38 @@ class ApiResponseTest {
     class JSON {
         @Test
         void serializationDeserialization(@Random ZonedDateTime now, @Random HttpStatus httpStatus, @Random String message) throws JsonProcessingException {
+            // Background
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-
             DateTimeFormatter FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-            String timestamp = FMT.format(now);
 
+            // Given
+            String timestamp = FMT.format(now);
             Integer status = httpStatus.value();
             String reason = httpStatus.getReasonPhrase();
-
             String json = String.format("{\n" +
                     "  \"timestamp\":\"%s\",\n" +
                     "  \"status\":%d,\n" +
                     "  \"reason\":\"%s\",\n" +
                     "  \"message\":\"%s\"\n" +
                     "}", timestamp, status, reason, message);
+
+            // When
+            ApiResponse entityFromBuilder = cut
+                    .withTimestamp(now)
+                    .withStatus(status)
+                    .withReason(reason)
+                    .withMessage(message).build();
+            String actualJson = mapper.writeValueAsString(entityFromBuilder);
+
+            // Then
             ApiResponse entityFromJson = mapper.readValue(json, CLAZZ);
-            String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
+            String expectedJson = mapper.writeValueAsString(entityFromJson);
 
-            ApiResponse entityFromBuilder = builder.withTimestamp(now).withStatus(status).withReason(reason).withMessage(message).build();
-            String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
-
-            assertEquals(jsonFromJSon, jsonFromBuilder);
-            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ), mapper.readValue(jsonFromBuilder, CLAZZ));
-            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ).toString(), mapper.readValue(jsonFromBuilder, CLAZZ).toString());
+            assertThat(actualJson).isEqualTo(expectedJson);
+            assertThat(mapper.readValue(actualJson, CLAZZ))
+                    .isEqualTo(mapper.readValue(expectedJson, CLAZZ));
+            assertThat(mapper.readValue(actualJson, CLAZZ).toString())
+                    .isEqualTo(mapper.readValue(expectedJson, CLAZZ).toString());
         }
     }
 
