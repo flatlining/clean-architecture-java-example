@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularTest {
@@ -27,69 +27,79 @@ class CircularTest {
 
     @Test
     void getIdentity(@Random Identity identity) {
-        cut = builder
+        // Given
+
+        // When
+        Circular actual = builder
                 .withId(identity)
                 .build();
 
-        assertAll(
-                () -> assertEquals(identity, cut.getId()),
-                () -> assertNull(cut.getName()),
-                () -> assertNull(cut.getDescription())
-        );
+        // Then
+        assertThat(actual.getId()).isEqualTo(identity);
+        assertThat(actual.getName()).isNull();
+        assertThat(actual.getDescription()).isNull();
     }
 
     @Test
     void getName(@Random String name) {
-        cut = builder
+        // Given
+
+        // When
+        Circular actual = builder
                 .withName(name)
                 .build();
 
-        assertAll(
-                () -> assertNull(cut.getId()),
-                () -> assertEquals(name, cut.getName()),
-                () -> assertNull(cut.getDescription())
-        );
+        // Then
+        assertThat(actual.getId()).isNull();
+        assertThat(actual.getName()).isEqualTo(name);
+        assertThat(actual.getDescription()).isNull();
     }
 
     @Test
     void getDescription(@Random String description) {
-        cut = builder
+        // Given
+
+        // When
+        Circular actual = builder
                 .withDescription(description)
                 .build();
 
-        assertAll(
-                () -> assertNull(cut.getId()),
-                () -> assertNull(cut.getName()),
-                () -> assertEquals(description, cut.getDescription())
-        );
+        // Then
+        assertThat(actual.getId()).isNull();
+        assertThat(actual.getName()).isNull();
+        assertThat(actual.getDescription()).isEqualTo(description);
     }
 
     @Nested
     class Builder {
         @Test
         void nullObject() {
-            cut = builder.build();
+            // Givem
 
-            assertAll(
-                    () -> assertNull(cut.getId()),
-                    () -> assertNull(cut.getName()),
-                    () -> assertNull(cut.getDescription())
-            );
+            // When
+            Circular actual = builder.build();
+
+            // Then
+            assertThat(actual.getId()).isNull();
+            assertThat(actual.getName()).isNull();
+            assertThat(actual.getDescription()).isNull();
         }
 
         @Test
         void fullObject(@Random Identity identity, @Random String name, @Random String description) {
-            cut = builder
+            // Given
+
+            // When
+            Circular actual = builder
                     .withId(identity)
                     .withName(name)
                     .withDescription(description)
                     .build();
 
-            assertAll(
-                    () -> assertEquals(identity, cut.getId()),
-                    () -> assertEquals(name, cut.getName()),
-                    () -> assertEquals(description, cut.getDescription())
-            );
+            // Then
+            assertThat(actual.getId()).isEqualTo(identity);
+            assertThat(actual.getName()).isEqualTo(name);
+            assertThat(actual.getDescription()).isEqualTo(description);
         }
     }
 
