@@ -14,29 +14,26 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularResponseTest {
     private final Class<CircularResponse> CLAZZ = CircularResponse.class;
 
-    private CircularResponse.Builder builder;
-    private CircularResponse cut;
+    private CircularResponse.Builder cut;
 
     @BeforeEach
     void setUp() {
-        this.builder = CircularResponse.builder();
-        this.cut = null;
+        this.cut = CircularResponse.builder();
     }
 
     @Test
     void getId(@Random String id) {
         // Given
-        builder
+        cut
                 .withId(id);
 
         // When
-        CircularResponse actual = builder.build();
+        CircularResponse actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(circularResponse -> {
@@ -49,11 +46,11 @@ class CircularResponseTest {
     @Test
     void getName(@Random String name) {
         // Given
-        builder
+        cut
                 .withName(name);
 
         // When
-        CircularResponse actual = builder.build();
+        CircularResponse actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(circularResponse -> {
@@ -66,11 +63,11 @@ class CircularResponseTest {
     @Test
     void getDescription(@Random String description) {
         // Given
-        builder
+        cut
                 .withDescription(description);
 
         // When
-        CircularResponse actual = builder.build();
+        CircularResponse actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(circularResponse -> {
@@ -87,7 +84,7 @@ class CircularResponseTest {
             // Given
 
             // When
-            CircularResponse actual = builder.build();
+            CircularResponse actual = cut.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(circularResponse -> {
@@ -99,13 +96,13 @@ class CircularResponseTest {
 
         @Test
         void fullObject(@Random String id, @Random String name, @Random String description) {
-            builder
+            cut
                     .withId(id)
                     .withName(name)
                     .withDescription(description);
 
             // When
-            CircularResponse actual = builder.build();
+            CircularResponse actual = cut.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(circularResponse -> {
@@ -120,22 +117,29 @@ class CircularResponseTest {
     class JSON {
         @Test
         void serializationDeserialization(@Random String id, @Random String name, @Random String description) throws JsonProcessingException {
+            // Background
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
+            // Given
             String json = String.format("{\n" +
                     "  \"id\":\"%s\",\n" +
                     "  \"name\":\"%s\",\n" +
                     "  \"description\":\"%s\"\n" +
                     "}", id, name, description);
+
+            // When
+            CircularResponse entityFromBuilder = cut.withId(id).withName(name).withDescription(description).build();
+            String actualJson = mapper.writeValueAsString(entityFromBuilder);
+
+            // Then
             CircularResponse entityFromJson = mapper.readValue(json, CLAZZ);
-            String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
+            String expectedJson = mapper.writeValueAsString(entityFromJson);
 
-            CircularResponse entityFromBuilder = builder.withId(id).withName(name).withDescription(description).build();
-            String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
-
-            assertEquals(jsonFromJSon, jsonFromBuilder);
-            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ), mapper.readValue(jsonFromBuilder, CLAZZ));
-            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ).toString(), mapper.readValue(jsonFromBuilder, CLAZZ).toString());
+            assertThat(actualJson).isEqualTo(expectedJson);
+            assertThat(mapper.readValue(actualJson, CLAZZ))
+                    .isEqualTo(mapper.readValue(expectedJson, CLAZZ));
+            assertThat(mapper.readValue(actualJson, CLAZZ).toString())
+                    .isEqualTo(mapper.readValue(expectedJson, CLAZZ).toString());
         }
     }
 
