@@ -8,13 +8,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularRepositoryImplTest {
-    @Mock private Logger logger;
+    @Mock
+    private Logger logger;
 
     private CircularRepositoryImpl cut;
 
@@ -26,5 +30,21 @@ class CircularRepositoryImplTest {
     @Test
     void create(@Random Circular expected) {
         assertEquals(expected, cut.create(expected));
+    }
+
+    @Test
+    void realAllEmpty() {
+        assertTrue(cut.readAll().isEmpty());
+    }
+
+    @Test
+    void realAllNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> expected) {
+        expected.forEach(circular -> {
+            cut.create(circular);
+        });
+
+        List<Circular> actual = cut.readAll();
+
+        assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
     }
 }
