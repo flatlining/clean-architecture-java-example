@@ -14,29 +14,26 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(RandomBeansExtension.class)
 class CircularRequestTest {
     private final Class<CircularRequest> CLAZZ = CircularRequest.class;
 
-    private CircularRequest.Builder builder;
-    private CircularRequest cut;
+    private CircularRequest.Builder cut;
 
     @BeforeEach
     void setUp() {
-        this.builder = CircularRequest.builder();
-        this.cut = null;
+        this.cut = CircularRequest.builder();
     }
 
     @Test
     void getName(@Random String name) {
         // Given
-        builder
+        cut
                 .withName(name);
 
         // When
-        CircularRequest actual = builder.build();
+        CircularRequest actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(circularRequest -> {
@@ -48,11 +45,11 @@ class CircularRequestTest {
     @Test
     void getDescription(@Random String description) {
         // Given
-        builder
+        cut
                 .withDescription(description);
 
         // When
-        CircularRequest actual = builder.build();
+        CircularRequest actual = cut.build();
 
         // Then
         assertThat(actual).isNotNull().satisfies(circularRequest -> {
@@ -68,7 +65,7 @@ class CircularRequestTest {
             // Given
 
             // When
-            CircularRequest actual = builder.build();
+            CircularRequest actual = cut.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(circularRequest -> {
@@ -80,12 +77,12 @@ class CircularRequestTest {
         @Test
         void fullObject(@Random String name, @Random String description) {
             // Given
-            builder
+            cut
                     .withName(name)
                     .withDescription(description);
 
             // When
-            CircularRequest actual = builder.build();
+            CircularRequest actual = cut.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(circularRequest -> {
@@ -99,21 +96,28 @@ class CircularRequestTest {
     class JSON {
         @Test
         void serializationDeserialization(@Random String name, @Random String description) throws JsonProcessingException {
+            // Background
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
+            // Given
             String json = String.format("{\n" +
                     "  \"name\":\"%s\",\n" +
                     "  \"description\":\"%s\"\n" +
                     "}", name, description);
+
+            // When
+            CircularRequest entityFromBuilder = cut.withName(name).withDescription(description).build();
+            String actualJson = mapper.writeValueAsString(entityFromBuilder);
+
+            // Then
             CircularRequest entityFromJson = mapper.readValue(json, CLAZZ);
-            String jsonFromJSon = mapper.writeValueAsString(entityFromJson);
+            String expectedJson = mapper.writeValueAsString(entityFromJson);
 
-            CircularRequest entityFromBuilder = builder.withName(name).withDescription(description).build();
-            String jsonFromBuilder = mapper.writeValueAsString(entityFromBuilder);
-
-            assertEquals(jsonFromJSon, jsonFromBuilder);
-            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ), mapper.readValue(jsonFromBuilder, CLAZZ));
-            assertEquals(mapper.readValue(jsonFromJSon, CLAZZ).toString(), mapper.readValue(jsonFromBuilder, CLAZZ).toString());
+            assertThat(actualJson).isEqualTo(expectedJson);
+            assertThat(mapper.readValue(actualJson, CLAZZ))
+                    .isEqualTo(mapper.readValue(expectedJson, CLAZZ));
+            assertThat(mapper.readValue(actualJson, CLAZZ).toString())
+                    .isEqualTo(mapper.readValue(expectedJson, CLAZZ).toString());
         }
     }
 
