@@ -27,9 +27,14 @@ class DeleteAllCircularUseCaseTest {
     @InjectMocks
     private DeleteAllCircularUseCase cut;
 
+    private DeleteAllCircularUseCase.InputValues.Builder inputBuilder;
+    private DeleteAllCircularUseCase.OutputValues.Builder outputBuilder;
+
     @BeforeEach
     void setUp() {
         reset(repository);
+        inputBuilder = DeleteAllCircularUseCase.InputValues.builder();
+        outputBuilder = DeleteAllCircularUseCase.OutputValues.builder();
     }
 
     @Test
@@ -38,7 +43,7 @@ class DeleteAllCircularUseCaseTest {
         doReturn(Collections.emptyList()).when(repository).deleteAll();
 
         // Given
-        DeleteAllCircularUseCase.InputValues input = DeleteAllCircularUseCase.InputValues.builder()
+        DeleteAllCircularUseCase.InputValues input = inputBuilder
                 .build();
 
         // When
@@ -47,7 +52,10 @@ class DeleteAllCircularUseCaseTest {
         // Then
         verify(repository, times(1)).deleteAll();
 
-        assertThat(actual).isNotNull();
+        DeleteAllCircularUseCase.OutputValues expected = outputBuilder
+                .build();
+
+        assertThat(actual).isNotNull().isEqualTo(expected);
     }
 
     @Test
@@ -56,7 +64,7 @@ class DeleteAllCircularUseCaseTest {
         doReturn(deleted).when(repository).deleteAll();
 
         // Given
-        DeleteAllCircularUseCase.InputValues input = DeleteAllCircularUseCase.InputValues.builder()
+        DeleteAllCircularUseCase.InputValues input = inputBuilder
                 .build();
 
         // When
@@ -65,44 +73,34 @@ class DeleteAllCircularUseCaseTest {
         // Then
         verify(repository, times(1)).deleteAll();
 
-        assertThat(actual).isNotNull();
+        DeleteAllCircularUseCase.OutputValues expected = outputBuilder
+                .build();
+
+        assertThat(actual).isNotNull().isEqualTo(expected);
     }
 
     @Nested
     class Input {
-        DeleteAllCircularUseCase.InputValues.Builder cut;
-
-        @BeforeEach
-        void setUp() {
-            this.cut = DeleteAllCircularUseCase.InputValues.builder();
-        }
-
         @Test
         void nullInput() {
             // Given
 
             // When
-            DeleteAllCircularUseCase.InputValues actual = cut.build();
+            DeleteAllCircularUseCase.InputValues actual = inputBuilder.build();
 
             // Then
             assertThat(actual).isNotNull();
         }
     }
 
+    @Nested
     class Output {
-        DeleteAllCircularUseCase.OutputValues.Builder cut;
-
-        @BeforeEach
-        void setUp() {
-            this.cut = DeleteAllCircularUseCase.OutputValues.builder();
-        }
-
         @Test
         void nullInput() {
             // Given
 
             // When
-            DeleteAllCircularUseCase.OutputValues actual = cut.build();
+            DeleteAllCircularUseCase.OutputValues actual = outputBuilder.build();
 
             // Then
             assertThat(actual).isNotNull();
