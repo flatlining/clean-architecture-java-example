@@ -6,6 +6,7 @@ import dev.schertel.cq.core.usecase.identity.GenerateRandomIdentityUseCase;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -72,5 +73,46 @@ class CreateCircularUseCaseTest {
             assertThat(act.getName()).isEqualTo(name);
             assertThat(act.getDescription()).isEqualTo(description);
         });
+    }
+
+    @Nested
+    class Input {
+        CreateCircularUseCase.InputValues.InputValuesBuilder cut;
+
+        @BeforeEach
+        void setUp() {
+            this.cut = CreateCircularUseCase.InputValues.builder();
+        }
+
+        @Test
+        void nullInput() {
+            // Given
+
+            // When
+            CreateCircularUseCase.InputValues actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(inputValues -> {
+                assertThat(inputValues.getName()).isNull();
+                assertThat(inputValues.getDescription()).isNull();
+            });
+        }
+
+        @Test
+        void fullInput(@Random String name, @Random String description) {
+            // Given
+            cut
+                    .withName(name)
+                    .withDescription(description);
+
+            // When
+            CreateCircularUseCase.InputValues actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(inputValues -> {
+                assertThat(inputValues.getName()).isEqualTo(name);
+                assertThat(inputValues.getDescription()).isEqualTo(description);
+            });
+        }
     }
 }
