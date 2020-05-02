@@ -68,4 +68,20 @@ class CircularRepositoryImplTest {
 
         assertThat(actual).isPresent().hasValue(expected);
     }
+
+    @Test
+    void deleteAllEmpty() {
+        assertThat(cut.deleteAll()).isEmpty();
+    }
+
+    @Test
+    void deleteAllNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> repository) {
+        repository.forEach(circular -> {
+            cut.create(circular);
+        });
+
+        assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
+        assertThat(cut.deleteAll()).containsExactlyInAnyOrderElementsOf(repository);
+        assertThat(cut.deleteAll()).isEmpty();
+    }
 }
