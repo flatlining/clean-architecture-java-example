@@ -122,19 +122,28 @@ class CircularRepositoryImplTest {
     class DeleteAll {
         @Test
         void deleteAllEmpty() {
-            assertThat(cut.deleteAll()).isEmpty();
+            // Given
+
+            // When
+            List<Circular> actual = cut.deleteAll();
+
+            // Then
+            assertThat(actual).isEmpty();
         }
 
         @Test
         void deleteAllNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> repository) {
+            // Background
             repository.forEach(circular -> {
                 cut.create(circular);
             });
             assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
 
-            assertThat(cut.deleteAll()).containsExactlyInAnyOrderElementsOf(repository);
+            // Given
+            List<Circular> actual = cut.deleteAll();
 
-            assertThat(cut.deleteAll()).isEmpty();
+            // Then
+            assertThat(actual).containsExactlyInAnyOrderElementsOf(repository);
         }
     }
 
@@ -142,30 +151,49 @@ class CircularRepositoryImplTest {
     class DeleteByIdentity {
         @Test
         void deleteByIdentityEmpty(@Random Identity randomIdentity) {
-            assertThat(cut.deleteByIdentity(randomIdentity)).isNotPresent();
+            // Given
+
+            // When
+            Optional<Circular> actual = cut.deleteByIdentity(randomIdentity);
+
+            // Then
+            assertThat(actual).isNotPresent();
         }
 
         @Test
         void deleteByIdentityNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> repository) {
+            // Background
             repository.forEach(circular -> {
                 cut.create(circular);
             });
             assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
 
+            // Given
             java.util.Random rand = new java.util.Random();
             Circular randomItem = repository.get(rand.nextInt(repository.size()));
 
-            assertThat(cut.deleteByIdentity(randomItem.getId())).isPresent().hasValue(randomItem);
+            // When
+            Optional<Circular> actual = cut.deleteByIdentity(randomItem.getId());
+
+            // Then
+            assertThat(actual).isPresent().hasValue(randomItem);
         }
 
         @Test
         void deleteByIdentityNonExistent(@Random(size = 5, type = Circular.class) List<Circular> repository, @Random Identity randomIdentity) {
+            // Background
             repository.forEach(circular -> {
                 cut.create(circular);
             });
             assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
 
-            assertThat(cut.deleteByIdentity(randomIdentity)).isNotPresent();
+            // Given
+
+            // When
+            Optional<Circular> actual = cut.deleteByIdentity(randomIdentity);
+
+            // Then
+            assertThat(actual).isNotPresent();
         }
     }
 }
