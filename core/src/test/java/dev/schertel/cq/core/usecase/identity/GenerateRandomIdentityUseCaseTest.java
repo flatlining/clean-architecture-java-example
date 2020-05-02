@@ -1,6 +1,10 @@
 package dev.schertel.cq.core.usecase.identity;
 
+import dev.schertel.cq.core.domain.Identity;
+import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -33,5 +37,62 @@ class GenerateRandomIdentityUseCaseTest {
                     .isNotNull()
                     .isEqualTo(UUID.fromString(identity.getId()).toString());
         });
+    }
+
+    @Nested
+    class Input {
+        GenerateRandomIdentityUseCase.InputValues.InputValuesBuilder cut;
+
+        @BeforeEach
+        void setUp() {
+            this.cut = GenerateRandomIdentityUseCase.InputValues.builder();
+        }
+
+        @Test
+        void nullFullInput() {
+            // Given
+
+            // When
+            GenerateRandomIdentityUseCase.InputValues actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull();
+        }
+    }
+
+    @Nested
+    class Output {
+        GenerateRandomIdentityUseCase.OutputValues.OutputValuesBuilder cut;
+
+        @BeforeEach
+        void setUp() {
+            this.cut = GenerateRandomIdentityUseCase.OutputValues.builder();
+        }
+
+        @Test
+        void nullInput() {
+            // Given
+
+            // When
+            GenerateRandomIdentityUseCase.OutputValues actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(outputValues -> {
+                assertThat(outputValues.getIdentity()).isNull();
+            });
+        }
+
+        @Test
+        void fullInput(@Random Identity identity) {
+            // Given
+            cut
+                    .withIdentity(identity);
+
+            // When
+            GenerateRandomIdentityUseCase.OutputValues actual = cut.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(outputValues -> assertThat(outputValues.getIdentity()).isEqualTo(identity));
+        }
     }
 }
