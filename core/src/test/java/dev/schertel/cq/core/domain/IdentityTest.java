@@ -37,11 +37,11 @@ class IdentityTest {
     @Test
     void getId(@Random String id) {
         // Given
+        Identity.Builder toBuild = builder
+                .withId(id);
 
         // When
-        Identity actual = builder
-                .withId(id)
-                .build();
+        Identity actual = toBuild.build();
 
         // Then
         assertThat(actual.getId()).isEqualTo(id);
@@ -52,9 +52,10 @@ class IdentityTest {
         @Test
         void nullObject() {
             // Given
+            Identity.Builder toBuild = builder;
 
             // When
-            Identity actual = builder.build();
+            Identity actual = toBuild.build();
 
             // Then
             assertThat(actual.getId()).isNull();
@@ -63,11 +64,11 @@ class IdentityTest {
         @Test
         void fullObject(@Random String id) {
             // Given
+            Identity.Builder toBuild = builder
+                    .withId(id);
 
             // When
-            Identity actual = builder
-                    .withId(id)
-                    .build();
+            Identity actual = toBuild.build();
 
             // Then
             assertThat(actual.getId()).isEqualTo(id);

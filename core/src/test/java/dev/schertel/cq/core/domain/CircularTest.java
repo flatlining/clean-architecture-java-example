@@ -26,78 +26,89 @@ class CircularTest {
     @Test
     void getIdentity(@Random Identity identity) {
         // Given
+        Circular.Builder toBuild = builder
+                .withId(identity);
 
         // When
-        Circular actual = builder
-                .withId(identity)
-                .build();
+        Circular actual = toBuild.build();
 
         // Then
-        assertThat(actual.getId()).isEqualTo(identity);
-        assertThat(actual.getName()).isNull();
-        assertThat(actual.getDescription()).isNull();
+        assertThat(actual).isNotNull().satisfies(circular -> {
+            assertThat(circular.getId()).isEqualTo(identity);
+            assertThat(circular.getName()).isNull();
+            assertThat(circular.getDescription()).isNull();
+        });
     }
 
     @Test
     void getName(@Random String name) {
         // Given
+        Circular.Builder toBuild = builder
+                .withName(name);
 
         // When
-        Circular actual = builder
-                .withName(name)
-                .build();
+        Circular actual = toBuild.build();
 
         // Then
-        assertThat(actual.getId()).isNull();
-        assertThat(actual.getName()).isEqualTo(name);
-        assertThat(actual.getDescription()).isNull();
+        assertThat(actual).isNotNull().satisfies(circular -> {
+            assertThat(circular.getId()).isNull();
+            assertThat(circular.getName()).isEqualTo(name);
+            assertThat(circular.getDescription()).isNull();
+        });
     }
 
     @Test
     void getDescription(@Random String description) {
         // Given
+        Circular.Builder toBuild = builder
+                .withDescription(description);
 
         // When
-        Circular actual = builder
-                .withDescription(description)
-                .build();
+        Circular actual = toBuild.build();
 
         // Then
-        assertThat(actual.getId()).isNull();
-        assertThat(actual.getName()).isNull();
-        assertThat(actual.getDescription()).isEqualTo(description);
+        assertThat(actual).isNotNull().satisfies(circular -> {
+            assertThat(circular.getId()).isNull();
+            assertThat(circular.getName()).isNull();
+            assertThat(circular.getDescription()).isEqualTo(description);
+        });
     }
 
     @Nested
     class Builder {
         @Test
         void nullObject() {
-            // Givem
+            // Given
+            Circular.Builder toBuild = builder;
 
             // When
-            Circular actual = builder.build();
+            Circular actual = toBuild.build();
 
             // Then
-            assertThat(actual.getId()).isNull();
-            assertThat(actual.getName()).isNull();
-            assertThat(actual.getDescription()).isNull();
+            assertThat(actual).isNotNull().satisfies(circular -> {
+                assertThat(circular.getId()).isNull();
+                assertThat(circular.getName()).isNull();
+                assertThat(circular.getDescription()).isNull();
+            });
         }
 
         @Test
         void fullObject(@Random Identity identity, @Random String name, @Random String description) {
             // Given
-
-            // When
-            Circular actual = builder
+            Circular.Builder toBuild = builder
                     .withId(identity)
                     .withName(name)
-                    .withDescription(description)
-                    .build();
+                    .withDescription(description);
+
+            // When
+            Circular actual = toBuild.build();
 
             // Then
-            assertThat(actual.getId()).isEqualTo(identity);
-            assertThat(actual.getName()).isEqualTo(name);
-            assertThat(actual.getDescription()).isEqualTo(description);
+            assertThat(actual).isNotNull().satisfies(circular -> {
+                assertThat(circular.getId()).isEqualTo(identity);
+                assertThat(circular.getName()).isEqualTo(name);
+                assertThat(circular.getDescription()).isEqualTo(description);
+            });
         }
     }
 

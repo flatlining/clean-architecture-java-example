@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -63,9 +62,10 @@ class CreateCircularUseCaseTest {
 
         // Then
         verify(repository).create(repoCapture.capture());
-        assertThat(repoCapture.getValue().getId()).isEqualTo(id);
 
-        assertNotNull(actual.getCircular());
+        assertThat(repoCapture.getValue()).isNotNull().satisfies(captureParam -> {
+            assertThat(captureParam.getId()).isEqualTo(id);
+        });
 
         assertThat(actual.getCircular()).isNotNull().satisfies(act -> {
             assertThat(act.getId()).isEqualTo(id);
