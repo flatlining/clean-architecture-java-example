@@ -55,11 +55,22 @@ class CircularRepositoryImplTest {
         repository.forEach(circular -> {
             cut.create(circular);
         });
+        assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
 
         java.util.Random rand = new java.util.Random();
         Circular randomItem = repository.get(rand.nextInt(repository.size()));
 
         assertThat(cut.readByIdentity(randomItem.getId())).isPresent().hasValue(randomItem);
+    }
+
+    @Test
+    void readByIdentityNonExistent(@Random(size = 5, type = Circular.class) List<Circular> repository, @Random Identity randomIdentity) {
+        repository.forEach(circular -> {
+            cut.create(circular);
+        });
+        assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
+
+        assertThat(cut.readByIdentity(randomIdentity)).isNotPresent();
     }
 
     @Test
@@ -72,9 +83,10 @@ class CircularRepositoryImplTest {
         repository.forEach(circular -> {
             cut.create(circular);
         });
-
         assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
+
         assertThat(cut.deleteAll()).containsExactlyInAnyOrderElementsOf(repository);
+        
         assertThat(cut.deleteAll()).isEmpty();
     }
 }
