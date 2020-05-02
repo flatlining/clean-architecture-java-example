@@ -2,39 +2,46 @@ package dev.schertel.cq.core.domain;
 
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(RandomBeansExtension.class)
 class NotFoundExceptionTest {
-    private NotFoundException cut;
-
-    @BeforeEach
-    void setUp() {
-        this.cut = null;
-    }
 
     @Test
     void getMessage(@Random String message) {
-        cut = new NotFoundException(message);
+        // Given
 
-        assertEquals(message, cut.getMessage());
+        // When
+        NotFoundException actual = new NotFoundException(message);
+
+        // Then
+        assertThat(actual.getMessage()).isEqualTo(message);
     }
 
     @Test
     void getMessageFormat() {
-        cut = new NotFoundException("This is a message format with %s parameter.", Integer.valueOf(1));
+        // Given
+        String message = "This is a message format with %s parameter.";
+        Integer parameter = 1;
 
-        assertEquals("This is a message format with 1 parameter.", cut.getMessage());
+        // When
+        NotFoundException actual = new NotFoundException(message, parameter);
+
+        // Then
+        assertThat(actual.getMessage()).isEqualTo("This is a message format with 1 parameter.");
     }
 
     @Test
-    void of(@Random String value) {
-        cut = NotFoundException.of(value);
+    void of(@Random String message) {
+        // Given
 
-        assertEquals(value, cut.getMessage());
+        // When
+        NotFoundException actual = NotFoundException.of(message);
+
+        // Then
+        assertThat(actual.getMessage()).isEqualTo(message);
     }
 }
