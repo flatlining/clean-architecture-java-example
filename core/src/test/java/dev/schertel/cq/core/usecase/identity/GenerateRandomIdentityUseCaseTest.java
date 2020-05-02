@@ -28,9 +28,10 @@ class GenerateRandomIdentityUseCaseTest {
         GenerateRandomIdentityUseCase.OutputValues actual = cut.execute(input);
 
         // Then
-        assertThat(actual.getIdentity()).isNotNull();
-        assertThat(actual.getIdentity().getId())
-                .isNotNull()
-                .isEqualTo(UUID.fromString(actual.getIdentity().getId()).toString());
+        assertThat(actual.getIdentity()).isNotNull().satisfies(identity -> {
+            assertThat(identity.getId())
+                    .isNotNull()
+                    .isEqualTo(UUID.fromString(identity.getId()).toString());
+        });
     }
 }
