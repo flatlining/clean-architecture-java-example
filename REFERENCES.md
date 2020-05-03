@@ -147,6 +147,7 @@
 
 - https://stackoverflow.com/a/55338237
   - https://dzone.com/articles/logger-injection-with-springs-injectionpoint
+- https://medium.com/simars/inject-loggers-in-spring-java-or-kotlin-87162d02d068
 
 ### <a name='JSON-1'></a>JSON
 
