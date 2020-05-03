@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4jApi.version}</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 		<dependency>
@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>io.github.glytching</groupId>
 			<artifactId>junit-extensions</artifactId>
-			<version>${junitExtensions.version}</version>
+			<version>${junit.extensions.version}</version>
 			<scope>test</scope>
 		</dependency>
 
