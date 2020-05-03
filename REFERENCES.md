@@ -100,14 +100,13 @@
 
 ### <a name='Modules'></a>Modules
 
-- https://dzone.com/articles/java-9-module-services
-- https://www.baeldung.com/project-jigsaw-java-modularity
-- https://medium.com/slalom-build/clean-architecture-with-java-11-f78bba431041
-- https://www.oracle.com/corporate/features/understanding-java-9-modules.html
+- [Java 9 Module Services](https://dzone.com/articles/java-9-module-services)
+- [Introduction to Project Jigsaw](https://www.baeldung.com/project-jigsaw-java-modularity)
+- [Understanding Java 9 Modules](https://www.oracle.com/corporate/features/understanding-java-9-modules.html)
 
 ### <a name='ModelMapper'></a>ModelMapper
 
-- https://github.com/modelmapper/modelmapper/issues/265
+- [ModelMapper should support Builder Pattern](https://github.com/modelmapper/modelmapper/issues/265)
 
 ### <a name='Time'></a>Time
 
