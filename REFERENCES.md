@@ -31,16 +31,16 @@
 
 ## <a name='CleanArchitecture'></a>Clean Architecture
 
-- https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830
+- [Real Life Clean Architecture](https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830)
   - https://github.com/mattia-battiston/clean-architecture-example
-- https://jmgarridopaz.github.io/content/hexagonalarchitecture.html
-- https://pusher.com/tutorials/clean-architecture-introduction
-- https://github.com/eliostvs/clean-architecture-delivery-example
-  - https://softwareengineering.stackexchange.com/a/373524
+- [Ports and Adapters Pattern](https://jmgarridopaz.github.io/content/hexagonalarchitecture.html)
+- [Clean Architecture For The Rest Of Us](https://pusher.com/tutorials/clean-architecture-introduction)
+- [Implementing a REST API in a Clean Architecture](https://softwareengineering.stackexchange.com/a/373524)
+  - https://github.com/eliostvs/clean-architecture-delivery-example
 - [Robert C. Martin - Clean Architecture](https://vimeo.com/43612849)
 - [Why you need Use Cases/Interactors](https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576)
-- https://hackernoon.com/clean-architecture-example-in-kotlin-9f23169219be
-- https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started
+- [Clean Architecture Example in Kotlin](https://hackernoon.com/clean-architecture-example-in-kotlin-9f23169219be)
+- [Clean Architecture Tutorial for Android: Getting Started](https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started)
   - https://github.com/dmilicic/Android-Clean-Boilerplate
 
 ### <a name='BuilderPattern'></a>Builder Pattern
