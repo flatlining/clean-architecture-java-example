@@ -6,6 +6,7 @@ import dev.schertel.cq.core.domain.NotFoundException;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -80,5 +81,65 @@ class ReadCircularUseCaseTest {
         NotFoundException expected = NotFoundException.of(toRead.getId());
 
         assertThat(actual).isNotNull().isEqualToComparingFieldByFieldRecursively(expected);
+    }
+
+    @Nested
+    class Input {
+        @Test
+        void nullObject() {
+            // Given
+
+            // When
+            ReadCircularUseCase.InputValues actual = inputBuilder.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(inputValues -> {
+                assertThat(inputValues.getIdentity()).isNull();
+            });
+        }
+
+        @Test
+        void fullObject(@Random Identity toDelete) {
+            // Given
+            inputBuilder
+                    .withIdentity(toDelete);
+
+            // When
+            ReadCircularUseCase.InputValues actual = inputBuilder.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(inputValues -> {
+                assertThat(inputValues.getIdentity()).isEqualTo(toDelete);
+            });
+        }
+    }
+
+    @Nested
+    class Output {
+        @Test
+        void nullObject() {
+            // Given
+
+            // When
+            ReadCircularUseCase.OutputValues actual = outputBuilder.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(outputValues -> {
+                assertThat(outputValues.getCircular()).isNull();
+            });
+        }
+
+        @Test
+        void fullObject(@Random Circular created) {
+            // Given
+            outputBuilder
+                    .withCircular(created);
+
+            // When
+            ReadCircularUseCase.OutputValues actual = outputBuilder.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(outputValues -> assertThat(outputValues.getCircular()).isEqualTo(created));
+        }
     }
 }
