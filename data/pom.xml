@@ -9,15 +9,20 @@
 		<version>${revision}</version>
 	</parent>
 
-	<artifactId>core</artifactId>
+	<artifactId>data</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
-			<scope>provided</scope>
+			<groupId>dev.schertel</groupId>
+			<artifactId>core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 		<dependency>
@@ -41,13 +46,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-core</artifactId>
-			<version>${assertj.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>io.github.glytching</groupId>
 			<artifactId>junit-extensions</artifactId>
 			<version>${junit.extensions.version}</version>
@@ -55,47 +53,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.jparams</groupId>
-			<artifactId>to-string-verifier</artifactId>
-			<version>${to.string.verifier.version}</version>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${assertj.version}</version>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>nl.jqno.equalsverifier</groupId>
-			<artifactId>equalsverifier</artifactId>
-			<version>${equalsverifier.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compiler.plugin.version}</version>
-				<configuration>
-					<release>${maven.compiler.release}</release>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-							<version>${lombok.version}</version>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.ow2.asm</groupId>
-						<artifactId>asm</artifactId>
-						<version>${asm.version}</version> <!-- Use newer version of ASM -->
-					</dependency>
-				</dependencies>
-			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
