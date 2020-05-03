@@ -78,7 +78,7 @@ class DeleteAllCircularUseCaseTest {
     @Nested
     class Input {
         @Test
-        void nullInput() {
+        void nullObject() {
             // Given
 
             // When
@@ -92,7 +92,7 @@ class DeleteAllCircularUseCaseTest {
     @Nested
     class Output {
         @Test
-        void nullInput() {
+        void nullObject() {
             // Given
 
             // When

@@ -86,7 +86,7 @@ class DeleteCircularUseCaseTest {
     @Nested
     class Input {
         @Test
-        void nullInput() {
+        void nullObject() {
             // Given
 
             // When
@@ -99,7 +99,7 @@ class DeleteCircularUseCaseTest {
         }
 
         @Test
-        void fullInput(@Random Identity identity) {
+        void fullObject(@Random Identity identity) {
             // Given
             inputBuilder
                     .withIdentity(identity);
@@ -117,7 +117,7 @@ class DeleteCircularUseCaseTest {
     @Nested
     class Output {
         @Test
-        void nullInput() {
+        void nullObject() {
             // Given
 
             // When

@@ -79,7 +79,7 @@ class CreateCircularUseCaseTest {
     @Nested
     class Input {
         @Test
-        void nullInput() {
+        void nullObject() {
             // Given
 
             // When
@@ -93,7 +93,7 @@ class CreateCircularUseCaseTest {
         }
 
         @Test
-        void fullInput(@Random String name, @Random String description) {
+        void fullObject(@Random String name, @Random String description) {
             // Given
             inputBuilder
                     .withName(name)
@@ -113,7 +113,7 @@ class CreateCircularUseCaseTest {
     @Nested
     class Output {
         @Test
-        void nullInput() {
+        void nullObject() {
             // Given
 
             // When
@@ -126,7 +126,7 @@ class CreateCircularUseCaseTest {
         }
 
         @Test
-        void fullInput(@Random Circular circular) {
+        void fullObject(@Random Circular circular) {
             // Given
             outputBuilder
                     .withCircular(circular);
