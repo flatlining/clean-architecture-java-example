@@ -31,9 +31,14 @@ class CreateCircularUseCaseTest {
     @InjectMocks
     private CreateCircularUseCase cut;
 
+    private CreateCircularUseCase.InputValues.Builder inputBuilder;
+    private CreateCircularUseCase.OutputValues.Builder outputBuilder;
+
     @BeforeEach
     void setUp() {
         reset(repository);
+        inputBuilder = CreateCircularUseCase.InputValues.builder();
+        outputBuilder = CreateCircularUseCase.OutputValues.builder();
     }
 
     @Test
@@ -53,7 +58,7 @@ class CreateCircularUseCaseTest {
         ArgumentCaptor<Circular> repoCapture = ArgumentCaptor.forClass(Circular.class);
 
         // Given
-        CreateCircularUseCase.InputValues input = CreateCircularUseCase.InputValues.builder()
+        CreateCircularUseCase.InputValues input = inputBuilder
                 .withName(name)
                 .withDescription(description)
                 .build();
@@ -63,33 +68,25 @@ class CreateCircularUseCaseTest {
 
         // Then
         verify(repository).create(repoCapture.capture());
-
         assertThat(repoCapture.getValue()).isNotNull().satisfies(captureParam -> {
             assertThat(captureParam.getId()).isEqualTo(id);
         });
 
-        assertThat(actual.getCircular()).isNotNull().satisfies(act -> {
-            assertThat(act.getId()).isEqualTo(id);
-            assertThat(act.getName()).isEqualTo(name);
-            assertThat(act.getDescription()).isEqualTo(description);
-        });
+        CreateCircularUseCase.OutputValues expected = outputBuilder
+                .withCircular(circular)
+                .build();
+
+        assertThat(actual).isNotNull().isEqualTo(expected);
     }
 
     @Nested
     class Input {
-        CreateCircularUseCase.InputValues.Builder cut;
-
-        @BeforeEach
-        void setUp() {
-            this.cut = CreateCircularUseCase.InputValues.builder();
-        }
-
         @Test
         void nullInput() {
             // Given
 
             // When
-            CreateCircularUseCase.InputValues actual = cut.build();
+            CreateCircularUseCase.InputValues actual = inputBuilder.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(inputValues -> {
@@ -101,12 +98,12 @@ class CreateCircularUseCaseTest {
         @Test
         void fullInput(@Random String name, @Random String description) {
             // Given
-            cut
+            inputBuilder
                     .withName(name)
                     .withDescription(description);
 
             // When
-            CreateCircularUseCase.InputValues actual = cut.build();
+            CreateCircularUseCase.InputValues actual = inputBuilder.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(inputValues -> {
@@ -118,19 +115,12 @@ class CreateCircularUseCaseTest {
 
     @Nested
     class Output {
-        CreateCircularUseCase.OutputValues.Builder cut;
-
-        @BeforeEach
-        void setUp() {
-            this.cut = CreateCircularUseCase.OutputValues.builder();
-        }
-
         @Test
         void nullInput() {
             // Given
 
             // When
-            CreateCircularUseCase.OutputValues actual = cut.build();
+            CreateCircularUseCase.OutputValues actual = outputBuilder.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(outputValues -> {
@@ -141,11 +131,11 @@ class CreateCircularUseCaseTest {
         @Test
         void fullInput(@Random Circular circular) {
             // Given
-            cut
+            outputBuilder
                     .withCircular(circular);
 
             // When
-            CreateCircularUseCase.OutputValues actual = cut.build();
+            CreateCircularUseCase.OutputValues actual = outputBuilder.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(outputValues -> assertThat(outputValues.getCircular()).isEqualTo(circular));
