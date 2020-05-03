@@ -118,14 +118,14 @@
 
 ## <a name='Spring-Boot-1'></a>Spring-Boot
 
-- https://start.spring.io/
-- https://spring.io/guides/gs/spring-boot/
-- https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html
+- [Spring Initializr](https://start.spring.io/)
+- [Building an Application with Spring Boot](https://spring.io/guides/gs/spring-boot/)
+- [Spring Boot: Getting Started](https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html)
 - https://github.com/eugenp/tutorials/blob/master/spring-boot-rest/src/main/java/com/baeldung/springpagination/controller/PostRestController.java
 
 ### <a name='Maven-1'></a>Maven
 
-- https://docs.spring.io/spring-boot/docs/current/maven-plugin/examples/run-profiles.html
+- [Spring Boot Maven Plugin](https://docs.spring.io/spring-boot/docs/current/maven-plugin/examples/run-profiles.html)
 
 ### <a name='Beans'></a>Beans
 
