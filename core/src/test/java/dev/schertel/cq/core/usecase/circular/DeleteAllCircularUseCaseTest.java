@@ -43,8 +43,7 @@ class DeleteAllCircularUseCaseTest {
         doReturn(Collections.emptyList()).when(repository).deleteAll();
 
         // Given
-        DeleteAllCircularUseCase.InputValues input = inputBuilder
-                .build();
+        DeleteAllCircularUseCase.InputValues input = inputBuilder.build();
 
         // When
         DeleteAllCircularUseCase.OutputValues actual = cut.execute(input);
@@ -52,8 +51,7 @@ class DeleteAllCircularUseCaseTest {
         // Then
         verify(repository, times(1)).deleteAll();
 
-        DeleteAllCircularUseCase.OutputValues expected = outputBuilder
-                .build();
+        DeleteAllCircularUseCase.OutputValues expected = outputBuilder.build();
 
         assertThat(actual).isNotNull().isEqualTo(expected);
     }
@@ -64,8 +62,7 @@ class DeleteAllCircularUseCaseTest {
         doReturn(deleted).when(repository).deleteAll();
 
         // Given
-        DeleteAllCircularUseCase.InputValues input = inputBuilder
-                .build();
+        DeleteAllCircularUseCase.InputValues input = inputBuilder.build();
 
         // When
         DeleteAllCircularUseCase.OutputValues actual = cut.execute(input);
@@ -73,8 +70,7 @@ class DeleteAllCircularUseCaseTest {
         // Then
         verify(repository, times(1)).deleteAll();
 
-        DeleteAllCircularUseCase.OutputValues expected = outputBuilder
-                .build();
+        DeleteAllCircularUseCase.OutputValues expected = outputBuilder.build();
 
         assertThat(actual).isNotNull().isEqualTo(expected);
     }
