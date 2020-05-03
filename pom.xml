@@ -23,7 +23,7 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.release>${java.version}</maven.compiler.release>
-		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
+		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
 		<asm.version>6.2</asm.version>
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
