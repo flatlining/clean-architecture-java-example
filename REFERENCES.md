@@ -45,16 +45,16 @@
 
 ### <a name='BuilderPattern'></a>Builder Pattern
 
-- https://www.geeksforgeeks.org/builder-pattern-in-java/
-- https://www.journaldev.com/1425/builder-design-pattern-in-java
+- [Builder Pattern in java](https://www.geeksforgeeks.org/builder-pattern-in-java/)
+- [Builder Design Pattern in Java](https://www.journaldev.com/1425/builder-design-pattern-in-java)
 
 ### <a name='Spring-Boot'></a>Spring-Boot
 
-- https://medium.com/slalom-build/clean-architecture-with-java-11-f78bba431041
+- [Clean Architecture with Java 11](https://medium.com/slalom-build/clean-architecture-with-java-11-f78bba431041)
   - https://github.com/carlphilipp/clean-architecture-example
-- https://reflectoring.io/java-components-clean-boundaries/
-- https://imasters.com.br/back-end/introducao-clean-architecture
-- https://medium.com/@icarovictor/the-clean-architecture-54df8a46dba1
+- [Clean Architecture Boundaries with Spring Boot and ArchUnit](https://reflectoring.io/java-components-clean-boundaries/)
+- [Introdução a Clean Architecture](https://imasters.com.br/back-end/introducao-clean-architecture)
+- [The clean Architecture](https://medium.com/@icarovictor/the-clean-architecture-54df8a46dba1)
 
 ## <a name='JSON'></a>JSON
 
