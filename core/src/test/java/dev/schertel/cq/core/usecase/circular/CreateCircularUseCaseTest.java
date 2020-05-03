@@ -93,19 +93,19 @@ class CreateCircularUseCaseTest {
         }
 
         @Test
-        void fullObject(@Random String name, @Random String description) {
+        void fullObject(@Random Circular toCreate) {
             // Given
             inputBuilder
-                    .withName(name)
-                    .withDescription(description);
+                    .withName(toCreate.getName())
+                    .withDescription(toCreate.getDescription());
 
             // When
             CreateCircularUseCase.InputValues actual = inputBuilder.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(inputValues -> {
-                assertThat(inputValues.getName()).isEqualTo(name);
-                assertThat(inputValues.getDescription()).isEqualTo(description);
+                assertThat(inputValues.getName()).isEqualTo(toCreate.getName());
+                assertThat(inputValues.getDescription()).isEqualTo(toCreate.getDescription());
             });
         }
     }
@@ -126,16 +126,16 @@ class CreateCircularUseCaseTest {
         }
 
         @Test
-        void fullObject(@Random Circular circular) {
+        void fullObject(@Random Circular created) {
             // Given
             outputBuilder
-                    .withCircular(circular);
+                    .withCircular(created);
 
             // When
             CreateCircularUseCase.OutputValues actual = outputBuilder.build();
 
             // Then
-            assertThat(actual).isNotNull().satisfies(outputValues -> assertThat(outputValues.getCircular()).isEqualTo(circular));
+            assertThat(actual).isNotNull().satisfies(outputValues -> assertThat(outputValues.getCircular()).isEqualTo(created));
         }
     }
 }

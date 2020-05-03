@@ -4,6 +4,7 @@ import dev.schertel.cq.core.domain.Circular;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -76,5 +77,48 @@ class ReadAllCircularUseCaseTest {
                 .build();
 
         assertThat(actual).isNotNull().isEqualTo(expected);
+    }
+
+    @Nested
+    class Input {
+        @Test
+        void nullObject() {
+            // Given
+
+            // When
+            ReadAllCircularUseCase.InputValues actual = inputBuilder.build();
+
+            // Then
+            assertThat(actual).isNotNull();
+        }
+    }
+
+    @Nested
+    class Output {
+        @Test
+        void nullObject() {
+            // Given
+
+            // When
+            ReadAllCircularUseCase.OutputValues actual = outputBuilder.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(outputValues -> {
+                assertThat(outputValues.getCircular()).isNull();
+            });
+        }
+
+        @Test
+        void fullObject(@Random(size = 5, type = Circular.class) List<Circular> read) {
+            // Given
+            outputBuilder
+                    .withCircular(read);
+
+            // When
+            ReadAllCircularUseCase.OutputValues actual = outputBuilder.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(outputValues -> assertThat(outputValues.getCircular()).isEqualTo(read));
+        }
     }
 }

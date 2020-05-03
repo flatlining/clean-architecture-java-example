@@ -99,17 +99,17 @@ class DeleteCircularUseCaseTest {
         }
 
         @Test
-        void fullObject(@Random Identity identity) {
+        void fullObject(@Random Identity toDelete) {
             // Given
             inputBuilder
-                    .withIdentity(identity);
+                    .withIdentity(toDelete);
 
             // When
             DeleteCircularUseCase.InputValues actual = inputBuilder.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(inputValues -> {
-                assertThat(inputValues.getIdentity()).isEqualTo(identity);
+                assertThat(inputValues.getIdentity()).isEqualTo(toDelete);
             });
         }
     }
