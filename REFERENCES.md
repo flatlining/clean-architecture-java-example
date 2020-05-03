@@ -143,15 +143,15 @@
 
 ### <a name='Logging'></a>Logging
 
-- https://stackoverflow.com/a/55338237
-  - https://dzone.com/articles/logger-injection-with-springs-injectionpoint
-- https://medium.com/simars/inject-loggers-in-spring-java-or-kotlin-87162d02d068
+- [How do I inject a logger into a field in the sample spring boot application?](https://stackoverflow.com/a/55338237)
+  - [Logger Injection With Spring’s InjectionPoint](https://dzone.com/articles/logger-injection-with-springs-injectionpoint)
+- [Inject loggers in Spring | Java or Kotlin](https://medium.com/simars/inject-loggers-in-spring-java-or-kotlin-87162d02d068)
 
 ### <a name='JSON-1'></a>JSON
 
-- https://www.baeldung.com/jackson-deserialize-immutable-objects
-- https://www.baeldung.com/jackson-map
-- https://codeboje.de/jackson-java-8-datetime-handling/
+- [Deserialize Immutable Objects with Jackson](https://www.baeldung.com/jackson-deserialize-immutable-objects)
+- [Map Serialization and Deserialization with Jackson](https://www.baeldung.com/jackson-map)
+- [How to Handle Java 8 Dates and Time with Jackson in Spring Boot (JSR-310)](https://codeboje.de/jackson-java-8-datetime-handling/)
 - https://github.com/FasterXML/jackson-modules-java8
 
 ### <a name='Test-1'></a>Test
