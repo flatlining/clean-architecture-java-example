@@ -76,7 +76,7 @@
 		<dependency>
 			<groupId>io.github.glytching</groupId>
 			<artifactId>junit-extensions</artifactId>
-			<version>${junitExtensions.version}</version>
+			<version>${junit.extensions.version}</version>
 			<scope>test</scope>
 		</dependency>
 

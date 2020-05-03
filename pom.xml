@@ -34,7 +34,7 @@
 		<lombok.version>1.18.12</lombok.version>
 		<junit.jupiter.version>5.6.2</junit.jupiter.version>
 		<to.string.verifier.version>1.4.8</to.string.verifier.version>
-		<junitExtensions.version>2.4.0</junitExtensions.version>
+		<junit.extensions.version>2.4.0</junit.extensions.version>
 		<equalsverifier.version>3.1.13</equalsverifier.version>
 		<jsonUnitSpring.version>2.17.0</jsonUnitSpring.version>
 		<mockito.version>3.1.0</mockito.version>
