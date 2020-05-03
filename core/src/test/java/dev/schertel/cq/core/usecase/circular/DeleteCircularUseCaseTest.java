@@ -40,7 +40,7 @@ class DeleteCircularUseCaseTest {
     }
 
     @Test
-    void successToDelete(@Random Circular deleted) {
+    void delete(@Random Circular deleted) {
         // Background
         doReturn(Optional.of(deleted)).when(repository).deleteByIdentity(deleted.getId());
 

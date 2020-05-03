@@ -38,7 +38,7 @@ class DeleteAllCircularUseCaseTest {
     }
 
     @Test
-    void successEmptyRepository() {
+    void deleteAllEmptyRepository() {
         // Background
         doReturn(Collections.emptyList()).when(repository).deleteAll();
 
@@ -57,7 +57,7 @@ class DeleteAllCircularUseCaseTest {
     }
 
     @Test
-    void successNonEmptyRepository(@Random(size = 5, type = Circular.class) List<Circular> deleted) {
+    void deleteAllNonEmptyRepository(@Random(size = 5, type = Circular.class) List<Circular> deleted) {
         // Background
         doReturn(deleted).when(repository).deleteAll();
 

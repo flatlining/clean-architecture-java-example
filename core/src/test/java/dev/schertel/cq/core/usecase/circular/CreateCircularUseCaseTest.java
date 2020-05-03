@@ -40,7 +40,7 @@ class CreateCircularUseCaseTest {
     }
 
     @Test
-    void success(@Random Circular created) {
+    void create(@Random Circular created) {
         // Background
         doReturn(created).when(repository).create(Circular.builder()
                 .withId(created.getId())
