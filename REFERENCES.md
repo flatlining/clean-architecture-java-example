@@ -58,15 +58,15 @@
 
 ## <a name='JSON'></a>JSON
 
-- https://jsonschema.net/
+- [JSONschema.net](https://jsonschema.net/)
 
 ## <a name='Maven'></a>Maven
 
-- http://maven.apache.org/maven-ci-friendly.html
-  - https://jeanchristophegay.com/en/posts/maven-unique-version-multi-modules-build/
-- https://www.baeldung.com/maven-java-version
-  - https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9
-- https://mkyong.com/maven/how-to-create-a-java-project-with-maven/
+- [Maven CI Friendly Versions](http://maven.apache.org/maven-ci-friendly.html)
+  - [Use a unique property to set Maven version](https://jeanchristophegay.com/en/posts/maven-unique-version-multi-modules-build/)
+- [Setting the Java Version in Maven](https://www.baeldung.com/maven-java-version)
+  - [It’s time! Migrating to Java 11](https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9)
+- [Maven – How to create a Java project](https://mkyong.com/maven/how-to-create-a-java-project-with-maven/)
   - https://github.com/mkyong/maven-examples
 
 ## <a name='Test'></a>Test
