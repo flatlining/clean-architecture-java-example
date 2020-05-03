@@ -1,7 +1,6 @@
 package dev.schertel.cq.core.usecase.circular;
 
 import dev.schertel.cq.core.domain.Circular;
-import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.core.usecase.identity.GenerateRandomIdentityUseCase;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
@@ -42,16 +41,11 @@ class CreateCircularUseCaseTest {
     }
 
     @Test
-    void success(@Random Identity id, @Random String name, @Random String description) {
+    void success(@Random Circular created) {
         // Background
-        Circular circular = Circular.builder()
-                .withId(id)
-                .withName(name)
-                .withDescription(description)
-                .build();
-        doReturn(circular).when(repository).create(any(Circular.class));
+        doReturn(created).when(repository).create(any(Circular.class));
         GenerateRandomIdentityUseCase.OutputValues randomIdentity = GenerateRandomIdentityUseCase.OutputValues.builder()
-                .withIdentity(id)
+                .withIdentity(created.getId())
                 .build();
         doReturn(randomIdentity).when(generateRandomIdentityUseCase).execute(any(GenerateRandomIdentityUseCase.InputValues.class));
 
@@ -59,8 +53,8 @@ class CreateCircularUseCaseTest {
 
         // Given
         CreateCircularUseCase.InputValues input = inputBuilder
-                .withName(name)
-                .withDescription(description)
+                .withName(created.getName())
+                .withDescription(created.getDescription())
                 .build();
 
         // When
@@ -69,11 +63,11 @@ class CreateCircularUseCaseTest {
         // Then
         verify(repository).create(repoCapture.capture());
         assertThat(repoCapture.getValue()).isNotNull().satisfies(captureParam -> {
-            assertThat(captureParam.getId()).isEqualTo(id);
+            assertThat(captureParam.getId()).isEqualTo(created.getId());
         });
 
         CreateCircularUseCase.OutputValues expected = outputBuilder
-                .withCircular(circular)
+                .withCircular(created)
                 .build();
 
         assertThat(actual).isNotNull().isEqualTo(expected);
