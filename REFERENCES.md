@@ -73,14 +73,13 @@
 
 ### <a name='jUnit5'></a>jUnit5
 
-- https://www.baeldung.com/junit-5
-- https://www.baeldung.com/mockito-junit-5-extension
-- https://mkyong.com/spring-boot/spring-boot-junit-5-mockito/
-- https://www.petrikainulainen.net/programming/testing/junit-5-tutorial-writing-nested-tests/
-- http://sangsoonam.github.io/2019/02/04/mockito-doreturn-vs-thenreturn.html
-- https://www.baeldung.com/junit-assert-exception
-- https://www.baeldung.com/mockito-verify
-- https://www.baeldung.com/mockito-junit-5-extension
+- [A Guide to JUnit 5](https://www.baeldung.com/junit-5)
+- [Mockito and JUnit 5 – Using ExtendWith](https://www.baeldung.com/mockito-junit-5-extension)
+- [Spring Boot + JUnit 5 + Mockito](https://mkyong.com/spring-boot/spring-boot-junit-5-mockito/)
+- [JUnit 5 Tutorial: Writing Nested Tests](https://www.petrikainulainen.net/programming/testing/junit-5-tutorial-writing-nested-tests/)
+- [Mockito: doReturn vs thenReturn](http://sangsoonam.github.io/2019/02/04/mockito-doreturn-vs-thenreturn.html)
+- [Assert an Exception is Thrown in JUnit 4 and 5](https://www.baeldung.com/junit-assert-exception)
+- [Mockito Verify Cookbook](https://www.baeldung.com/mockito-verify)
 
 ## <a name='Java'></a>Java
 
