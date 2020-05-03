@@ -85,18 +85,18 @@
 
 ### <a name='DependencyInjection'></a>Dependency Injection
 
-- https://www.vogella.com/tutorials/DependencyInjection/article.html
-- https://javarevisited.blogspot.com/2017/04/difference-between-autowired-and-inject-annotation-in-spring-framework.html
-- https://www.baeldung.com/spring-annotations-resource-inject-autowire
-- https://mvnrepository.com/artifact/javax.inject/javax.inject/1
+- [Using dependency injection in Java - Introduction - Tutorial](https://www.vogella.com/tutorials/DependencyInjection/article.html)
+- [Difference between @Autowired and @Inject annotation in Spring?](https://javarevisited.blogspot.com/2017/04/difference-between-autowired-and-inject-annotation-in-spring-framework.html)
+- [Wiring in Spring: @Autowired, @Resource and @Inject](https://www.baeldung.com/spring-annotations-resource-inject-autowire)
+- [Javax Inject](https://mvnrepository.com/artifact/javax.inject/javax.inject/1)
 
 ### <a name='Lombok'></a>Lombok
 
-- https://projectlombok.org/setup/maven
+- [Project Lombok > Maven](https://projectlombok.org/setup/maven)
   - https://github.com/MCMicS/simple-lombok
-  - https://medium.com/@Leejjon_net/youll-have-this-problems-when-you-add-lombok-to-a-modular-java-11-micro-service-832f55911bc5
-- https://www.baeldung.com/lombok-ide
-- http://errataobscura.blogspot.com/2019/03/jsonserialize-and-jsondeserialize-with.html
+  - [How to add Lombok to a modular Java 11 micro service](https://medium.com/@Leejjon_net/youll-have-this-problems-when-you-add-lombok-to-a-modular-java-11-micro-service-832f55911bc5)
+- [Setting up Lombok with Eclipse and Intellij](https://www.baeldung.com/lombok-ide)
+- [JSONSerialize and JSONDeserialize with Lombok custom deserialization builders](http://errataobscura.blogspot.com/2019/03/jsonserialize-and-jsondeserialize-with.html)
 
 ### <a name='Modules'></a>Modules
 
