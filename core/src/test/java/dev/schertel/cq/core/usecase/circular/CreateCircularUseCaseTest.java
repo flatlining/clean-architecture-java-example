@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,11 +42,15 @@ class CreateCircularUseCaseTest {
     @Test
     void success(@Random Circular created) {
         // Background
-        doReturn(created).when(repository).create(any(Circular.class));
+        doReturn(created).when(repository).create(Circular.builder()
+                .withId(created.getId())
+                .withName(created.getName())
+                .withDescription(created.getDescription())
+                .build());
         GenerateRandomIdentityUseCase.OutputValues randomIdentity = GenerateRandomIdentityUseCase.OutputValues.builder()
                 .withIdentity(created.getId())
                 .build();
-        doReturn(randomIdentity).when(generateRandomIdentityUseCase).execute(any(GenerateRandomIdentityUseCase.InputValues.class));
+        doReturn(randomIdentity).when(generateRandomIdentityUseCase).execute(GenerateRandomIdentityUseCase.InputValues.builder().build());
 
         ArgumentCaptor<Circular> repoCapture = ArgumentCaptor.forClass(Circular.class);
 
