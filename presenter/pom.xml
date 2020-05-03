@@ -83,7 +83,7 @@
 		<dependency>
 			<groupId>com.jparams</groupId>
 			<artifactId>to-string-verifier</artifactId>
-			<version>${toStringVerifier.version}</version>
+			<version>${to.string.verifier.version}</version>
 			<scope>test</scope>
 		</dependency>
 

@@ -33,7 +33,7 @@
 		<slf4j.version>1.7.30</slf4j.version>
 		<lombok.version>1.18.12</lombok.version>
 		<junit.jupiter.version>5.6.2</junit.jupiter.version>
-		<toStringVerifier.version>1.4.8</toStringVerifier.version>
+		<to.string.verifier.version>1.4.8</to.string.verifier.version>
 		<junitExtensions.version>2.4.0</junitExtensions.version>
 		<equalsverifier.version>3.1.13</equalsverifier.version>
 		<jsonUnitSpring.version>2.17.0</jsonUnitSpring.version>
