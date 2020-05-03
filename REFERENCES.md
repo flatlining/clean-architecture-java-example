@@ -129,17 +129,17 @@
 
 ### <a name='Beans'></a>Beans
 
-- https://docs.spring.io/spring-javaconfig/docs/1.0.0.m3/reference/html/creating-bean-definitions.html
+- [Creating and using bean definitions](https://docs.spring.io/spring-javaconfig/docs/1.0.0.m3/reference/html/creating-bean-definitions.html)
 
 ### <a name='Rest'></a>Rest
 
-- https://spring.io/guides/tutorials/rest/
-- https://www.baeldung.com/rest-with-spring-series
-  - https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application
+- [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
+- [REST with Spring Tutorial](https://www.baeldung.com/rest-with-spring-series)
+  - [Entity To DTO Conversion for a Spring REST API](https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application)
 
 ### <a name='Controller'></a>Controller
 
-- https://www.baeldung.com/spring-controller-vs-restcontroller
+- [The Spring @Controller and @RestController Annotations](https://www.baeldung.com/spring-controller-vs-restcontroller)
 
 ### <a name='Logging'></a>Logging
 
