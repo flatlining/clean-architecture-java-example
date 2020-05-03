@@ -110,11 +110,11 @@
 
 ### <a name='Time'></a>Time
 
-- http://apiux.com/2013/03/20/5-laws-api-dates-and-times/
-- https://www.codebyamir.com/blog/add-a-timezone-to-localdatetime-with-zoneddatetime-in-java-8
-- https://stackoverflow.com/a/32443004
-- https://www.moesif.com/blog/technical/timestamp/manage-datetime-timestamp-timezones-in-api/
-- https://mincong.io/2017/02/16/convert-date-to-string-in-java/
+- [The 5 laws of API dates and times](http://apiux.com/2013/03/20/5-laws-api-dates-and-times/)
+- [Add a Timezone to LocalDateTime with ZonedDateTime in Java 8](https://www.codebyamir.com/blog/add-a-timezone-to-localdatetime-with-zoneddatetime-in-java-8)
+- [What's the difference between Instant and LocalDateTime?](https://stackoverflow.com/a/32443004)
+- [Based on thousands of APIs, what is the best approaches and format for handling timezone, timestamps, and datetime in APIs and Apps](https://www.moesif.com/blog/technical/timestamp/manage-datetime-timestamp-timezones-in-api/)
+- [Convert Date to ISO 8601 String in Java](https://mincong.io/2017/02/16/convert-date-to-string-in-java/)
 
 ## <a name='Spring-Boot-1'></a>Spring-Boot
 
