@@ -1,7 +1,6 @@
 package dev.schertel.cq.core.usecase.circular;
 
 import dev.schertel.cq.core.domain.Circular;
-import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.core.usecase.identity.GenerateRandomIdentityUseCase;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
@@ -15,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,31 +29,35 @@ class CreateCircularUseCaseTest {
     @InjectMocks
     private CreateCircularUseCase cut;
 
+    private CreateCircularUseCase.InputValues.Builder inputBuilder;
+    private CreateCircularUseCase.OutputValues.Builder outputBuilder;
+
     @BeforeEach
     void setUp() {
         reset(repository);
+        inputBuilder = CreateCircularUseCase.InputValues.builder();
+        outputBuilder = CreateCircularUseCase.OutputValues.builder();
     }
 
     @Test
-    void success(@Random Identity id, @Random String name, @Random String description) {
+    void create(@Random Circular created) {
         // Background
-        Circular circular = Circular.builder()
-                .withId(id)
-                .withName(name)
-                .withDescription(description)
-                .build();
-        doReturn(circular).when(repository).create(any(Circular.class));
+        doReturn(created).when(repository).create(Circular.builder()
+                .withId(created.getId())
+                .withName(created.getName())
+                .withDescription(created.getDescription())
+                .build());
         GenerateRandomIdentityUseCase.OutputValues randomIdentity = GenerateRandomIdentityUseCase.OutputValues.builder()
-                .withIdentity(id)
+                .withIdentity(created.getId())
                 .build();
-        doReturn(randomIdentity).when(generateRandomIdentityUseCase).execute(any(GenerateRandomIdentityUseCase.InputValues.class));
+        doReturn(randomIdentity).when(generateRandomIdentityUseCase).execute(GenerateRandomIdentityUseCase.InputValues.builder().build());
 
         ArgumentCaptor<Circular> repoCapture = ArgumentCaptor.forClass(Circular.class);
 
         // Given
-        CreateCircularUseCase.InputValues input = CreateCircularUseCase.InputValues.builder()
-                .withName(name)
-                .withDescription(description)
+        CreateCircularUseCase.InputValues input = inputBuilder
+                .withName(created.getName())
+                .withDescription(created.getDescription())
                 .build();
 
         // When
@@ -63,33 +65,25 @@ class CreateCircularUseCaseTest {
 
         // Then
         verify(repository).create(repoCapture.capture());
-
         assertThat(repoCapture.getValue()).isNotNull().satisfies(captureParam -> {
-            assertThat(captureParam.getId()).isEqualTo(id);
+            assertThat(captureParam.getId()).isEqualTo(created.getId());
         });
 
-        assertThat(actual.getCircular()).isNotNull().satisfies(act -> {
-            assertThat(act.getId()).isEqualTo(id);
-            assertThat(act.getName()).isEqualTo(name);
-            assertThat(act.getDescription()).isEqualTo(description);
-        });
+        CreateCircularUseCase.OutputValues expected = outputBuilder
+                .withCircular(created)
+                .build();
+
+        assertThat(actual).isNotNull().isEqualTo(expected);
     }
 
     @Nested
     class Input {
-        CreateCircularUseCase.InputValues.Builder cut;
-
-        @BeforeEach
-        void setUp() {
-            this.cut = CreateCircularUseCase.InputValues.builder();
-        }
-
         @Test
-        void nullInput() {
+        void nullObject() {
             // Given
 
             // When
-            CreateCircularUseCase.InputValues actual = cut.build();
+            CreateCircularUseCase.InputValues actual = inputBuilder.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(inputValues -> {
@@ -99,38 +93,31 @@ class CreateCircularUseCaseTest {
         }
 
         @Test
-        void fullInput(@Random String name, @Random String description) {
+        void fullObject(@Random Circular toCreate) {
             // Given
-            cut
-                    .withName(name)
-                    .withDescription(description);
+            inputBuilder
+                    .withName(toCreate.getName())
+                    .withDescription(toCreate.getDescription());
 
             // When
-            CreateCircularUseCase.InputValues actual = cut.build();
+            CreateCircularUseCase.InputValues actual = inputBuilder.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(inputValues -> {
-                assertThat(inputValues.getName()).isEqualTo(name);
-                assertThat(inputValues.getDescription()).isEqualTo(description);
+                assertThat(inputValues.getName()).isEqualTo(toCreate.getName());
+                assertThat(inputValues.getDescription()).isEqualTo(toCreate.getDescription());
             });
         }
     }
 
     @Nested
     class Output {
-        CreateCircularUseCase.OutputValues.Builder cut;
-
-        @BeforeEach
-        void setUp() {
-            this.cut = CreateCircularUseCase.OutputValues.builder();
-        }
-
         @Test
-        void nullInput() {
+        void nullObject() {
             // Given
 
             // When
-            CreateCircularUseCase.OutputValues actual = cut.build();
+            CreateCircularUseCase.OutputValues actual = outputBuilder.build();
 
             // Then
             assertThat(actual).isNotNull().satisfies(outputValues -> {
@@ -139,16 +126,16 @@ class CreateCircularUseCaseTest {
         }
 
         @Test
-        void fullInput(@Random Circular circular) {
+        void fullObject(@Random Circular created) {
             // Given
-            cut
-                    .withCircular(circular);
+            outputBuilder
+                    .withCircular(created);
 
             // When
-            CreateCircularUseCase.OutputValues actual = cut.build();
+            CreateCircularUseCase.OutputValues actual = outputBuilder.build();
 
             // Then
-            assertThat(actual).isNotNull().satisfies(outputValues -> assertThat(outputValues.getCircular()).isEqualTo(circular));
+            assertThat(actual).isNotNull().satisfies(outputValues -> assertThat(outputValues.getCircular()).isEqualTo(created));
         }
     }
 }
