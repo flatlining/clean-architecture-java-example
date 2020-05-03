@@ -6,6 +6,7 @@ import dev.schertel.cq.core.domain.NotFoundException;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -80,5 +81,50 @@ class DeleteCircularUseCaseTest {
         NotFoundException expected = NotFoundException.of(toDelete.getId());
 
         assertThat(actual).isNotNull().isEqualToComparingFieldByFieldRecursively(expected);
+    }
+
+    @Nested
+    class Input {
+        @Test
+        void nullInput() {
+            // Given
+
+            // When
+            DeleteCircularUseCase.InputValues actual = inputBuilder.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(inputValues -> {
+                assertThat(inputValues.getIdentity()).isNull();
+            });
+        }
+
+        @Test
+        void fullInput(@Random Identity identity) {
+            // Given
+            inputBuilder
+                    .withIdentity(identity);
+
+            // When
+            DeleteCircularUseCase.InputValues actual = inputBuilder.build();
+
+            // Then
+            assertThat(actual).isNotNull().satisfies(inputValues -> {
+                assertThat(inputValues.getIdentity()).isEqualTo(identity);
+            });
+        }
+    }
+
+    @Nested
+    class Output {
+        @Test
+        void nullInput() {
+            // Given
+
+            // When
+            DeleteCircularUseCase.OutputValues actual = outputBuilder.build();
+
+            // Then
+            assertThat(actual).isNotNull();
+        }
     }
 }
