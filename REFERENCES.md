@@ -81,6 +81,11 @@
 - [Assert an Exception is Thrown in JUnit 4 and 5](https://www.baeldung.com/junit-assert-exception)
 - [Mockito Verify Cookbook](https://www.baeldung.com/mockito-verify)
 
+### Karate
+
+- https://github.com/intuit/karate
+  - https://github.com/intuit/karate/tree/master/karate-demo
+
 ## <a name='Java'></a>Java
 
 ### <a name='DependencyInjection'></a>Dependency Injection
