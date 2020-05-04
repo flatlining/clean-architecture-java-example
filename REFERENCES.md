@@ -8,6 +8,7 @@
 * [Maven](#Maven)
 * [Test](#Test)
 	* [jUnit5](#jUnit5)
+	* [Karate](#Karate)
 * [Java](#Java)
 	* [Dependency Injection](#DependencyInjection)
 	* [Lombok](#Lombok)
@@ -81,10 +82,11 @@
 - [Assert an Exception is Thrown in JUnit 4 and 5](https://www.baeldung.com/junit-assert-exception)
 - [Mockito Verify Cookbook](https://www.baeldung.com/mockito-verify)
 
-### Karate
+### <a name='Karate'></a>Karate
 
 - https://github.com/intuit/karate
-  - https://github.com/intuit/karate/tree/master/karate-demo
+- https://github.com/intuit/karate/tree/master/karate-demo
+- https://github.com/intuit/karate/tree/master/karate-mock-servlet
 
 ## <a name='Java'></a>Java
 
