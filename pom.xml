@@ -41,6 +41,19 @@
 		<assertj.version>3.11.1</assertj.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>mvnrepository</id>
+			<url>http://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
