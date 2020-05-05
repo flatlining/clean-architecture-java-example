@@ -29,6 +29,9 @@ function fn() {
     var baseUrl = karate.properties[APP_BASE_URL];
     if (!baseUrl) {
         baseUrl = protocol + '://' + domain + ':' + port;
+    } else if (baseUrl.startsWith('https://')) {
+        karate.log('ssl is true.');
+        karate.configure('ssl', true);
     }
 
     var config = {
