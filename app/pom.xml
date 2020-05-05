@@ -9,7 +9,7 @@
 		<version>${revision}</version>
 	</parent>
 
-	<artifactId>config</artifactId>
+	<artifactId>app</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencyManagement>
@@ -78,7 +78,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.parent.groupId}-${project.parent.artifactId}-${revision}</finalName>
+		<finalName>${project.parent.groupId}-${project.parent.artifactId}-${project.artifactId}-${revision}</finalName>
 
 		<testResources>
 			<testResource>
