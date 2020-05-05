@@ -7,7 +7,7 @@ Generic queue management system
 ### Build
 
 ```console
-$ ./mvnw clean install
+$ ./mvnw clean install [-Dspring.profiles.active=dev]
 ```
 
 ### Run
