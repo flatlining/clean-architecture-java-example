@@ -1,9 +1,10 @@
 # References
 
 <!-- vscode-markdown-toc -->
-* [Clean Architecture](#CleanArchitecture)
+* [Architecture](#Architecture)
+	* [Clean Architecture](#CleanArchitecture)
+		* [Spring-Boot](#Spring-Boot)
 	* [Builder Pattern](#BuilderPattern)
-	* [Spring-Boot](#Spring-Boot)
 * [JSON](#JSON)
 * [Maven](#Maven)
 * [Test](#Test)
@@ -30,7 +31,9 @@
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 
-## <a name='CleanArchitecture'></a>Clean Architecture
+## <a name='Architecture'></a>Architecture
+
+### <a name='CleanArchitecture'></a>Clean Architecture
 
 - [Real Life Clean Architecture](https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830)
   - https://github.com/mattia-battiston/clean-architecture-example
@@ -44,12 +47,7 @@
 - [Clean Architecture Tutorial for Android: Getting Started](https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started)
   - https://github.com/dmilicic/Android-Clean-Boilerplate
 
-### <a name='BuilderPattern'></a>Builder Pattern
-
-- [Builder Pattern in java](https://www.geeksforgeeks.org/builder-pattern-in-java/)
-- [Builder Design Pattern in Java](https://www.journaldev.com/1425/builder-design-pattern-in-java)
-
-### <a name='Spring-Boot'></a>Spring-Boot
+#### <a name='Spring-Boot'></a>Spring-Boot
 
 - [Clean Architecture with Java 11](https://medium.com/slalom-build/clean-architecture-with-java-11-f78bba431041)
   - https://github.com/carlphilipp/clean-architecture-example
@@ -57,9 +55,10 @@
 - [Introdução a Clean Architecture](https://imasters.com.br/back-end/introducao-clean-architecture)
 - [The clean Architecture](https://medium.com/@icarovictor/the-clean-architecture-54df8a46dba1)
 
-## Test
+### <a name='BuilderPattern'></a>Builder Pattern
 
-- [The Practical Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
+- [Builder Pattern in java](https://www.geeksforgeeks.org/builder-pattern-in-java/)
+- [Builder Design Pattern in Java](https://www.journaldev.com/1425/builder-design-pattern-in-java)
 
 ## <a name='JSON'></a>JSON
 
@@ -76,6 +75,8 @@
 
 ## <a name='Test'></a>Test
 
+- [The Practical Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
+
 ### <a name='jUnit5'></a>jUnit5
 
 - [A Guide to JUnit 5](https://www.baeldung.com/junit-5)
@@ -91,6 +92,8 @@
 - https://github.com/intuit/karate
 - https://github.com/intuit/karate/tree/master/karate-demo
 - https://github.com/intuit/karate/tree/master/karate-mock-servlet
+- https://www.baeldung.com/karate-rest-api-testing
+- https://medium.com/cwi-software/karate-dsl-automatizando-testes-de-api-de-forma-simples-3624ab230198
 
 ## <a name='Java'></a>Java
 
