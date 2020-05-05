@@ -21,7 +21,7 @@ $ ./mvnw spring-boot:run -pl config
 While running:
 
 ```console
-$ ./mvnw test -Dtest=KarateRunner -pl config
+$ ./mvnw test -Dtest=KarateRunner -pl config -DargLine="-Dapp.server.baseUrl=http://localhost:8080"
 ```
 
 ## Design
