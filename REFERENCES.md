@@ -57,6 +57,10 @@
 - [Introdução a Clean Architecture](https://imasters.com.br/back-end/introducao-clean-architecture)
 - [The clean Architecture](https://medium.com/@icarovictor/the-clean-architecture-54df8a46dba1)
 
+## Test
+
+- [The Practical Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
+
 ## <a name='JSON'></a>JSON
 
 - [JSONschema.net](https://jsonschema.net/)

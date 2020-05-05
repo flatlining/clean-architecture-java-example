@@ -4,9 +4,24 @@ Generic queue management system
 
 ## Usage
 
+### Build
+
 ```console
 $ ./mvnw clean install
+```
+
+### Run
+
+```console
 $ ./mvnw spring-boot:run -pl config
+```
+
+#### API Tests
+
+While running:
+
+```console
+$ ./mvnw test -Dtest=KarateRunner -pl config
 ```
 
 ## Design
