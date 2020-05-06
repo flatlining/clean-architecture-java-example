@@ -4,9 +4,24 @@ Generic queue management system
 
 ## Usage
 
+### Build
+
 ```console
-$ ./mvnw clean install
-$ ./mvnw spring-boot:run -pl config
+$ ./mvnw clean install [-Dspring.profiles.active=dev]
+```
+
+### Run
+
+```console
+$ ./mvnw spring-boot:run -pl app
+```
+
+#### API Tests
+
+While running:
+
+```console
+$ ./mvnw test -pl app -Dtest=KarateRunner [-DargLine="-Dapp.server.baseUrl=http://localhost:8080"]
 ```
 
 ## Design
