@@ -13,7 +13,7 @@ $ ./mvnw clean install [-Dspring.profiles.active=dev]
 ### Run
 
 ```console
-$ ./mvnw spring-boot:run -pl config
+$ ./mvnw spring-boot:run -pl app
 ```
 
 #### API Tests
@@ -21,7 +21,7 @@ $ ./mvnw spring-boot:run -pl config
 While running:
 
 ```console
-$ ./mvnw test -Dtest=KarateRunner -pl config -DargLine="-Dapp.server.baseUrl=http://localhost:8080"
+$ ./mvnw test -pl app -Dtest=KarateRunner [-DargLine="-Dapp.server.baseUrl=http://localhost:8080"]
 ```
 
 ## Design
