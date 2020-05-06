@@ -24,6 +24,9 @@
 	* [Logging](#Logging)
 	* [JSON](#JSON-1)
 	* [Test](#Test-1)
+	* [Database](#Database)
+		* [SQLite](#SQLite)
+		* [H2](#H2)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -178,3 +181,15 @@
 - [Mockito Argument Matchers – any(), eq()](https://www.journaldev.com/21876/mockito-argument-matchers-any-eq)
 - [Mockito – Using Spies](https://www.baeldung.com/mockito-spy)
 - https://github.com/spring-projects/spring-framework/blob/master/spring-test/src/test/java/org/springframework/test/web/servlet/samples/standalone/AsyncTests.java
+
+### <a name='Database'></a>Database
+
+#### <a name='SQLite'></a>SQLite
+
+- https://www.sqlitetutorial.net/sqlite-java/
+- https://fonini.github.io/2010/02/18/usando-sqlite-com-java/
+- https://receitasdecodigo.com.br/java/usando-sqlite-em-java
+
+#### <a name='H2'></a>H2
+
+- https://www.baeldung.com/spring-boot-h2-database
