@@ -19,6 +19,7 @@
 * [Spring-Boot](#Spring-Boot-1)
 	* [Maven](#Maven-1)
 	* [Beans](#Beans)
+	* [Application Configuration](#ApplicationConfiguration)
 	* [Rest](#Rest)
 	* [Controller](#Controller)
 	* [Logging](#Logging)
@@ -148,6 +149,10 @@
 
 - [Creating and using bean definitions](https://docs.spring.io/spring-javaconfig/docs/1.0.0.m3/reference/html/creating-bean-definitions.html)
 
+### <a name='ApplicationConfiguration'></a>Application Configuration
+
+- [Spring boot application.properties maven multi-module projects](https://stackoverflow.com/a/33298125)
+
 ### <a name='Rest'></a>Rest
 
 - [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
@@ -193,3 +198,4 @@
 #### <a name='H2'></a>H2
 
 - https://www.baeldung.com/spring-boot-h2-database
+- https://h2database.com/html/tutorial.html#creating_new_databases
