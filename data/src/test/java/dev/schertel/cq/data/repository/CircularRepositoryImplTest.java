@@ -14,11 +14,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(RandomBeansExtension.class)
@@ -63,11 +64,13 @@ class CircularRepositoryImplTest {
         }
     }
 
-    @Disabled("Need to mock circularEntityRepository behavior")
     @Nested
     class RealAll {
         @Test
         void realAllEmpty() {
+            // Background
+            doReturn(Collections.emptyList()).when(circularEntityRepository).findAll();
+
             // Given
 
             // When
@@ -78,11 +81,9 @@ class CircularRepositoryImplTest {
         }
 
         @Test
-        void realAllNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> repository) {
+        void realAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existing) {
             // Background
-            repository.forEach(circular -> {
-                cut.create(circular);
-            });
+            doReturn(existing).when(circularEntityRepository).findAll();
 
             // Given
 
@@ -90,7 +91,15 @@ class CircularRepositoryImplTest {
             List<Circular> actual = cut.readAll();
 
             // Then
-            assertThat(actual).containsExactlyInAnyOrderElementsOf(repository);
+            List<Circular> expected = existing.stream()
+                    .map(e -> Circular.builder()
+                            .withId(Identity.of(e.getId()))
+                            .withName(e.getName())
+                            .withDescription(e.getDescription())
+                            .build())
+                    .collect(Collectors.toList());
+
+            assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
         }
     }
 
