@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.reset;
 
 @ExtendWith(RandomBeansExtension.class)
 @ExtendWith(MockitoExtension.class)
@@ -33,6 +34,7 @@ class CircularRepositoryImplTest {
 
     @BeforeEach
     void setUp() {
+        reset(circularEntityRepository);
         this.cut = new CircularRepositoryImpl(circularEntityRepository);
     }
 
@@ -106,54 +108,43 @@ class CircularRepositoryImplTest {
         }
     }
 
-    @Disabled("Need to mock circularEntityRepository behavior")
     @Nested
     class ReadByIdentity {
         @Test
-        void readByIdentityEmpty(@Random Identity randomIdentity) {
+        void readByIdentityNonExistent(@Random Identity nonExistentIdentity) {
+            // Background
+            doReturn(Optional.empty())
+                    .when(circularEntityRepository).findById(nonExistentIdentity.getId());
+
             // Given
 
             // When
-            Optional<Circular> actual = cut.readByIdentity(randomIdentity);
+            Optional<Circular> actual = cut.readByIdentity(nonExistentIdentity);
 
             // Then
             assertThat(actual).isNotPresent();
         }
 
         @Test
-        void readByIdentityNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> repository) {
+        void readByIdentityExistent(@Random CircularEntity existing) {
             // Background
-            repository.forEach(circular -> {
-                cut.create(circular);
-            });
-            assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
+            doReturn(Optional.of(existing))
+                    .when(circularEntityRepository).findById(existing.getId());
 
             // Given
-            java.util.Random rand = new java.util.Random();
-            Circular randomItem = repository.get(rand.nextInt(repository.size()));
+            Identity existentIdentity = Identity.of(existing.getId());
 
             // When
-            Optional<Circular> actual = cut.readByIdentity(randomItem.getId());
+            Optional<Circular> actual = cut.readByIdentity(existentIdentity);
 
             // Then
-            assertThat(actual).isPresent().hasValue(randomItem);
-        }
+            Circular expected = Circular.builder()
+                    .withId(existentIdentity)
+                    .withName(existing.getName())
+                    .withDescription(existing.getDescription())
+                    .build();
 
-        @Test
-        void readByIdentityNonExistent(@Random(size = 5, type = Circular.class) List<Circular> repository, @Random Identity randomIdentity) {
-            // Background
-            repository.forEach(circular -> {
-                cut.create(circular);
-            });
-            assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
-
-            // Given
-
-            // When
-            Optional<Circular> actual = cut.readByIdentity(randomIdentity);
-
-            // Then
-            assertThat(actual).isNotPresent();
+            assertThat(actual).isPresent().contains(expected);
         }
     }
 
