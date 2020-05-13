@@ -189,39 +189,31 @@ class CircularRepositoryImplTest {
         }
     }
 
-    @Disabled("Need to mock circularEntityRepository behavior")
     @Nested
     class DeleteByIdentity {
         @Test
-        void deleteByIdentityEmpty(@Random Identity randomIdentity) {
-            // Given
-
-            // When
-            Optional<Circular> actual = cut.deleteByIdentity(randomIdentity);
-
-            // Then
-            assertThat(actual).isNotPresent();
-        }
-
-        @Test
-        void deleteByIdentityNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> repository) {
+        void deleteByIdentityExistent(@Random CircularEntity existing) {
             // Background
-            repository.forEach(circular -> {
-                cut.create(circular);
-            });
-            assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
+            doReturn(Optional.of(existing))
+                    .when(circularEntityRepository).findById(existing.getId());
 
             // Given
-            java.util.Random rand = new java.util.Random();
-            Circular randomItem = repository.get(rand.nextInt(repository.size()));
+            Identity identity = Identity.of(existing.getId());
 
             // When
-            Optional<Circular> actual = cut.deleteByIdentity(randomItem.getId());
+            Optional<Circular> actual = cut.deleteByIdentity(identity);
 
             // Then
-            assertThat(actual).isPresent().hasValue(randomItem);
+            Circular expected = Circular.builder()
+                    .withId(Identity.of(existing.getId()))
+                    .withName(existing.getName())
+                    .withDescription(existing.getDescription())
+                    .build();
+
+            assertThat(actual).isPresent().contains(expected);
         }
 
+        @Disabled("Need to mock circularEntityRepository behavior")
         @Test
         void deleteByIdentityNonExistent(@Random(size = 5, type = Circular.class) List<Circular> repository, @Random Identity randomIdentity) {
             // Background
