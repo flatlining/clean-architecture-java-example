@@ -3,6 +3,7 @@ package dev.schertel.cq.data.repository;
 import dev.schertel.cq.core.domain.Circular;
 import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.data.repository.circular.CircularEntityRepository;
+import dev.schertel.cq.data.repository.circular.entity.CircularEntity;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,18 +12,21 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(RandomBeansExtension.class)
-@Disabled("Need to mock circularEntityRepository behavior")
+@ExtendWith(MockitoExtension.class)
 class CircularRepositoryImplTest {
 
     @Mock
-    CircularEntityRepository circularEntityRepository;
+    private CircularEntityRepository circularEntityRepository;
 
     private CircularRepositoryImpl cut;
 
@@ -34,17 +38,32 @@ class CircularRepositoryImplTest {
     @Nested
     class Create {
         @Test
-        void create(@Random Circular expected) {
+        void create(@Random CircularEntity existing) {
+            // Background
+            doReturn(existing).when(circularEntityRepository).save(any(CircularEntity.class));
+
             // Given
+            Circular toCreate = Circular.builder()
+                    .withId(Identity.of(existing.getId()))
+                    .withName(existing.getName())
+                    .withDescription(existing.getDescription())
+                    .build();
 
             // When
-            Circular actual = cut.create(expected);
+            Circular actual = cut.create(toCreate);
 
             // Then
+            Circular expected = Circular.builder()
+                    .withId(Identity.of(existing.getId()))
+                    .withName(existing.getName())
+                    .withDescription(existing.getDescription())
+                    .build();
+
             assertThat(actual).isEqualTo(expected);
         }
     }
 
+    @Disabled("Need to mock circularEntityRepository behavior")
     @Nested
     class RealAll {
         @Test
@@ -75,6 +94,7 @@ class CircularRepositoryImplTest {
         }
     }
 
+    @Disabled("Need to mock circularEntityRepository behavior")
     @Nested
     class ReadByIdentity {
         @Test
@@ -125,6 +145,7 @@ class CircularRepositoryImplTest {
         }
     }
 
+    @Disabled("Need to mock circularEntityRepository behavior")
     @Nested
     class DeleteAll {
         @Test
@@ -154,6 +175,7 @@ class CircularRepositoryImplTest {
         }
     }
 
+    @Disabled("Need to mock circularEntityRepository behavior")
     @Nested
     class DeleteByIdentity {
         @Test
