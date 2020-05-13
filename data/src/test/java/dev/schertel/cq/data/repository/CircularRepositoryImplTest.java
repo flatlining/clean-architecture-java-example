@@ -40,16 +40,16 @@ class CircularRepositoryImplTest {
     @Nested
     class Create {
         @Test
-        void create(@Random CircularEntity existing) {
+        void create(@Random CircularEntity existent) {
             // Background
-            doReturn(existing)
-                    .when(circularEntityRepository).save(existing);
+            doReturn(existent)
+                    .when(circularEntityRepository).save(existent);
 
             // Given
             Circular toCreate = Circular.builder()
-                    .withId(Identity.of(existing.getId()))
-                    .withName(existing.getName())
-                    .withDescription(existing.getDescription())
+                    .withId(Identity.of(existent.getId()))
+                    .withName(existent.getName())
+                    .withDescription(existent.getDescription())
                     .build();
 
             // When
@@ -57,9 +57,9 @@ class CircularRepositoryImplTest {
 
             // Then
             Circular expected = Circular.builder()
-                    .withId(Identity.of(existing.getId()))
-                    .withName(existing.getName())
-                    .withDescription(existing.getDescription())
+                    .withId(Identity.of(existent.getId()))
+                    .withName(existent.getName())
+                    .withDescription(existent.getDescription())
                     .build();
 
             assertThat(actual).isEqualTo(expected);
@@ -84,9 +84,9 @@ class CircularRepositoryImplTest {
         }
 
         @Test
-        void realAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existing) {
+        void realAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existent) {
             // Background
-            doReturn(existing)
+            doReturn(existent)
                     .when(circularEntityRepository).findAll();
 
             // Given
@@ -95,7 +95,7 @@ class CircularRepositoryImplTest {
             List<Circular> actual = cut.readAll();
 
             // Then
-            List<Circular> expected = existing.stream()
+            List<Circular> expected = existent.stream()
                     .map(e -> Circular.builder()
                             .withId(Identity.of(e.getId()))
                             .withName(e.getName())
@@ -110,12 +110,13 @@ class CircularRepositoryImplTest {
     @Nested
     class ReadByIdentity {
         @Test
-        void readByIdentityNonExistent(@Random Identity nonExistentIdentity) {
+        void readByIdentityNonExistent(@Random String nonExistentId) {
             // Background
             doReturn(Optional.empty())
-                    .when(circularEntityRepository).findById(nonExistentIdentity.getId());
+                    .when(circularEntityRepository).findById(nonExistentId);
 
             // Given
+            Identity nonExistentIdentity = Identity.of(nonExistentId);
 
             // When
             Optional<Circular> actual = cut.readByIdentity(nonExistentIdentity);
@@ -125,22 +126,22 @@ class CircularRepositoryImplTest {
         }
 
         @Test
-        void readByIdentityExistent(@Random CircularEntity existing) {
+        void readByIdentityExistent(@Random CircularEntity existent) {
             // Background
-            doReturn(Optional.of(existing))
-                    .when(circularEntityRepository).findById(existing.getId());
+            doReturn(Optional.of(existent))
+                    .when(circularEntityRepository).findById(existent.getId());
 
             // Given
-            Identity existentIdentity = Identity.of(existing.getId());
+            Identity existentIdentity = Identity.of(existent.getId());
 
             // When
             Optional<Circular> actual = cut.readByIdentity(existentIdentity);
 
             // Then
             Circular expected = Circular.builder()
-                    .withId(existentIdentity)
-                    .withName(existing.getName())
-                    .withDescription(existing.getDescription())
+                    .withId(Identity.of(existent.getId()))
+                    .withName(existent.getName())
+                    .withDescription(existent.getDescription())
                     .build();
 
             assertThat(actual).isPresent().contains(expected);
@@ -165,9 +166,9 @@ class CircularRepositoryImplTest {
         }
 
         @Test
-        void deleteAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existing) {
+        void deleteAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existent) {
             // Background
-            doReturn(existing)
+            doReturn(existent)
                     .when(circularEntityRepository).findAll();
 
             // Given
@@ -176,7 +177,7 @@ class CircularRepositoryImplTest {
             List<Circular> actual = cut.deleteAll();
 
             // Then
-            List<Circular> expected = existing.stream()
+            List<Circular> expected = existent.stream()
                     .map(e -> Circular.builder()
                             .withId(Identity.of(e.getId()))
                             .withName(e.getName())
@@ -191,37 +192,38 @@ class CircularRepositoryImplTest {
     @Nested
     class DeleteByIdentity {
         @Test
-        void deleteByIdentityExistent(@Random CircularEntity existing) {
+        void deleteByIdentityExistent(@Random CircularEntity existent) {
             // Background
-            doReturn(Optional.of(existing))
-                    .when(circularEntityRepository).findById(existing.getId());
+            doReturn(Optional.of(existent))
+                    .when(circularEntityRepository).findById(existent.getId());
 
             // Given
-            Identity identity = Identity.of(existing.getId());
+            Identity existentIdentity = Identity.of(existent.getId());
 
             // When
-            Optional<Circular> actual = cut.deleteByIdentity(identity);
+            Optional<Circular> actual = cut.deleteByIdentity(existentIdentity);
 
             // Then
             Circular expected = Circular.builder()
-                    .withId(Identity.of(existing.getId()))
-                    .withName(existing.getName())
-                    .withDescription(existing.getDescription())
+                    .withId(Identity.of(existent.getId()))
+                    .withName(existent.getName())
+                    .withDescription(existent.getDescription())
                     .build();
 
             assertThat(actual).isPresent().contains(expected);
         }
-        
+
         @Test
-        void deleteByIdentityNonExistent(@Random Identity randomIdentity) {
+        void deleteByIdentityNonExistent(@Random String nonExistentId) {
             // Background
             doReturn(Optional.empty())
-                    .when(circularEntityRepository).findById(randomIdentity.getId());
+                    .when(circularEntityRepository).findById(nonExistentId);
 
             // Given
+            Identity nonExistentIdentity = Identity.of(nonExistentId);
 
             // When
-            Optional<Circular> actual = cut.deleteByIdentity(randomIdentity);
+            Optional<Circular> actual = cut.deleteByIdentity(nonExistentIdentity);
 
             // Then
             assertThat(actual).isNotPresent();
