@@ -7,7 +7,6 @@ import dev.schertel.cq.data.repository.circular.entity.CircularEntity;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -212,15 +211,12 @@ class CircularRepositoryImplTest {
 
             assertThat(actual).isPresent().contains(expected);
         }
-
-        @Disabled("Need to mock circularEntityRepository behavior")
+        
         @Test
-        void deleteByIdentityNonExistent(@Random(size = 5, type = Circular.class) List<Circular> repository, @Random Identity randomIdentity) {
+        void deleteByIdentityNonExistent(@Random Identity randomIdentity) {
             // Background
-            repository.forEach(circular -> {
-                cut.create(circular);
-            });
-            assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
+            doReturn(Optional.empty())
+                    .when(circularEntityRepository).findById(randomIdentity.getId());
 
             // Given
 
