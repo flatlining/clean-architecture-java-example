@@ -40,7 +40,7 @@ class CircularRepositoryImplTest {
         @Test
         void create(@Random CircularEntity existing) {
             // Background
-            doReturn(existing).when(circularEntityRepository).save(any(CircularEntity.class));
+            doReturn(existing).when(circularEntityRepository).save(existing);
 
             // Given
             Circular toCreate = Circular.builder()
