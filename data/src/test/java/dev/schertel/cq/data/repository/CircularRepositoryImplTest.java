@@ -148,11 +148,14 @@ class CircularRepositoryImplTest {
         }
     }
 
-    @Disabled("Need to mock circularEntityRepository behavior")
     @Nested
     class DeleteAll {
         @Test
         void deleteAllEmpty() {
+            // Background
+            doReturn(Collections.emptyList())
+                    .when(circularEntityRepository).findAll();
+
             // Given
 
             // When
@@ -163,18 +166,26 @@ class CircularRepositoryImplTest {
         }
 
         @Test
-        void deleteAllNonEmpty(@Random(size = 5, type = Circular.class) List<Circular> repository) {
+        void deleteAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existing) {
             // Background
-            repository.forEach(circular -> {
-                cut.create(circular);
-            });
-            assertThat(cut.readAll()).containsExactlyInAnyOrderElementsOf(repository);
+            doReturn(existing)
+                    .when(circularEntityRepository).findAll();
 
             // Given
+
+            // When
             List<Circular> actual = cut.deleteAll();
 
             // Then
-            assertThat(actual).containsExactlyInAnyOrderElementsOf(repository);
+            List<Circular> expected = existing.stream()
+                    .map(e -> Circular.builder()
+                            .withId(Identity.of(e.getId()))
+                            .withName(e.getName())
+                            .withDescription(e.getDescription())
+                            .build()
+                    ).collect(Collectors.toList());
+
+            assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
         }
     }
 
