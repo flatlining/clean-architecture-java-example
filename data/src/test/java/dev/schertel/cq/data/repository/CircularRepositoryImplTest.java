@@ -41,7 +41,8 @@ class CircularRepositoryImplTest {
         @Test
         void create(@Random CircularEntity existing) {
             // Background
-            doReturn(existing).when(circularEntityRepository).save(existing);
+            doReturn(existing)
+                    .when(circularEntityRepository).save(existing);
 
             // Given
             Circular toCreate = Circular.builder()
@@ -69,7 +70,8 @@ class CircularRepositoryImplTest {
         @Test
         void realAllEmpty() {
             // Background
-            doReturn(Collections.emptyList()).when(circularEntityRepository).findAll();
+            doReturn(Collections.emptyList())
+                    .when(circularEntityRepository).findAll();
 
             // Given
 
@@ -83,7 +85,8 @@ class CircularRepositoryImplTest {
         @Test
         void realAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existing) {
             // Background
-            doReturn(existing).when(circularEntityRepository).findAll();
+            doReturn(existing)
+                    .when(circularEntityRepository).findAll();
 
             // Given
 
