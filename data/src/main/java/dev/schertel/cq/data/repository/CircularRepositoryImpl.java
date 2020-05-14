@@ -3,8 +3,8 @@ package dev.schertel.cq.data.repository;
 import dev.schertel.cq.core.domain.Circular;
 import dev.schertel.cq.core.domain.Identity;
 import dev.schertel.cq.core.usecase.circular.CircularRepository;
-import dev.schertel.cq.data.repository.circular.CircularEntityRepository;
-import dev.schertel.cq.data.repository.circular.entity.CircularEntity;
+import dev.schertel.cq.data.database.circular.CircularEntityRepository;
+import dev.schertel.cq.data.database.circular.entity.CircularEntity;
 
 import java.util.List;
 import java.util.Optional;

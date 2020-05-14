@@ -2,8 +2,8 @@ package dev.schertel.cq.data.repository;
 
 import dev.schertel.cq.core.domain.Circular;
 import dev.schertel.cq.core.domain.Identity;
-import dev.schertel.cq.data.repository.circular.CircularEntityRepository;
-import dev.schertel.cq.data.repository.circular.entity.CircularEntity;
+import dev.schertel.cq.data.database.circular.CircularEntityRepository;
+import dev.schertel.cq.data.database.circular.entity.CircularEntity;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package dev.schertel.cq.data.repository.circular.entity;
+package dev.schertel.cq.data.database.circular.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
