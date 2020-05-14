@@ -21,11 +21,14 @@ public class CircularRepositoryImpl implements CircularRepository {
 
     @Override
     public Circular create(Circular circular) {
-        CircularEntity entity = new CircularEntity();
-        entity.setId(circular.getId().getId());
-        entity.setName(circular.getName());
-        entity.setDescription(circular.getDescription());
+        CircularEntity entity = CircularEntity.builder()
+                .withId(circular.getId().getId())
+                .withName(circular.getName())
+                .withDescription(circular.getDescription())
+                .build();
+
         CircularEntity saved = repository.save(entity);
+
         return Circular.builder()
                 .withId(Identity.of(saved.getId()))
                 .withName(saved.getName())
