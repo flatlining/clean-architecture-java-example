@@ -24,6 +24,54 @@ class CircularEntityTest {
         this.cut = CircularEntity.builder();
     }
 
+    @Test
+    void getId(@Random String id) {
+        // Given
+        CircularEntity actual = new CircularEntity();
+
+        // When
+        actual.setId(id);
+
+        // Then
+        assertThat(actual).isNotNull().satisfies(circularEntity -> {
+            assertThat(circularEntity.getId()).isEqualTo(id);
+            assertThat(circularEntity.getName()).isNull();
+            assertThat(circularEntity.getDescription()).isNull();
+        });
+    }
+
+    @Test
+    void getName(@Random String name) {
+        // Given
+        CircularEntity actual = new CircularEntity();
+
+        // When
+        actual.setName(name);
+
+        // Then
+        assertThat(actual).isNotNull().satisfies(circularEntity -> {
+            assertThat(circularEntity.getId()).isNull();
+            assertThat(circularEntity.getName()).isEqualTo(name);
+            assertThat(circularEntity.getDescription()).isNull();
+        });
+    }
+
+    @Test
+    void getDescription(@Random String description) {
+        // Given
+        CircularEntity actual = new CircularEntity();
+
+        // When
+        actual.setDescription(description);
+
+        // Then
+        assertThat(actual).isNotNull().satisfies(circularEntity -> {
+            assertThat(circularEntity.getId()).isNull();
+            assertThat(circularEntity.getName()).isNull();
+            assertThat(circularEntity.getDescription()).isEqualTo(description);
+        });
+    }
+
     @Nested
     class Builder {
         @Test
