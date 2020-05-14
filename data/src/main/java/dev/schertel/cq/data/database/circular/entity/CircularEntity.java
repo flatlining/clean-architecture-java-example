@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"name", "description"})
 @ToString
 @Entity
 public class CircularEntity {
