@@ -19,11 +19,15 @@
 * [Spring-Boot](#Spring-Boot-1)
 	* [Maven](#Maven-1)
 	* [Beans](#Beans)
+	* [Application Configuration](#ApplicationConfiguration)
 	* [Rest](#Rest)
 	* [Controller](#Controller)
 	* [Logging](#Logging)
 	* [JSON](#JSON-1)
 	* [Test](#Test-1)
+	* [Database](#Database)
+		* [SQLite](#SQLite)
+		* [H2](#H2)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -145,6 +149,10 @@
 
 - [Creating and using bean definitions](https://docs.spring.io/spring-javaconfig/docs/1.0.0.m3/reference/html/creating-bean-definitions.html)
 
+### <a name='ApplicationConfiguration'></a>Application Configuration
+
+- [Spring boot application.properties maven multi-module projects](https://stackoverflow.com/a/33298125)
+
 ### <a name='Rest'></a>Rest
 
 - [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
@@ -178,3 +186,16 @@
 - [Mockito Argument Matchers – any(), eq()](https://www.journaldev.com/21876/mockito-argument-matchers-any-eq)
 - [Mockito – Using Spies](https://www.baeldung.com/mockito-spy)
 - https://github.com/spring-projects/spring-framework/blob/master/spring-test/src/test/java/org/springframework/test/web/servlet/samples/standalone/AsyncTests.java
+
+### <a name='Database'></a>Database
+
+#### <a name='SQLite'></a>SQLite
+
+- https://www.sqlitetutorial.net/sqlite-java/
+- https://fonini.github.io/2010/02/18/usando-sqlite-com-java/
+- https://receitasdecodigo.com.br/java/usando-sqlite-em-java
+
+#### <a name='H2'></a>H2
+
+- https://www.baeldung.com/spring-boot-h2-database
+- https://h2database.com/html/tutorial.html#creating_new_databases

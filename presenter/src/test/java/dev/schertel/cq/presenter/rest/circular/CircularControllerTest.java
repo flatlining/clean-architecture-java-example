@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -89,6 +90,10 @@ class CircularControllerTest {
     @TestConfiguration
     @ComponentScan(basePackages = {"dev.schertel.cq.presenter.rest.circular"})
     static class Config {
+    }
+
+    @SpringBootApplication
+    static class CentralQueueApplication {
     }
 
     @Nested
