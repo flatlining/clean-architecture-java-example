@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -54,6 +55,9 @@ class CircularControllerTest {
     private CircularMapper circularMapper;
     @SpyBean
     private UseCaseExecutorImpl useCaseExecutor;
+
+    @MockBean
+    private Logger logger;
 
     @MockBean
     private CreateCircularUseCase createCircularUseCase;

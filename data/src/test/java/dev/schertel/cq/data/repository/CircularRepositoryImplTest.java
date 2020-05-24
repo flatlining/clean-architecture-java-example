@@ -10,9 +10,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,12 +22,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(RandomBeansExtension.class)
 @ExtendWith(MockitoExtension.class)
 class CircularRepositoryImplTest {
+    @Mock
+    Logger logger;
 
     @Mock
     private CircularEntityRepository circularEntityRepository;
@@ -35,7 +38,7 @@ class CircularRepositoryImplTest {
 
     @BeforeEach
     void setUp() {
-        reset(circularEntityRepository);
+        reset(logger, circularEntityRepository);
     }
 
     @Nested
@@ -64,13 +67,15 @@ class CircularRepositoryImplTest {
                     .build();
 
             assertThat(actual).isEqualTo(expected);
+
+            verify(logger, times(2)).info(contains("create"), any(Circular.class));
         }
     }
 
     @Nested
-    class RealAll {
+    class ReadAll {
         @Test
-        void realAllEmpty() {
+        void readAllEmpty() {
             // Background
             doReturn(Collections.emptyList())
                     .when(circularEntityRepository).findAll();
@@ -82,10 +87,12 @@ class CircularRepositoryImplTest {
 
             // Then
             assertThat(actual).isEmpty();
+
+            verify(logger, times(1)).info(contains("readAll"), ArgumentMatchers.<List<Circular>>any());
         }
 
         @Test
-        void realAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existent) {
+        void readAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existent) {
             // Background
             doReturn(existent)
                     .when(circularEntityRepository).findAll();
@@ -105,6 +112,8 @@ class CircularRepositoryImplTest {
                     .collect(Collectors.toList());
 
             assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
+
+            verify(logger, times(1)).info(contains("readAll"), ArgumentMatchers.<List<Circular>>any());
         }
     }
 
@@ -124,6 +133,8 @@ class CircularRepositoryImplTest {
 
             // Then
             assertThat(actual).isNotPresent();
+
+            verify(logger, times(2)).info(contains("readByIdentity"), any(Object.class));
         }
 
         @Test
@@ -146,6 +157,8 @@ class CircularRepositoryImplTest {
                     .build();
 
             assertThat(actual).isPresent().contains(expected);
+
+            verify(logger, times(2)).info(contains("readByIdentity"), any(Object.class));
         }
     }
 
@@ -164,6 +177,8 @@ class CircularRepositoryImplTest {
 
             // Then
             assertThat(actual).isEmpty();
+
+            verify(logger, times(1)).info(contains("deleteAll"), ArgumentMatchers.<List<Circular>>any());
         }
 
         @Test
@@ -187,6 +202,8 @@ class CircularRepositoryImplTest {
                     ).collect(Collectors.toList());
 
             assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
+
+            verify(logger, times(1)).info(contains("deleteAll"), ArgumentMatchers.<List<Circular>>any());
         }
     }
 
@@ -212,6 +229,8 @@ class CircularRepositoryImplTest {
                     .build();
 
             assertThat(actual).isPresent().contains(expected);
+
+            verify(logger, times(2)).info(contains("deleteByIdentity"), any(Object.class));
         }
 
         @Test
@@ -228,6 +247,8 @@ class CircularRepositoryImplTest {
 
             // Then
             assertThat(actual).isNotPresent();
+
+            verify(logger, times(2)).info(contains("deleteByIdentity"), any(Object.class));
         }
     }
 }
