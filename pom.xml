@@ -26,7 +26,7 @@
 		<maven.compiler.release>${java.version}</maven.compiler.release>
 		<maven.compiler.version>3.8.1</maven.compiler.version>
 		<maven.compiler.plugin.version>${maven.compiler.version}</maven.compiler.plugin.version>
-		<asm.version>6.2</asm.version>
+		<asm.version>8.0.1</asm.version>
 		<maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
 		<spring.version>2.3.0.RELEASE</spring.version>
 		<modelmapper.version>2.3.7</modelmapper.version>
