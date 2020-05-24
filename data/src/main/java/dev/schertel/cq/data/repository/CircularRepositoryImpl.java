@@ -24,7 +24,7 @@ public class CircularRepositoryImpl implements CircularRepository {
 
     @Override
     public Circular create(Circular circular) {
-        logger.info("Creating: {}", circular);
+        logger.info("create({})", circular);
 
         CircularEntity entity = CircularEntity.builder()
                 .withId(circular.getId().getId())
@@ -40,18 +40,22 @@ public class CircularRepositoryImpl implements CircularRepository {
                 .withDescription(saved.getDescription())
                 .build();
 
-        logger.info("Created: {}", created);
+        logger.info("create(): {}", created);
         return created;
     }
 
     @Override
     public List<Circular> readAll() {
-        return StreamSupport.stream(repository.findAll().spliterator(), false).map(t -> Circular.builder()
-                .withId(Identity.of(t.getId()))
-                .withName(t.getName())
-                .withDescription(t.getDescription())
-                .build()
-        ).collect(Collectors.toList());
+        List<Circular> existing = StreamSupport.stream(repository.findAll().spliterator(), false)
+                .map(t -> Circular.builder()
+                        .withId(Identity.of(t.getId()))
+                        .withName(t.getName())
+                        .withDescription(t.getDescription())
+                        .build()
+                ).collect(Collectors.toList());
+
+        logger.info("readAll(): {}", existing);
+        return existing;
     }
 
     @Override

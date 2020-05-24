@@ -21,8 +21,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(RandomBeansExtension.class)
 @ExtendWith(MockitoExtension.class)
@@ -67,13 +66,14 @@ class CircularRepositoryImplTest {
                     .build();
 
             assertThat(actual).isEqualTo(expected);
+            verify(logger, times(2)).info(anyString(), any(Circular.class));
         }
     }
 
     @Nested
-    class RealAll {
+    class ReadAll {
         @Test
-        void realAllEmpty() {
+        void readAllEmpty() {
             // Background
             doReturn(Collections.emptyList())
                     .when(circularEntityRepository).findAll();
@@ -85,10 +85,11 @@ class CircularRepositoryImplTest {
 
             // Then
             assertThat(actual).isEmpty();
+            verify(logger, times(1)).info(anyString(), anyList());
         }
 
         @Test
-        void realAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existent) {
+        void readAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existent) {
             // Background
             doReturn(existent)
                     .when(circularEntityRepository).findAll();
