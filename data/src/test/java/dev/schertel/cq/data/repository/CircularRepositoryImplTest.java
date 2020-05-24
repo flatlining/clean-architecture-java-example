@@ -38,7 +38,7 @@ class CircularRepositoryImplTest {
 
     @BeforeEach
     void setUp() {
-        reset(circularEntityRepository);
+        reset(logger, circularEntityRepository);
     }
 
     @Nested

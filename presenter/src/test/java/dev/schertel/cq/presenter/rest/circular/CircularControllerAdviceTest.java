@@ -8,19 +8,29 @@ import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(RandomBeansExtension.class)
+@ExtendWith(MockitoExtension.class)
 class CircularControllerAdviceTest {
+    @Mock
+    Logger logger;
 
+    @InjectMocks
     CircularControllerAdvice cut;
 
     @BeforeEach
     void setUp() {
-        this.cut = new CircularControllerAdvice();
+        reset(logger);
     }
 
     @Test
@@ -33,6 +43,7 @@ class CircularControllerAdviceTest {
 
         // Then
         HttpStatus expectedHttpStatus = HttpStatus.NOT_FOUND;
+
         assertThat(actual.getStatusCode()).isEqualTo(expectedHttpStatus);
         assertThat(actual.getBody()).isNotNull().satisfies(apiResponse -> {
             assertThat(apiResponse.getTimestamp()).isNotNull();
@@ -40,6 +51,8 @@ class CircularControllerAdviceTest {
             assertThat(apiResponse.getReason()).isEqualTo(expectedHttpStatus.getReasonPhrase());
             assertThat(apiResponse.getMessage()).contains(value);
         });
+
+        verify(logger, times(1)).error(anyString(), anyString());
     }
 
     @Test
@@ -52,6 +65,7 @@ class CircularControllerAdviceTest {
 
         // Then
         HttpStatus expectedHttpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+
         assertThat(actual.getStatusCode()).isEqualTo(expectedHttpStatus);
         assertThat(actual.getBody()).isNotNull().satisfies(apiResponse -> {
             assertThat(apiResponse.getTimestamp()).isNotNull();
@@ -59,5 +73,7 @@ class CircularControllerAdviceTest {
             assertThat(apiResponse.getReason()).isEqualTo(expectedHttpStatus.getReasonPhrase());
             assertThat(apiResponse.getMessage()).contains(value);
         });
+
+        verify(logger, times(1)).error(anyString(), anyString());
     }
 }
