@@ -60,27 +60,38 @@ public class CircularRepositoryImpl implements CircularRepository {
 
     @Override
     public Optional<Circular> readByIdentity(Identity identity) {
+        logger.info("readByIdentity({})", identity);
+
         Optional<CircularEntity> ce = repository.findById(identity.getId());
-        return ce.map(t -> Circular.builder()
+        Optional<Circular> read = ce.map(t -> Circular.builder()
                 .withId(Identity.of(t.getId()))
                 .withName(t.getName())
                 .withDescription(t.getDescription())
                 .build());
+
+        logger.info("readByIdentity(): {}", read);
+        return read;
     }
 
     @Override
     public List<Circular> deleteAll() {
-        List<Circular> deleteValues = readAll();
+        List<Circular> deleted = readAll();
         repository.deleteAll();
-        return deleteValues;
+
+        logger.info("deleteAll(): {}", deleted);
+        return deleted;
     }
 
     @Override
     public Optional<Circular> deleteByIdentity(Identity identity) {
+        logger.info("deleteByIdentity({})", identity);
+
         Optional<Circular> toDelete = readByIdentity(identity);
         if (toDelete.isPresent()) {
             repository.deleteById(identity.getId());
         }
+
+        logger.info("deleteByIdentity(): {}", toDelete);
         return toDelete;
     }
 }
