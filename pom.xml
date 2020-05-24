@@ -21,11 +21,11 @@
 		<revision>0.2.0</revision>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
-		<maven.compiler.version>3.8.0</maven.compiler.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.release>${java.version}</maven.compiler.release>
-		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+		<maven.compiler.version>3.8.1</maven.compiler.version>
+		<maven.compiler.plugin.version>${maven.compiler.version}</maven.compiler.plugin.version>
 		<asm.version>6.2</asm.version>
 		<maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
 		<spring.version>2.3.0.RELEASE</spring.version>
