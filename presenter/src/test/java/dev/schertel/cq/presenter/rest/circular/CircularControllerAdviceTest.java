@@ -52,7 +52,7 @@ class CircularControllerAdviceTest {
             assertThat(apiResponse.getMessage()).contains(value);
         });
 
-        verify(logger, times(1)).error(anyString(), anyString());
+        verify(logger, times(1)).error(anyString(), eq(exception.toString()));
     }
 
     @Test
@@ -74,6 +74,6 @@ class CircularControllerAdviceTest {
             assertThat(apiResponse.getMessage()).contains(value);
         });
 
-        verify(logger, times(1)).error(anyString(), anyString());
+        verify(logger, times(1)).error(anyString(), eq(exception.toString()));
     }
 }
