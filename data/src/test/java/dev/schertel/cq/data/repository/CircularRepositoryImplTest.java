@@ -68,7 +68,7 @@ class CircularRepositoryImplTest {
 
             assertThat(actual).isEqualTo(expected);
 
-            verify(logger, times(2)).info(anyString(), any(Circular.class));
+            verify(logger, times(2)).info(contains("create"), any(Circular.class));
         }
     }
 
@@ -88,7 +88,7 @@ class CircularRepositoryImplTest {
             // Then
             assertThat(actual).isEmpty();
 
-            verify(logger, times(1)).info(anyString(), ArgumentMatchers.<List<Circular>>any());
+            verify(logger, times(1)).info(contains("readAll"), ArgumentMatchers.<List<Circular>>any());
         }
 
         @Test
@@ -113,7 +113,7 @@ class CircularRepositoryImplTest {
 
             assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
 
-            verify(logger, times(1)).info(anyString(), ArgumentMatchers.<List<Circular>>any());
+            verify(logger, times(1)).info(contains("readAll"), ArgumentMatchers.<List<Circular>>any());
         }
     }
 
@@ -134,7 +134,7 @@ class CircularRepositoryImplTest {
             // Then
             assertThat(actual).isNotPresent();
 
-            verify(logger, times(2)).info(anyString(), any(Object.class));
+            verify(logger, times(2)).info(contains("readByIdentity"), any(Object.class));
         }
 
         @Test
@@ -158,7 +158,7 @@ class CircularRepositoryImplTest {
 
             assertThat(actual).isPresent().contains(expected);
 
-            verify(logger, times(2)).info(anyString(), any(Object.class));
+            verify(logger, times(2)).info(contains("readByIdentity"), any(Object.class));
         }
     }
 
@@ -178,7 +178,7 @@ class CircularRepositoryImplTest {
             // Then
             assertThat(actual).isEmpty();
 
-            verify(logger, times(2)).info(anyString(), ArgumentMatchers.<List<Circular>>any());
+            verify(logger, times(1)).info(contains("deleteAll"), ArgumentMatchers.<List<Circular>>any());
         }
 
         @Test
@@ -203,7 +203,7 @@ class CircularRepositoryImplTest {
 
             assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
 
-            verify(logger, times(2)).info(anyString(), ArgumentMatchers.<List<Circular>>any());
+            verify(logger, times(1)).info(contains("deleteAll"), ArgumentMatchers.<List<Circular>>any());
         }
     }
 
@@ -230,7 +230,7 @@ class CircularRepositoryImplTest {
 
             assertThat(actual).isPresent().contains(expected);
 
-            verify(logger, times(4)).info(anyString(), any(Object.class));
+            verify(logger, times(2)).info(contains("deleteByIdentity"), any(Object.class));
         }
 
         @Test
@@ -248,7 +248,7 @@ class CircularRepositoryImplTest {
             // Then
             assertThat(actual).isNotPresent();
 
-            verify(logger, times(4)).info(anyString(), any(Object.class));
+            verify(logger, times(2)).info(contains("deleteByIdentity"), any(Object.class));
         }
     }
 }
