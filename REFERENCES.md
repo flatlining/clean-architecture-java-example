@@ -77,6 +77,12 @@
 - [Maven – How to create a Java project](https://mkyong.com/maven/how-to-create-a-java-project-with-maven/)
   - https://github.com/mkyong/maven-examples
 
+To print a [flat](http://www.janosgyerik.com/print-a-flat-list-of-dependencies-of-a-maven-project/) dependency tree:
+
+```console
+$ ./mvnw dependency:list | sed -ne s/..........// -e /patterntoexclude/d -e s/:compile//p -e s/:runtime//p | sort | uniq
+```
+
 ## <a name='Test'></a>Test
 
 - [The Practical Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
