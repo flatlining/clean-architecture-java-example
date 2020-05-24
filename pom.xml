@@ -21,14 +21,14 @@
 		<revision>0.2.0</revision>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
-		<maven.compiler.version>3.8.0</maven.compiler.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.release>${java.version}</maven.compiler.release>
-		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-		<asm.version>6.2</asm.version>
+		<maven.compiler.version>3.8.1</maven.compiler.version>
+		<maven.compiler.plugin.version>${maven.compiler.version}</maven.compiler.plugin.version>
+		<asm.version>8.0.1</asm.version>
 		<maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
-		<spring.version>2.2.6.RELEASE</spring.version>
+		<spring.version>2.3.0.RELEASE</spring.version>
 		<modelmapper.version>2.3.7</modelmapper.version>
 		<slf4j.version>1.7.30</slf4j.version>
 		<h2.version>1.4.200</h2.version>
@@ -36,10 +36,10 @@
 		<junit.jupiter.version>5.6.2</junit.jupiter.version>
 		<to.string.verifier.version>1.4.8</to.string.verifier.version>
 		<junit.extensions.version>2.4.0</junit.extensions.version>
-		<equalsverifier.version>3.1.13</equalsverifier.version>
+		<equalsverifier.version>3.3</equalsverifier.version>
 		<json.unit.version>2.17.0</json.unit.version>
-		<mockito.version>3.1.0</mockito.version>
-		<assertj.version>3.11.1</assertj.version>
+		<mockito.version>3.3.3</mockito.version>
+		<assertj.version>3.16.1</assertj.version>
 		<karate.version>0.9.5</karate.version>
 	</properties>
 
