@@ -17,12 +17,12 @@ Clear Architecture
 
    The center of your application is not the database. Nor is it one or more of the frameworks you may be using. *The center of your application is the use cases of your application*
   
-   -- `Unclebob <https://blog.cleancoder.com/uncle-bob/2012/05/15/NODB.html>`__
+   -- `Unclebob <NO DB_>`__
 
 Why?
 ****
 
-(`source <https://github.com/mattia-battiston/clean-architecture-example#why-clean-architecture>`__)
+(`source <Why Clean Architecture?_>`__)
 
 Issues
 ======
@@ -42,7 +42,7 @@ Clean architecture helps us solve, or at least mitigate, these common problems w
 Benefits
 ========
 
-- **Effective testing strategy** that follows the `testing pyramid <http://martinfowler.com/bliki/TestPyramid.html>`__ and gives us a fast and reliable build
+- **Effective testing strategy** that follows the `testing pyramid <TestPyramid_>`__ and gives us a fast and reliable build
 - **Frameworks are isolated** in individual modules so that when (not if) we change our mind we only have to change one place, with the rest of the app not even knowing about it
 - **Independent from Database**, which is treated just like any other data provider. Our app has real use cases rather than being a CRUD system
 - **Screaming architecture** a.k.a. it screams its intended usage. When you look at the package structure you get a feel for what the application does rather than seeing technical details
@@ -143,9 +143,24 @@ While running:
 References
 ##########
 
-- `Robert C. Martin - Clean Architecture <https://www.youtube.com/watch?v=Nltqi7ODZTM>`_
-- `Real Life Clean Architecture <https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830>`_
+- `Robert C. Martin - Clean Architecture`_
+- `Real Life Clean Architecture`_
 
-  - `Clean Architecture Example (Java): Example of what clean architecture would look like <https://github.com/mattia-battiston/clean-architecture-example>`_
+  - `Clean Architecture Example (Java): Example of what clean architecture would look like`_
+  - `NO DB`_
+  - `Why Clean Architecture?`_
+  - `TestPyramid`_
 
-- `A example of clean architecture in Java 8 and Spring Boot 2.0 <https://github.com/eliostvs/clean-architecture-delivery-example>`_
+- `A example of clean architecture in Java 8 and Spring Boot 2.0`_
+
+
+
+.. _`Robert C. Martin - Clean Architecture`: https://www.youtube.com/watch?v=Nltqi7ODZTM
+
+.. _`Real Life Clean Architecture`: https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830
+.. _`Clean Architecture Example (Java): Example of what clean architecture would look like`: https://github.com/mattia-battiston/clean-architecture-example
+.. _`NO DB`: https://blog.cleancoder.com/uncle-bob/2012/05/15/NODB.html
+.. _`Why Clean Architecture?`: https://github.com/mattia-battiston/clean-architecture-example#why-clean-architecture
+.. _`TestPyramid`: http://martinfowler.com/bliki/TestPyramid.html
+
+.. _`A example of clean architecture in Java 8 and Spring Boot 2.0`: https://github.com/eliostvs/clean-architecture-delivery-example
