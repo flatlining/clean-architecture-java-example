@@ -2,6 +2,10 @@
 
 Generic queue management system
 
+## Design
+
+![Unclie Bob's Clean Architecture](./docs/ca_unclebob.png)
+
 ## References
 
 - [Robert C. Martin - Clean Architecture](https://www.youtube.com/watch?v=Nltqi7ODZTM)
