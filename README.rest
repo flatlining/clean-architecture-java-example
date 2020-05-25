@@ -62,10 +62,10 @@ Structure
 *********
 
 .. figure:: ./docs/ca_unclebob.svg
-   :alt: Unclie Bob's Clean Architecture
+   :alt: Uncle Bob's Clean Architecture
    :align: center
 
-   Unclie Bob's Clean Architecture
+   Uncle Bob's Clean Architecture
 
 - **Core**: Business Logic
 
