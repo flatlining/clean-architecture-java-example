@@ -5,6 +5,8 @@
 Central Queue
 #############
 
+A generic queue management system.
+
 .. contents:: Table of Contents
    :depth: 2
 
@@ -55,3 +57,12 @@ Cost
 
 - **Perceived duplication of code**. Entities might be represented differently when used in business logic, when dealing with the database and when presenting them in a json format. You might feel like you're duplicating code, but you're actually favouring decoupling over DRY
 - **You need interesting business logic** to "justify" the structure. If all you do in your use case is a one-line method to read or save from a database, then maybe you can get away with something simpler
+
+Structure
+*********
+
+.. figure:: ./docs/ca_unclebob.svg
+   :alt: alternate text
+   :align: center
+
+   This a caption.
