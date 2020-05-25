@@ -10,6 +10,7 @@ Generic queue management system
 		* [Benefits](#Benefits)
 		* [Cost](#Cost)
 	* [Structure](#Structure)
+		* [Sequence](#Sequence)
 * [Usage](#Usage)
 	* [Build](#Build)
 	* [Run](#Run)
@@ -89,6 +90,10 @@ Clean architecture helps us solve, or at least mitigate, these common problems w
   - Wires everything together
   - Frameworks (e.g. for dependency injection) are isolated here
   - Has the "dirty details" like Main class, web server configuration, datasource configuration, etc.
+
+#### <a name='Sequence'></a>Sequence
+
+[![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gIHBhcnRpY2lwYW50IENsaWVudFxuICBwYXJ0aWNpcGFudCBDaXJjdWxhclJlc291cmNlXG4gIHBhcnRpY2lwYW50IENpcmN1bGFyQ29udHJvbGxlclxuICBwYXJ0aWNpcGFudCBSZWFkQWxsQ2lyY3VsYXJVc2VDYXNlXG4gIHBhcnRpY2lwYW50IENpcmN1bGFyUmVwb3NpdG9yeVxuICBwYXJ0aWNpcGFudCBDaXJjdWxhckVudGl0eVJlcG9zaXRvcnlcbiAgcGFydGljaXBhbnQgQ2lyY3VsYXJSZXBvc2l0b3J5XG5cbiAgQ2xpZW50LT4-K0NpcmN1bGFyUmVzb3VyY2U6IEdFVCAvY2lyY3VsYXJcbiAgQ2lyY3VsYXJSZXNvdXJjZS0-PitDaXJjdWxhckNvbnRyb2xsZXI6IHJlYWRBbGwoKVxuICBDaXJjdWxhckNvbnRyb2xsZXItPj4rUmVhZEFsbENpcmN1bGFyVXNlQ2FzZTogZXhlY3V0ZSgpXG4gIFJlYWRBbGxDaXJjdWxhclVzZUNhc2UtPj4rQ2lyY3VsYXJSZXBvc2l0b3J5OiByZWFkQWxsKClcbiAgQ2lyY3VsYXJSZXBvc2l0b3J5LT4-K0NpcmN1bGFyRW50aXR5UmVwb3NpdG9yeTogZmluZEFsbCgpXG4gIENpcmN1bGFyRW50aXR5UmVwb3NpdG9yeS0tPj4tQ2lyY3VsYXJSZXBvc2l0b3J5OiBMaXN0PENpcmN1bGFyRW50aXR5PlxuICBDaXJjdWxhclJlcG9zaXRvcnktLT4-LVJlYWRBbGxDaXJjdWxhclVzZUNhc2U6IExpc3Q8Q2lyY3VsYXI-XG4gIFJlYWRBbGxDaXJjdWxhclVzZUNhc2UtLT4-LUNpcmN1bGFyQ29udHJvbGxlcjogTGlzdDxDaXJjdWxhcj5cbiAgQ2lyY3VsYXJDb250cm9sbGVyLS0-Pi1DaXJjdWxhclJlc291cmNlOiBMaXN0PENpcmN1bGFyUmVzcG9uc2U-XG4gIENpcmN1bGFyUmVzb3VyY2UtLT4-LUNsaWVudDogYXBwbGljYXRpb24vanNvbiIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9)](./docs/sequence.md)
 
 ## <a name='Usage'></a>Usage
 
