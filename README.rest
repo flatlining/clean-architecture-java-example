@@ -8,7 +8,7 @@ Central Queue
 A generic queue management system.
 
 .. contents:: Table of Contents
-   :depth: 2
+   :depth: 3
 
 Clear Architecture
 ##################
@@ -112,3 +112,21 @@ Sequence
    :align: center
 
    HTTP call example
+
+Usage
+#####
+
+Build
+*****
+
+.. code:: console
+
+   $ ./mvnw clean install [-Dspring.profiles.active=dev]
+
+
+Run
+***
+
+.. code:: console
+
+   $ ./mvnw spring-boot:run -pl app
