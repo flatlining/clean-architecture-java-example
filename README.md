@@ -4,7 +4,7 @@ Generic queue management system
 
 ## Design
 
-![Unclie Bob's Clean Architecture](./docs/ca_unclebob.png)
+![Unclie Bob's Clean Architecture](./docs/ca_unclebob.svg)
 
 ## References
 
