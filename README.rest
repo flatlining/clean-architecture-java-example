@@ -63,6 +63,7 @@ Structure
 
 .. figure:: ./docs/ca_unclebob.svg
    :alt: Uncle Bob's Clean Architecture
+   :scale: 90 %
    :align: center
 
    Uncle Bob's Clean Architecture
@@ -101,3 +102,13 @@ Structure
   - Wires everything together
   - Frameworks (e.g. for dependency injection) are isolated here
   - Has the "dirty details" like Main class, web server configuration, datasource configuration, etc.
+
+Sequence
+========
+
+.. figure:: https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gIHBhcnRpY2lwYW50IGNsaWVudCBhcyBDbGllbnRcbiAgcGFydGljaXBhbnQgcmVzb3VyY2UgYXMgQ2lyY3VsYXJSZXNvdXJjZVxuICBwYXJ0aWNpcGFudCBjb250cm9sbGVyIGFzIENpcmN1bGFyQ29udHJvbGxlclxuICBwYXJ0aWNpcGFudCB1c2VjYXNlIGFzIFJlYWRBbGxDaXJjdWxhclVzZUNhc2VcbiAgcGFydGljaXBhbnQgcmVwb3NpdG9yeSBhcyBDaXJjdWxhclJlcG9zaXRvcnlcbiAgcGFydGljaXBhbnQgZGF0YWJhc2UgYXMgQ2lyY3VsYXJFbnRpdHlSZXBvc2l0b3J5XG5cbiAgY2xpZW50LT4-K3Jlc291cmNlOiBHRVQgL2NpcmN1bGFyXG4gIHJlc291cmNlLT4-K2NvbnRyb2xsZXI6IHJlYWRBbGwoKVxuICBjb250cm9sbGVyLT4-K3VzZWNhc2U6IGV4ZWN1dGUoKVxuICB1c2VjYXNlLT4-K3JlcG9zaXRvcnk6IHJlYWRBbGwoKVxuICByZXBvc2l0b3J5LT4-K2RhdGFiYXNlOiBmaW5kQWxsKClcbiAgZGF0YWJhc2UtLT4-LXJlcG9zaXRvcnk6IExpc3Q8Q2lyY3VsYXJFbnRpdHk-XG4gIHJlcG9zaXRvcnktLT4-LXVzZWNhc2U6IExpc3Q8Q2lyY3VsYXI-XG4gIHVzZWNhc2UtLT4-LWNvbnRyb2xsZXI6IExpc3Q8Q2lyY3VsYXI-XG4gIGNvbnRyb2xsZXItLT4-LXJlc291cmNlOiBMaXN0PENpcmN1bGFyUmVzcG9uc2U-XG4gIHJlc291cmNlLS0-Pi1jbGllbnQ6IGFwcGxpY2F0aW9uL2pzb24iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ
+   :alt: HTTP call example
+   :scale: 90 %
+   :align: center
+
+   HTTP call example
