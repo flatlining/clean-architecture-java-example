@@ -130,3 +130,12 @@ Run
 .. code:: console
 
    $ ./mvnw spring-boot:run -pl app
+
+API Tests
+*********
+
+While running:
+
+.. code:: console
+
+   $ ./mvnw test -pl app -Dtest=KarateRunner [-DargLine="-Dapp.server.baseUrl=http://localhost:8080"]
