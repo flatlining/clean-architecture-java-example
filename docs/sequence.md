@@ -1,21 +1,20 @@
 ```mermaid
 sequenceDiagram
-  participant Client
-  participant CircularResource
-  participant CircularController
-  participant ReadAllCircularUseCase
-  participant CircularRepository
-  participant CircularEntityRepository
-  participant CircularRepository
+  participant client as Client
+  participant resource as CircularResource
+  participant controller as CircularController
+  participant usecase as ReadAllCircularUseCase
+  participant repository as CircularRepository
+  participant database as CircularEntityRepository
 
-  Client->>+CircularResource: GET /circular
-  CircularResource->>+CircularController: readAll()
-  CircularController->>+ReadAllCircularUseCase: execute()
-  ReadAllCircularUseCase->>+CircularRepository: readAll()
-  CircularRepository->>+CircularEntityRepository: findAll()
-  CircularEntityRepository-->>-CircularRepository: List<CircularEntity>
-  CircularRepository-->>-ReadAllCircularUseCase: List<Circular>
-  ReadAllCircularUseCase-->>-CircularController: List<Circular>
-  CircularController-->>-CircularResource: List<CircularResponse>
-  CircularResource-->>-Client: application/json
+  client->>+resource: GET /circular
+  resource->>+controller: readAll()
+  controller->>+usecase: execute()
+  usecase->>+repository: readAll()
+  repository->>+database: findAll()
+  database-->>-repository: List<CircularEntity>
+  repository-->>-usecase: List<Circular>
+  usecase-->>-controller: List<Circular>
+  controller-->>-resource: List<CircularResponse>
+  resource-->>-client: application/json
 ```
