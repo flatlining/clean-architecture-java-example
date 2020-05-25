@@ -2,15 +2,35 @@
 
 Generic queue management system
 
-## Clear Architecture
+<!-- https://marketplace.visualstudio.com/items?itemName=joffreykern.markdown-toc -->
+<!-- vscode-markdown-toc -->
+* [Clear Architecture](#ClearArchitecture)
+	* [Why?](#Why)
+		* [Issues](#Issues)
+		* [Benefits](#Benefits)
+		* [Cost](#Cost)
+	* [Structure](#Structure)
+* [Usage](#Usage)
+	* [Build](#Build)
+	* [Run](#Run)
+	* [API Tests](#APITests)
+* [References](#References)
+
+<!-- vscode-markdown-toc-config
+	numbering=false
+	autoSave=false
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+
+## <a name='ClearArchitecture'></a>Clear Architecture
 
 > The center of your application is not the database. Nor is it one or more of the frameworks you may be using. *The center of your application is the use cases of your application* - Unclebob ([source](https://blog.cleancoder.com/uncle-bob/2012/05/15/NODB.html))
 
-### Why Clean Architecture?
+### <a name='Why'></a>Why?
 
 ([source](https://github.com/mattia-battiston/clean-architecture-example#why-clean-architecture))
 
-#### Issues
+#### <a name='Issues'></a>Issues
 
 Clean architecture helps us solve, or at least mitigate, these common problems with architecture:
 
@@ -24,7 +44,7 @@ Clean architecture helps us solve, or at least mitigate, these common problems w
 - **Forces/Encourages slow, heavy tests**. Often our only choice for tests is to go through the GUI, either because the GUI has a lot of logic, or because the architecture doesn't allow us to do otherwise. This makes tests slow to run, heavy and brittle. It results in people not running them and the build beind broken often
 - **Infrequent deploys** because it's hard to make changes without breaking existing functionalities. People resort to long-lived feature branches that only get integrated at the end and result in big releases, rather than small incremental ones
 
-#### Benefits
+#### <a name='Benefits'></a>Benefits
 
 - **Effective testing strategy** that follows the [testing pyramid](http://martinfowler.com/bliki/TestPyramid.html) and gives us a fast and reliable build
 - **Frameworks are isolated** in individual modules so that when (not if) we change our mind we only have to change one place, with the rest of the app not even knowing about it
@@ -36,12 +56,12 @@ Clean architecture helps us solve, or at least mitigate, these common problems w
 - **Swarming on stories** so that different pairs can easily work on the same story at the same time to complete it quicker
 - **Good monolith** with clear use cases that you can split in microservices later one, once you've learnt more about them
 
-#### Cost
+#### <a name='Cost'></a>Cost
 
 - **Perceived duplication of code**. Entities might be represented differently when used in business logic, when dealing with the database and when presenting them in a json format. You might feel like you're duplicating code, but you're actually favouring decoupling over DRY
 - **You need interesting business logic** to "justify" the structure. If all you do in your use case is a one-line method to read or save from a database, then maybe you can get away with something simpler
 
-### Structure
+### <a name='Structure'></a>Structure
 
 ![Unclie Bob's Clean Architecture](./docs/ca_unclebob.svg)
 
@@ -70,31 +90,31 @@ Clean architecture helps us solve, or at least mitigate, these common problems w
   - Frameworks (e.g. for dependency injection) are isolated here
   - Has the "dirty details" like Main class, web server configuration, datasource configuration, etc.
 
-## References
+## <a name='Usage'></a>Usage
 
-- [Robert C. Martin - Clean Architecture](https://www.youtube.com/watch?v=Nltqi7ODZTM)
-- [Real Life Clean Architecture](https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830)
-  - [Clean Architecture Example (Java): Example of what clean architecture would look like](https://github.com/mattia-battiston/clean-architecture-example)
-- [A example of clean architecture in Java 8 and Spring Boot 2.0](https://github.com/eliostvs/clean-architecture-delivery-example)
-
-## Usage
-
-### Build
+### <a name='Build'></a>Build
 
 ```console
 $ ./mvnw clean install [-Dspring.profiles.active=dev]
 ```
 
-### Run
+### <a name='Run'></a>Run
 
 ```console
 $ ./mvnw spring-boot:run -pl app
 ```
 
-#### API Tests
+### <a name='APITests'></a>API Tests
 
 While running:
 
 ```console
 $ ./mvnw test -pl app -Dtest=KarateRunner [-DargLine="-Dapp.server.baseUrl=http://localhost:8080"]
 ```
+
+## <a name='References'></a>References
+
+- [Robert C. Martin - Clean Architecture](https://www.youtube.com/watch?v=Nltqi7ODZTM)
+- [Real Life Clean Architecture](https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830)
+  - [Clean Architecture Example (Java): Example of what clean architecture would look like](https://github.com/mattia-battiston/clean-architecture-example)
+- [A example of clean architecture in Java 8 and Spring Boot 2.0](https://github.com/eliostvs/clean-architecture-delivery-example)
