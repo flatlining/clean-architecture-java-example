@@ -6,7 +6,7 @@ sequenceDiagram
   ReadAllCircularUseCase->>+CircularRepository: readAll()
   CircularRepository->>+CircularEntityRepository: findAll()
   CircularEntityRepository-->>-CircularRepository: List<CircularEntity>
-  CircularRepository-->>-ReadAllCircularUseCase: List<Circular
+  CircularRepository-->>-ReadAllCircularUseCase: List<Circular>
   ReadAllCircularUseCase-->>-CircularController: List<Circular>
   CircularController-->>-CircularResource: List<CircularResponse>
   CircularResource-->>-Client: application/json
