@@ -139,3 +139,13 @@ While running:
 .. code:: console
 
    $ ./mvnw test -pl app -Dtest=KarateRunner [-DargLine="-Dapp.server.baseUrl=http://localhost:8080"]
+
+References
+##########
+
+- `Robert C. Martin - Clean Architecture <https://www.youtube.com/watch?v=Nltqi7ODZTM>`_
+- `Real Life Clean Architecture <https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830>`_
+
+  - `Clean Architecture Example (Java): Example of what clean architecture would look like <https://github.com/mattia-battiston/clean-architecture-example>`_
+
+- `A example of clean architecture in Java 8 and Spring Boot 2.0 <https://github.com/eliostvs/clean-architecture-delivery-example>`_
