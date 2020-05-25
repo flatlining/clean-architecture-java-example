@@ -15,9 +15,9 @@ Clear Architecture
 
 .. epigraph::
 
-  The center of your application is not the database. Nor is it one or more of the frameworks you may be using. *The center of your application is the use cases of your application*
+   The center of your application is not the database. Nor is it one or more of the frameworks you may be using. *The center of your application is the use cases of your application*
   
-  -- `Unclebob <https://blog.cleancoder.com/uncle-bob/2012/05/15/NODB.html>`__
+   -- `Unclebob <https://blog.cleancoder.com/uncle-bob/2012/05/15/NODB.html>`__
 
 Why?
 ****
@@ -62,7 +62,7 @@ Structure
 *********
 
 .. figure:: ./docs/ca_unclebob.svg
-   :alt: alternate text
+   :alt: Unclie Bob's Clean Architecture
    :align: center
 
-   This a caption.
+   Unclie Bob's Clean Architecture
