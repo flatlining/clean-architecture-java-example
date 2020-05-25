@@ -1,5 +1,13 @@
 ```mermaid
 sequenceDiagram
+  participant Client
+  participant CircularResource
+  participant CircularController
+  participant ReadAllCircularUseCase
+  participant CircularRepository
+  participant CircularEntityRepository
+  participant CircularRepository
+
   Client->>+CircularResource: GET /circular
   CircularResource->>+CircularController: readAll()
   CircularController->>+ReadAllCircularUseCase: execute()
