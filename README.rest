@@ -194,6 +194,7 @@ References
 
   - `Robert C. Martin - Clean Architecture, presentation @ NDC`_
 
+- `Software Architecture Guide: What is architecture?`_
 - `Real Life Clean Architecture`_
 
   - `Clean Architecture Example (Java): Example of what clean architecture would look like`_
@@ -206,6 +207,8 @@ References
 
 .. _`Robert C. Martin - Clean Architecture`: https://www.goodreads.com/book/show/18043011-clean-architecture
 .. _`Robert C. Martin - Clean Architecture, presentation @ NDC`: https://www.youtube.com/watch?v=Nltqi7ODZTM
+
+.. _`Software Architecture Guide: What is architecture?`: https://martinfowler.com/architecture/#WhatIsArchitecture
 
 .. _`Real Life Clean Architecture`: https://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830
 .. _`Clean Architecture Example (Java): Example of what clean architecture would look like`: https://github.com/mattia-battiston/clean-architecture-example
