@@ -1,5 +1,6 @@
 .. https://docutils.sourceforge.io/docs/ref/rst/directives.html
 .. https://devguide.python.org/documenting/#sections
+.. https://gist.github.com/ionelmc/e876b73e2001acd2140f
 
 .. epigraph::
 
@@ -13,8 +14,11 @@ Central Queue
 
 A generic queue management system.
 
+.. Hint:: Open `docs/references.rest` for more references.
+
 .. contents:: Table of Contents
    :depth: 3
+.. section-numbering::
 
 Clear Architecture
 ##################
