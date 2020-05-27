@@ -64,6 +64,12 @@ Cost
 - **Perceived duplication of code**. Entities might be represented differently when used in business logic, when dealing with the database and when presenting them in a json format. You might feel like you're duplicating code, but you're actually favouring decoupling over DRY
 - **You need interesting business logic** to "justify" the structure. If all you do in your use case is a one-line method to read or save from a database, then maybe you can get away with something simpler
 
+.. epigraph::
+
+   First we say is too much, then we say we don't have time.
+
+   -- Matias Schertel
+
 Structure
 *********
 
