@@ -1,0 +1,225 @@
+.. Sections https://devguide.python.org/documenting/#sections
+
+   #####################
+   Title of the Document
+   #####################
+
+   ****************
+   Title of chapter
+   ****************
+
+   Level 1 Sections
+   ################
+
+   Level 2 Sections
+   ****************
+
+   Level 3 Section
+   ===============
+
+   Level 4 Section
+   ---------------
+
+   Level 5 Section
+   ^^^^^^^^^^^^^^^
+
+   Level 6 Section
+   """""""""""""""
+
+##########
+References
+##########
+
+Architecture
+############
+
+Clean Architecture
+******************
+
+- `Ports and Adapters Pattern <https://jmgarridopaz.github.io/content/hexagonalarchitecture.html>`_
+- `Clean Architecture For The Rest Of Us <https://pusher.com/tutorials/clean-architecture-introduction>`_
+- `Implementing a REST API in a Clean Architecture <https://softwareengineering.stackexchange.com/a/373524>`_
+- `Why you need Use Cases/Interactors <https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576>`_
+- `Clean Architecture Example in Kotlin <https://hackernoon.com/clean-architecture-example-in-kotlin-9f23169219be>`_
+- `Clean Architecture Tutorial for Android: Getting Started <https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started>`_
+  - https://github.com/dmilicic/Android-Clean-Boilerplate
+
+Spring-Boot Examples
+====================
+
+- `Clean Architecture with Java 11 <https://medium.com/slalom-build/clean-architecture-with-java-11-f78bba431041>`_
+  - https://github.com/carlphilipp/clean-architecture-example
+- `Clean Architecture Boundaries with Spring Boot and ArchUnit <https://reflectoring.io/java-components-clean-boundaries/>`_
+- `Introdução a Clean Architecture <https://imasters.com.br/back-end/introducao-clean-architecture>`_
+- `The clean Architecture <https://medium.com/@icarovictor/the-clean-architecture-54df8a46dba1>`_
+
+Builder Pattern
+***************
+
+- `Builder Pattern in java <https://www.geeksforgeeks.org/builder-pattern-in-java/>`_
+- `Builder Design Pattern in Java <https://www.journaldev.com/1425/builder-design-pattern-in-java>`_
+
+JSON
+####
+
+- `JSONschema.net <https://jsonschema.net/>`_
+
+Maven
+#####
+
+- `Maven CI Friendly Versions <http://maven.apache.org/maven-ci-friendly.html>`_
+  - `Use a unique property to set Maven version <https://jeanchristophegay.com/en/posts/maven-unique-version-multi-modules-build/>`_
+- `Setting the Java Version in Maven <https://www.baeldung.com/maven-java-version>`_
+  - `It’s time! Migrating to Java 11 <https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9>`_
+- `Maven – How to create a Java project <https://mkyong.com/maven/how-to-create-a-java-project-with-maven/>`_
+  - https://github.com/mkyong/maven-examples
+
+To print a `flat <http://www.janosgyerik.com/print-a-flat-list-of-dependencies-of-a-maven-project/>`_ dependency tree:
+
+.. code:: bash
+
+   $ ./mvnw dependency:list | sed -ne s/..........// -e /patterntoexclude/d -e s/:compile//p -e s/:runtime//p | sort | uniq
+
+Test
+####
+
+-`The Practical Test Pyramid <https://martinfowler.com/articles/practical-test-pyramid.html>`_
+
+jUnit5
+******
+
+- `A Guide to JUnit 5 <https://www.baeldung.com/junit-5>`_
+- `Mockito and JUnit 5 – Using ExtendWith <https://www.baeldung.com/mockito-junit-5-extension>`_
+- `Spring Boot + JUnit 5 + Mockito <https://mkyong.com/spring-boot/spring-boot-junit-5-mockito/>`_
+- `JUnit 5 Tutorial: Writing Nested Tests <https://www.petrikainulainen.net/programming/testing/junit-5-tutorial-writing-nested-tests/>`_
+- `Mockito: doReturn vs thenReturn <http://sangsoonam.github.io/2019/02/04/mockito-doreturn-vs-thenreturn.html>`_
+- `Assert an Exception is Thrown in JUnit 4 and 5 <https://www.baeldung.com/junit-assert-exception>`_
+- `Mockito Verify Cookbook <https://www.baeldung.com/mockito-verify>`_
+
+Karate
+******
+
+- https://github.com/intuit/karate
+- https://github.com/intuit/karate/tree/master/karate-demo
+- https://github.com/intuit/karate/tree/master/karate-mock-servlet
+- https://www.baeldung.com/karate-rest-api-testing
+- https://medium.com/cwi-software/karate-dsl-automatizando-testes-de-api-de-forma-simples-3624ab230198
+
+Java
+####
+
+Dependency Injection
+********************
+
+- `Using dependency injection in Java - Introduction - Tutorial <https://www.vogella.com/tutorials/DependencyInjection/article.html>`_
+- `Difference between @Autowired and @Inject annotation in Spring? <https://javarevisited.blogspot.com/2017/04/difference-between-autowired-and-inject-annotation-in-spring-framework.html>`_
+- `Wiring in Spring: @Autowired, @Resource and @Inject <https://www.baeldung.com/spring-annotations-resource-inject-autowire>`_
+- `Javax Inject <https://mvnrepository.com/artifact/javax.inject/javax.inject/1>`_
+
+Lombok
+******
+
+- `Project Lombok > Maven <https://projectlombok.org/setup/maven>`_
+  - https://github.com/MCMicS/simple-lombok
+  - `How to add Lombok to a modular Java 11 micro service <https://medium.com/@Leejjon_net/youll-have-this-problems-when-you-add-lombok-to-a-modular-java-11-micro-service-832f55911bc5>`_
+- `Setting up Lombok with Eclipse and Intellij <https://www.baeldung.com/lombok-ide>`_
+- `JSONSerialize and JSONDeserialize with Lombok custom deserialization builders <http://errataobscura.blogspot.com/2019/03/jsonserialize-and-jsondeserialize-with.html>`_
+
+Jigsaw
+******
+
+- `Java 9 Module Services <https://dzone.com/articles/java-9-module-services>`_
+- `Introduction to Project Jigsaw <https://www.baeldung.com/project-jigsaw-java-modularity>`_
+- `Understanding Java 9 Modules <https://www.oracle.com/corporate/features/understanding-java-9-modules.html>`_
+
+ModelMapper
+***********
+
+- `ModelMapper should support Builder Pattern <https://github.com/modelmapper/modelmapper/issues/265>`_
+
+Time
+****
+
+- `The 5 laws of API dates and times <http://apiux.com/2013/03/20/5-laws-api-dates-and-times/>`_
+- `Add a Timezone to LocalDateTime with ZonedDateTime in Java 8 <https://www.codebyamir.com/blog/add-a-timezone-to-localdatetime-with-zoneddatetime-in-java-8>`_
+- `What's the difference between Instant and LocalDateTime? <https://stackoverflow.com/a/32443004>`_
+- `Based on thousands of APIs, what is the best approaches and format for handling timezone, timestamps, and datetime in APIs and Apps <https://www.moesif.com/blog/technical/timestamp/manage-datetime-timestamp-timezones-in-api/>`_
+- `Convert Date to ISO 8601 String in Java <https://mincong.io/2017/02/16/convert-date-to-string-in-java/>`_
+
+Spring-Boot
+###########
+
+- `Spring Initializr <https://start.spring.io/>`_
+- `Building an Application with Spring Boot <https://spring.io/guides/gs/spring-boot/>`_
+- `Spring Boot: Getting Started <https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html>`_
+- https://github.com/eugenp/tutorials/blob/master/spring-boot-rest/src/main/java/com/baeldung/springpagination/controller/PostRestController.java
+
+Maven Plugin
+************
+
+- `Spring Boot Maven Plugin <https://docs.spring.io/spring-boot/docs/current/maven-plugin/examples/run-profiles.html>`_
+
+Beans
+*****
+
+- `Creating and using bean definitions <https://docs.spring.io/spring-javaconfig/docs/1.0.0.m3/reference/html/creating-bean-definitions.html>`_
+
+Application Configuration
+*************************
+
+- `Spring boot application.properties maven multi-module projects <https://stackoverflow.com/a/33298125>`_
+
+Rest
+****
+
+- `Building REST services with Spring <https://spring.io/guides/tutorials/rest/>`_
+- `REST with Spring Tutorial <https://www.baeldung.com/rest-with-spring-series>`_
+  - `Entity To DTO Conversion for a Spring REST API <https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application>`_
+
+Controller
+**********
+
+- `The Spring @Controller and @RestController Annotations <https://www.baeldung.com/spring-controller-vs-restcontroller>`_
+
+Logging
+*******
+
+- `How do I inject a logger into a field in the sample spring boot application? <https://stackoverflow.com/a/55338237>`_
+  - `Logger Injection With Spring’s InjectionPoint <https://dzone.com/articles/logger-injection-with-springs-injectionpoint>`_
+- `Inject loggers in Spring | Java or Kotlin <https://medium.com/simars/inject-loggers-in-spring-java-or-kotlin-87162d02d068>`_
+
+JSON (de)Serialization
+**********************
+
+- `Deserialize Immutable Objects with Jackson <https://www.baeldung.com/jackson-deserialize-immutable-objects>`_
+- `Map Serialization and Deserialization with Jackson <https://www.baeldung.com/jackson-map>`_
+- `How to Handle Java 8 Dates and Time with Jackson in Spring Boot (JSR-310) <https://codeboje.de/jackson-java-8-datetime-handling/>`_
+- https://github.com/FasterXML/jackson-modules-java8
+
+Tests by Layers
+***************
+
+- `Testing the Web Layer <https://spring.io/guides/gs/testing-web/>`_
+- `Unit Testing with Spring Boot <https://reflectoring.io/unit-testing-spring-boot/>`_
+- `Test Your Spring Boot Applications with JUnit 5 <https://developer.okta.com/blog/2019/03/28/test-java-spring-boot-junit5>`_
+- `Mockito.mock() vs @Mock vs @MockBean <https://www.baeldung.com/java-spring-mockito-mock-mockbean>`_
+- `Spring boot @MockBean Example <https://howtodoinjava.com/spring-boot2/testing/spring-mockbean-annotation/>`_
+- `Mockito Argument Matchers – any(), eq() <https://www.journaldev.com/21876/mockito-argument-matchers-any-eq>`_
+- `Mockito – Using Spies <https://www.baeldung.com/mockito-spy>`_
+- https://github.com/spring-projects/spring-framework/blob/master/spring-test/src/test/java/org/springframework/test/web/servlet/samples/standalone/AsyncTests.java
+
+Database
+********
+
+SQLite
+======
+
+- https://www.sqlitetutorial.net/sqlite-java/
+- https://fonini.github.io/2010/02/18/usando-sqlite-com-java/
+- https://receitasdecodigo.com.br/java/usando-sqlite-em-java
+
+H2
+===
+
+- https://www.baeldung.com/spring-boot-h2-database
+- https://h2database.com/html/tutorial.html#creating_new_databases
