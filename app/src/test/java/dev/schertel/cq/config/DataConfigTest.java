@@ -14,12 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class DataConfigTest {
     @MockBean
     Logger logger;
-
     @MockBean
     CircularEntityRepository circularEntityRepository;
 
     @Autowired
-    private CircularRepository circularRepository;
+    CircularRepository circularRepository;
 
     @Test
     void circularRepository() {

@@ -14,27 +14,26 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(RandomBeansExtension.class)
 class CreateCircularUseCaseTest {
 
     @Mock
-    private CircularRepository repository;
-
+    CircularRepository repository;
     @Mock
-    private GenerateRandomIdentityUseCase generateRandomIdentityUseCase;
+    GenerateRandomIdentityUseCase generateRandomIdentityUseCase;
 
     @InjectMocks
-    private CreateCircularUseCase cut;
+    CreateCircularUseCase cut;
 
-    private CreateCircularUseCase.InputValues.Builder inputBuilder;
-    private CreateCircularUseCase.OutputValues.Builder outputBuilder;
+    CreateCircularUseCase.InputValues.Builder inputBuilder;
+    CreateCircularUseCase.OutputValues.Builder outputBuilder;
 
     @BeforeEach
     void setUp() {
-        reset(repository);
         inputBuilder = CreateCircularUseCase.InputValues.builder();
         outputBuilder = CreateCircularUseCase.OutputValues.builder();
     }
@@ -42,15 +41,17 @@ class CreateCircularUseCaseTest {
     @Test
     void create(@Random Circular created) {
         // Background
-        doReturn(created).when(repository).create(Circular.builder()
+        when(repository.create(Circular.builder()
                 .withId(created.getId())
                 .withName(created.getName())
                 .withDescription(created.getDescription())
-                .build());
+                .build())).thenReturn(created);
+
         GenerateRandomIdentityUseCase.OutputValues randomIdentity = GenerateRandomIdentityUseCase.OutputValues.builder()
                 .withIdentity(created.getId())
                 .build();
-        doReturn(randomIdentity).when(generateRandomIdentityUseCase).execute(GenerateRandomIdentityUseCase.InputValues.builder().build());
+        when(generateRandomIdentityUseCase.execute(GenerateRandomIdentityUseCase.InputValues.builder().build()))
+                .thenReturn(randomIdentity);
 
         ArgumentCaptor<Circular> repoCapture = ArgumentCaptor.forClass(Circular.class);
 

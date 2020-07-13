@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CircularTest {
     private final Class<Circular> CLAZZ = Circular.class;
 
-    private Circular.Builder cut;
+    Circular.Builder cut;
 
     @BeforeEach
     void setUp() {

@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CircularEntityTest {
     private final Class<CircularEntity> CLAZZ = CircularEntity.class;
 
-    private CircularEntity.Builder cut;
+    CircularEntity.Builder cut;
 
     @BeforeEach
     void setUp() {

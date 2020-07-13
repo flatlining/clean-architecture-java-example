@@ -5,11 +5,10 @@ import dev.schertel.cq.core.domain.NotFoundException;
 import dev.schertel.cq.presenter.rest.entity.ApiResponse;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -22,16 +21,11 @@ import static org.mockito.Mockito.*;
 @ExtendWith(RandomBeansExtension.class)
 @ExtendWith(MockitoExtension.class)
 class CircularControllerAdviceTest {
-    @Mock
+    @Spy
     Logger logger;
 
     @InjectMocks
     CircularControllerAdvice cut;
-
-    @BeforeEach
-    void setUp() {
-        reset(logger);
-    }
 
     @Test
     void customNotFoundException(@Random String value) {

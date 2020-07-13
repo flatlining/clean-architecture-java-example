@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CircularRequestTest {
     private final Class<CircularRequest> CLAZZ = CircularRequest.class;
 
-    private CircularRequest.Builder cut;
+    CircularRequest.Builder cut;
 
     @BeforeEach
     void setUp() {

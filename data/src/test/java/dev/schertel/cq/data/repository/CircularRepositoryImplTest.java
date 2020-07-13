@@ -6,7 +6,6 @@ import dev.schertel.cq.data.database.circular.CircularEntityRepository;
 import dev.schertel.cq.data.database.circular.entity.CircularEntity;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,25 +27,18 @@ import static org.mockito.Mockito.*;
 class CircularRepositoryImplTest {
     @Mock
     Logger logger;
-
     @Mock
-    private CircularEntityRepository circularEntityRepository;
+    CircularEntityRepository circularEntityRepository;
 
     @InjectMocks
-    private CircularRepositoryImpl cut;
-
-    @BeforeEach
-    void setUp() {
-        reset(logger, circularEntityRepository);
-    }
+    CircularRepositoryImpl cut;
 
     @Nested
     class Create {
         @Test
         void create(@Random CircularEntity existent) {
             // Background
-            doReturn(existent)
-                    .when(circularEntityRepository).save(existent);
+            when(circularEntityRepository.save(existent)).thenReturn(existent);
 
             // Given
             Circular toCreate = Circular.builder()
@@ -77,8 +68,6 @@ class CircularRepositoryImplTest {
         @Test
         void readAllEmpty() {
             // Background
-            doReturn(Collections.emptyList())
-                    .when(circularEntityRepository).findAll();
 
             // Given
 
@@ -94,8 +83,7 @@ class CircularRepositoryImplTest {
         @Test
         void readAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existent) {
             // Background
-            doReturn(existent)
-                    .when(circularEntityRepository).findAll();
+            when(circularEntityRepository.findAll()).thenReturn(existent);
 
             // Given
 
@@ -122,8 +110,6 @@ class CircularRepositoryImplTest {
         @Test
         void readByIdentityNonExistent(@Random String nonExistentId) {
             // Background
-            doReturn(Optional.empty())
-                    .when(circularEntityRepository).findById(nonExistentId);
 
             // Given
             Identity nonExistentIdentity = Identity.of(nonExistentId);
@@ -140,8 +126,7 @@ class CircularRepositoryImplTest {
         @Test
         void readByIdentityExistent(@Random CircularEntity existent) {
             // Background
-            doReturn(Optional.of(existent))
-                    .when(circularEntityRepository).findById(existent.getId());
+            when(circularEntityRepository.findById(existent.getId())).thenReturn(Optional.of(existent));
 
             // Given
             Identity existentIdentity = Identity.of(existent.getId());
@@ -167,8 +152,6 @@ class CircularRepositoryImplTest {
         @Test
         void deleteAllEmpty() {
             // Background
-            doReturn(Collections.emptyList())
-                    .when(circularEntityRepository).findAll();
 
             // Given
 
@@ -184,8 +167,7 @@ class CircularRepositoryImplTest {
         @Test
         void deleteAllNonEmpty(@Random(size = 5, type = CircularEntity.class) List<CircularEntity> existent) {
             // Background
-            doReturn(existent)
-                    .when(circularEntityRepository).findAll();
+            when(circularEntityRepository.findAll()).thenReturn(existent);
 
             // Given
 
@@ -212,8 +194,7 @@ class CircularRepositoryImplTest {
         @Test
         void deleteByIdentityExistent(@Random CircularEntity existent) {
             // Background
-            doReturn(Optional.of(existent))
-                    .when(circularEntityRepository).findById(existent.getId());
+            when(circularEntityRepository.findById(existent.getId())).thenReturn(Optional.of(existent));
 
             // Given
             Identity existentIdentity = Identity.of(existent.getId());
@@ -236,8 +217,6 @@ class CircularRepositoryImplTest {
         @Test
         void deleteByIdentityNonExistent(@Random String nonExistentId) {
             // Background
-            doReturn(Optional.empty())
-                    .when(circularEntityRepository).findById(nonExistentId);
 
             // Given
             Identity nonExistentIdentity = Identity.of(nonExistentId);
