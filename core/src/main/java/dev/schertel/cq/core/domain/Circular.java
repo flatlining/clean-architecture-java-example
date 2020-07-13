@@ -8,7 +8,7 @@ import lombok.Value;
 @Value
 @Builder(builderClassName = "Builder", setterPrefix = "with")
 public class Circular {
-    private final Identity id;
-    private final String name;
-    private final String description;
+    Identity id;
+    String name;
+    String description;
 }

@@ -36,13 +36,13 @@ public class CreateCircularUseCase extends UseCase<CreateCircularUseCase.InputVa
     @Value
     @Builder(builderClassName = "Builder", setterPrefix = "with")
     public static class InputValues implements UseCase.InputValues {
-        private final String name;
-        private final String description;
+        String name;
+        String description;
     }
 
     @Value
     @Builder(builderClassName = "Builder", setterPrefix = "with")
     public static class OutputValues implements UseCase.OutputValues {
-        private final Circular circular;
+        Circular circular;
     }
 }

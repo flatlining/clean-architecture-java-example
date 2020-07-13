@@ -31,6 +31,6 @@ public class ReadAllCircularUseCase extends UseCase<ReadAllCircularUseCase.Input
     @Value
     @Builder(builderClassName = "Builder", setterPrefix = "with")
     public static class OutputValues implements UseCase.OutputValues {
-        private final List<Circular> circular;
+        List<Circular> circular;
     }
 }

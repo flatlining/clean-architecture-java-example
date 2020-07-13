@@ -25,6 +25,6 @@ public class GenerateRandomIdentityUseCase extends UseCase<GenerateRandomIdentit
     @Value
     @Builder(builderClassName = "Builder", setterPrefix = "with")
     public static class OutputValues implements UseCase.OutputValues {
-        private final Identity identity;
+        Identity identity;
     }
 }

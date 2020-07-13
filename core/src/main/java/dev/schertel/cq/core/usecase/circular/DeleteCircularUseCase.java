@@ -27,7 +27,7 @@ public class DeleteCircularUseCase extends UseCase<DeleteCircularUseCase.InputVa
     @Value
     @Builder(setterPrefix = "with")
     public static class InputValues implements UseCase.InputValues {
-        private final Identity identity;
+        Identity identity;
     }
 
     @Value

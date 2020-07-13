@@ -10,7 +10,7 @@ import lombok.Value;
 @Builder(builderClassName = "Builder", setterPrefix = "with")
 @JsonDeserialize(builder = CircularResponse.Builder.class)
 public class CircularResponse {
-    private final String id;
-    private final String name;
-    private final String description;
+    String id;
+    String name;
+    String description;
 }
