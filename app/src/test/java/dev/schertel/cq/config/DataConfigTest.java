@@ -18,7 +18,7 @@ class DataConfigTest {
     CircularEntityRepository circularEntityRepository;
 
     @Autowired
-    private CircularRepository circularRepository;
+    CircularRepository circularRepository;
 
     @Test
     void circularRepository() {
