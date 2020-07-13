@@ -24,13 +24,13 @@ import static org.mockito.Mockito.*;
 class DeleteCircularUseCaseTest {
 
     @Mock
-    private CircularRepository repository;
+    CircularRepository repository;
 
     @InjectMocks
-    private DeleteCircularUseCase cut;
+    DeleteCircularUseCase cut;
 
-    private DeleteCircularUseCase.InputValues.InputValuesBuilder inputBuilder;
-    private DeleteCircularUseCase.OutputValues.OutputValuesBuilder outputBuilder;
+    DeleteCircularUseCase.InputValues.InputValuesBuilder inputBuilder;
+    DeleteCircularUseCase.OutputValues.OutputValuesBuilder outputBuilder;
 
     @BeforeEach
     void setUp() {

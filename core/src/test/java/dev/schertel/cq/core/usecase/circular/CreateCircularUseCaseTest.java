@@ -22,15 +22,15 @@ import static org.mockito.Mockito.when;
 class CreateCircularUseCaseTest {
 
     @Mock
-    private CircularRepository repository;
+    CircularRepository repository;
     @Mock
-    private GenerateRandomIdentityUseCase generateRandomIdentityUseCase;
+    GenerateRandomIdentityUseCase generateRandomIdentityUseCase;
 
     @InjectMocks
-    private CreateCircularUseCase cut;
+    CreateCircularUseCase cut;
 
-    private CreateCircularUseCase.InputValues.Builder inputBuilder;
-    private CreateCircularUseCase.OutputValues.Builder outputBuilder;
+    CreateCircularUseCase.InputValues.Builder inputBuilder;
+    CreateCircularUseCase.OutputValues.Builder outputBuilder;
 
     @BeforeEach
     void setUp() {

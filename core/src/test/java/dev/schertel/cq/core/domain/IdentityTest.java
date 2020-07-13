@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class IdentityTest {
     private final Class<Identity> CLAZZ = Identity.class;
 
-    private Identity.Builder cut;
+    Identity.Builder cut;
 
     @BeforeEach
     void setUp() {

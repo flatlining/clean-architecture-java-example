@@ -22,13 +22,13 @@ import static org.mockito.Mockito.*;
 class ReadAllCircularUseCaseTest {
 
     @Mock
-    private CircularRepository repository;
+    CircularRepository repository;
 
     @InjectMocks
-    private ReadAllCircularUseCase cut;
+    ReadAllCircularUseCase cut;
 
-    private ReadAllCircularUseCase.InputValues.Builder inputBuilder;
-    private ReadAllCircularUseCase.OutputValues.Builder outputBuilder;
+    ReadAllCircularUseCase.InputValues.Builder inputBuilder;
+    ReadAllCircularUseCase.OutputValues.Builder outputBuilder;
 
     @BeforeEach
     void setUp() {
