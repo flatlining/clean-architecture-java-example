@@ -19,15 +19,11 @@ public class GenerateRandomIdentityUseCase extends UseCase<GenerateRandomIdentit
 
     @Value
     @Builder(builderClassName = "Builder", setterPrefix = "with")
-    @EqualsAndHashCode
-    @ToString
     public static class InputValues implements UseCase.InputValues {
     }
 
     @Value
     @Builder(builderClassName = "Builder", setterPrefix = "with")
-    @EqualsAndHashCode
-    @ToString
     public static class OutputValues implements UseCase.OutputValues {
         private final Identity identity;
     }

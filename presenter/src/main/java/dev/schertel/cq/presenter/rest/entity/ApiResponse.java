@@ -12,8 +12,6 @@ import java.time.ZonedDateTime;
 
 @Value
 @Builder(builderClassName = "Builder", setterPrefix = "with")
-@EqualsAndHashCode
-@ToString
 @JsonDeserialize(builder = ApiResponse.Builder.class)
 public class ApiResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", timezone = "UTC")

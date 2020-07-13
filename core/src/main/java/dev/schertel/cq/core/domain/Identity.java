@@ -9,8 +9,6 @@ import java.util.UUID;
 
 @Value
 @Builder(builderClassName = "Builder", setterPrefix = "with")
-@EqualsAndHashCode
-@ToString
 public class Identity {
     private final String id;
 

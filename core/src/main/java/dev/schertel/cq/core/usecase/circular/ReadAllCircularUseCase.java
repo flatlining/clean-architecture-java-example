@@ -25,15 +25,11 @@ public class ReadAllCircularUseCase extends UseCase<ReadAllCircularUseCase.Input
 
     @Value
     @Builder(builderClassName = "Builder", setterPrefix = "with")
-    @EqualsAndHashCode
-    @ToString
     public static class InputValues implements UseCase.InputValues {
     }
 
     @Value
     @Builder(builderClassName = "Builder", setterPrefix = "with")
-    @EqualsAndHashCode
-    @ToString
     public static class OutputValues implements UseCase.OutputValues {
         private final List<Circular> circular;
     }
