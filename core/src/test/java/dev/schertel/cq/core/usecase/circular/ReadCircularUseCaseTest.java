@@ -34,7 +34,6 @@ class ReadCircularUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        reset(repository);
         inputBuilder = ReadCircularUseCase.InputValues.builder();
         outputBuilder = ReadCircularUseCase.OutputValues.builder();
     }
@@ -42,7 +41,7 @@ class ReadCircularUseCaseTest {
     @Test
     void read(@Random Circular read) {
         // Background
-        doReturn(Optional.of(read)).when(repository).readByIdentity(read.getId());
+        when(repository.readByIdentity(read.getId())).thenReturn(Optional.of(read));
 
         // Given
         ReadCircularUseCase.InputValues input = inputBuilder
@@ -63,7 +62,6 @@ class ReadCircularUseCaseTest {
     @Test
     void failToRead(@Random Identity toRead) {
         // Background
-        doReturn(Optional.empty()).when(repository).readByIdentity(toRead);
 
         // Given
         ReadCircularUseCase.InputValues input = inputBuilder

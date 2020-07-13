@@ -32,7 +32,6 @@ class ReadAllCircularUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        reset(repository);
         inputBuilder = ReadAllCircularUseCase.InputValues.builder();
         outputBuilder = ReadAllCircularUseCase.OutputValues.builder();
     }
@@ -40,7 +39,6 @@ class ReadAllCircularUseCaseTest {
     @Test
     void readAllEmptyRepository() {
         // Background
-        doReturn(Collections.emptyList()).when(repository).readAll();
 
         // Given
         ReadAllCircularUseCase.InputValues input = inputBuilder.build();
@@ -61,7 +59,7 @@ class ReadAllCircularUseCaseTest {
     @Test
     void readAllNonEmptyRepository(@Random(size = 5, type = Circular.class) List<Circular> toRead) {
         // Background
-        doReturn(toRead).when(repository).readAll();
+        when(repository.readAll()).thenReturn(toRead);
 
         // Given
         ReadAllCircularUseCase.InputValues input = inputBuilder.build();
