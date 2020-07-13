@@ -34,9 +34,11 @@ class UseCaseExecutorImplTest {
 
     @RepeatedTest(10)
     void execute() {
-        // Given
+        // Background
         when(useCase.execute(input)).thenReturn(output);
         when(outputMapper.apply(output)).thenReturn(expected);
+
+        // Given
 
         // When
         CompletableFuture<UseCase.OutputValues> actual = cut.execute(useCase, input, outputMapper);
