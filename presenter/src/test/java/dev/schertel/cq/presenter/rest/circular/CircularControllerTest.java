@@ -11,7 +11,6 @@ import dev.schertel.cq.presenter.rest.entity.CircularResponse;
 import dev.schertel.cq.presenter.usecase.UseCaseExecutorImpl;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,8 +35,7 @@ import java.util.stream.Collectors;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -69,17 +67,6 @@ class CircularControllerTest {
     private DeleteAllCircularUseCase deleteAllCircularUseCase;
     @MockBean
     private DeleteCircularUseCase deleteCircularUseCase;
-
-    @BeforeEach
-    void setUp() {
-        reset(
-                createCircularUseCase,
-                readAllCircularUseCase,
-                readCircularUseCase,
-                deleteAllCircularUseCase,
-                deleteCircularUseCase
-        );
-    }
 
     private MvcResult makeAsyncRequest(RequestBuilder request) throws Exception {
         return mockMvc.perform(request)
@@ -116,7 +103,7 @@ class CircularControllerTest {
                             .withDescription(circular.getDescription())
                             .build())
                     .build();
-            doReturn(output).when(createCircularUseCase).execute(eq(input));
+            when(createCircularUseCase.execute(input)).thenReturn(output);
 
             // Given
             CircularRequest content = CircularRequest.builder()
@@ -163,7 +150,7 @@ class CircularControllerTest {
                             .withDescription(circular.getDescription())
                             .build())
                     .build();
-            doReturn(output).when(createCircularUseCase).execute(eq(input));
+            when(createCircularUseCase.execute(input)).thenReturn(output);
 
             // Given
             CircularRequest content = CircularRequest.builder()
@@ -211,7 +198,7 @@ class CircularControllerTest {
                             .withDescription(circular.getDescription())
                             .build())
                     .build();
-            doReturn(output).when(createCircularUseCase).execute(eq(input));
+            when(createCircularUseCase.execute(input)).thenReturn(output);
 
             // Given
             CircularRequest content = CircularRequest.builder()
@@ -259,7 +246,7 @@ class CircularControllerTest {
                             .withDescription(circular.getDescription())
                             .build())
                     .build();
-            doReturn(output).when(createCircularUseCase).execute(eq(input));
+            when(createCircularUseCase.execute(input)).thenReturn(output);
 
             // Given
             CircularRequest content = CircularRequest.builder()
@@ -335,7 +322,7 @@ class CircularControllerTest {
             ReadAllCircularUseCase.OutputValues output = ReadAllCircularUseCase.OutputValues.builder()
                     .withCircular(circulars)
                     .build();
-            doReturn(output).when(readAllCircularUseCase).execute(eq(null));
+            when(readAllCircularUseCase.execute(null)).thenReturn(output);
 
             // Given
             RequestBuilder request = get("/circular");
@@ -365,7 +352,7 @@ class CircularControllerTest {
             ReadAllCircularUseCase.OutputValues output = ReadAllCircularUseCase.OutputValues.builder()
                     .withCircular(Collections.emptyList())
                     .build();
-            doReturn(output).when(readAllCircularUseCase).execute(eq(null));
+            when(readAllCircularUseCase.execute(null)).thenReturn(output);
 
             // Given
             RequestBuilder request = get("/circular");
@@ -396,7 +383,7 @@ class CircularControllerTest {
             ReadCircularUseCase.OutputValues output = ReadCircularUseCase.OutputValues.builder()
                     .withCircular(circular)
                     .build();
-            doReturn(output).when(readCircularUseCase).execute(eq(input));
+            when(readCircularUseCase.execute(input)).thenReturn(output);
 
             // Given
             RequestBuilder request = get("/circular/{id}", circular.getId().getId());
@@ -425,7 +412,7 @@ class CircularControllerTest {
             ReadCircularUseCase.InputValues input = ReadCircularUseCase.InputValues.builder()
                     .withIdentity(Identity.of(id))
                     .build();
-            doThrow(NotFoundException.of(id)).when(readCircularUseCase).execute(eq(input));
+            when(readCircularUseCase.execute(input)).thenThrow(NotFoundException.of(id));
 
             // Given
             RequestBuilder request = get("/circular/{id}", id);
@@ -458,7 +445,7 @@ class CircularControllerTest {
             // Background
             DeleteAllCircularUseCase.InputValues input = DeleteAllCircularUseCase.InputValues.builder().build();
             DeleteAllCircularUseCase.OutputValues output = DeleteAllCircularUseCase.OutputValues.builder().build();
-            doReturn(output).when(deleteAllCircularUseCase).execute(eq(null));
+            when(deleteAllCircularUseCase.execute(null)).thenReturn(output);
 
             // Given
             RequestBuilder request = delete("/circular");
@@ -481,7 +468,7 @@ class CircularControllerTest {
                     .withIdentity(id)
                     .build();
             DeleteCircularUseCase.OutputValues output = DeleteCircularUseCase.OutputValues.builder().build();
-            doReturn(output).when(deleteCircularUseCase).execute(eq(input));
+            when(deleteCircularUseCase.execute(input)).thenReturn(output);
 
             // Given
             RequestBuilder request = delete("/circular/{id}", id.getId());
@@ -501,7 +488,7 @@ class CircularControllerTest {
                     .withIdentity(Identity.of(id))
                     .build();
             DeleteCircularUseCase.OutputValues output = DeleteCircularUseCase.OutputValues.builder().build();
-            doThrow(NotFoundException.of(id)).when(deleteCircularUseCase).execute(eq(input));
+            when(deleteCircularUseCase.execute(input)).thenThrow(NotFoundException.of(id));
 
             // Given
             RequestBuilder request = delete("/circular/{id}", id);
