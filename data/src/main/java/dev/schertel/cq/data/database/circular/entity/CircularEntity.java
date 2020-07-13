@@ -5,17 +5,15 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Builder(builderClassName = "Builder", setterPrefix = "with", toBuilder = true)
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @EqualsAndHashCode(exclude = {"name", "description"})
-@ToString
+@Builder(builderClassName = "Builder", setterPrefix = "with", toBuilder = true)
 @Entity
 public class CircularEntity {
     @Id
-    private String id;
-    private String name;
-    private String description;
+    String id;
+    String name;
+    String description;
 }

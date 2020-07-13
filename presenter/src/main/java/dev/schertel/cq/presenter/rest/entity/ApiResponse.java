@@ -12,15 +12,13 @@ import java.time.ZonedDateTime;
 
 @Value
 @Builder(builderClassName = "Builder", setterPrefix = "with")
-@EqualsAndHashCode
-@ToString
 @JsonDeserialize(builder = ApiResponse.Builder.class)
 public class ApiResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", timezone = "UTC")
-    private final ZonedDateTime timestamp;
-    private final Integer status;
-    private final String reason;
-    private final String message;
+    ZonedDateTime timestamp;
+    Integer status;
+    String reason;
+    String message;
 
     @JsonPOJOBuilder
     public static class Builder {
