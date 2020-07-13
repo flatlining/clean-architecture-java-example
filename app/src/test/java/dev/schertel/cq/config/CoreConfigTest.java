@@ -15,25 +15,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class CoreConfigTest {
     @MockBean
     Logger logger;
-
     @MockBean
     CircularEntityRepository circularEntityRepository;
 
     @Autowired
     private GenerateRandomIdentityUseCase generateRandomIdentityUseCase;
-
     @Autowired
     private CreateCircularUseCase createCircularUseCase;
-
     @Autowired
     private ReadAllCircularUseCase readAllCircularUseCase;
-
     @Autowired
     private ReadCircularUseCase readCircularUseCase;
-
     @Autowired
     private DeleteAllCircularUseCase deleteAllCircularUseCase;
-
     @Autowired
     private DeleteCircularUseCase deleteCircularUseCase;
 
