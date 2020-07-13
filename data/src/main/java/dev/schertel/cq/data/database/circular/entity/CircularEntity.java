@@ -8,10 +8,8 @@ import javax.persistence.Id;
 @Builder(builderClassName = "Builder", setterPrefix = "with", toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @EqualsAndHashCode(exclude = {"name", "description"})
-@ToString
 @Entity
 public class CircularEntity {
     @Id
