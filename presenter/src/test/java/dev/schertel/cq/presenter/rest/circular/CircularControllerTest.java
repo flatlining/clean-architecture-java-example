@@ -45,28 +45,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class CircularControllerTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
     @Autowired
-    private ObjectMapper objectMapper;
+    ObjectMapper objectMapper;
 
     @SpyBean
-    private CircularMapper circularMapper;
+    CircularMapper circularMapper;
     @SpyBean
-    private UseCaseExecutorImpl useCaseExecutor;
+    UseCaseExecutorImpl useCaseExecutor;
 
     @MockBean
-    private Logger logger;
+    Logger logger;
 
     @MockBean
-    private CreateCircularUseCase createCircularUseCase;
+    CreateCircularUseCase createCircularUseCase;
     @MockBean
-    private ReadAllCircularUseCase readAllCircularUseCase;
+    ReadAllCircularUseCase readAllCircularUseCase;
     @MockBean
-    private ReadCircularUseCase readCircularUseCase;
+    ReadCircularUseCase readCircularUseCase;
     @MockBean
-    private DeleteAllCircularUseCase deleteAllCircularUseCase;
+    DeleteAllCircularUseCase deleteAllCircularUseCase;
     @MockBean
-    private DeleteCircularUseCase deleteCircularUseCase;
+    DeleteCircularUseCase deleteCircularUseCase;
 
     private MvcResult makeAsyncRequest(RequestBuilder request) throws Exception {
         return mockMvc.perform(request)
