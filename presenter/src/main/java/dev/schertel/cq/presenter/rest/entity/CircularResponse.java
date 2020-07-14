@@ -8,11 +8,9 @@ import lombok.Value;
 
 @Value
 @Builder(builderClassName = "Builder", setterPrefix = "with")
-@EqualsAndHashCode
-@ToString
 @JsonDeserialize(builder = CircularResponse.Builder.class)
 public class CircularResponse {
-    private final String id;
-    private final String name;
-    private final String description;
+    String id;
+    String name;
+    String description;
 }

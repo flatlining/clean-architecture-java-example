@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ApiResponseTest {
     private final Class<ApiResponse> CLAZZ = ApiResponse.class;
 
-    private ApiResponse.Builder cut;
+    ApiResponse.Builder cut;
 
     @BeforeEach
     void setUp() {

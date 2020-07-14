@@ -9,12 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = LoggerConfig.class)
 class LoggerConfigTest {
-
-    private Logger logger;
-
-    public LoggerConfigTest(@Autowired Logger logger) {
-        this.logger = logger;
-    }
+    @Autowired
+    Logger logger;
 
     @Test
     void logger() {

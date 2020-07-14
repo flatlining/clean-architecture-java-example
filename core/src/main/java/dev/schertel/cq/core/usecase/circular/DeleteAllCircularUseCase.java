@@ -21,15 +21,11 @@ public class DeleteAllCircularUseCase extends UseCase<DeleteAllCircularUseCase.I
 
     @Value
     @Builder(builderClassName = "Builder", setterPrefix = "with")
-    @EqualsAndHashCode
-    @ToString
     public static class InputValues implements UseCase.InputValues {
     }
 
     @Value
     @Builder(builderClassName = "Builder", setterPrefix = "with")
-    @EqualsAndHashCode
-    @ToString
     public static class OutputValues implements UseCase.OutputValues {
     }
 }

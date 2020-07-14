@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class GenerateRandomIdentityUseCaseTest {
 
     @InjectMocks
-    private GenerateRandomIdentityUseCase cut;
+    GenerateRandomIdentityUseCase cut;
 
     @Test
     void execute() {

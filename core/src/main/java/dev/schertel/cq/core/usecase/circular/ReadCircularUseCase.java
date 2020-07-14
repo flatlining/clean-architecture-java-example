@@ -27,17 +27,13 @@ public class ReadCircularUseCase extends UseCase<ReadCircularUseCase.InputValues
 
     @Value
     @Builder(setterPrefix = "with")
-    @EqualsAndHashCode
-    @ToString
     public static class InputValues implements UseCase.InputValues {
-        private final Identity identity;
+        Identity identity;
     }
 
     @Value
     @Builder(setterPrefix = "with")
-    @EqualsAndHashCode
-    @ToString
     public static class OutputValues implements UseCase.OutputValues {
-        private final Circular circular;
+        Circular circular;
     }
 }

@@ -24,17 +24,16 @@ import static org.mockito.Mockito.*;
 class DeleteCircularUseCaseTest {
 
     @Mock
-    private CircularRepository repository;
+    CircularRepository repository;
 
     @InjectMocks
-    private DeleteCircularUseCase cut;
+    DeleteCircularUseCase cut;
 
-    private DeleteCircularUseCase.InputValues.InputValuesBuilder inputBuilder;
-    private DeleteCircularUseCase.OutputValues.OutputValuesBuilder outputBuilder;
+    DeleteCircularUseCase.InputValues.InputValuesBuilder inputBuilder;
+    DeleteCircularUseCase.OutputValues.OutputValuesBuilder outputBuilder;
 
     @BeforeEach
     void setUp() {
-        reset(repository);
         inputBuilder = DeleteCircularUseCase.InputValues.builder();
         outputBuilder = DeleteCircularUseCase.OutputValues.builder();
     }
@@ -42,7 +41,7 @@ class DeleteCircularUseCaseTest {
     @Test
     void delete(@Random Circular deleted) {
         // Background
-        doReturn(Optional.of(deleted)).when(repository).deleteByIdentity(deleted.getId());
+        when(repository.deleteByIdentity(deleted.getId())).thenReturn(Optional.of(deleted));
 
         // Given
         DeleteCircularUseCase.InputValues input = inputBuilder
@@ -63,7 +62,7 @@ class DeleteCircularUseCaseTest {
     @Test
     void failToDelete(@Random Identity toDelete) {
         // Background
-        doReturn(Optional.empty()).when(repository).deleteByIdentity(toDelete);
+        when(repository.deleteByIdentity(toDelete)).thenReturn(Optional.empty());
 
         // Given
         DeleteCircularUseCase.InputValues input = inputBuilder
